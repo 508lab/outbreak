@@ -1,0 +1,476 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
+    <title>晋城职业技术学院-个人中心</title>
+    <link href="/public/info/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/info/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/public/info/css/animate.css" rel="stylesheet">
+    <link href="/public/info/css/style.css" rel="stylesheet">
+    <script src="/public/info/js/jquery-3.1.1.min.js"></script>
+    <style>
+        body {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .title {
+            font-weight: 500;
+        }
+
+        .ibox-content {
+
+            padding-bottom: 30px;
+            margin: 0 auto;
+            font-size: 16px;
+        }
+
+        .ibox-content p {
+            margin-top: 0;
+            padding-top: 0
+        }
+
+        .ibox-content img {
+            padding: 0
+        }
+
+        .form-group {
+            padding: 0 1.5rem;
+            overflow: hidden;
+            line-height: 30px;
+            margin-bottom: 15px
+        }
+
+        .i-checks {
+            float: left;
+            padding-right: 20px
+        }
+
+        .form-group label {
+            width: 250px;
+            display: block;
+            white-space: nowrap;
+        }
+
+        .form-control {
+            width: 97%;
+            height: 35px;
+            border: 1px #e7eaec solid;
+            font-size: 15px;
+            padding-left: 5px;
+            color: #999;
+            background-color: #f1f1f1;
+        }
+
+        .select-country {
+            height: 35px;
+            border: 1px #e7eaec solid;
+            font-size: 13px;
+            padding-left: 5px;
+            color: #999;
+            background-color: #f1f1f1;
+        }
+
+        .select-country2 {
+            height: 35px;
+            border: 1px #e7eaec solid;
+            font-size: 13px;
+            padding-left: 5px;
+            color: #999;
+            margin-bottom: 15px;
+            background-color: #f1f1f1;
+        }
+
+        .input-group-append .btn-primary {
+            background-color: #999;
+            height: 39px;
+            width: 28.5%;
+            margin-left: 8px;
+            float: left;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 15px
+        }
+
+        .btn-primary2 {
+            background-color: #177ce4;
+            height: 39px;
+            width: 200px;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            margin: 15px auto 20px auto;
+            display: block;
+            font-size: 15px
+        }
+
+        .input-group-append .btn-primary:hover {
+            background-color: #177ce4;
+        }
+
+        .file {
+            background-color: #e7eaec;
+            width: 100px;
+            height: 100px;
+            float: right;
+            margin-right: 1rem;
+        }
+
+        .file a {
+            color: #999;
+            cursor: pointer;
+            margin: 0 auto;
+            text-decoration: none;
+            display: block;
+            line-height: 100px;
+            width: 64px
+        }
+
+        .total-top {
+            overflow: hidden;
+        }
+
+
+        @media screen and (min-width: 800px) {
+            .center-content {
+                width: 800px
+            }
+
+            .ibox-content {
+                width: 100%;
+                height: auto;
+                background-size: cover;
+
+            }
+
+            .select-country {
+                width: 98%
+            }
+
+            .tips-card {
+                width: 67.5%
+            }
+
+            .select-country2 {
+                width: 40%
+            }
+
+            .tips-card {
+                width: 67.5%
+            }
+
+            .select-country2 {
+                float: right;
+                width: 40%;
+                margin-right: 1rem
+            }
+        }
+
+        @media screen and (min-width:480px) and (max-width:800px) {
+            .center-content {
+                width: 100%;
+
+            }
+
+            .top-img {
+                width: 100%
+            }
+
+            .select-country {
+                width: 100%
+            }
+
+            .tips-card {
+                width: 67%
+            }
+
+            .select-country2 {
+                width: 40%
+            }
+
+            .select-country2 {
+                float: right;
+                width: 40%;
+                margin-right: 1rem
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .center-content {
+                width: 100%;
+                margin-bottom: 20px !important;
+            }
+
+            .form-group .title {
+                white-space: normal;
+                width: 100%;
+            }
+
+            .form-control {
+                font-size: 13px;
+            }
+
+            body>div>div.center-content>p>strong>span {
+                display: inline-block;
+            }
+
+            .file {
+                margin-right: 0px;
+            }
+
+            div.center-content>div.total-top>div:nth-child(2) {
+                width: 29% !important;
+            }
+
+            .ibox-content {
+                border: 1px #e7eaec solid;
+            }
+
+            .top-img {
+                width: 100% !important;
+                height: 200px !important;
+            }
+
+            .select-country {
+                width: 100%;
+            }
+
+            .tips-card {
+                width: 64%
+            }
+
+            .input-group-append .btn-primary {
+                width: 30%;
+            }
+
+            .select-country2 {
+                width: 40%
+            }
+
+            .select-country2 {
+                float: left;
+                width: 100%
+            }
+        }
+
+        .en {
+            color: rgb(158, 158, 169);
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body >
+<div id="wrapper">
+    <% include /partial/nav.ejs %>
+<script>
+    var activity = "userinfo";
+    $('#side-menu .' + activity).addClass('active');
+    $($('#side-menu .' + activity).parent().parent()[0]).addClass('active');
+</script>
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+        <% include /partial/header.ejs %>   
+</div>
+    <style>
+
+.btn-primary2{
+    background-color: #177ce4;
+    height: 30px;
+    width: 100px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    font-size: 15px;
+}
+</style>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="ibox-content">
+                    <div class="center-content" style="margin:0 auto;background-color:#fff">
+                        <div class="total-top">
+                            <div class="form-group" style="float:left;width:100%" id="type">
+                                <label class="title"><span style="color:red;padding-right:5px">*</span>是否去过武汉<span
+                                        class="en"></span>：</label>
+                            <% if (user.wuhan == 0) { %>
+                                <input type="text" placeholder="" class="form-control" disabled value="是">
+                            <% } %>
+                            <% if (user.wuhan == 1) { %>
+                                <input type="text" placeholder="" class="form-control" disabled value="否">
+                            <% } %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="title"><span style="color:red;padding-right:5px">*</span>姓名 <span
+                                    class="en">Name</span>：</label>
+                            <input type="text" placeholder="" class="form-control" disabled value="<%= user.name %>">
+                        </div>
+                        <div class="form-group" id="sex">
+                            <label class="title"><span style="color:red;padding-right:5px">*</span>性别 <span
+                                    class="en">Sex</span>：</label>
+                            <% if (user.sex == 0) { %>
+                                <input type="text" placeholder="" class="form-control" disabled value="男">
+                            <% } %>
+                            <% if (user.sex == 1) { %>
+                                <input type="sextext" placeholder="" class="form-control" disabled value="女">
+                            <% } %>                
+                        </div>
+                        <div class="form-group">
+                            <label class="title"><span style="color:red;padding-right:5px">*</span>所在系<span
+                                    class="en"></span>：</label>
+                            <input type="text" placeholder="" class="form-control" disabled value="<%= user.department %>">
+                        </div>
+                        <div class="form-group">
+                            <label class="title"><span style="color:red;padding-right:5px">*</span>所在班级<span
+                                    class="en"></span>：</label>
+                            <input type="text" placeholder="" class="form-control" disabled value="<%= user.clas %>">
+                        </div>
+                        <div class="form-group">
+                            <label class="title"><span style="color:red;padding-right:5px"></span>学号 <span
+                                    class="en"></span>：</label>
+                            <input type="text" placeholder="" class="form-control" disabled value="<%= user.studentid %>">
+                        </div>
+                        <div class="form-group">
+                            <label class="title"><span style="color:red;padding-right:5px">*</span>目前所在城市<span
+                                    class="en"></span>：</label>
+                            <input type="text" placeholder="" class="form-control" disabled value="<%= user.city %>" >
+                        </div>
+                        <p style="padding-left:1.2rem;padding-top:15px"><strong style="font-size: 20px">出行信息 <span
+                            class="en">(2020年1月-1日后)</span></strong>
+                        </p>
+                        <div id="travel">
+
+                                <%for(var i=0;i < travel.length; i++){%>
+                                <div class="content">
+                                    <div class="form-group">
+                                        <label class="title"><span style="color:red;padding-right:5px">*</span>主要目的地 <span
+                                                class="en"></span>：</label>
+                                        <input type="text" placeholder="" class="form-control purpose" value="<%= travel[i].purpose %>" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="title"><span style="color:red;padding-right:5px">*</span>出行方式 <span
+                                                class="en"></span>：</label>
+                                        <input type="text" placeholder="" class="form-control way" value="<%= travel[i].way %>" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="title"><span style="color:red;padding-right:5px">*</span>车次 <span
+                                                class="en"></span>：</label>
+                                        <input type="text" placeholder="没有请填写无" class="form-control trains1" value="<%= travel[i].trains1 %>" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="title"><span style="color:red;padding-right:5px">*</span>出行时间 <span
+                                                class="en"></span>：</label>
+                                        <input type="text" placeholder="" class="form-control start_time" value="<%= travel[i].start_time %>" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="title"><span style="color:red;padding-right:5px">*</span>返回时间 <span
+                                                class="en"></span>：</label>
+                                        <input type="text" placeholder="" class="form-control en_time" value="<%= travel[i].en_time %>" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="title"><span style="color:red;padding-right:5px">*</span>车次 <span
+                                                class="en"></span>：</label>
+                                        <input type="text" placeholder="没有请填写无" class="form-control trains2" value="<%= travel[i].trains2 %>" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="title"><span style="color:red;padding-right:5px">*</span>备注<span
+                                                class="en"></span>：</label>
+                                        <textarea class="note" style="width: 100%;" disabled><%= travel[i].note %></textarea>
+                                    </div>
+                                    <p style="width: 100%;height: 1px;background-color: #b3aba0;"></p>
+                                </div>
+                                <%}%>
+                            </div>
+                    </div>
+                    <style>
+                        .fixed-right {
+                            position: fixed;
+                            top: 22%;
+                            width: 70px;
+                            bottom: -1px;
+                            right: 0px;
+                            z-index: 999;
+                            height: 50px;
+                        }
+            
+                        .fixed-right .col-md-4 a {
+                            color: #fff;
+                            font-size: 14px;
+                            font-weight: bolder;
+                        }
+            
+                        .fixed-right .col-md-4 {
+                            text-align: center;
+                            width: 70px;
+                            height: 70px;
+            
+                        }
+            
+                        .fixed-right .btn-primary2 {
+                            width: 100%;
+                            height: 100%;
+                            text-align: center;
+                            margin-top: 1px;
+                        }
+            
+                        .fixed-right a {
+                            display: inline-block;
+                            text-decoration: none;
+                            color: #fff;
+                            font-size: 14px;
+                            font-weight: bolder;
+                            width: 50%;
+                            height: 50%;
+                        }
+            
+                        @media (max-width: 768px) {
+                            .fixed-right {
+                                width: 100%;
+                                top: auto;
+                                bottom: 0px;
+                                background-color: #177ce4;
+                            }
+            
+                            .fixed-right a {
+                                line-height: normal;
+                                white-space: nowrap !important;
+                            }
+            
+                            .fixed-right .col-md-4 {
+                                height: 50px;
+                                display: inline-block;
+                                width: 32%;
+                            }
+            
+                            .fixed-right .btn-primary2 {
+                                height: 50px;
+                                line-height: 50px;
+                            }
+            
+                            .fixed-right .row {
+                                height: 50px;
+                                line-height: 50px;
+                            }
+                        }
+                    </style>
+            
+                </div>
+            </div>
+        </div>
+        <% include /partial/footer.ejs %>
+    </div>
+</div>
+
+<script src="/public/info/js/popper.min.js"></script>
+<script src="/public/info/js/bootstrap.min.js"></script>
+<script src="/public/info/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/public/info/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/public/info/js/inspinia.js"></script>
+<script src="/public/info/js/plugins/pace/pace.min.js"></script>
+</body>
+</html>

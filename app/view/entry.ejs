@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <!-- <link rel=" icon" href="/Public/logo1.png"> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+        content="wclassth=device-wclassth, initial-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+    <title>请填写个人信息-晋城职业技术学院</title>
+</head>
+
+<body>
+    <style>
+        body {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .title {
+            font-weight: 500;
+        }
+
+        .ibox-content {
+
+            padding-bottom: 30px;
+            margin: 0 auto;
+            font-size: 16px;
+        }
+
+        .ibox-content p {
+            margin-top: 0;
+            padding-top: 0
+        }
+
+        .ibox-content img {
+            padding: 0
+        }
+
+        .form-group {
+            padding: 0 1.5rem;
+            overflow: hidden;
+            line-height: 30px;
+            margin-bottom: 15px
+        }
+
+        .i-checks {
+            float: left;
+            padding-right: 20px
+        }
+
+        .form-group label {
+            width: 250px;
+            display: block;
+            white-space: nowrap;
+        }
+
+        .form-control {
+            width: 97%;
+            height: 35px;
+            border: 1px #e7eaec solid;
+            font-size: 15px;
+            padding-left: 5px;
+            color: #999;
+            background-color: #f1f1f1;
+        }
+
+        .select-country {
+            height: 35px;
+            border: 1px #e7eaec solid;
+            font-size: 13px;
+            padding-left: 5px;
+            color: #999;
+            background-color: #f1f1f1;
+        }
+
+        .select-country2 {
+            height: 35px;
+            border: 1px #e7eaec solid;
+            font-size: 13px;
+            padding-left: 5px;
+            color: #999;
+            margin-bottom: 15px;
+            background-color: #f1f1f1;
+        }
+
+        .input-group-append .btn-primary {
+            background-color: #999;
+            height: 39px;
+            width: 28.5%;
+            margin-left: 8px;
+            float: left;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 15px
+        }
+
+        .btn-primary2 {
+            background-color: #177ce4;
+            height: 39px;
+            width: 200px;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            margin: 15px auto 20px auto;
+            display: block;
+            font-size: 15px
+        }
+
+        .input-group-append .btn-primary:hover {
+            background-color: #177ce4;
+        }
+
+        .file {
+            background-color: #e7eaec;
+            width: 100px;
+            height: 100px;
+            float: right;
+            margin-right: 1rem;
+        }
+
+        .file a {
+            color: #999;
+            cursor: pointer;
+            margin: 0 auto;
+            text-decoration: none;
+            display: block;
+            line-height: 100px;
+            width: 64px
+        }
+
+        .total-top {
+            overflow: hidden;
+        }
+
+
+        @media screen and (min-width: 800px) {
+            .center-content {
+                width: 800px
+            }
+
+            .ibox-content {
+                background: url(http://2020.globaltalent.net/Public/bg3.jpg) no-repeat;
+                width: 100%;
+                height: auto;
+                background-size: cover;
+
+            }
+
+            .select-country {
+                width: 98%
+            }
+
+            .tips-card {
+                width: 67.5%
+            }
+
+            .select-country2 {
+                width: 40%
+            }
+
+            .tips-card {
+                width: 67.5%
+            }
+
+            .select-country2 {
+                float: right;
+                width: 40%;
+                margin-right: 1rem
+            }
+        }
+
+        @media screen and (min-width:480px) and (max-width:800px) {
+            .center-content {
+                width: 100%;
+
+            }
+
+            .top-img {
+                width: 100%
+            }
+
+            .select-country {
+                width: 100%
+            }
+
+            .tips-card {
+                width: 67%
+            }
+
+            .select-country2 {
+                width: 40%
+            }
+
+            .select-country2 {
+                float: right;
+                width: 40%;
+                margin-right: 1rem
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .center-content {
+                width: 100%;
+                margin-bottom: 20px !important;
+            }
+
+            .form-group .title {
+                white-space: normal;
+                width: 100%;
+            }
+
+            .form-control {
+                font-size: 13px;
+            }
+
+            body>div>div.center-content>p>strong>span {
+                display: inline-block;
+            }
+
+            .file {
+                margin-right: 0px;
+            }
+
+            div.center-content>div.total-top>div:nth-child(2) {
+                width: 29% !important;
+            }
+
+            .ibox-content {
+                border: 1px #e7eaec solid;
+            }
+
+            .top-img {
+                width: 100% !important;
+                height: 200px !important;
+            }
+
+            .select-country {
+                width: 100%;
+            }
+
+            .tips-card {
+                width: 64%
+            }
+
+            .input-group-append .btn-primary {
+                width: 30%;
+            }
+
+            .select-country2 {
+                width: 40%
+            }
+
+            .select-country2 {
+                float: left;
+                width: 100%
+            }
+        }
+
+        .en {
+            color: rgb(158, 158, 169);
+            font-size: 12px;
+        }
+    </style>
+    <link rel="stylesheet" href="/public/css/jquery.mloading.css">
+    <div class="ibox-content">
+        <div style="text-align:center">
+            <a href="http://www.sxjczy.cn:88/gb2015/"><img src="http://www.sxjczy.cn:88/gb2015/images/20.png"
+                    class="top-img" style="width: 800px;height: 333px;"></a>
+        </div>
+
+        <div class="center-content" style="margin:0 auto;background-color:#fff">
+            <% if (err) { %>
+            <p style="text-align: center;">
+                <a href="/register" style="color: red;"><%= err %></a>
+            </p>
+            <% } %>
+            <p style="padding-left:1.2rem;padding-top:15px"><strong style="font-size: 20px">请填写您的信息 <span
+                        class="en"></span></strong>
+            </p>
+            <div class="total-top">
+                <div class="form-group" style="float:left;width:40%" id="type">
+                    <label class="title"><span style="color:red;padding-right:5px">*</span>是否去过武汉<span
+                            class="en"></span>：</label>
+                    <div class="i-checks"><label> <input type="radio" value="0" name="type" checked="">
+                            <i></i>是 <span class="en"></span></label></div>
+                    <div class="i-checks"><label> <input type="radio" value="1" name="type">
+                            <i></i>否 <span class="en"></span></label></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="title"><span style="color:red;padding-right:5px">*</span>姓名 <span
+                        class="en">Name</span>：</label>
+                <input type="text" placeholder="" class="form-control" id="name" value="<%= data.name %>" disabled>
+            </div>
+            <div class="form-group" id="sex">
+                <label class="title"><span style="color:red;padding-right:5px">*</span>性别 <span
+                        class="en">Sex</span>：</label>
+                <div class="i-checks"><label> <input type="radio" value="0" name="a5" checked="">
+                        <i></i> 男 <span class="en">Male</span></label></div>
+                <div class="i-checks"><label> <input type="radio" value="1" name="a5"> <i></i> 女 <span
+                            class="en">Female</span>
+                    </label></div>
+            </div>
+            <div class="form-group">
+                <label class="title"><span style="color:red;padding-right:5px">*</span>所在系<span
+                        class="en"></span>：</label>
+                <input type="text" placeholder="" class="form-control" id="nationality" value="<%= data.department %>"
+                    disabled>
+            </div>
+            <div class="form-group">
+                <label class="title"><span style="color:red;padding-right:5px">*</span>所在班级<span
+                        class="en"></span>：</label>
+                <input type="text" placeholder="" class="form-control" id="clas" value="<%= data.clas %>" disabled>
+            </div>
+            <div class="form-group">
+                <label class="title"><span style="color:red;padding-right:5px"></span>学号 <span
+                        class="en"></span>：</label>
+                <input type="email" placeholder="" class="form-control" id="idcard" value="<%= data.id %>" disabled>
+            </div>
+            <div class="form-group">
+                <label class="title"><span style="color:red;padding-right:5px">*</span>目前所在城市<span
+                        class="en"></span>：</label>
+                <input type="text" placeholder="" class="form-control" id="city">
+            </div>
+            <div class="form-group">
+                <label class="title"><span style="color:red;padding-right:5px">*</span>填写您的密码 <span
+                        class="en"></span>：</label>
+                <input type="password" placeholder="请务必记住您的密码" class="form-control" id="password">
+            </div>
+            <div class="form-group">
+                <label class="title"><span style="color:red;padding-right:5px">*</span>再次填写您的密码 <span
+                        class="en"></span>：</label>
+                <input type="password" placeholder="" class="form-control" id="npass">
+            </div>
+            <p style="padding-left:1.2rem;padding-top:15px"><strong style="font-size: 20px">请填写您的出行信息 <span
+                        class="en">(2020年1月-1日后)</span></strong>
+            </p>
+
+            <div id="travel">
+
+                <div class="content">
+                    <div class="form-group">
+                        <label class="title"><span style="color:red;padding-right:5px">*</span>主要目的地 <span
+                                class="en"></span>：</label>
+                        <input type="text" placeholder="" class="form-control purpose">
+                    </div>
+                    <div class="form-group">
+                        <label class="title"><span style="color:red;padding-right:5px">*</span>出行方式 <span
+                                class="en"></span>：</label>
+                        <input type="text" placeholder="" class="form-control way">
+                    </div>
+                    <div class="form-group">
+                        <label class="title"><span style="color:red;padding-right:5px">*</span>车次 <span
+                                class="en"></span>：</label>
+                        <input type="text" placeholder="没有请填写无" class="form-control trains1">
+                    </div>
+                    <div class="form-group">
+                        <label class="title"><span style="color:red;padding-right:5px">*</span>出行时间 <span
+                                class="en"></span>：</label>
+                        <input type="text" placeholder="" class="form-control start_time">
+                    </div>
+                    <div class="form-group">
+                        <label class="title"><span style="color:red;padding-right:5px">*</span>返回时间 <span
+                                class="en"></span>：</label>
+                        <input type="text" placeholder="" class="form-control en_time">
+                    </div>
+                    <div class="form-group">
+                        <label class="title"><span style="color:red;padding-right:5px">*</span>车次 <span
+                                class="en"></span>：</label>
+                        <input type="text" placeholder="没有请填写无" class="form-control trains2">
+                    </div>
+                    <div class="form-group">
+                        <label class="title"><span style="color:red;padding-right:5px"></span>备注<span
+                                class="en"></span>：</label>
+                        <textarea class="note" style="width: 100%;"></textarea>
+                    </div>
+                    <p style="width: 100%;height: 1px;background-color: #b3aba0;"></p>
+                </div>
+            </div>
+            <p style="padding: 0 1.5rem;text-align: right;color: blue;cursor: pointer;">
+                <span id="addtravel">添加出行记录</span>
+            </p>
+
+            <div style="height: 52px;">
+                <button type="button" class="btn btn-primary2" id="submit" style="margin-top: 10px;">确认<span class="en"
+                        style="color: white;"></span></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/public/js/jquery.mloading.js"></script>
+    <script>
+        /**
+         * del dom
+         * */
+        function deldom(e) {
+            $(e).parent().prev().remove();
+            $(e).parent().remove();
+        }
+
+        let c_cdom = $('#travel').html();
+        $('#addtravel').click(function () {
+            let num = $('#travel div.content').length;
+            if (num > 2) {
+                alert('出行记录最多添加3次');
+            } else {
+                $('#travel').append(c_cdom + `<p style="padding: 0 1.5rem;margin-bottom: 5px;text-align: left;"><span style="color: red;" onclick="deldom(this)">删除</span></p>`);
+            }
+        })
+
+
+        $('#submit').click(function () {
+
+            var sex = $($('#sex input:radio:checked')[0]).val();
+            var wuhan = $($('#type input:radio:checked')[0]).val();
+            var name = $('#name').val();
+            var dep = $('#nationality').val();
+            var clas = $('#clas').val();
+            var sid = $('#idcard').val();
+            var city = $('#city').val();
+            var password = $('#password').val();
+            var n_pass = $('#npass').val();
+
+            if (name == '') {
+                alert('姓名不能为空');
+                return;
+            }
+
+            if (city == '') {
+                alert('请输入您目前所在城市');
+                return;
+            }
+
+            if (password.length < 6 || password.length > 12) {
+                alert('请保证自己的密码长度大于6位并小于12位');
+                return;
+            }
+
+            if (password !== n_pass) {
+                alert('两次密码输入不一致！');
+                return;
+            }
+
+            let travel = getTravel();
+            if (!travel) {
+                return;
+            }
+
+            $('.ibox-content').mLoading({
+                text: "上传中...",
+            });
+
+            $.ajax({
+                url: "/entry",
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    name: name,
+                    wuhan: wuhan,
+                    sex: sex,
+                    clas: clas,
+                    studentid: sid,
+                    city: city,
+                    password: password,
+                    department: dep,
+                    travel: JSON.stringify(travel)
+                },
+                success: function (data) {
+                    $('.ibox-content').mLoading('hide');
+                    if (data.code === 1) {
+                        window.location.href = '/info/index';
+                    } else {
+                        alert(data.err);
+                    }
+                },
+
+                error: function (data) {
+                    err(data);
+                    $('.ibox-content').mLoading('hide');
+
+                }
+            });
+        })
+
+        /**
+         * 获取出行记录
+         * */
+        function getTravel() {
+            let doms = $('#travel div.content');
+            let arr = [];
+            let tag = true;
+            doms.map(function (e) {
+                let ele = doms[e];
+                let obj = {
+                    purpose: $(ele).find('.purpose').val(),
+                    way: $(ele).find('.way').val(),
+                    trains1: $(ele).find('.trains1').val(),
+                    start_time: $(ele).find('.start_time').val(),
+                    en_time: $(ele).find('.en_time').val(),
+                    trains2: $(ele).find('.trains2').val(),
+                    note: $(ele).find('.note').val(),
+                };
+                if (valedDom(obj)) {
+                    arr.push(obj);
+                } else {
+                    tag = false;
+                }
+            });
+            if (tag) {
+                return arr;
+            } else {
+                return false;
+            }
+        }
+
+        /**
+         * 校验填写的出行信息
+         * */
+        function valedDom(object) {
+            let tag = true;
+            for (const key in object) {
+                if (object.hasOwnProperty(key)) {
+                    const element = object[key];
+                    if (key != 'note') {
+                        if (element == '') {
+                            tag = false;
+                            alert('请查看您的出行信息中是否有未填项');
+                            return;
+                        }
+                    }
+                }
+            }
+            return tag;
+        }
+
+        function err(data) {
+            if (data.responseJSON.code === 'ER_DUP_ENTRY') {
+                alert('该用户已注册');
+            } else {
+                alert("注册失败,请重试");
+            }
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
+    <title>晋城职业技术学院-管理中心</title>
+    <link href="/public/info/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/info/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/public/info/css/animate.css" rel="stylesheet">
+    <link href="/public/info/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <% include /adminpartial/nav.ejs %>
+        <script>
+            var activity = "home";
+            $('#side-menu .' + activity).addClass('active');
+            $($('#side-menu .' + activity).parent().parent()[0]).addClass('active');
+
+            $('body').addClass('mini-navbar');  //缩小nav
+        </script>
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <% include /adminpartial/header.ejs %>
+            </div>
+            <style>
+                .btn-primary2 {
+                    background-color: #177ce4;
+                    height: 30px;
+                    width: 100px;
+                    color: #fff;
+                    border: none;
+                    cursor: pointer;
+                    text-align: center;
+                    display: block;
+                    font-size: 15px;
+                }
+            </style>
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <h1>this is home</h1>
+            </div>
+        </div>
+        <% include /adminpartial/footer.ejs %>
+                    </div>
+                </div>
+
+                <script src="/public/info/js/popper.min.js"></script>
+                <script src="/public/info/js/bootstrap.min.js"></script>
+                <script src="/public/info/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+                <script src="/public/info/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+                <script src="/public/info/js/inspinia.js"></script>
+                <script src="/public/info/js/plugins/pace/pace.min.js"></script>
+</body>
+
+</html>

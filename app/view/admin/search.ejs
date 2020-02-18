@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
+    <title>晋城职业技术学院-管理中心</title>
+    <link href="/public/info/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/info/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/public/info/css/animate.css" rel="stylesheet">
+    <link href="/public/info/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <% include /adminpartial/nav.ejs %>
+        <script>
+            var activity = "search-page";
+            $('#side-menu .' + activity).addClass('active');
+            $($('#side-menu .' + activity).parent().parent()[0]).addClass('active');
+        </script>
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <% include /adminpartial/header.ejs %>
+            </div>
+            <style>
+                .btn-primary2 {
+                    background-color: #177ce4;
+                    height: 30px;
+                    width: 100px;
+                    color: #fff;
+                    border: none;
+                    cursor: pointer;
+                    text-align: center;
+                    display: block;
+                    font-size: 15px;
+                }
+            </style>
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <input type="number" placeholder="请输入需要查询大于多少的温度值(默认37.0)" class="form-control" id="record">
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <select class="custom-select" id="inputGroupSelect01">
+                            <% if (time == 'week') { %>
+                            <option selected value="week">本周</option>
+                            <option value="month">本月</option>
+                            <option value="day">当天</option>
+                            <% } %>
+                            <% if (time == 'month') { %>
+                            <option value="week">本周</option>
+                            <option value="month" selected>本月</option>
+                            <option value="day">当天</option>
+                            <% } %>
+                            <% if (time == 'day') { %>
+                            <option value="week">本周</option>
+                            <option value="month">本月</option>
+                            <option value="day" selected>当天</option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="col-lg-2">
+                        <button type="button" class="btn btn-primary2" id="submit" style="height: 70%;">提交</button>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table id="example" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>姓名</th>
+                                    <th>是否去过武汉</th>
+                                    <th>性别</th>
+                                    <th>所在系</th>
+                                    <th>所在班级</th>
+                                    <th>学号</th>
+                                    <th>目前所在城市</th>
+                                    <th>目前温度</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%for(var i=0;i < data.length; i++){%>
+                                <tr>
+                                    <td><%= data[i].name %></td>
+
+                                    <% if (data[i].wuhan == 0) { %>
+                                    <td>是</td>
+                                    <% } else { %>
+                                    <td>否</td>
+                                    <% } %>
+
+                                    <% if (data[i].sex == 0) { %>
+                                    <td>男</td>
+                                    <% } else { %>
+                                    <td>女</td>
+                                    <% } %>
+                                    <td><%= data[i].department %></td>
+                                    <td><a href="/admin/clasdata?clas=<%= data[i].clas %>&department=<%= data[i].department %>"><%= data[i].clas %></a></td>
+                                    <td><%= data[i].studentid %></td>
+                                    <td><%= data[i].city %></td>
+                                    <td><%= data[i].record %></td>
+                                    <th><a href="/admin/clasdata?sid=<%= data[i].id %>&n=<%= data[i].name %>"
+                                            target="_blank">体温记录</a></th>
+                                </tr>
+                                <%}%>
+                            </tbody>
+      
+                        </table>
+                        </div>
+            </div>
+        </div>
+        <% include /adminpartial/footer.ejs %>
+                    </div>
+                </div>
+
+                <script src="/public/info/js/popper.min.js"></script>
+                <script src="/public/info/js/bootstrap.min.js"></script>
+                <script src="/public/info/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+                <script src="/public/info/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+                <script src="/public/info/js/inspinia.js"></script>
+                <script src="/public/info/js/plugins/pace/pace.min.js"></script>
+                <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+                <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+                <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+                <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+                <script>
+                    $(document).ready(function () {
+                        //配置DataTables默认参数
+                        $.extend(true, $.fn.dataTable.defaults, {
+                            "language": {
+                                "url": "/public/language/Chinese.txt"
+                            },
+                            "dom": "l<'#toolbar'>frtip"
+                        });                        
+
+                        $('#example').DataTable({
+                            dom: 'Bfrtip',
+                            buttons: [
+                               'excel', 'pdf',
+                            ]
+                        });
+
+                        $('#submit').click(function () {
+                            var record = $('#record').val();
+                            var time = $('#inputGroupSelect01').find("option:selected").val();
+                            if (record == '') {
+                                alert('温度不能为空');
+                                return;
+                            }
+                            window.location.href = '/admin/index?record=' + record + '&time=' + time;
+                        });
+
+
+                    });
+                </script>
+</body>
+
+</html>

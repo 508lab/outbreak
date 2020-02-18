@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
+    <title>晋城职业技术学院-登陆</title>
+    <link href="/public/info/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/info/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/public/info/css/animate.css" rel="stylesheet">
+    <link href="/public/info/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/jquery.mloading.css">
+    <script src="/public/info/js/jquery-3.1.1.min.js"></script>
+    <style>
+    .middle-box{
+        padding-top: 0px;
+    }
+    </style>
+
+</head>
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div>
+            <div>
+                <h1 class="logo-name" style="margin-top: 0px;">
+                    <img src="http://www.sxjczy.cn:88/gb2015/images/logo.png" style="width: 300px;height: 84px;">
+                </h1>
+            </div>
+            <div class="m-t" id="pwd_login" style="display: block;">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="请输入您的帐号" required="" id="sid">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="请输入您的密码" required="" id="password">
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b" id="login2">登陆</button>
+            </div>
+        </div>
+    </div>
+ 
+    <script src="/public/info/js/popper.min.js"></script>
+    <script src="/public/info/js/bootstrap.js"></script>
+    <script src="/public/js/jquery.mloading.js"></script>
+    <script>
+        $('#login2').click(function () {
+            var name = $('#sid').val();
+            var password = $('#password').val();
+            if (name == '') {
+                alert('帐号不能为空');
+                return;
+            }
+
+            if (password.length < 6) {
+                alert('请保证自己的密码长度大于6位');
+                return;
+            }
+            
+            $('body').mLoading({
+                text: "登陆中...",
+            });
+            $.ajax({
+                url: "/admin/login",
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    name: name,
+                    password: password
+                },
+                success: function (data) {
+                    $('body').mLoading('hide');
+                    if (data.code === 1) {
+                        window.location.href = '/admin/index';
+                    }else{
+                        alert(data.err);
+                    }
+                },
+
+                error: function (data) {
+                    $('body').mLoading('hide');
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>

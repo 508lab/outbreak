@@ -1,0 +1,251 @@
+.input_245_34_div1{
+    width: 233px;
+    padding-left: 10px;
+    height: 32px;
+    border: 1px #DDDDDD solid;
+    line-height: 32px;
+    background-image: url(http://www.globaltalent.net/Application/Home/View/default/public/images/17.png);
+    background-repeat: no-repeat;
+    background-position: right -30px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.input_245_34_div1 .result{
+    float: left;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+body > div.modal1 {
+    position: initial;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    overflow: hidden;
+    outline: 0;
+}
+.modal .modal_dialog{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+}
+.modal_content{
+    padding: 5px;
+    background: #a3a3a3;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+.modal_content .modal_header{
+    height: 30px;
+    padding-top: 10px;
+    padding-left: 15px;
+    background: #f0f0f0;
+    position: relative;
+    cursor: move;
+    user-select: none;
+}
+.modal_content .modal_body{
+    padding: 15px;
+    background: #fff;
+}
+.modal_content .modal_footer{
+    padding: 10px 90px;
+    background: #f0f0f0;
+}
+.modal_content .modal_header .title{
+    font-size: 16px;
+    color: #333333;
+    line-height: 20px;
+}
+.modal_content .modal_header .max_remind{
+    font-size: 12px;
+    color: #999999;
+}
+.modal_content .modal_header .close{
+    display: block;
+    position: absolute;
+    right: 15px;
+    top: 12px;
+    width: 16px;
+    height: 16px;
+    background: url(http://www.globaltalent.net/Application/Home/View/default/public/images/44.png) no-repeat;
+    *font-size: 0;
+}
+.listed_group{
+    display: none;
+    margin-bottom: 10px;
+    line-height: 24px;
+    font-size: 14px;
+}
+.listed_group .left_text{
+    float: left;
+}
+.listed_group .center_text{
+    float: left;
+    max-width: 515px;
+}
+.listed_group .right_text{
+    display: block;
+    float: right;
+    background: url(http://www.globaltalent.net/Application/Home/View/default/public/images/26.png) no-repeat 0px 5px;
+    padding-left: 18px;
+    text-decoration: none;
+    color: #999;
+    font-size: 12px;
+}
+.clear{
+    clear: both;
+    height: 0px;
+    font-size: 0px;
+    line-height: 0px;
+}
+.modal_body_box_jl2{
+    width: 478px;
+    height: 252px;
+}
+.modal_body_box{
+    border: 1px solid #ccc;
+}
+.modal_body_box_jl2 .left_box{
+    width: 175px;
+    height: 252px;
+    float: left;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+div.modal .J_modal_content .left_box .list_nav{
+    margin: 0px;
+    padding: 0px;
+}
+.btn_blue{
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    color: #FFFFFF;
+    background-color: #5F8DC9;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 0px;
+    width: 60px;
+    height: 32px;
+    line-height: 32px;
+    border: 0px #35639F solid;
+}
+
+.modal_backdrop{position:fixed;top:0;right:0;bottom:0;left:0;width:100%;height:100%;background-color:#000;z-index:1040;-webkit-opacity:0.5;-moz-opacity:0.5;-khtml-opacity:0.5;opacity:.5;filter:alpha(opacity=50);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50);_position:absolute;_top:expression(offsetParent.scrollTop);_left:expression(offsetParent.scrollLeft);}
+.modal_backdrop.fade{filter:alpha(opacity=0);opacity:0;}
+.modal_backdrop.in{filter:alpha(opacity=50);opacity:.5;}
+.modal_scrollbar_measure{position:absolute;top:-9999px;width:50px;height:50px;overflow:scroll;}
+.modal{overflow:hidden;-webkit-overflow-scrolling:touch;outline:0;}
+.modal .modal_dialog{position:absolute;top:0;left:0;z-index:1050;}
+.modal.in .modal_dialog{-webkit-transition:-webkit-transform .2s ease-out;-o-transition:-o-transform .2s ease-out;transition:transform .2s ease-out;-webkit-transform:translate(0,-25%);-ms-transform:translate(0,-25%);-o-transform:translate(0,-25%);transform:translate(0,-25%);}
+.modal_content{padding:5px;background:#a3a3a3;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}
+.modal_content.no_pad{padding:0;}
+.modal_content .modal_header{height:30px;padding-top:10px;padding-left:15px;background:#f0f0f0;position:relative;cursor:move;moz-user-select:-moz-none;-moz-user-select:none;-o-user-select:none;-khtml-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none;}
+.modal_content .modal_header .title{font-size:16px;color:#333333;line-height:20px;}
+.modal_content .modal_header .max_remind{font-size:12px;color:#999999;}
+.modal_content .modal_header .close{display:block;position:absolute;right:15px;top:12px;width:16px;height:16px;background:url(http://www.globaltalent.net/Application/Home/View/default/public/images/44.png) no-repeat;*font-size:0;}
+.modal_content .modal_header .close:hover{background-position:0 -24px;}
+.modal_content .modal_body{padding:15px;background:#fff;}
+.modal_content .modal_body.pd0{padding:0;}
+.modal_content .modal_body .confirm{text-align:center;padding:0 50px;}
+
+/*AJAX loading*/
+.modal_content .modal_body .ajax_loading{display:block;margin:0 30px;position:relative;width:150px;height:68px;}
+.modal_content .modal_body .ajax_loading .ajaxloadtxt{background-image:url(../../images/loading.gif);background-repeat:no-repeat;background-position:center 5px;width:150px;height:28px;background-color:#FFFFFF;text-align:center;margin:0 auto;padding-top:40px;font-size:12px;border:0;}
+.modal_content .modal_footer{padding:10px 90px;background:#f0f0f0;}
+.modal_content .modal_footer .res_add_but{margin:0 auto;width:auto;}
+.modal_content .modal_footer .res_add_but .butlist{width:50%;text-align:center;float:left;}
+.modal_content .modal_footer .res_add_but .J_hoverbut{display:inline-block;*display:inline;*zoom:1;moz-user-select:-moz-none;-moz-user-select:none;-o-user-select:none;-khtml-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none;width:72px;height:30px;line-height:30px;}
+
+/*职位、地区、行业、专业弹出框样式*/
+.modal_body_box{border:1px solid #ccc;}
+.modal_body_box .list_box input{*top:1px;margin:0;margin:0 4px 0 0;*margin:0 0 0 -4px;}
+.modal_body_box .list_nav li{display:block;margin:0;padding:0;padding:0;_display:inline;white-space:nowrap;_white-space:normal;overflow:hidden;text-overflow:ellipsis;-o-text-overflow:ellipsis;_background:transparent;_height:20px;}
+.modal_body_box .list_nav li label{float:none;width:auto;padding:5px 6px;text-decoration:none;cursor:pointer;font-size:14px;height:20px;line-height:20px;display:block;}
+.modal_body_box .list_nav li:hover{color:#5f8dc9;background-color:#eaf7ff;}
+.modal_body_box .list_nav li.current,.modal_body_box .list_nav li.seledted{color:#5f8dc9;font-weight:bold;}
+.modal_body_box .list_nav1 li{display:block;margin:0;padding:0;height:20px;line-height:20px;padding:8px 0;}
+.modal_body_box .list_nav1 li label{float:none;width:auto;padding:3px 6px;text-decoration:none;cursor:pointer;font-size:14px;}
+.modal_body_box .list_nav1 li:hover{color:#5f8dc9;}
+.modal_body_box .list_nav1 li.current,.modal_body_box .list_nav1 li.seledted{color:#5f8dc9;}
+.listed_group{display:none;margin-bottom:10px;line-height:24px;font-size:14px;}
+.listed_group.nmb{margin-bottom:0;}
+.listed_group .left_text{float:left;}
+.listed_group .center_text{float:left;max-width:515px;}
+.listed_group .center_text .listed_item_parent{padding-right:10px;padding-bottom:10px;float:left;}
+.listed_group .center_text .listed_item{display:block;float:left;padding:5px 10px;line-height:14px;border-radius:2px;text-decoration:none;color:#fff;background-color:#5F8DC9;position:relative;padding-right:17px;}
+.listed_group .center_text .listed_item:hover{background-color:#4579C0}
+.listed_group .center_text .listed_item .del{position:absolute;top:5px;right:10px;width:17px;height:14px;background:url(http://www.globaltalent.net/Application/Home/View/default/public/images/89.png) no-repeat;}
+.listed_group .center_text .listed_item span{padding:0 15px 0 0;}
+.listed_group .right_text{display:block;float:right;background:url(http://www.globaltalent.net/Application/Home/View/default/public/images/26.png) no-repeat 0px 5px;padding-left:18px;text-decoration:none;color:#999;font-size:12px;}
+.listed_group .right_text:hover{color:#FF6600;background-position:0px -35px;}
+
+/* 行业 */
+#body_trade{display:none;}
+.modal_body_box1{width:600px;height:320px;padding:10px 20px;overflow-x:hidden;overflow-y:scroll;}
+.modal_body_box1 .list_nav li{width:33.3333%;float:left;}
+.modal_body_box1 .list_nav1 li{width:33.3333%;float:left;}
+
+/* 职位 */
+#body_jobs{display:none;}
+.modal_body_box2{width:627px;height:248px;}
+.modal_body_box2 .item{width:33.3333%;height:248px;float:left;overflow-x:hidden;overflow-y:scroll;}
+.modal_body_box2 .item .list_nav{display:none;}
+.modal_body_box2 .list_nav li label{padding:7px 12px;}
+
+/* 地区、专业 */
+#body_city{display:none;}
+#body_major{display:none;}
+.modal_body_box3{width:478px;height:252px;}
+.modal_body_box3 .left_box{width:100px;height:252px;float:left;overflow-x:hidden;overflow-y:scroll;}
+.modal_body_box3 .right_box{width:373px;height:252px;padding-left:5px;float:left;overflow:hidden;overflow-x:hidden;overflow-y:auto;}
+.modal_body_box3 .left_box .list_nav li{text-align:center;}
+.modal_body_box3 .right_box .list_nav{display:none;}
+.modal_body_box3 .right_box .list_nav li{float:left;}
+.modal_body_box3 .right_box .list_nav li label{padding:5px 10px;}
+.modal_body_box3.for-jobs .left_box{width:200px;}
+.modal_body_box3.for-jobs .right_box{width:273px;}
+
+/* 地区新样式 */
+.modal_body_box_new_city{width:647px;height:351px;border:0;}
+.modal_body_box_new_city .select_group{width:100%;height:50px;border-bottom:1px solid #f0f0f0;}
+.modal_body_box_new_city .select_group .select_g1{width:100px;height:50px;line-height:50px;padding-right:15px;text-align:right;font-weight:bold;float:left;}
+.modal_body_box_new_city .select_group .select_g2{width:512px;padding:10px 0;float:left;}
+.modal_body_box_new_city .select_group .select_g2 select{padding:3px 3px 3px 10px;background:transparent;height:30px;width:180px;font-size:14px;float:left;outline:none;border:1px solid #D0D0D0;cursor:pointer;margin-right:10px;line-height:30px;}
+.modal_body_box_new_city .select_group .select_g2.s2 select{width:180px;}
+.modal_body_box_new_city .select_group .select_g2.s3 select{width:150px;}
+.modal_body_box_new_city .select_group .select_g2.s4 select{width:100px;}
+.modal_body_box_new_city .child_line_group{width:100%;height:300px;overflow-x:hidden;overflow-y:scroll;}
+.modal_body_box_new_city .child_line_group .child_line{width:100%;border-bottom:1px solid #f0f0f0;}
+.modal_body_box_new_city .child_line_group .child_line .cl1{width:99px;line-height:30px;padding-right:15px;background-color:rgb(245,245,245);text-align:right;font-weight:bold;float:left;}
+.modal_body_box_new_city .child_line_group .child_line .cl2{width:500px;padding-left:12px;border-left:1px solid #f0f0f0;float:left;}
+.modal_body_box_new_city .child_line_group .child_line .cl2 .child_li{display:block;width:110px;height:17px;line-height:17px;padding:7px 0 4px 0;float:left;}
+.modal_body_box_new_city .child_line_group .child_line .cl2 .child_li label{height:14px;line-height:14px;cursor:pointer;}
+.modal_body_box_new_city .child_line_group .child_line .cl2 .child_li .child_input{vertical-align:bottom;}
+.modal_body_box_new_city .child_line_group .child_line .cl2 .child_li .txt{padding-left:5px;}
+.listed_group.city_new{padding-top:10px;background:#f5f5f5;}
+.listed_group.city_new .left_text{width:100px;padding-right:15px;text-align:right;font-weight:bold;float:left;}
+.listed_group.city_new .right_text{margin-right:15px;}
+.listed_group.city_new.pb10{padding-bottom:10px;}
+
+/*职位分类二级样式调整*/
+.modal_body_box_jl2{width:478px;height:252px;}
+.modal_body_box_jl2 .left_box{width:175px;height:252px;float:left;overflow-x:hidden;overflow-y:scroll;}
+.modal_body_box_jl2 .right_box{width:298px;height:252px;padding-left:5px;float:left;overflow:hidden;}
+.modal_body_box_jl2 .left_box .list_nav li{text-align:left;}
+.modal_body_box_jl2 .right_box .list_nav{display:none;}
+.modal_body_box_jl2 .right_box .list_nav li{float:left;}
+.modal_body_box_jl2 .right_box .list_nav li label{padding:3px 10px;}
+.modal_body_box_jl2.for-jobs .left_box{width:200px;}
+.modal_body_box_jl2.for-jobs .right_box{width:273px;}
+
+/*无数据*/
+.res_empty{background-image:url(http://www.globaltalent.net/Application/Home/View/default/public/images/13.png);background-repeat:no-repeat;background-position:center 10px;margin:0 auto;width:500px;height:30px;text-align:center;height:90px;padding-top:138px;margin-top:50px;line-height:200%}

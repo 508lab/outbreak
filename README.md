@@ -12,7 +12,7 @@ see [视频演示][https://508lab.github.io/2020/02/18/xi-tong/xue-sheng-ti-wen-
 
 ```bash
 $ 导入数据库 mtest.sql
-$ 相关/config/config.default.js 中关于数据库的配置（config.mysql）
+$ 修改/config/config.default.js 中关于数据库的配置（config.mysql）
 $ npm i
 $ npm run dev
 $ open http://localhost:7001/

@@ -1,9 +1,10 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
     <title>晋城职业技术学院-注册</title>
     <link href="/public/info/css/bootstrap.min.css" rel="stylesheet">
     <link href="/public/info/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -11,12 +12,13 @@
     <link href="/public/info/css/style.css" rel="stylesheet">
     <script src="/public/info/js/jquery-3.1.1.min.js"></script>
     <style>
-    .middle-box{
-        padding-top: 0px;
-    }
+        .middle-box {
+            padding-top: 0px;
+        }
     </style>
 
 </head>
+
 <body class="gray-bg">
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
@@ -29,14 +31,16 @@
                 <div class="form-group">
                     <input type="number" class="form-control" placeholder="请输入您的学号" required="" id="sid">
                 </div>
-                
+
                 <button type="submit" class="btn btn-primary block full-width m-b" id="login2">注册</button>
-                <a href="/login" style="display: block; width: 100%; text-align: right;">登陆</a>
+                <p style="width: 100%;">
+                    <a href="/teacher/login" style="float: left;">教师端</a>
+                    <a href="/login" style="float: right;">登陆</a>
+                </p>
             </div>
-            
         </div>
     </div>
- 
+
     <script src="/public/info/js/popper.min.js"></script>
     <script src="/public/info/js/bootstrap.js"></script>
     <script>
@@ -44,7 +48,7 @@
             var sid = $('#sid').val();
             if (sid.length === 10) {
                 window.location.href = '/entry?id=' + sid;
-            }else{
+            } else {
                 alert('请检查您的学号是否合规！');
             }
         })

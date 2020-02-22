@@ -1,5 +1,5 @@
 const Service = require('egg').Service;
-const TABLE = "temperature";
+const TABLE = "teachertemp";
 
 class TemperatureService extends Service {
 
@@ -64,24 +64,13 @@ class TemperatureService extends Service {
     }
 
     /**
-     * 获取区间数据(根据班级)
+     * 根据时间和系别获取数据
      * @param {*} time 
      * @param {*} dep 
      */
-    async bardataByClas(time, dep, clas) {
-        let sids = await this.sid({ department: dep, clas: clas });
-        if (sids) {
-            const sql = `SELECT ELT( INTERVAL( record, 35.0, 36.0, 37.0, 38.0, 39.0, 40.0) ,
-            '35.0-36.0',  '36.0-37.0', '37.0-38.0', '38.0-39.0', '39.0-40.0') AS 'interval',
-            COUNT( * ) AS  'num'
-            FROM temperature WHERE TIME >= '${time[0]}' AND TIME <= '${time[1]}'
-            AND sid IN ( ${sids} ) 
-            GROUP BY ELT( INTERVAL( record, 35.0, 36.0, 37.0, 38.0, 39.0, 40.0) , 
-            '35.0-36.0',  '36.0-37.0',  '37.0-38.0',  '38.0-39.0', '39.0-40.0')`;
-            return await this.app.mysql.query(sql);
-        } else {
-            return [];
-        }
+    async historyByDepTime(time, dep) {
+        const sql = `select * from teachertemp t join teacher u where t.time >= "${time[0]}" AND t.time <= "${time[1]}" AND u.department = "${dep}";`
+        return await this.app.mysql.query(sql);
     }
 
     /**
@@ -106,9 +95,9 @@ class TemperatureService extends Service {
      */
     async outstandard(record) {
         //当天统计
-        const now_sql = `SELECT count(DISTINCT sid) FROM temperature WHERE date(time) = curdate() AND record >= ${record};`;
+        const now_sql = `SELECT count(DISTINCT sid) FROM ${TABLE} WHERE date(time) = curdate() AND record >= ${record};`;
         //全部统计
-        const all_sql = `SELECT count(DISTINCT sid) FROM temperature WHERE record >= ${record}`;
+        const all_sql = `SELECT count(DISTINCT sid) FROM ${TABLE} WHERE record >= ${record}`;
         let all = await this.app.mysql.query(all_sql);
         let now = await this.app.mysql.query(now_sql);
         return {

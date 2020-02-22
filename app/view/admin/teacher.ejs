@@ -3,12 +3,14 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
-    <title>晋城职业技术学院-管理中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
+    <title>晋城职业技术学院</title>
     <link href="/public/info/css/bootstrap.min.css" rel="stylesheet">
     <link href="/public/info/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="/public/info/css/animate.css" rel="stylesheet">
     <link href="/public/info/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/kalendae.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -18,7 +20,7 @@
     <div id="wrapper">
         <% include /adminpartial/nav.ejs %>
         <script>
-            var activity = "search-page";
+            var activity = "search-teacher";
             $('#side-menu .' + activity).addClass('active');
             $($('#side-menu .' + activity).parent().parent()[0]).addClass('active');
         </script>
@@ -41,29 +43,19 @@
             </style>
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row">
-                    <div class="col-lg-5">
+                    <div class="col-lg-3">
                         <div class="form-group">
-                            <input type="number" placeholder="请输入需要查询大于多少的温度值(默认37.0)" class="form-control" id="record">
+                            <select class="custom-select" id="departmentsSelect" style="width: 100%;">
+                                <%for(var i=0;i < departments.length; i++){%>
+                                    <option value="<%= departments[i] %>"><%= departments[i] %></option>
+                                <%}%>
+                            </select>
                         </div>
                     </div>
-                    <div class="col-lg-2">
-                        <select class="custom-select" id="inputGroupSelect01">
-                            <% if (time == 'week') { %>
-                            <option selected value="week">本周</option>
-                            <option value="month">本月</option>
-                            <option value="day">当天</option>
-                            <% } %>
-                            <% if (time == 'month') { %>
-                            <option value="week">本周</option>
-                            <option value="month" selected>本月</option>
-                            <option value="day">当天</option>
-                            <% } %>
-                            <% if (time == 'day') { %>
-                            <option value="week">本周</option>
-                            <option value="month">本月</option>
-                            <option value="day" selected>当天</option>
-                            <% } %>
-                        </select>
+                    <div class="col-lg-3">
+                        <div id="time-select-box-toggle" class="time-select-box time-select-box-toggle last"><input
+                            type="text" value="2/16/2012" id="input1" style="width: 100%;height: 36px;">
+                        </div>
                     </div>
                     <div class="col-lg-2">
                         <button type="button" class="btn btn-primary2" id="submit" style="height: 70%;">提交</button>
@@ -81,7 +73,6 @@
                                     <th>是否去过武汉</th>
                                     <th>性别</th>
                                     <th>所在系</th>
-                                    <th>所在班级</th>
                                     <th>学号</th>
                                     <th>目前所在城市</th>
                                     <th>目前温度</th>
@@ -106,14 +97,14 @@
                                     <td>女</td>
                                     <% } %>
                                     <td><%= data[i].department %></td>
-                                    <td><a href="/admin/clasdata?clas=<%= data[i].clas %>&department=<%= data[i].department %>"><%= data[i].clas %></a></td>
                                     <td><%= data[i].studentid %></td>
                                     <td><%= data[i].city %></td>
                                     <td><%= data[i].record %></td>
                                     <td>
-                                        <button data-username="<%= data[i].name %>" data-travel="<%= data[i].travel %>" type="button" class="btn btn-primary travel">显示</button>
+                                        <button data-username="<%= data[i].name %>" data-travel="<%= data[i].travel %>"
+                                            type="button" class="btn btn-primary travel">显示</button>
                                     </td>
-                                    <th><a href="/admin/clasdata?sid=<%= data[i].id %>&n=<%= data[i].name %>"
+                                    <th><a href="/admin/user/teacher/info?sid=<%= data[i].id %>&n=<%= data[i].name %>"
                                             target="_blank">体温记录</a></th>
                                 </tr>
                                 <%}%>
@@ -151,6 +142,8 @@
                 <script src="/public/info/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
                 <script src="/public/info/js/inspinia.js"></script>
                 <script src="/public/info/js/plugins/pace/pace.min.js"></script>
+                <script src="/public/js/moment.min.js"></script>
+                <script src="/public/js/kalendae.min.js"></script>
                 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
                 <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
                 <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
@@ -160,29 +153,38 @@
                 <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
                 <script>
                     $(document).ready(function () {
+                        var k4 = new Kalendae.Input('input1', {
+                            months: 2,
+                            mode: 'range',
+                            selected: ['<%= starttime %>', '<%= endtime %>'],
+                            closeOnSelection: true,
+                        });
+                        $('#departmentsSelect').val('<%= department %>');
+
+                        $('<div class="btnbox"><a class="k-submit">确定</a></div>').appendTo(".kalendae");
+                        $(".k-submit").click(function () {
+                            k4.hide();
+                        });
+
                         //配置DataTables默认参数
                         $.extend(true, $.fn.dataTable.defaults, {
                             "language": {
                                 "url": "/public/language/Chinese.txt"
                             },
                             "dom": "l<'#toolbar'>frtip"
-                        });                        
+                        });
 
                         $('#example').DataTable({
                             dom: 'Bfrtip',
                             buttons: [
-                               'excel', 'pdf',
+                                'excel', 'pdf',
                             ]
                         });
 
                         $('#submit').click(function () {
-                            var record = $('#record').val();
-                            var time = $('#inputGroupSelect01').find("option:selected").val();
-                            if (record == '') {
-                                alert('温度不能为空');
-                                return;
-                            }
-                            window.location.href = '/admin/search?record=' + record + '&time=' + time;
+                            var times = $("#input1").val().split(" 至 ");
+                            var department = $('#departmentsSelect').find("option:selected").val();
+                            window.location.href = '/admin/user/teacher?department=' + department + '&starttime=' + times[0] + '&endtime=' + times[1]
                         });
                         $('.travel').click(function (e) {
                             $('#exampleModalCenter').modal('show');

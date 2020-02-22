@@ -3,14 +3,21 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
     <title>晋城职业技术学院-管理中心</title>
     <link href="/public/info/css/bootstrap.min.css" rel="stylesheet">
     <link href="/public/info/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="/public/info/css/animate.css" rel="stylesheet">
     <link href="/public/info/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/kalendae.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
+    <style>
+        #clas-list li {
+            cursor: pointer;
+        }
+    </style>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 
@@ -42,19 +49,265 @@
                 }
             </style>
             <div class="wrapper wrapper-content animated fadeInRight">
-                <h1>this is home</h1>
-            </div>
-        </div>
-        <% include /adminpartial/footer.ejs %>
+                <div class="row" style="height: 60px;">
+                    <div class="col-lg-3">
+                        <select class="custom-select" id="departmentsSelect" style="width: 100%;">
+
+                        </select>
+                    </div>
+                    <div class="col-lg-2">
+                        <div id="time-select-box-toggle" class="time-select-box time-select-box-toggle last"><input
+                                type="text" value="2/16/2012" id="input1" style="width: 100%;height: 36px;">
+                        </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <ul class="list-group" id="clas-list" style="position: relative;height: 600px;overflow: auto;">
 
-                <script src="/public/info/js/popper.min.js"></script>
-                <script src="/public/info/js/bootstrap.min.js"></script>
-                <script src="/public/info/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-                <script src="/public/info/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-                <script src="/public/info/js/inspinia.js"></script>
-                <script src="/public/info/js/plugins/pace/pace.min.js"></script>
+                        </ul>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="alert alert-info alert-dismissible" role="alert">
+                            <span id="tip">
+                                目前学校超过37.0的学生为：<%= data.all %>人，&nbsp;&nbsp;
+                                今日学校超过37.0的学生为：<%= data.now %>人<br>
+                                目前学校超过37.0的教师为：<%= teacher.all %>人，&nbsp;&nbsp;
+                                今日学校超过37.0的教师为：<%= teacher.now %>人</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <canvas id="barChart" width="300" height="250"></canvas>
+                            </div>
+                            <div class="col-lg-6">
+                                <canvas id="pieChart" width="300" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% include /adminpartial/footer.ejs %>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <script src="/public/info/js/popper.min.js"></script>
+    <script src="/public/info/js/bootstrap.min.js"></script>
+    <script src="/public/info/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/public/info/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/public/info/js/inspinia.js"></script>
+    <script src="/public/info/js/plugins/pace/pace.min.js"></script>
+    <script src="/public/js/moment.min.js"></script>
+    <script src="/public/js/kalendae.min.js"></script>
+    <script src="/public/info/js/plugins/chartJs/Chart.min.js"></script>
+
+    <script>
+        var myDate = new Date();
+        y = myDate.getFullYear();
+        m = myDate.getMonth() + 1;
+        d = myDate.getDate();
+        today = y + '-' + m + '-' + d
+
+
+        let department = null;
+
+        var k4 = new Kalendae.Input('input1', {
+            months: 2,
+            mode: 'range',
+            selected: [today, today],
+            closeOnSelection: true,
+        });
+
+        $('<div class="btnbox"><a class="k-submit">确定</a></div>').appendTo(".kalendae");
+        $(".k-submit").click(function () {
+            k4.hide();
+            fushView();
+        });
+
+        /**
+         * fush页面 所有图表的更新都是调用此方法
+         * */
+        function fushView() {
+            let times = getKalendae();
+            let dep = $('#departmentsSelect').find("option:selected").val();
+            let clas = $('#clas-list li.active').text() || null;
+            let type = 1;
+            if (clas) {
+                type = 2;
+                barChart('/admin/index/bardata?type=' + type + '&clas=' + clas + '&department=' + dep + '&starttime=' + times[0] + '&endtime=' + times[1]);
+                pieChart('/admin/index/wuhandata?type=' + type + '&department=' + dep + '&clas=' + clas);
+
+            } else {
+                barChart('/admin/index/bardata?type=1&department=' + dep + '&starttime=' + times[0] + '&endtime=' + times[1]);
+                pieChart('/admin/index/wuhandata?type=' + type + '&department=' + dep);
+            }
+        }
+
+        /**
+        **获取时间控件的时间
+        */
+        function getKalendae() {
+            return $("#input1").val().split(" 至 ");
+        }
+
+        $.ajax({
+            url: `/admin/index/clasdepartment`,
+            type: 'get',
+            success(data) {
+                let obj = data.data;
+                let departments = Object.keys(obj);
+                let dep_html = '';
+                departments.map(function (e, i) {
+                    if (i == 0) {
+                        dep_html += `<option value="${e}" selected>${e}</option>`;
+                    } else {
+                        dep_html += `<option value="${e}">${e}</option>`;
+                    }
+
+                });
+                $('#departmentsSelect').html(dep_html);
+                selectEvent(obj);
+
+                fushView();
+                initClasView(obj, departments[0]);
+            },
+            error(err) {
+                alert(err);
+            }
+        });
+
+        function selectEvent(arr) {
+            $("#departmentsSelect").change(function () {
+                let dep = $('#departmentsSelect').find("option:selected").val();
+                initClasView(arr, dep);
+                fushView();
+            })
+        }
+
+        function initClasView(arr, dep) {
+            let clas = arr[dep];
+            $('#clas-list').html('');
+            var clas_html = ``;
+            clas.map(function (e) {
+                clas_html += `<li class="list-group-item">${e}</li>`;
+            });
+            $('#clas-list').append(clas_html);
+        }
+
+        var now_dom_li = '';
+        $('#clas-list').click(function (e) {
+            if (!$(e.target).hasClass('active')) {
+                $(now_dom_li).removeClass('active');
+                $(e.target).addClass('active');
+                now_dom_li = e.target;
+                fushView();
+            }
+        })
+
+        let barchartdom = null;
+        let labels = ["35.0-36.0", "36.0-37.0", "37.0-38.0", "38.0-39.0", "39.0-40.0"];
+        updateBarChart([]);
+
+        function updateBarChart(data) {
+            var ctx2 = document.getElementById("barChart").getContext("2d");
+            var barData = {
+                labels: labels,
+                datasets: [
+                    {
+                        label: "区间数据(次)",
+                        backgroundColor: '#007bff',
+                        pointBorderColor: "#007bff",
+                        data: [0, 0, 0, 0, 0]
+                    },
+                ]
+            };
+            var barOptions = {
+                responsive: true,
+            };
+            if (barchartdom) {
+                barData.datasets[0].data = data;
+                barchartdom.destroy();
+                barchartdom = new Chart(ctx2, { type: 'bar', data: barData, options: barOptions });
+            } else {
+                barchartdom = new Chart(ctx2, { type: 'bar', data: barData, options: barOptions });
+            }
+        }
+
+        /**
+         * bar
+         * */
+        function barChart(url) {
+            wAjax(url, function (data) {
+                let arr = [];
+                labels.map(function (e) {
+                    let sou = data.data.find(function (ele) {
+                        return ele.interval == e;
+                    });
+                    if (sou != undefined) {
+                        arr.push(sou.num);
+                    } else {
+                        arr.push(0);
+                    }
+                });
+                updateBarChart(arr);
+            })
+        }
+
+        function pieChart(url) {
+            wAjax(url, function (data) {
+                let arr = []
+                let y = data.data.find(function (e) {
+                    return e.data == 'y';
+                })
+                let n = data.data.find(function (e) {
+                    return e.data == 'n';
+                });
+                if (y) { arr.push(y.num); } else { arr.push(0) };
+                if (n) { arr.push(n.num); } else { arr.push(0) };
+                updatePieChart(arr);
+            })
+        }
+
+        let piechartdom = null;
+        updatePieChart([]);
+        function updatePieChart(arr) {
+            let config = {
+                "labels": ["去过武汉(人)", "没有去过武汉(人)",],
+                "datasets": [{
+                    "label": "My First Dataset",
+                    "data": [0, 0],
+                    "backgroundColor": ["rgb(255, 99, 132)", "rgb(54, 162, 235)",]
+                }],
+            };
+            if (piechartdom) {
+                config.datasets[0].data = arr;
+                piechartdom.destroy();
+                piechartdom = new Chart(document.getElementById("pieChart"), { "type": "doughnut", "data": config });
+            } else {
+                piechartdom = new Chart(document.getElementById("pieChart"), { "type": "doughnut", "data": config });
+            }
+        }
+        /**
+         * 首页ajax请求
+         * */
+        function wAjax(url, callback) {
+            $.ajax({
+                url: url,
+                type: 'get',
+                success(data) {
+                    if (data.code == 1) {
+                        callback(data);
+                    } else {
+                        alert(data.err);
+                    }
+                },
+                error(err) {
+                    alert(err);
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

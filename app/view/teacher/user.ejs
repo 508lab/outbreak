@@ -265,7 +265,7 @@
 </head>
 <body >
 <div id="wrapper">
-    <% include /userpartial/nav.ejs %>
+    <% include /teacherpartial/nav.ejs %>
 <script>
     var activity = "userinfo";
     $('#side-menu .' + activity).addClass('active');
@@ -273,7 +273,7 @@
 </script>
     <div id="page-wrapper" class="gray-bg">
         <div class="row border-bottom">
-        <% include /userpartial/header.ejs %>   
+        <% include /teacherpartial/header.ejs %>   
 </div>
     <style>
 
@@ -297,48 +297,55 @@
                             <div class="form-group" style="float:left;width:100%" id="type">
                                 <label class="title"><span style="color:red;padding-right:5px">*</span>是否去过武汉<span
                                         class="en"></span>：</label>
-                            <% if (user.wuhan == 0) { %>
-                                <input type="text" placeholder="" class="form-control" disabled value="是">
-                            <% } %>
-                            <% if (user.wuhan == 1) { %>
-                                <input type="text" placeholder="" class="form-control" disabled value="否">
-                            <% } %>
+                            <select class="select-country" name="account" style="height:39px" id="wuhan">
+                                <% if (user.wuhan == 0) { %>
+                                    <option value="1">否</option>
+                                    <option value="0" selected>是</option>
+                                <% } %>
+                                <% if (user.wuhan == 1) { %>
+                                    <option value="1" selected>否</option>
+                                    <option value="0">是</option>
+                                <% } %>
+                            </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="title"><span style="color:red;padding-right:5px">*</span>姓名 <span
                                     class="en">Name</span>：</label>
-                            <input type="text" placeholder="" class="form-control" disabled value="<%= user.name %>">
+                            <input type="text" placeholder="" class="form-control"  value="<%= user.name %>" id="name">
                         </div>
                         <div class="form-group" id="sex">
                             <label class="title"><span style="color:red;padding-right:5px">*</span>性别 <span
                                     class="en">Sex</span>：</label>
-                            <% if (user.sex == 0) { %>
-                                <input type="text" placeholder="" class="form-control" disabled value="男">
-                            <% } %>
-                            <% if (user.sex == 1) { %>
-                                <input type="sextext" placeholder="" class="form-control" disabled value="女">
-                            <% } %>                
+                            <select class="select-country" name="account" style="height:39px" id="sex">
+                                <% if (user.sex == 0) { %>
+                                    <option value="1" selected>男</option>
+                                    <option value="0">女</option>
+                                <% } %>
+                                <% if (user.sex == 1) { %>
+                                    <option value="1">男</option>
+                                    <option value="0" selected>女</option>
+                                <% } %>
+                            </select>                
                         </div>
                         <div class="form-group">
                             <label class="title"><span style="color:red;padding-right:5px">*</span>所在系<span
                                     class="en"></span>：</label>
-                            <input type="text" placeholder="" class="form-control" disabled value="<%= user.department %>">
+                            <select class="select-country" name="account" style="height:39px" id="department">
+                                <%for(var i = 0 ;i < deps.length; i++){%>
+                                    <option value="<%= deps[i] %>"><%= deps[i] %></option>
+                                <%}%>
+                            </select>  
                         </div>
                         <div class="form-group">
-                            <label class="title"><span style="color:red;padding-right:5px">*</span>所在班级<span
+                            <label class="title"><span style="color:red;padding-right:5px"></span>工号 <span
                                     class="en"></span>：</label>
-                            <input type="text" placeholder="" class="form-control" disabled value="<%= user.clas %>">
-                        </div>
-                        <div class="form-group">
-                            <label class="title"><span style="color:red;padding-right:5px"></span>学号 <span
-                                    class="en"></span>：</label>
-                            <input type="text" placeholder="" class="form-control" disabled value="<%= user.studentid %>">
+                            <input type="text" placeholder="" class="form-control" id="studentid"  value="<%= user.studentid %>" disabled>
                         </div>
                         <div class="form-group">
                             <label class="title"><span style="color:red;padding-right:5px">*</span>目前所在城市<span
                                     class="en"></span>：</label>
-                            <input type="text" placeholder="" class="form-control" disabled value="<%= user.city %>" >
+                            <input type="text" placeholder="" class="form-control"  value="<%= user.city %>" id="city" >
                         </div>
                         <p style="padding-left:1.2rem;padding-top:15px"><strong style="font-size: 20px">出行信息 <span
                             class="en">(2020年1月-1日后)</span></strong>
@@ -395,7 +402,7 @@
                 </div>
             </div>
         </div>
-        <% include /userpartial/footer.ejs %>
+        <% include /teacherpartial/footer.ejs %>
     </div>
 </div>
 
@@ -406,6 +413,11 @@
 <script src="/public/info/js/inspinia.js"></script>
 <script src="/public/info/js/plugins/pace/pace.min.js"></script>
 <script>
+    initView()
+    function initView() {
+        let department = "<%= user.department %>";
+        $('#department').val(department);
+    }
         let c_cdom = `<div class="content">
                     <div class="form-group">
                         <label class="title"><span style="color:red;padding-right:5px">*</span>主要目的地 <span
@@ -444,6 +456,7 @@
                     </div>
                     <p style="width: 100%;height: 1px;background-color: #b3aba0;"></p>
                 </div>`;
+
         $('#addtravel').click(function () {
             let num = $('#travel div.content').length;
             if (num > 2) {
@@ -459,20 +472,42 @@
             $(e).parent().prev().remove();
             $(e).parent().remove();
         }
+
         $('#submit').click(function () {
             let travel = getTravel();
             if (!travel) {
                 alert('请最少填写一条出行记录');
                 return;
             }
+            var wuhan = $('#wuhan').find("option:selected").val();
+            var name = $('#name').val();
+            var sex = $('#sex').find("option:selected").val();
+            var department = $('#department').find("option:selected").val();
+            var city = $('#city').val();
+
+            if (name == '') {
+                alert('姓名不能为空');
+                return;
+            }
+
+            if (city == '') {
+                alert('请输入您目前所在城市');
+                return;
+            }
+
             $('.ibox-content').mLoading({
                 text: "上传中...",
             });
             $.ajax({
-                url: "/info/user/travel",
+                url: "/teacher/user",
                 type: "PUT",
                 dataType: 'json',
                 data: {
+                    wuhan: wuhan,
+                    name: name,
+                    sex: sex,
+                    department: department,
+                    city: city,
                     travel: JSON.stringify(travel)
                 },
                 success: function (data) {

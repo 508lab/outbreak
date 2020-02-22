@@ -27,19 +27,16 @@
                 <h1 class="logo-name" style="margin-top: 0px;">
                     <img src="http://www.sxjczy.cn:88/gb2015/images/logo.png" style="width: 300px;height: 84px;">
                 </h1>
+                <p>教师登陆</p>
             </div>
             <div class="m-t" id="pwd_login" style="display: block;">
                 <div class="form-group">
-                    <input type="number" class="form-control" placeholder="请输入您的学号" required="" id="sid">
+                    <input type="number" class="form-control" placeholder="请输入您的工号" required="" id="sid">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="请输入您的密码" required="" id="password">
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b" id="login2">登陆</button>
-                <p style="width: 100%;">
-                    <a href="/teacher/login" style="float: left;">教师端</a>
-                    <a href="/login" style="float: right;">登陆</a>
-                </p>
             </div>
         </div>
     </div>
@@ -52,7 +49,7 @@
             var sid = $('#sid').val();
             var password = $('#password').val();
             if (sid == '') {
-                alert('学号不能为空');
+                alert('工号不能为空');
                 return;
             }
 
@@ -64,7 +61,7 @@
                 text: "登陆中...",
             });
             $.ajax({
-                url: "/loginin",
+                url: "/teacher/login",
                 type: "POST",
                 dataType: 'json',
                 data: {
@@ -74,7 +71,7 @@
                 success: function (data) {
                     $('body').mLoading('hide');
                     if (data.code === 1) {
-                        window.location.href = '/info/index';
+                        window.location.href = '/teacher/index';
                     } else {
                         alert(data.err);
                     }

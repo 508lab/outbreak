@@ -1,4 +1,4 @@
-# school
+# outbreak
 
 
 
@@ -6,7 +6,7 @@
 
 <!-- add docs here for user -->
 
-see [egg docs][egg] for more detail.
+see [视频演示][https://508lab.github.io/2020/02/18/xi-tong/xue-sheng-ti-wen-xin-xi-xi-tong/]
 
 ### Development
 
@@ -27,13 +27,14 @@ $ npm stop
 
 ### 使用到的技术
 ```bash
-$ mysql
-$ node 
+$ "node": ">=10.0.0"
+$ "MariaDB": ">=10.0.38"
 ```
 
 ### 测试帐号
 ```bash
 学生->   学号： 1501373434  密码： 123456
+教师->   工号： 123456      密码： 123456
 后台->   帐号： admin       密码： 123456  
 ```
 

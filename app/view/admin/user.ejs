@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
+    <title>个人中心</title>
+    <link href="/public/info/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/info/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/public/info/css/animate.css" rel="stylesheet">
+    <link href="/public/info/css/style.css" rel="stylesheet">
+    <script src="/public/info/js/jquery-3.1.1.min.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <% include /adminpartial/nav.ejs %>
+        <script>
+            var activity = "user";
+            $('#side-menu .' + activity).addClass('active');
+            $($('#side-menu .' + activity).parent().parent()[0]).addClass('active');
+        </script>
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <% include /adminpartial/header.ejs %>
+            </div>
+            <style>
+                .btn-primary2 {
+                    background-color: #177ce4;
+                    height: 30px;
+                    width: 100px;
+                    color: #fff;
+                    border: none;
+                    cursor: pointer;
+                    text-align: center;
+                    display: block;
+                    font-size: 15px;
+                }
+            </style>
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="title" style="margin-top: 10px;"><span
+                                    style="color:red;padding-right:5px">*</span>旧密码 <span class="en"></span>：</label>
+                            <input type="text" placeholder="" class="form-control" id="oldpassword">
+                        </div>
+                        <div class="form-group">
+                            <label class="title" style="margin-top: 10px;"><span
+                                    style="color:red;padding-right:5px">*</span>新密码 <span class="en"></span>：</label>
+                            <input type="password" placeholder="" class="form-control" id="password">
+                        </div>
+                        <div class="form-group">
+                            <label class="title" style="margin-top: 10px;"><span
+                                    style="color:red;padding-right:5px">*</span>再次输入新的密码 <span
+                                    class="en"></span>：</label>
+                            <input type="password" placeholder="" class="form-control" id="conpassword">
+                        </div>
+                        <div style="height: 52px;">
+                            <button type="button" class="btn btn-primary2" id="submit">提交 <span class="en"
+                                    style="color: white;"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% include /adminpartial/footer.ejs %>
+        </div>
+    </div>
+
+    <script src="/public/info/js/popper.min.js"></script>
+    <script src="/public/info/js/bootstrap.min.js"></script>
+    <script src="/public/info/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/public/info/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/public/info/js/inspinia.js"></script>
+    <script src="/public/info/js/plugins/pace/pace.min.js"></script>
+
+    <script>
+        $('#submit').click(function () {
+            var conpassword = $('#conpassword').val();
+            var password = $('#password').val();
+            var oldpassword = $('#oldpassword').val();
+            if (conpassword === '' || password === '') {
+                alert('新密码不能为空');
+                return;
+            }
+            if (conpassword.length < 6 || conpassword.length > 12) {
+                alert('请保证自己的密码长度大于6位并小于12位');
+                return;
+            }
+            if (password.length < 6 || conpassword.length < 6 || oldpassword.length < 6) {
+                alert('请保证自己的密码长度大于6位');
+                return;
+            }
+
+            if (oldpassword === '') {
+                alert('请输入旧密码');
+                return;
+            }
+
+            if (password === oldpassword) {
+                alert('新密码与旧密码不能相同');
+                return;
+            }
+
+            if (password !== conpassword) {
+                alert('两次密码输入不一致');
+                return;
+            }
+
+            $('#page-wrapper').mLoading({
+                text: "修改中...",
+            });
+
+            $.ajax({
+                url: "/admin/user/password",
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    conpassword: conpassword,
+                    password: password,
+                    oldpassword: oldpassword
+                },
+                success: function (data) {
+                    $('#page-wrapper').mLoading('hide');
+                    if (data.code === 1) {
+                        alert('修改成功');
+                        setTimeout(function (params) {
+                            window.location.reload();
+                        }, 1300);
+                    } else {
+                        alert(data.err);
+                    }
+                },
+
+                error: function (data) {
+                    $('#page-wrapper').mLoading('hide');
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>

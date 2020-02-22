@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <!-- <link rel=" icon" href="/Public/logo1.png"> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+        content="wclassth=device-wclassth, initial-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+    <% if (clas) { %>
+    <title><%= clas %></title>
+    <%} else { %>
+    <title>班级当天体温查询-晋城职业技术学院</title>
+    <%}%>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
+</head>
+
+<body>
+    <style>
+        body {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .title {
+            font-weight: 500;
+        }
+
+        .ibox-content {
+
+            padding-bottom: 30px;
+            margin: 0 auto;
+            font-size: 16px;
+        }
+
+        .ibox-content p {
+            margin-top: 0;
+            padding-top: 0
+        }
+
+        .ibox-content img {
+            padding: 0
+        }
+
+        .form-group {
+            padding: 0 1.5rem;
+            overflow: hidden;
+            line-height: 30px;
+            margin-bottom: 15px
+        }
+
+        .i-checks {
+            float: left;
+            padding-right: 20px
+        }
+
+        .form-group label {
+            width: 250px;
+            display: block;
+            white-space: nowrap;
+        }
+
+        .form-control {
+            width: 97%;
+            height: 35px;
+            border: 1px #e7eaec solid;
+            font-size: 15px;
+            padding-left: 5px;
+            color: #999;
+            background-color: #f1f1f1;
+        }
+
+        .select-country {
+            height: 35px;
+            border: 1px #e7eaec solid;
+            font-size: 13px;
+            padding-left: 5px;
+            color: #999;
+            background-color: #f1f1f1;
+        }
+
+        .select-country2 {
+            height: 35px;
+            border: 1px #e7eaec solid;
+            font-size: 13px;
+            padding-left: 5px;
+            color: #999;
+            margin-bottom: 15px;
+            background-color: #f1f1f1;
+        }
+
+        .input-group-append .btn-primary {
+            background-color: #999;
+            height: 39px;
+            width: 28.5%;
+            margin-left: 8px;
+            float: left;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 15px
+        }
+
+        .btn-primary2 {
+            background-color: #177ce4;
+            height: 39px;
+            width: 200px;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            margin: 15px auto 20px auto;
+            display: block;
+            font-size: 15px
+        }
+
+        .input-group-append .btn-primary:hover {
+            background-color: #177ce4;
+        }
+
+        .file {
+            background-color: #e7eaec;
+            width: 100px;
+            height: 100px;
+            float: right;
+            margin-right: 1rem;
+        }
+
+        .file a {
+            color: #999;
+            cursor: pointer;
+            margin: 0 auto;
+            text-decoration: none;
+            display: block;
+            line-height: 100px;
+            width: 64px
+        }
+
+        .total-top {
+            overflow: hidden;
+        }
+
+
+        @media screen and (min-width: 800px) {
+            .center-content {
+                width: 800px
+            }
+
+            .ibox-content {
+                background: url(http://2020.globaltalent.net/Public/bg3.jpg) no-repeat;
+                width: 100%;
+                height: auto;
+                background-size: cover;
+
+            }
+
+            .select-country {
+                width: 98%
+            }
+
+            .tips-card {
+                width: 67.5%
+            }
+
+            .select-country2 {
+                width: 40%
+            }
+
+            .tips-card {
+                width: 67.5%
+            }
+
+            .select-country2 {
+                float: right;
+                width: 40%;
+                margin-right: 1rem
+            }
+        }
+
+        @media screen and (min-width:480px) and (max-width:800px) {
+            .center-content {
+                width: 100%;
+
+            }
+
+            .top-img {
+                width: 100%
+            }
+
+            .select-country {
+                width: 100%
+            }
+
+            .tips-card {
+                width: 67%
+            }
+
+            .select-country2 {
+                width: 40%
+            }
+
+            .select-country2 {
+                float: right;
+                width: 40%;
+                margin-right: 1rem
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .center-content {
+                width: 100%;
+                margin-bottom: 20px !important;
+            }
+
+            .form-group .title {
+                white-space: normal;
+                width: 100%;
+            }
+
+            .form-control {
+                font-size: 13px;
+            }
+
+            body>div>div.center-content>p>strong>span {
+                display: inline-block;
+            }
+
+            .file {
+                margin-right: 0px;
+            }
+
+            div.center-content>div.total-top>div:nth-child(2) {
+                width: 29% !important;
+            }
+
+            .ibox-content {
+                border: 1px #e7eaec solid;
+            }
+
+            .top-img {
+                width: 100% !important;
+                height: 200px !important;
+            }
+
+            .select-country {
+                width: 100%;
+            }
+
+            .tips-card {
+                width: 64%
+            }
+
+            .input-group-append .btn-primary {
+                width: 30%;
+            }
+
+            .select-country2 {
+                width: 40%
+            }
+
+            .select-country2 {
+                float: left;
+                width: 100%
+            }
+        }
+
+        .en {
+            color: rgb(158, 158, 169);
+            font-size: 12px;
+        }
+    </style>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <div class="ibox-content">
+        <div style="text-align:center">
+            <a href="http://www.sxjczy.cn:88/gb2015/"><img src="http://www.sxjczy.cn:88/gb2015/images/20.png"
+                    class="top-img" style="width: 800px;height: 333px;"></a>
+        </div>
+
+        <div class="center-content" style="margin:0 auto;background-color:#fff">
+            <p style="padding-left:1.2rem;padding-top:15px"><strong style="font-size: 20px">请填写选择您需要查询的班级 <span
+                        class="en"></span></strong>
+            </p>
+
+            <div class="form-group">
+                <label class="title"><span style="color:red;padding-right:5px">*</span>系别 <span
+                        class="en"></span>：</label>
+                <select class="select-country" name="account" style="height:39px" id="departmentsSelect">
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="title"><span style="color:red;padding-right:5px">*</span>班级 <span
+                        class="en"></span>：</label>
+                <select class="select-country" name="account" style="height:39px" id="clasSelect">
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="title"><span style="color:red;padding-right:5px">*</span>今日是否填写 <span
+                        class="en"></span>：</label>
+                <select class="select-country" name="account" style="height:39px" id="write">
+                    <option value="0">是</option>
+                    <option value="1">否</option>
+                </select>
+            </div>
+            <div style="height: 52px;">
+                <button type="button" class="btn btn-primary2" id="submit" style="margin-top: 10px;">查询<span class="en"
+                        style="color: white;"></span></button>
+            </div>
+                <% if (clas) { %>
+                    <div style="width: 80%; margin: 0 auto;">
+                            <table id="example" class="display" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>姓名</th>
+                                            <th>当天体温</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%for(var i=0;i < data.length; i++){%>
+                                        <tr>
+                                            <td><%= data[i].name %></td>
+                                            <td><%= data[i].record %></td>
+                                        </tr>
+                                        <%}%>
+                                </tbody>
+                    </div>
+
+                <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+                <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+                <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+                <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+                <script>
+                    //配置DataTables默认参数
+                    $.extend(true, $.fn.dataTable.defaults, {
+                        "language": {
+                            "url": "/public/language/Chinese.txt"
+                        },
+                            "dom": "l<'#toolbar'>frtip"
+                    });
+                    $('#example').DataTable({
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'excel', 'pdf',
+                            ]
+                        });
+                </script>
+                <%}%>
+            </table>
+        </div>
+    </div>
+
+
+    <script>
+        $.ajax({
+            url: `/admin/index/clasdepartment`,
+            type: 'get',
+            success(data) {
+                let obj = data.data;
+                let departments = Object.keys(obj);
+                let dep_html = '';
+                departments.map(function (e) {
+                    dep_html += `<option value="${e}">${e}</option>`;
+                });
+                $('#departmentsSelect').html(dep_html);
+                selectEvent(obj);
+                setDepList(obj, departments[0]);
+            },
+            error(err) {
+                alert(err);
+            }
+        });
+        function selectEvent(arr) {
+            $("#departmentsSelect").change(function () {
+                let dep = $('#departmentsSelect').find("option:selected").val();
+                setDepList(arr, dep);
+            })
+        }
+
+        function setDepList(arr, dep) {
+            let clas = arr[dep];
+                $('#clasSelect').html('');
+                var clas_html = ``;
+                clas.map(function (e) {
+                    clas_html += `<option value="${e}">${e}</option>`;
+                });
+                $('#clasSelect').append(clas_html);
+        }
+
+        $('#submit').click(function () {
+            let dep = $('#departmentsSelect').find("option:selected").val();
+            let clas = $('#clasSelect').find("option:selected").val();
+            let type = $('#write').find("option:selected").val();
+            window.location.href = '/classaerch?department=' + dep + '&clas=' + clas + '&type=' + type;
+        })
+    </script>
+</body>
+
+</html>

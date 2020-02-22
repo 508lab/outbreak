@@ -76,6 +76,35 @@ class UserService extends Service {
         const sql = `select * from user u join temperature t on t.sid = u.id AND department = '${department}' AND clas = '${name}' AND ${t};`;
         return await this.app.mysql.query(sql);
     }
+
+    /**
+     * 统计去过武汉的数据
+     * @param {*} type 1: 有  0: 没有 
+     * @param {*} where
+     */
+    async findWuHan(where) {
+        const sql = `SELECT ELT( INTERVAL( wuhan, 0, 1 ) ,  'y',  'n' ) AS  'data', COUNT( * ) AS  'num'
+            FROM user
+            WHERE ${where}
+            GROUP BY ELT( INTERVAL( wuhan, 0, 1 ) ,  '1',  'n' ) `;
+        return await this.app.mysql.query(sql);
+    }
+
+    /**
+     * 更新用户的出行记录
+     * @param {*} id 
+     * @param {*} data
+     */
+    async updateTravel(id, data) {
+        const options = {
+            where: {
+                id: id,
+            }
+        };
+        const result = await this.app.mysql.update(TABLE, data, options);
+        return result.affectedRows === 1;
+    }
 }
 
 module.exports = UserService;
+

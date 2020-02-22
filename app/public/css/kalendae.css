@@ -1,0 +1,261 @@
+/** Base container **/
+.kalendae {
+	display: inline-block;zoom:1;*display:inline;
+	background-color: #fff;
+	font-size:11px;
+	cursor:default;
+}
+
+/** Popup Container for Kalendae.Input **/
+.kalendae.k-floating {
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:100000;
+	margin:0;
+	box-shadow:0 1px 3px rgba(0,0,0,0.75);
+	-moz-box-shadow:0 1px 3px rgba(0,0,0,0.75);
+	-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.75);
+}
+
+/** Kalendae.Input's popup close button **/
+.kalendae .k-btn-close {
+	position:absolute;
+	top:-8px;
+	right:-8px;
+	width:16px;
+	height:16px;
+	background:#fff url(/public/images/x.png) no-repeat left top;
+	background-size:100% 100%;
+	border:2px solid #ccc;
+	color:#999;
+	line-height:17px;
+	text-align:center;
+	font-size:13px;
+	border-radius:10px;
+	box-shadow:0 1px 3px rgba(0,0,0,0.75);
+	cursor:pointer;
+}
+
+.kalendae .k-btn-close:hover {
+	color:#7EA0E2;
+
+	border-color:#7EA0E2;
+}
+.kalendae .btnbox{
+	height:55px;
+	border-top:1px solid #e7e7eb;
+background-color: #f4f5f9;
+}
+.kalendae .k-submit{
+	width:122px;
+	height:35px;
+	display:block;
+	background-color: #44b549;
+	margin:10px auto;
+	color:#fff;
+	text-decoration:none;
+	cursor:pointer;
+	border-radius: 3px;
+	text-align:center;
+	line-height:35px;
+	font-size:14px;
+}
+.kalendae .k-submit:hover{
+	background:#2f9833;
+}
+/** Month Container **/
+.kalendae .k-calendar {display: inline-block;zoom:1;*display:inline;width:252px;vertical-align:top;}
+.kalendae .k-first-month{
+	width:253px;
+}
+/** Month Separator **/
+
+
+/** Month Title Row **/
+.kalendae .k-title {text-align:center;white-space:nowrap;position:relative;height:35px; line-height:35px; background:#f4f5f9;}
+.kalendae .k-first-month .k-title{
+	padding-right:1px;
+}
+.kalendae .k-caption {font-size:14px;}
+
+
+/** Month and Year Buttons **/
+.kalendae .k-btn-previous-month,
+.kalendae .k-btn-next-month,
+.kalendae .k-btn-previous-year,
+.kalendae .k-btn-next-year {width:22px;height:22px;cursor:pointer;position:absolute;top:7px;color:#777;font-size:20px;line-height:14px;}
+
+.kalendae .k-btn-previous-year {left:0;}
+.kalendae .k-btn-previous-month {left:10px; background:url(/public/images/k-btn.png) -22px 0;}
+.kalendae .k-btn-previous-month:hover{
+	background-position:-22px -22px;
+}
+.kalendae .k-btn-next-month {right:10px; background:url(/public/images/k-btn.png) -44px 0;}
+.kalendae .k-btn-next-month:hover{
+	background-position:-44px -22px;
+}
+.kalendae .k-btn-next-year {right:0;}
+
+
+
+.kalendae .k-btn-previous-year,
+.kalendae .k-btn-next-year {letter-spacing:-4px;text-align:left;}
+
+.kalendae .k-btn-previous-month:hover,
+.kalendae .k-btn-next-month:hover {color:#7EA0E2;}
+
+.kalendae .k-btn-previous-year:hover,
+.kalendae .k-btn-next-year:hover {color:#6FDF81;}
+
+/** Remove extra buttons when calendar shows multiple months **/
+.kalendae .k-first-month .k-btn-next-month,
+.kalendae .k-middle-month .k-btn-next-month,
+.kalendae .k-middle-month .k-btn-previous-month,
+.kalendae .k-last-month .k-btn-previous-month,
+.kalendae .k-first-month .k-btn-next-year,
+.kalendae .k-middle-month .k-btn-next-year,
+.kalendae .k-middle-month .k-btn-previous-year,
+.kalendae .k-last-month .k-btn-previous-year {display:none;}
+
+/** Force specific width for month container contents **/
+.kalendae .k-title,
+.kalendae .k-header,
+.kalendae .k-days {
+	display:block;
+	overflow:hidden;
+}
+.k-first-month .k-days{
+	border-right:1px solid #e7e7eb;
+}
+.kalendae .k-header{
+background: #f7f8fa;
+height:28px;
+line-height:28px;
+}
+.k-first-month .k-header{
+border-right:1px solid #e7e7eb;
+}
+
+/** Hide unusable buttons **/
+.kalendae.k-disable-next-month-btn .k-btn-next-month,
+.kalendae.k-disable-previous-month-btn .k-btn-previous-month,
+.kalendae.k-disable-next-year-btn .k-btn-next-year,
+.kalendae.k-disable-previous-year-btn .k-btn-previous-year {
+	display:none;
+}
+
+
+/** Week columns and day cells **/
+.kalendae .k-header span,
+.kalendae .k-days span {
+	float:left;
+}
+
+.kalendae .k-header span {
+	text-align:center;
+	width:36px;
+}
+
+.kalendae .k-days span {
+	text-align:center;
+	width:36px;
+	height:24px;
+	padding:2px 0;
+	line-height:24px;
+	color:#999;
+}
+
+/** Today **/
+.kalendae .k-today {
+	text-decoration:underline;
+}
+
+/** Selected day, when outside the selectable area **/
+.kalendae .k-days span.k-selected {
+	border-color:#1072A5;
+	color:#1072A5;
+}
+
+/** Selected day, when inside the selectable area **/
+.kalendae .k-days span.k-selected.k-active {
+	background:url(/public/images/kalendae.png) no-repeat -91px;
+	color: #fff;
+}
+
+/** Days between the start and end points on a range, outside of the selectable area **/
+.kalendae .k-days span.k-range {
+	background:none;
+	border-color:#6DD4FE;
+}
+
+/** Days between the start and end points on a range, inside of the selectable area **/
+.kalendae .k-days span.k-range.k-active {
+	color:#fff;
+	background:url(/public/images/kalendae.png) no-repeat -160px;
+}
+.kalendae .k-days span.k-selected-first.k-active{
+	background:url(/public/images/kalendae.png) no-repeat -126px;
+}
+.kalendae .k-days span.k-selected-first.k-active.k-out-of-month{
+	background:none;
+}
+.kalendae .k-days span.k-selected-last.k-active{
+	background:url(/public/images/kalendae.png) no-repeat -200px;
+}
+.kalendae .k-days span.k-selected-last.k-active.k-out-of-month{
+	background:none;
+}
+
+/** Selectable but not selected day  **/
+.kalendae .k-days span.k-active {
+	cursor:pointer;
+	color:#333;
+}
+
+/** Selectable day, hovered **/
+.kalendae .k-days span.k-active:hover {
+	border-color:#666;
+}
+
+/** Days outside of the month view (before the first day of the month, after the last day of the month) **/
+.kalendae .k-days span.k-out-of-month.k-selected{ background:none;color: #999;}
+
+
+
+/*-------------------------------------IE8 ONLY CODE BELOW THIS LINE--------------------------------------------*/
+
+.kalendae.ie8.k-floating {
+	border:1px solid #ccc;
+}
+
+.kalendae.ie8 .k-btn-close {
+	width:20px;
+	height:20px;
+	border:none;
+	background:url('close.png') no-repeat top left;
+}
+.kalendae.ie8 .k-btn-close:after {display:none;}
+
+.kalendae.ie8 .k-btn-previous-month,
+.kalendae.ie8 .k-btn-next-month,
+.kalendae.ie8 .k-btn-previous-year,
+.kalendae.ie8 .k-btn-next-year {width:16px;height:16px;cursor:pointer;background:#777 url('arrows.png') no-repeat center left;position:absolute;top:0;}
+
+.kalendae.ie8 .k-btn-next-month,
+.kalendae.ie8 .k-btn-next-year {background-position:center right;}
+
+.kalendae.ie8 .k-btn-previous-month:hover,
+.kalendae.ie8 .k-btn-next-month:hover {background-color:#7EA0E2;}
+
+.kalendae.ie8 .k-btn-previous-year,
+.kalendae.ie8 .k-btn-next-year {background-color:#333;}
+
+.kalendae.ie8 .k-btn-previous-year:hover,
+.kalendae.ie8 .k-btn-next-year:hover {background-color:#6FDF81;}
+
+.kalendae.ie8 .k-btn-previous-month:after,
+.kalendae.ie8 .k-btn-next-month:after,
+.kalendae.ie8 .k-btn-previous-year:after,
+.kalendae.ie8 .k-btn-next-year:after {display:none;}
+

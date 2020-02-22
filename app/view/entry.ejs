@@ -283,10 +283,11 @@
                 <div class="form-group" style="float:left;width:40%" id="type">
                     <label class="title"><span style="color:red;padding-right:5px">*</span>是否去过武汉<span
                             class="en"></span>：</label>
-                    <div class="i-checks"><label> <input type="radio" value="0" name="type" checked="">
-                            <i></i>是 <span class="en"></span></label></div>
-                    <div class="i-checks"><label> <input type="radio" value="1" name="type">
+                    <div class="i-checks"><label> <input type="radio" value="1" name="type" checked="">
                             <i></i>否 <span class="en"></span></label></div>
+                    <div class="i-checks"><label> <input type="radio" value="0" name="type">
+                            <i></i>是 <span class="en"></span></label></div>
+
                 </div>
             </div>
             <div class="form-group">
@@ -344,32 +345,32 @@
                     <div class="form-group">
                         <label class="title"><span style="color:red;padding-right:5px">*</span>主要目的地 <span
                                 class="en"></span>：</label>
-                        <input type="text" placeholder="" class="form-control purpose">
+                        <input type="text" placeholder="" class="form-control purpose" value="无">
                     </div>
                     <div class="form-group">
                         <label class="title"><span style="color:red;padding-right:5px">*</span>出行方式 <span
                                 class="en"></span>：</label>
-                        <input type="text" placeholder="" class="form-control way">
+                        <input type="text" placeholder="" class="form-control way" value="无">
                     </div>
                     <div class="form-group">
                         <label class="title"><span style="color:red;padding-right:5px">*</span>车次 <span
                                 class="en"></span>：</label>
-                        <input type="text" placeholder="没有请填写无" class="form-control trains1">
+                        <input type="text" placeholder="没有请填写无" class="form-control trains1" value="无">
                     </div>
                     <div class="form-group">
                         <label class="title"><span style="color:red;padding-right:5px">*</span>出行时间 <span
                                 class="en"></span>：</label>
-                        <input type="text" placeholder="" class="form-control start_time">
+                        <input type="text" placeholder="" class="form-control start_time" value="无">
                     </div>
                     <div class="form-group">
                         <label class="title"><span style="color:red;padding-right:5px">*</span>返回时间 <span
                                 class="en"></span>：</label>
-                        <input type="text" placeholder="" class="form-control en_time">
+                        <input type="text" placeholder="" class="form-control en_time" value="无">
                     </div>
                     <div class="form-group">
                         <label class="title"><span style="color:red;padding-right:5px">*</span>车次 <span
                                 class="en"></span>：</label>
-                        <input type="text" placeholder="没有请填写无" class="form-control trains2">
+                        <input type="text" placeholder="没有请填写无" class="form-control trains2" value="无">
                     </div>
                     <div class="form-group">
                         <label class="title"><span style="color:red;padding-right:5px"></span>备注<span
@@ -413,7 +414,6 @@
 
 
         $('#submit').click(function () {
-
             var sex = $($('#sex input:radio:checked')[0]).val();
             var wuhan = $($('#type input:radio:checked')[0]).val();
             var name = $('#name').val();
@@ -528,6 +528,9 @@
                         if (element == '') {
                             tag = false;
                             alert('请查看您的出行信息中是否有未填项');
+                            return;
+                        }else if (element.length > 30) {
+                            alert('避免您的出行信息过长');
                             return;
                         }
                     }

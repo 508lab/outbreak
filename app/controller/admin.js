@@ -12,8 +12,11 @@ class AdminController extends AdminBaseontroller {
   async index() {
     const { ctx } = this;
     this.userv();
+    const data = await ctx.service.temperature.outstandard(37.0);
+    const teacher = await ctx.service.teachertemp.outstandard(37.0);
     await ctx.render('/admin/index.ejs', {
-
+      data: data,
+      teacher: teacher
     });
   }
 
@@ -107,11 +110,43 @@ class AdminController extends AdminBaseontroller {
   }
 
   /**
-   * 获取所所有
+   * 获取所有系与班级的信息
    */
   async clasdepartment() {
-    this.userv();
     this.ctx.body = { code: 1, data: ClasDeartment };
+  }
+
+  /**
+   * 获取温度区间统计
+   * ["35.0-36.0", "36.0-37.0", "37.0-38.0", "38.0-39.0", "39.0-40.0"]
+   */
+  async bardata() {
+    const { ctx } = this;
+    this.userv();
+    let info = ctx.query;
+    if (info.type == 1) {  //根据系别统计
+      const result = await ctx.service.temperature.bardataByDep([info.starttime, info.endtime], info.department);
+      ctx.body = { code: 1, data: result };
+    } else if (info.type == 2) { //根据班级去统计
+      const result = await ctx.service.temperature.bardataByClas([info.starttime, info.endtime], info.department, info.clas);
+      ctx.body = { code: 1, data: result };
+    }
+  }
+
+  /*
+  * 武汉数据统计
+  **/
+  async wuhandata() {
+    const { ctx } = this;
+    this.userv();
+    let info = ctx.query;
+    if (info.type == 1) {
+      const result = await ctx.service.user.findWuHan(`department='${info.department}'`);
+      ctx.body = { code: 1, data: result };
+    } else if (info.type == 2) {
+      const result = await ctx.service.user.findWuHan(`department='${info.department}' AND clas='${info.clas}'`);
+      ctx.body = { code: 1, data: result };
+    }
   }
 }
 

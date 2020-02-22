@@ -2,7 +2,7 @@
 
 const UserInfoController = require('./base/userinfo');
 const Tool = require('../global/tool');
-const { entryvalitemp, entryvalipass } = require('../validate/user');
+const { entryvalitemp, entryvalipass, entryvaltravel } = require('../validate/user');
 const ErrMsg = require('../global/errmsg');
 
 /**
@@ -102,6 +102,22 @@ class UserController extends UserInfoController {
       ctx.body = { code: 1 };
     } else {
       ctx.body = { code: 0, err: ErrMsg[6] };
+    }
+  }
+
+  /**
+   * 修改出行记录
+   */
+  async travel() {
+    const { ctx } = this;
+    this.userv();
+    const info = ctx.request.body;
+    ctx.validate(entryvaltravel, info);
+    const result = await ctx.service.user.updateTravel(ctx.session.userid, info);
+    if (result) {
+      ctx.body = { code: 1 };
+    } else {
+      ctx.body = { code: 0, err: ErrMsg[4] };
     }
   }
 }

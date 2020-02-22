@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
+    <title>晋城职业技术学院-个人中心</title>
+    <link href="/public/info/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/info/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/public/info/css/animate.css" rel="stylesheet">
+    <link href="/public/info/css/style.css" rel="stylesheet">
+    <script src="/public/info/js/jquery-3.1.1.min.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <% include /teacherpartial/nav.ejs %>
+
+        <script>
+            var activity = "home";
+            $('#side-menu .' + activity).addClass('active');
+            $($('#side-menu .' + activity).parent().parent()[0]).addClass('active');
+        </script>
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <% include /teacherpartial/header.ejs %>
+            </div>
+            <style>
+                .btn-primary2 {
+                    background-color: #177ce4;
+                    height: 30px;
+                    width: 100px;
+                    color: #fff;
+                    border: none;
+                    cursor: pointer;
+                    text-align: center;
+                    display: block;
+                    font-size: 15px;
+                }
+            </style>
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    
+                    <div class="col-lg-12">
+                        <% if (data) { %>
+                        <div class="form-group">
+                            <label class="title" style="margin-top: 10px;"><span
+                                    style="color:red;padding-right:5px">*</span>今日体温 <span class="en"></span>：</label>
+                            <input type="number" placeholder="请输入你今日的体温" class="form-control" id="record"
+                                value="<%= data.record %>" disabled>
+                        </div>
+                        <% } else { %>
+                        <div class="form-group">
+                            <label class="title" style="margin-top: 10px;"><span
+                                    style="color:red;padding-right:5px">*</span>今日体温 <span class="en"></span>：</label>
+                            <input type="number" placeholder="请输入你今日的体温(35.0~38.5)" class="form-control" id="record">
+                        </div>
+                        <div style="height: 52px;">
+                            <button type="button" class="btn btn-primary2" id="submit">提交 <span class="en"
+                                    style="color: white;"></span></button>
+                        </div>
+                        <% } %>
+                        <a href="/classaerch" target="_blank" style="float: right;">班级当天体温查询</a>
+                    </div>
+                </div>
+            </div>
+            <% include /teacherpartial/footer.ejs %>
+        </div>
+    </div>
+
+    <script src="/public/info/js/popper.min.js"></script>
+    <script src="/public/info/js/bootstrap.min.js"></script>
+    <script src="/public/info/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/public/info/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/public/info/js/inspinia.js"></script>
+    <script src="/public/info/js/plugins/pace/pace.min.js"></script>
+    <script>
+        $('#submit').click(function () {
+            var record = $('#record').val();
+            if (record == '') {
+                alert('温度不能为空');
+                return;
+            }
+            record = parseFloat(record);
+            if (record < 35.0 || record > 40.0) {
+                alert('体温区间为(35.0~40.0)');
+                return;
+            }
+            $('#page-wrapper').mLoading({
+                text: "上传中...",
+            });
+            $.ajax({
+                url: "/teacher/temperature",
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    record: record,
+                },
+                success: function (data) {
+                    $('#page-wrapper').mLoading('hide');
+                    if (data.code === 1) {
+                        $('#record').attr('disabled', true);
+                        $('#submit').css('display', 'none');
+                    } else {
+                        alert(data.err);
+                    }
+                },
+
+                error: function (data) {
+                    $('#page-wrapper').mLoading('hide');
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>

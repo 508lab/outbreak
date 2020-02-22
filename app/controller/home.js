@@ -7,7 +7,11 @@ const ErrMsg = require('../global/errmsg');
 class HomeController extends Controller {
   async index() {
     const { ctx } = this;
-    await ctx.render('register.ejs');
+    if (ctx.session.userid) {
+      ctx.redirect('/info/index');
+    } else {
+      await ctx.render('register.ejs');
+    }
   }
 
   /**
@@ -17,7 +21,7 @@ class HomeController extends Controller {
     const { ctx } = this;
     if (ctx.session.userid) {
       ctx.redirect('/info/index');
-    }else{
+    } else {
       await ctx.render('login.ejs');
     }
   }
@@ -106,6 +110,45 @@ class HomeController extends Controller {
       return 3;
     }
     return user;
+  }
+
+  /**
+   * 班级当天信息查询
+   */
+  async classaerch() {
+    const { ctx } = this;
+    let info = ctx.query;
+    if (info && info != undefined && info.clas && info.type) {
+      let result = await ctx.service.user.findByClas(info.clas, info.department, 'day');
+      if (info.type == 1) {
+        const studens = await ctx.service.students.findUsersByClasDep(info.department, info.clas);
+        result = this.getNoWriteNow(studens, result);
+      }
+      await ctx.render('classaerch.ejs', {
+        clas: info.clas,
+        data: result
+      });
+    } else {
+      await ctx.render('classaerch.ejs', {
+        clas: null,
+      });
+    }
+  }
+
+  getNoWriteNow(studens, data) {
+    let yids = data.map(function (e) {
+      return e.studentid;
+    });
+    let result = [];
+    studens.map(function (ele) {
+      if (!yids.includes(ele.id)) {
+        result.push({
+          name: ele.name,
+          record: 0
+        })
+      }
+    })
+    return result;
   }
 }
 

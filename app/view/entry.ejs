@@ -391,7 +391,7 @@
         </div>
     </div>
 
-    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/public/info/js/jquery-3.1.1.min.js"></script>
     <script src="/public/js/jquery.mloading.js"></script>
     <script>
         /**
@@ -529,7 +529,7 @@
                             tag = false;
                             alert('请查看您的出行信息中是否有未填项');
                             return;
-                        }else if (element.length > 30) {
+                        } else if (element.length > 20) {
                             alert('避免您的出行信息过长');
                             return;
                         }
@@ -546,6 +546,7 @@
                 alert("注册失败,请重试");
             }
         }
+
 
     </script>
 </body>

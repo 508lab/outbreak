@@ -11,8 +11,8 @@
     <%} else { %>
     <title>班级当天体温查询-晋城职业技术学院</title>
     <%}%>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="/public/info/css/plugins/dataTables/datatables.min.css">
+    <link rel="stylesheet" href="/public/info/css/plugins/dataTables/buttons.dataTables.min.css">
 </head>
 
 <body>
@@ -269,7 +269,7 @@
             font-size: 12px;
         }
     </style>
-    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/public/info/js/jquery-3.1.1.min.js"></script>
     <div class="ibox-content">
         <div style="text-align:center">
             <a href="http://www.sxjczy.cn:88/gb2015/"><img src="http://www.sxjczy.cn:88/gb2015/images/20.png"
@@ -306,53 +306,66 @@
                         style="color: white;"></span></button>
             </div>
                 <% if (clas) { %>
-                    <div style="width: 80%; margin: 0 auto;">
-                            <table id="example" class="display" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>姓名</th>
-                                            <th>当天体温</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <%for(var i=0;i < data.length; i++){%>
-                                        <tr>
-                                            <td><%= data[i].name %></td>
-                                            <td><%= data[i].record %></td>
-                                        </tr>
-                                        <%}%>
+    <div style="width: 80%; margin: 0 auto;">
+        <table id="example" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>当天体温</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%for(var i=0;i < data.length; i++){%>
+                <tr>
+                    <td><%= data[i].name %></td>
+                    <td><%= data[i].record %></td>
+                </tr>
+                <%}%>
                                 </tbody>
                     </div>
 
-                <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-                <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
-                <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-                <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+                <script src="/public/info/js/plugins/dataTables/datatables.min.js"></script>
+                <script src="/public/info/js/plugins/dataTables/dataTables.buttons.min.js"></script>
+                <script src="/public/info/js/plugins/dataTables/buttons.flash.min.js"></script>
+                <script src="/public/info/js/plugins/dataTables/jszip.min.js"></script>
+                <script src="/public/info/js/plugins/dataTables/pdfmake.min.js"></script>
+                <script src="/public/info/js/plugins/dataTables/vfs_fonts.js"></script>
+                <script src="/public/info/js/plugins/dataTables/buttons.html5.min.js"></script>
                 <script>
                     //配置DataTables默认参数
                     $.extend(true, $.fn.dataTable.defaults, {
                         "language": {
                             "url": "/public/language/Chinese.txt"
                         },
-                            "dom": "l<'#toolbar'>frtip"
+                        "dom": "l<'#toolbar'>frtip"
                     });
                     $('#example').DataTable({
-                            dom: 'Bfrtip',
-                            buttons: [
-                                'excel', 'pdf',
-                            ]
-                        });
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'excel', 'pdf',
+                        ]
+                    });
                 </script>
                 <%}%>
-            </table>
-        </div>
+        </table>
+    </div>
     </div>
 
 
     <script>
+        var dep = '<%= department %>';
+        var type = '<%= type %>';
+        var clas = '<%= clas %>';
+        /**
+         * 确保页面更新之后选项没变
+         * */
+        function initView() {
+            if (dep && type && clas) {
+                $('#departmentsSelect').val(dep);
+                $('#clasSelect').val(clas);
+                $('#write').val(type);
+            }
+        }
         $.ajax({
             url: `/admin/index/clasdepartment`,
             type: 'get',
@@ -365,7 +378,12 @@
                 });
                 $('#departmentsSelect').html(dep_html);
                 selectEvent(obj);
-                setDepList(obj, departments[0]);
+                if (dep) {
+                    setDepList(obj, dep);
+                }else{
+                    setDepList(obj, departments[0]);
+                }
+                initView();
             },
             error(err) {
                 alert(err);
@@ -380,12 +398,14 @@
 
         function setDepList(arr, dep) {
             let clas = arr[dep];
-                $('#clasSelect').html('');
-                var clas_html = ``;
-                clas.map(function (e) {
-                    clas_html += `<option value="${e}">${e}</option>`;
-                });
-                $('#clasSelect').append(clas_html);
+            $('#clasSelect').html('');
+            var clas_html = ``;
+            clas.map(function (e) {
+                clas_html += `<option value="${e}">${e}</option>`;
+            });
+            $('#clasSelect').append(clas_html);
+
+            
         }
 
         $('#submit').click(function () {
@@ -395,6 +415,6 @@
             window.location.href = '/classaerch?department=' + dep + '&clas=' + clas + '&type=' + type;
         })
     </script>
-</body>
+    </body>
 
 </html>

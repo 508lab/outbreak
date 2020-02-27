@@ -19,6 +19,7 @@ class AdminTeacherController extends AdminBaseontroller {
             time = [info.starttime, info.endtime]
             department = info.department;
         }
+        
         const result = await ctx.service.teachertemp.historyByDepTime(time, department);
         await ctx.render('/admin/teacher.ejs', {
             data: result,

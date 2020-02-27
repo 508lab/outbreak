@@ -27,7 +27,12 @@ class TeacherController extends TeacherBaseController {
             const user = await ctx.service.teacher.find(info);
             if (user && user.id) {
                 ctx.session.teacherid = user.id;
-                ctx.body = { code: 1 };
+                if (user.travel) {  //判断是否未提交出行信息
+                    ctx.body = { code: 1, data: 1 }
+                } else {
+                    ctx.body = { code: 1, data: 0 }
+                }
+
             } else {
                 ctx.body = { code: 0, err: ErrMsg[9] };
             }
@@ -59,17 +64,23 @@ class TeacherController extends TeacherBaseController {
         const { ctx } = this;
         this.userv();
         const user = await ctx.service.teacher.findById(ctx.session.teacherid);
+        let type = '';
+        if (ctx.query.type) {
+            type = ErrMsg[21]
+        };
         if (user.travel) {
             await ctx.render('teacher/user.ejs', {
                 user: user,
                 travel: JSON.parse(user.travel),
-                deps: Object.keys(ClasDepartment)
+                deps: Object.keys(ClasDepartment),
+                type: type
             });
         } else {
             await ctx.render('teacher/user.ejs', {
                 user: user,
                 travel: [],
-                deps: Object.keys(ClasDepartment)
+                deps: Object.keys(ClasDepartment),
+                type: type
             });
         }
     }
@@ -103,7 +114,7 @@ class TeacherController extends TeacherBaseController {
         this.userv();
         if (ctx.request.method == 'GET') {
             await ctx.render('teacher/password.ejs');
-        } else if(ctx.request.method == 'PUT') {
+        } else if (ctx.request.method == 'PUT') {
             let info = ctx.request.body;
             ctx.validate(entryvalipass, info);
             const id = ctx.session.teacherid;

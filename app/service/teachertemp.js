@@ -69,7 +69,7 @@ class TemperatureService extends Service {
      * @param {*} dep 
      */
     async historyByDepTime(time, dep) {
-        const sql = `select * from teachertemp t join teacher u where t.time >= "${time[0]}" AND t.time <= "${time[1]}" AND u.department = "${dep}";`
+        const sql = `select * from teachertemp t join teacher u on t.sid = u.id AND t.time >= "${time[0]}" AND t.time <= "${time[1]}" AND u.department = "${dep}";`
         return await this.app.mysql.query(sql);
     }
 

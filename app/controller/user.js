@@ -23,6 +23,9 @@ class UserController extends UserInfoController {
     const { ctx } = this;
     this.userv();
     const user = await ctx.service.user.findById(ctx.session.userid);
+    if (!user.travel) {
+      user.travel = "[]";
+    } 
     await ctx.render('user/user.ejs', {
       user: user,
       travel: JSON.parse(user.travel)

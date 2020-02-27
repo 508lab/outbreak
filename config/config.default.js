@@ -16,7 +16,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1581742171904_1000';
 
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = ['sqlerr'];
 
   config.view = {
     mapping: {

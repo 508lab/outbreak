@@ -31,7 +31,7 @@
             </div>
             <div class="m-t" id="pwd_login" style="display: block;">
                 <div class="form-group">
-                    <input type="number" class="form-control" placeholder="请输入您的工号" required="" id="sid">
+                    <input type="text" class="form-control" placeholder="请输入您的工号" required="" id="sid">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="请输入您的密码" required="" id="password">
@@ -71,7 +71,12 @@
                 success: function (data) {
                     $('body').mLoading('hide');
                     if (data.code === 1) {
-                        window.location.href = '/teacher/index';
+                        if (data.data == '1') {
+                            window.location.href = '/teacher/index';
+                        }else{
+                            window.location.href = '/teacher/user?type=0';
+                        }
+                        
                     } else {
                         alert(data.err);
                     }

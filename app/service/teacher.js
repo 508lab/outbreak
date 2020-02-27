@@ -10,7 +10,7 @@ class TeacherService extends Service {
     async find(info) {
         info.password = Tool.encryption(info.password);
         const user = await this.app.mysql.get(TABLE, info, {
-            columns: ["id"]
+            columns: ["id", "travel"]
         });
         return user;
     }

@@ -23,7 +23,7 @@ class AdminController extends AdminBaseontroller {
   async search() {
     const { ctx } = this;
     this.userv();
-    let record = 37.0, time = 'week';
+    let record = 37.0, time = 'day';
     if (ctx.query.record) {
       record = parseFloat(ctx.query.record);
     }

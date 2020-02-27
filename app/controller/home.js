@@ -126,11 +126,15 @@ class HomeController extends Controller {
       }
       await ctx.render('classaerch.ejs', {
         clas: info.clas,
+        department: info.department,
+        type: info.type,
         data: result
       });
     } else {
       await ctx.render('classaerch.ejs', {
         clas: null,
+        department: null,
+        type: null
       });
     }
   }

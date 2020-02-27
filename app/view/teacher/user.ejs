@@ -319,12 +319,12 @@
                                     class="en">Sex</span>：</label>
                             <select class="select-country" name="account" style="height:39px" id="sex">
                                 <% if (user.sex == 0) { %>
-                                    <option value="1" selected>男</option>
-                                    <option value="0">女</option>
+                                    <option value="0" selected>男</option>
+                                    <option value="1">女</option>
                                 <% } %>
                                 <% if (user.sex == 1) { %>
-                                    <option value="1">男</option>
-                                    <option value="0" selected>女</option>
+                                    <option value="0">男</option>
+                                    <option value="1" selected>女</option>
                                 <% } %>
                             </select>                
                         </div>
@@ -396,7 +396,7 @@
                             <span id="addtravel">添加出行记录</span>
                         </p>
                         <div style="height: 52px;">
-                            <button type="button" class="btn btn-primary2" id="submit" >更新<span class="en" style="color: white;"></span></button>
+                            <button type="button" class="btn btn-primary2" id="submit" >保存<span class="en" style="color: white;"></span></button>
                          </div>
                     </div>
                 </div>
@@ -417,6 +417,10 @@
     function initView() {
         let department = "<%= user.department %>";
         $('#department').val(department);
+        let t = "<%= type %>";
+        if (t) {
+            alert(t);
+        }
     }
         let c_cdom = `<div class="content">
                     <div class="form-group">
@@ -514,6 +518,9 @@
                     $('.ibox-content').mLoading('hide');
                     if (data.code === 1) {
                         alert('修改成功');
+                        setTimeout(function () {
+                            window.location.href = '/teacher/index';
+                        }, 1000);
                     } else {
                         alert(data.err);
                     }

@@ -123,6 +123,7 @@ class UserController extends UserInfoController {
       ctx.body = { code: 0, err: ErrMsg[4] };
     }
   }
+
 }
 
 module.exports = UserController;

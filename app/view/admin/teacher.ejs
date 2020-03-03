@@ -76,6 +76,7 @@
                                     <th>工号</th>
                                     <th>目前所在城市</th>
                                     <th>目前温度</th>
+                                    <td>重置密码</td>
                                     <th>出行记录</th>
                                     <th>操作</th>
                                 </tr>
@@ -99,13 +100,17 @@
                                     <td><%= data[i].department %></td>
                                     <td><%= data[i].studentid %></td>
                                     <td><%= data[i].city %></td>
+                                    
                                     <td><%= data[i].record %></td>
+                                    <td><button data-studentid="<%= data[i].studentid %>" type="button"
+                                        class="btn btn-primary npass">重置</button></td>
                                     <td>
                                         <button data-username="<%= data[i].name %>" data-travel="<%= data[i].travel %>"
                                             type="button" class="btn btn-primary travel">显示</button>
                                     </td>
                                     <th><a href="/admin/user/teacher/info?sid=<%= data[i].id %>&n=<%= data[i].name %>"
-                                            target="_blank">体温记录</a></th>
+                                            target="_blank">体温记录</a>
+                                        </th>
                                 </tr>
                                 <%}%>
                             </tbody>
@@ -166,6 +171,37 @@
                             k4.hide();
                         });
 
+                        /**
+                         * 重置密码
+                         * */
+                         $('.npass').click(function (e) {
+                            let studentid = $(e.target).data('studentid');
+                            $('.ibox-content').mLoading({
+                                text: "修改密码中...",
+                            });
+                            $.ajax({
+                                url: "/admin/user/teacher/cpass",
+                                type: "PUT",
+                                dataType: 'json',
+                                data: {
+                                    studentid: studentid
+                                },
+                                success: function (data) {
+                                    $('.ibox-content').mLoading('hide');
+                                    if (data.code === 1) {
+                                        alert('修改成功,密码为：123456');
+                                    } else {
+                                        alert(data.err);
+                                    }
+                                },
+
+                                error: function (data) {
+                                    err(data);
+                                    $('.ibox-content').mLoading('hide');
+
+                                }
+                            });
+                        })
                         //配置DataTables默认参数
                         $.extend(true, $.fn.dataTable.defaults, {
                             "language": {

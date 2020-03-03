@@ -3,6 +3,7 @@
 const Controller = require('egg').Controller;
 const { entryvalidate, logindata } = require('../validate/home');
 const ErrMsg = require('../global/errmsg');
+const moment = require('moment');
 
 class HomeController extends Controller {
   async index() {
@@ -113,28 +114,28 @@ class HomeController extends Controller {
   }
 
   /**
-   * 班级当天信息查询
+   * 班级信息查询
    */
   async classaerch() {
     const { ctx } = this;
     let info = ctx.query;
-    if (info && info != undefined && info.clas && info.type) {
-      let result = await ctx.service.user.findByClas(info.clas, info.department, 'day');
-      if (info.type == 1) {
-        const studens = await ctx.service.students.findUsersByClasDep(info.department, info.clas);
-        result = this.getNoWriteNow(studens, result);
-      }
+    let time = moment().format("YYYY-MM-DD");
+    if (info && info != undefined && info.clas) {
+      time = info.time;
+      let result = await ctx.service.user.findByClasAndTime(info.clas, info.department, time);
+      const studens = await ctx.service.students.findUsersByClasDep(info.department, info.clas);
+      result = this.getNoWriteNow(studens, result);
       await ctx.render('classaerch.ejs', {
         clas: info.clas,
         department: info.department,
-        type: info.type,
-        data: result
+        data: result,
+        time: time
       });
     } else {
       await ctx.render('classaerch.ejs', {
         clas: null,
         department: null,
-        type: null
+        time: time
       });
     }
   }
@@ -145,12 +146,18 @@ class HomeController extends Controller {
     });
     let result = [];
     studens.map(function (ele) {
-      if (!yids.includes(ele.id)) {
+      if (!yids.includes(ele.id) && ele.name != '' && ele.name != undefined) {
         result.push({
           name: ele.name,
           record: 0
         })
       }
+    });
+    data.map(function (ele) {
+      result.push({
+        name: ele.name,
+        record: ele.record
+      })
     })
     return result;
   }

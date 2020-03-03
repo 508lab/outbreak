@@ -19,7 +19,7 @@ class AdminTeacherController extends AdminBaseontroller {
             time = [info.starttime, info.endtime]
             department = info.department;
         }
-        
+
         const result = await ctx.service.teachertemp.historyByDepTime(time, department);
         await ctx.render('/admin/teacher.ejs', {
             data: result,
@@ -40,6 +40,21 @@ class AdminTeacherController extends AdminBaseontroller {
             data: arr,
             n: ctx.query.n
         });
+    }
+
+
+    /**
+     * 修改个人密码
+     */
+    async userpass() {
+        const { ctx } = this;
+        this.userv();
+        let res = await ctx.service.teacher.updatePassword(ctx.request.body.studentid, '123456');
+        if (res) {
+            ctx.body = { code: 1 };
+        } else {
+            ctx.body = { code: 0, err: ErrMsg[4] };
+        }
     }
 }
 

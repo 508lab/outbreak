@@ -92,16 +92,19 @@
                     record: record,
                 },
                 success: function (data) {
-                    $('#page-wrapper').mLoading('hide');
                     if (data.code === 1) {
                         $('#record').attr('disabled', true);
                         $('#submit').css('display', 'none');
                     }else{
                         alert(data.err);
                     }
+                    setTimeout(function () {
+                        $('#page-wrapper').mLoading('hide');
+                    }, 1000);
                 },
 
                 error: function (data) {
+                    alert('服务器异常');
                     $('#page-wrapper').mLoading('hide');
                 }
         });

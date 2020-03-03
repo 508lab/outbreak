@@ -148,6 +148,22 @@ class AdminController extends AdminBaseontroller {
       ctx.body = { code: 1, data: result };
     }
   }
+
+
+  /**
+   * 修改个人密码
+   */
+  async userpass() {
+    const { ctx } = this;
+    this.userv();
+    let res = await ctx.service.user.updatePassword(ctx.request.body.studentid, '123456');
+    if (res) {
+      ctx.body = { code: 1 };
+    } else {
+      ctx.body = { code: 0, err: ErrMsg[4] };
+    }
+  }
+
 }
 
 module.exports = AdminController;

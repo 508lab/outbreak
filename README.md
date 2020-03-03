@@ -6,7 +6,7 @@
 
 <!-- add docs here for user -->
 
-see [视频演示][https://508lab.github.io/2020/02/18/xi-tong/xue-sheng-ti-wen-xin-xi-xi-tong/]
+see [线上地址与视频演示](https://508lab.github.io/2020/02/18/xi-tong/xue-sheng-ti-wen-xin-xi-xi-tong/)
 
 ### Development
 

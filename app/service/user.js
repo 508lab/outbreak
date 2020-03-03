@@ -19,6 +19,17 @@ class UserService extends Service {
         return user;
     }
 
+    async updatePassword(studentid, password) {
+        password = Tool.encryption(password);
+        const options = {
+            where: {
+                studentid: studentid,
+            }
+        };
+        const result = await this.app.mysql.update(TABLE, { password: password }, options);
+        return result.affectedRows === 1;
+    }
+
     async findById(id) {
         const user = await this.app.mysql.get(TABLE, { id: id });
         return user;
@@ -39,7 +50,7 @@ class UserService extends Service {
             where: {
                 id: id,
             },
-        };
+        }; { }
         const result = await this.app.mysql.update(TABLE, row, options);
         return result.affectedRows === 1;
     }
@@ -103,6 +114,15 @@ class UserService extends Service {
         };
         const result = await this.app.mysql.update(TABLE, data, options);
         return result.affectedRows === 1;
+    }
+
+
+    /**
+     * 根据时间与班级并获取当天的体温记录
+    */
+    async findByClasAndTime(name, department, time) {
+        const sql = `select * from user u join temperature t on t.sid = u.id AND t.time = '${time}' AND department = '${department}' AND clas = '${name}';`;
+        return await this.app.mysql.query(sql);
     }
 }
 

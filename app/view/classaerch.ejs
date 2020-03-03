@@ -13,6 +13,7 @@
     <%}%>
     <link rel="stylesheet" href="/public/info/css/plugins/dataTables/datatables.min.css">
     <link rel="stylesheet" href="/public/info/css/plugins/dataTables/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="/public/css/kalendae.css">
 </head>
 
 <body>
@@ -294,12 +295,9 @@
                 </select>
             </div>
             <div class="form-group">
-                <label class="title"><span style="color:red;padding-right:5px">*</span>今日是否填写 <span
+                <label class="title"><span style="color:red;padding-right:5px">*</span>时间 <span
                         class="en"></span>：</label>
-                <select class="select-country" name="account" style="height:39px" id="write">
-                    <option value="0">是</option>
-                    <option value="1">否</option>
-                </select>
+                <input type="text" placeholder="" class="form-control" id="time">
             </div>
             <div style="height: 52px;">
                 <button type="button" class="btn btn-primary2" id="submit" style="margin-top: 10px;">查询<span class="en"
@@ -351,19 +349,31 @@
     </div>
     </div>
 
-
+    <script src="/public/js/moment.min.js"></script>
+    <script src="/public/js/kalendae.min.js"></script>
     <script>
+        $(document).ready(function () {
+            var k4 = new Kalendae.Input('time', {
+                months: 1,
+                mode: 'single',
+                selected: ['<%= time %>'],
+                closeOnSelection: true,
+            });
+
+            $('<div class="btnbox"><a class="k-submit">确定</a></div>').appendTo(".kalendae");
+            $(".k-submit").click(function () {
+                k4.hide();
+            });
+        })
         var dep = '<%= department %>';
-        var type = '<%= type %>';
         var clas = '<%= clas %>';
         /**
          * 确保页面更新之后选项没变
          * */
         function initView() {
-            if (dep && type && clas) {
+            if (dep && clas) {
                 $('#departmentsSelect').val(dep);
                 $('#clasSelect').val(clas);
-                $('#write').val(type);
             }
         }
         $.ajax({
@@ -380,7 +390,7 @@
                 selectEvent(obj);
                 if (dep) {
                     setDepList(obj, dep);
-                }else{
+                } else {
                     setDepList(obj, departments[0]);
                 }
                 initView();
@@ -405,14 +415,14 @@
             });
             $('#clasSelect').append(clas_html);
 
-            
+
         }
 
         $('#submit').click(function () {
             let dep = $('#departmentsSelect').find("option:selected").val();
             let clas = $('#clasSelect').find("option:selected").val();
-            let type = $('#write').find("option:selected").val();
-            window.location.href = '/classaerch?department=' + dep + '&clas=' + clas + '&type=' + type;
+            let time = $('#time').val();
+            window.location.href = '/classaerch?department=' + dep + '&clas=' + clas + '&time=' + time;
         })
     </script>
     </body>

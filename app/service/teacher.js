@@ -56,6 +56,17 @@ class TeacherService extends Service {
         const result = await this.app.mysql.update(TABLE, data, options);
         return result.affectedRows === 1;
     }
+
+    async updatePassword(studentid, password) {
+        password = Tool.encryption(password);
+        const options = {
+            where: {
+                studentid: studentid,
+            }
+        };
+        const result = await this.app.mysql.update(TABLE, { password: password }, options);
+        return result.affectedRows === 1;
+    }
 }
 
 module.exports = TeacherService;

@@ -12,7 +12,7 @@ class UserController extends UserInfoController {
 
   async index() {
     const { ctx } = this;
-    this.userv();
+
     const data = await ctx.service.temperature.findNow(ctx.session.userid);
     await ctx.render('user/index.ejs', {
       data: data
@@ -21,11 +21,11 @@ class UserController extends UserInfoController {
 
   async user() {
     const { ctx } = this;
-    this.userv();
+
     const user = await ctx.service.user.findById(ctx.session.userid);
     if (!user.travel) {
       user.travel = "[]";
-    } 
+    }
     await ctx.render('user/user.ejs', {
       user: user,
       travel: JSON.parse(user.travel)
@@ -34,7 +34,7 @@ class UserController extends UserInfoController {
 
   async temperature() {
     const { ctx } = this;
-    this.userv();
+
     const data = await ctx.service.temperature.data(ctx.session.userid);
     await ctx.render('user/temperature.ejs', {
       data: data
@@ -43,7 +43,7 @@ class UserController extends UserInfoController {
 
   async password() {
     const { ctx } = this;
-    this.userv();
+
     await ctx.render('user/password.ejs');
   }
 
@@ -52,7 +52,7 @@ class UserController extends UserInfoController {
    */
   async cpass() {
     const { ctx } = this;
-    this.userv();
+
     let info = ctx.request.body;
     ctx.validate(entryvalipass, info);
     const id = ctx.session.userid;
@@ -80,7 +80,7 @@ class UserController extends UserInfoController {
    */
   async temp() {
     const { ctx } = this;
-    this.userv();
+
     let info = ctx.request.body;
     ctx.validate(entryvalitemp, info);
     let record = parseFloat(info.record);
@@ -89,6 +89,12 @@ class UserController extends UserInfoController {
       ctx.body = { code: 0, err: ErrMsg[20] };
       return;
     }
+
+    ctx.coreLogger.info('---studnet-temp---' + JSON.stringify({
+      id: ctx.session.userid,
+      record: record
+    }));
+
     //如果已经上传直接拒绝
     const data = await ctx.service.temperature.findNow(ctx.session.userid);
     if (data == 'undefined') {
@@ -113,7 +119,7 @@ class UserController extends UserInfoController {
    */
   async travel() {
     const { ctx } = this;
-    this.userv();
+
     const info = ctx.request.body;
     ctx.validate(entryvaltravel, info);
     const result = await ctx.service.user.updateTravel(ctx.session.userid, info);

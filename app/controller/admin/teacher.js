@@ -1,6 +1,6 @@
 'use strict';
 
-const AdminBaseontroller = require('./base');
+const AdminBaseontroller = require('../base/admin');
 const ClasDeartment = require('../../global/clasdepartment');
 const moment = require('moment');
 
@@ -10,7 +10,6 @@ const moment = require('moment');
 class AdminTeacherController extends AdminBaseontroller {
     async index() {
         const { ctx } = this;
-        this.userv();
         const departments = Object.keys(ClasDeartment);
         const now = moment().format("YYYY-MM-DD");
         const info = ctx.query;
@@ -48,7 +47,6 @@ class AdminTeacherController extends AdminBaseontroller {
      */
     async userpass() {
         const { ctx } = this;
-        this.userv();
         let res = await ctx.service.teacher.updatePassword(ctx.request.body.studentid, '123456');
         if (res) {
             ctx.body = { code: 1 };

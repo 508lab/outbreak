@@ -42,7 +42,7 @@
             </style>
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row">
-                    
+
                     <div class="col-lg-12">
                         <% if (data) { %>
                         <div class="form-group">
@@ -91,27 +91,29 @@
             $('#page-wrapper').mLoading({
                 text: "上传中...",
             });
-            $.ajax({
-                url: "/teacher/temperature",
-                type: "POST",
-                dataType: 'json',
-                data: {
-                    record: record,
-                },
-                success: function (data) {
-                    $('#page-wrapper').mLoading('hide');
-                    if (data.code === 1) {
-                        $('#record').attr('disabled', true);
-                        $('#submit').css('display', 'none');
-                    } else {
-                        alert(data.err);
-                    }
-                },
+            setTimeout(function () {
+                $.ajax({
+                    url: "/teacher/temperature",
+                    type: "POST",
+                    dataType: 'json',
+                    data: {
+                        record: record,
+                    },
+                    success: function (data) {
+                        $('#page-wrapper').mLoading('hide');
+                        if (data.code === 1) {
+                            $('#record').attr('disabled', true);
+                            $('#submit').css('display', 'none');
+                        } else {
+                            alert(data.err);
+                        }
+                    },
 
-                error: function (data) {
-                    $('#page-wrapper').mLoading('hide');
-                }
-            });
+                    error: function (data) {
+                        $('#page-wrapper').mLoading('hide');
+                    }
+                });
+            }, Math.round(Math.random() * 1500));
         })
     </script>
 </body>

@@ -8,6 +8,7 @@ module.exports = app => {
   require('./router/info')(app);
   require('./router/admin')(app);
   require('./router/teacher')(app);
+  require('./router/vis')(app);
 
   router.get('/classaerch', controller.home.classaerch);
 };

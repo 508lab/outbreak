@@ -1,11 +1,19 @@
 const { Controller } = require('egg');
 
-class UserInfoController extends Controller {
+class UserInfoBaseController extends Controller {
+
+  constructor(app) {
+    super(app);
+    this.userv();
+  }
+
   userv() {
     const sid = this.ctx.session.userid;
     if (sid == null || sid == 'undefined' || sid == undefined) {
-      this.ctx.redirect('/login');
+      if (this.ctx.request.url !== '/login') {
+        this.ctx.redirect('/login');
+      }
     }
   }
 }
-module.exports = UserInfoController;
+module.exports = UserInfoBaseController;

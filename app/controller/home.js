@@ -34,6 +34,7 @@ class HomeController extends Controller {
     const { ctx } = this;
     let info = ctx.request.body;
     ctx.validate(logindata, info);
+    ctx.coreLogger.info('---student-login---' + JSON.stringify(info));
     const user = await ctx.service.user.find(info);
     if (user && user.id) {
       ctx.session.userid = user.id;

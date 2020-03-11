@@ -1,6 +1,6 @@
 'use strict';
 
-const AdminBaseontroller = require('./admin/base');
+const AdminBaseontroller = require('./base/admin');
 const { loginin, clasdatav } = require('../validate/admin');
 const ErrMsg = require('../global/errmsg');
 const ClasDeartment = require('../global/clasdepartment');
@@ -11,7 +11,6 @@ const ClasDeartment = require('../global/clasdepartment');
 class AdminController extends AdminBaseontroller {
   async index() {
     const { ctx } = this;
-    this.userv();
     const data = await ctx.service.temperature.outstandard(37.0);
     const teacher = await ctx.service.teachertemp.outstandard(37.0);
     await ctx.render('/admin/index.ejs', {
@@ -22,7 +21,6 @@ class AdminController extends AdminBaseontroller {
 
   async search() {
     const { ctx } = this;
-    this.userv();
     let record = 37.0, time = 'day';
     if (ctx.query.record) {
       record = parseFloat(ctx.query.record);
@@ -71,7 +69,6 @@ class AdminController extends AdminBaseontroller {
    */
   async clas() {
     const { ctx } = this;
-    this.userv();
     const result = await ctx.service.user.clas();
     await ctx.render('/admin/clas.ejs', {
       data: result
@@ -83,7 +80,6 @@ class AdminController extends AdminBaseontroller {
    */
   async clasdata() {
     const { ctx } = this;
-    this.userv();
     //统计班级信息
     if (ctx.query.clas && ctx.query.department) {
       let time = 'day';
@@ -122,7 +118,6 @@ class AdminController extends AdminBaseontroller {
    */
   async bardata() {
     const { ctx } = this;
-    this.userv();
     let info = ctx.query;
     if (info.type == 1) {  //根据系别统计
       const result = await ctx.service.temperature.bardataByDep([info.starttime, info.endtime], info.department);
@@ -138,7 +133,6 @@ class AdminController extends AdminBaseontroller {
   **/
   async wuhandata() {
     const { ctx } = this;
-    this.userv();
     let info = ctx.query;
     if (info.type == 1) {
       const result = await ctx.service.user.findWuHan(`department='${info.department}'`);
@@ -155,7 +149,6 @@ class AdminController extends AdminBaseontroller {
    */
   async userpass() {
     const { ctx } = this;
-    this.userv();
     let res = await ctx.service.user.updatePassword(ctx.request.body.studentid, '123456');
     if (res) {
       ctx.body = { code: 1 };

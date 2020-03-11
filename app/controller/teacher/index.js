@@ -24,6 +24,7 @@ class TeacherController extends TeacherBaseController {
         } else {
             let info = ctx.request.body;
             ctx.validate(logindata, info);
+            ctx.coreLogger.info('---teacher-login---' + JSON.stringify(info));
             const user = await ctx.service.teacher.find(info);
             if (user && user.id) {
                 ctx.session.teacherid = user.id;
@@ -50,7 +51,7 @@ class TeacherController extends TeacherBaseController {
      */
     async index() {
         const { ctx } = this;
-        this.userv();
+
         const data = await ctx.service.teachertemp.findNow(ctx.session.teacherid);
         await ctx.render('/teacher/index.ejs', {
             data: data
@@ -62,7 +63,7 @@ class TeacherController extends TeacherBaseController {
      */
     async user() {
         const { ctx } = this;
-        this.userv();
+
         const user = await ctx.service.teacher.findById(ctx.session.teacherid);
         let type = '';
         if (ctx.query.type) {
@@ -90,7 +91,7 @@ class TeacherController extends TeacherBaseController {
      */
     async updateuser() {
         const { ctx } = this;
-        this.userv();
+
         const info = ctx.request.body;
         const result = await ctx.service.teacher.updateTravel(ctx.session.teacherid, info);
         if (result) {
@@ -102,7 +103,7 @@ class TeacherController extends TeacherBaseController {
 
     async temperature() {
         const { ctx } = this;
-        this.userv();
+
         const data = await ctx.service.teachertemp.data(ctx.session.teacherid);
         await ctx.render('teacher/temperature.ejs', {
             data: data
@@ -111,7 +112,7 @@ class TeacherController extends TeacherBaseController {
 
     async password() {
         const { ctx } = this;
-        this.userv();
+
         if (ctx.request.method == 'GET') {
             await ctx.render('teacher/password.ejs');
         } else if (ctx.request.method == 'PUT') {
@@ -143,7 +144,7 @@ class TeacherController extends TeacherBaseController {
      */
     async temp() {
         const { ctx } = this;
-        this.userv();
+
         let info = ctx.request.body;
         ctx.validate(entryvalitemp, info);
         let record = parseFloat(info.record);
@@ -152,6 +153,10 @@ class TeacherController extends TeacherBaseController {
             ctx.body = { code: 0, err: ErrMsg[20] };
             return;
         }
+        ctx.coreLogger.info('---teacher-login---' + JSON.stringify({
+            id: ctx.session.teacherid,
+            record: record
+        }));
         //如果已经上传直接拒绝
         const data = await ctx.service.teachertemp.findNow(ctx.session.teacherid);
         if (data == 'undefined') {
@@ -168,6 +173,42 @@ class TeacherController extends TeacherBaseController {
             ctx.body = { code: 1 };
         } else {
             ctx.body = { code: 0, err: ErrMsg[6] };
+        }
+    }
+
+    async students() {
+        const { ctx } = this;
+
+        const id = ctx.session.teacherid;
+        const user = await ctx.service.teacher.findById(id);
+        let classs = ClasDepartment[user.department];
+        let clas = classs[0];
+        if (ctx.query.clas) {
+            clas = ctx.query.clas;
+        }
+        const data = await ctx.service.user.findClasData(user.department, clas);
+        await ctx.render('teacher/students.ejs', {
+            clas: classs,
+            data: data
+        });
+    }
+
+    /**
+     * 修改学生密码
+     */
+    async cpass() {
+        const { ctx } = this;
+
+        let res = await ctx.service.user.updatePassword(ctx.request.body.studentid, '123456');
+        if (res) {
+            //记录修改密码的教师与学生
+            ctx.coreLogger.info('---teacher-cpass-studnet---' + JSON.stringify({
+                teacherid: ctx.session.teacherid,
+                studentid: ctx.request.body.studentid
+            }));
+            ctx.body = { code: 1 };
+        } else {
+            ctx.body = { code: 0, err: ErrMsg[4] };
         }
     }
 }

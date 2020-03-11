@@ -1,6 +1,6 @@
 'use strict';
 
-const AdminBaseontroller = require('./base');
+const AdminBaseontroller = require('../base/admin');
 const ErrMsg = require('../../global/errmsg');
 
 /**
@@ -9,14 +9,12 @@ const ErrMsg = require('../../global/errmsg');
 class AdminUsersController extends AdminBaseontroller {
     async index() {
         const { ctx } = this;
-        this.userv();
         await ctx.render('/admin/user.ejs', {
         });
     }
 
     async password() {
         const { ctx } = this;
-        this.userv();
         let info = ctx.request.body;
         const id = ctx.session.user.id;
         //旧密码是否正确

@@ -479,6 +479,9 @@
                     $('.ibox-content').mLoading('hide');
                     if (data.code === 1) {
                         alert('修改成功');
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 100);
                     } else {
                         alert(data.err);
                     }

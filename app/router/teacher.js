@@ -14,4 +14,6 @@ module.exports = app => {
     router.post('/teacher/temperature', controller.teacher.index.temp);
     router.get('/teacher/password', controller.teacher.index.password);
     router.put('/teacher/password', controller.teacher.index.password);
+    router.get('/teacher/students', controller.teacher.index.students);
+    router.put('/teacher/students/password', controller.teacher.index.cpass);
 };

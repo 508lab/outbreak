@@ -124,6 +124,13 @@ class UserService extends Service {
         const sql = `select * from user u join temperature t on t.sid = u.id AND t.time = '${time}' AND department = '${department}' AND clas = '${name}';`;
         return await this.app.mysql.query(sql);
     }
+
+    async findClasData(department, clas) {
+        return await this.app.mysql.select(TABLE, {
+            where: { department: department, clas: clas },
+            columns: ['name', 'id', 'studentid', 'wuhan', 'sex', 'department', 'clas', 'city' ,'travel'],
+        });
+    }
 }
 
 module.exports = UserService;

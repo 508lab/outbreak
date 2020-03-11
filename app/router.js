@@ -11,4 +11,5 @@ module.exports = app => {
   require('./router/vis')(app);
 
   router.get('/classaerch', controller.home.classaerch);
+  router.get('/clasdepartment', controller.home.clasdepartment)
 };

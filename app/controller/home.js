@@ -4,6 +4,7 @@ const Controller = require('egg').Controller;
 const { entryvalidate, logindata } = require('../validate/home');
 const ErrMsg = require('../global/errmsg');
 const moment = require('moment');
+const ClasDeartment = require('../global/clasdepartment');
 
 class HomeController extends Controller {
   async index() {
@@ -161,6 +162,13 @@ class HomeController extends Controller {
       })
     })
     return result;
+  }
+
+  /**
+ * 获取所有系与班级的信息
+ */
+  async clasdepartment() {
+    this.ctx.body = { code: 1, data: ClasDeartment };
   }
 }
 

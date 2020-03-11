@@ -3,7 +3,7 @@
 const AdminBaseontroller = require('./base/admin');
 const { loginin, clasdatav } = require('../validate/admin');
 const ErrMsg = require('../global/errmsg');
-const ClasDeartment = require('../global/clasdepartment');
+
 
 /**
  * 后台管理
@@ -103,13 +103,6 @@ class AdminController extends AdminBaseontroller {
     } else {
       ctx.body = { code: 0, err: ErrMsg[1] };
     }
-  }
-
-  /**
-   * 获取所有系与班级的信息
-   */
-  async clasdepartment() {
-    this.ctx.body = { code: 1, data: ClasDeartment };
   }
 
   /**

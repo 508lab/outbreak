@@ -14,7 +14,6 @@ module.exports = app => {
     router.get('/admin/loginout', controller.admin.loginout);
     router.get('/admin/clas', controller.admin.clas);
     router.get('/admin/clasdata', controller.admin.clasdata);
-    router.get('/admin/index/clasdepartment', controller.admin.clasdepartment)
     router.get('/admin/user/index', controller.admin.users.index);
     router.post('/admin/user/password', controller.admin.users.password);
     router.get('/admin/user/teacher', controller.admin.teacher.index);

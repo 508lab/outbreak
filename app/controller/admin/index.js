@@ -1,8 +1,8 @@
 'use strict';
 
-const AdminBaseontroller = require('./base/admin');
-const { loginin, clasdatav } = require('../validate/admin');
-const ErrMsg = require('../global/errmsg');
+const AdminBaseontroller = require('../base/admin');
+const { loginin, clasdatav } = require('../../validate/admin');
+const ErrMsg = require('../../global/errmsg');
 
 
 /**

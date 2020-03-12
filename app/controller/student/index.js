@@ -1,9 +1,9 @@
 'use strict';
 
-const UserInfoController = require('./base/userinfo');
-const Tool = require('../global/tool');
-const { entryvalitemp, entryvalipass, entryvaltravel } = require('../validate/user');
-const ErrMsg = require('../global/errmsg');
+const UserInfoController = require('../base/userinfo');
+const Tool = require('../../global/tool');
+const { entryvalitemp, entryvalipass, entryvaltravel } = require('../../validate/user');
+const ErrMsg = require('../../global/errmsg');
 
 /**
  * 用户个人中心
@@ -12,7 +12,6 @@ class UserController extends UserInfoController {
 
   async index() {
     const { ctx } = this;
-
     const data = await ctx.service.temperature.findNow(ctx.session.userid);
     await ctx.render('user/index.ejs', {
       data: data
@@ -21,7 +20,6 @@ class UserController extends UserInfoController {
 
   async user() {
     const { ctx } = this;
-
     const user = await ctx.service.user.findById(ctx.session.userid);
     if (!user.travel) {
       user.travel = "[]";
@@ -34,7 +32,6 @@ class UserController extends UserInfoController {
 
   async temperature() {
     const { ctx } = this;
-
     const data = await ctx.service.temperature.data(ctx.session.userid);
     await ctx.render('user/temperature.ejs', {
       data: data
@@ -43,7 +40,6 @@ class UserController extends UserInfoController {
 
   async password() {
     const { ctx } = this;
-
     await ctx.render('user/password.ejs');
   }
 
@@ -52,7 +48,6 @@ class UserController extends UserInfoController {
    */
   async cpass() {
     const { ctx } = this;
-
     let info = ctx.request.body;
     ctx.validate(entryvalipass, info);
     const id = ctx.session.userid;
@@ -66,7 +61,6 @@ class UserController extends UserInfoController {
       ctx.body = { code: 0, err: ErrMsg[17] };
       return;
     }
-
     const res = await ctx.service.user.changePass(id, info.password, info.oldpassword);
     if (res) {
       ctx.body = { code: 1 };
@@ -80,7 +74,6 @@ class UserController extends UserInfoController {
    */
   async temp() {
     const { ctx } = this;
-
     let info = ctx.request.body;
     ctx.validate(entryvalitemp, info);
     let record = parseFloat(info.record);
@@ -89,19 +82,16 @@ class UserController extends UserInfoController {
       ctx.body = { code: 0, err: ErrMsg[20] };
       return;
     }
-
     ctx.coreLogger.info('---studnet-temp---' + JSON.stringify({
       id: ctx.session.userid,
       record: record
     }));
-
     //如果已经上传直接拒绝
     const data = await ctx.service.temperature.findNow(ctx.session.userid);
     if (data == 'undefined') {
       ctx.body = { code: 0, err: ErrMsg[15] }
       return;
     }
-
     const result = await ctx.service.temperature.insert({
       sid: parseInt(ctx.session.userid),
       record: record,
@@ -119,7 +109,6 @@ class UserController extends UserInfoController {
    */
   async travel() {
     const { ctx } = this;
-
     const info = ctx.request.body;
     ctx.validate(entryvaltravel, info);
     const result = await ctx.service.user.updateTravel(ctx.session.userid, info);
@@ -129,7 +118,6 @@ class UserController extends UserInfoController {
       ctx.body = { code: 0, err: ErrMsg[4] };
     }
   }
-
 }
 
 module.exports = UserController;

@@ -14,11 +14,11 @@ module.exports = app => {
     /**
      * 个人中心
     */
-    router.get('/info/index', controller.user.index);
-    router.get('/info/user', controller.user.user);
-    router.get('/info/temperature', controller.user.temperature);
-    router.post('/info/temperature', controller.user.temp);
-    router.get('/info/password', controller.user.password);
-    router.post('/info/password', controller.user.cpass);
-    router.put('/info/user/travel', controller.user.travel);
+    router.get('/info/index', controller.student.index.index);
+    router.get('/info/user', controller.student.index.user);
+    router.get('/info/temperature', controller.student.index.temperature);
+    router.post('/info/temperature', controller.student.index.temp);
+    router.get('/info/password', controller.student.index.password);
+    router.post('/info/password', controller.student.index.cpass);
+    router.put('/info/user/travel', controller.student.index.travel);
 };

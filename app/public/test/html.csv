@@ -1,0 +1,13 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1584441601169,130,首页测试,200,OK,页面测试 1-1,text,true,,2503,118,1,3,http://127.0.0.1:7001/,127,0,52
+1584441601312,11,班级当天体温查询,200,OK,页面测试 1-1,text,true,,10884,128,1,3,http://127.0.0.1:7001/classaerch,11,0,0
+1584441601169,130,登陆,200,OK,学生接口测试 3-1,text,true,,510,246,1,3,http://127.0.0.1:7001/loginin,127,0,52
+1584441601169,130,基础接口,200,OK,对外接口测试 2-1,text,true,,5645,134,1,3,http://127.0.0.1:7001/api/v1/vis/index,125,0,52
+1584441601428,38,体温数据统计,200,OK,对外接口测试 2-1,text,true,,362,200,1,2,http://127.0.0.1:7001/api/v1/vis/bardata?type=1&department=信息工程系,38,0,0
+1584441601468,6,武汉数据统计,200,OK,对外接口测试 2-1,text,true,,348,202,1,2,http://127.0.0.1:7001/api/v1/vis/wuhandata?type=1&department=信息工程系,6,0,0
+1584441601427,76,提交体温,200,OK,学生接口测试 3-1,text,true,,319,422,1,1,http://127.0.0.1:7001/info/temperature,76,0,0
+1584441601504,10,修改密码,200,OK,学生接口测试 3-1,text,true,,318,457,1,1,http://127.0.0.1:7001/info/password,10,0,0
+1584441601515,13,修改出行记录,200,OK,学生接口测试 3-1,text,true,,318,419,1,1,http://127.0.0.1:7001/info/user/travel,13,0,0
+1584441601529,11,退出,200,OK,学生接口测试 3-1,text,true,,4066,249,1,1,http://127.0.0.1:7001/login,5,0,0
+1584441601529,5,退出-0,302,Found,学生接口测试 3-1,text,true,,543,126,1,1,http://127.0.0.1:7001/loginout,5,0,0
+1584441601536,4,退出-1,200,OK,学生接口测试 3-1,text,true,,3523,123,1,1,http://127.0.0.1:7001/login,3,0,0

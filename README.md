@@ -1,4 +1,4 @@
-# outbreak
+# school
 
 
 
@@ -6,13 +6,11 @@
 
 <!-- add docs here for user -->
 
-see [线上地址与视频演示](https://508lab.github.io/2020/02/18/xi-tong/xue-sheng-ti-wen-xin-xi-xi-tong/)
+see [egg docs][egg] for more detail.
 
 ### Development
 
 ```bash
-$ 导入数据库 mtest.sql
-$ 修改/config/config.default.js 中关于数据库的配置（config.mysql）
 $ npm i
 $ npm run dev
 $ open http://localhost:7001/
@@ -25,17 +23,11 @@ $ npm start
 $ npm stop
 ```
 
-### 使用到的技术
-```bash
-$ "node": ">=10.0.0"
-$ "MariaDB": ">=10.0.38"
+### Test
 ```
-
-### 测试帐号
-```bash
-学生->   学号： 1501373434  密码： 123456
-教师->   工号： 123456      密码： 123456
-后台->   帐号： admin       密码： 123456  
+$ ./bin/jmeter -n -t 文件路径1/疫情填报系统测试.jmx -l 文件路径2/html.csv -e -o 文件路径
+$ 也可以直接查看 /app/public/test 下的文件
+$ 注：测试使用的技术为-> jmeter
 ```
 
 ### npm scripts

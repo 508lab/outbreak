@@ -9,7 +9,8 @@ module.exports = app => {
   require('./router/admin')(app);
   require('./router/teacher')(app);
   require('./router/vis')(app);
+  require('./router/mirror')(app);
 
   router.get('/classaerch', controller.home.classaerch);
-  router.get('/clasdepartment', controller.home.clasdepartment)
+  router.get('/clasdepartment', controller.home.clasdepartment);
 };

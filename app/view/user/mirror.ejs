@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
+    <title>晋城职业技术学院-学习资料</title>
+    <link href="/public/info/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/info/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/public/info/css/animate.css" rel="stylesheet">
+    <link href="/public/info/css/style.css" rel="stylesheet">
+    <style>
+        #mirrordom .alert {
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+        }
+
+        #mirrordom .files .dow {
+            float: right;
+        }
+
+        #nowdir {
+            position: relative;
+        }
+
+        #nowdir #back {
+            position: absolute;
+            right: 10px;
+            top: 0.4rem;
+        }
+    </style>
+    <script src="/public/info/js/jquery-3.1.1.min.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <% include /userpartial/nav.ejs %>
+        <script>
+            var activity = "mirror";
+            $('#side-menu .' + activity).addClass('active');
+            $($('#side-menu .' + activity).parent().parent()[0]).addClass('active');
+        </script>
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <% include /userpartial/header.ejs %>
+            </div>
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-info alert-dismissible" role="alert"><button type="button" class="close"
+                                data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> <span
+                                id="tip"><a href="https://www.bilibili.com/video/av91364742/" target="_blank">
+                                    此为实验性功能，如果觉得有任何问题可到哔哩哔哩中留言
+                                </a> 
+                            </span></div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="alert alert-success" role="alert" id="nowdir">
+                            <span class="content">/</span>
+                            <button type="button" class="btn btn-primary" id="back">返回</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-12" id="mirrordom">
+                    </div>
+                </div>
+            </div>
+            <% include /userpartial/footer.ejs %>
+        </div>
+    </div>
+
+    <script src="/public/info/js/popper.min.js"></script>
+    <script src="/public/info/js/bootstrap.min.js"></script>
+    <script src="/public/info/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/public/info/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/public/info/js/inspinia.js"></script>
+    <script src="/public/info/js/plugins/pace/pace.min.js"></script>
+    <script>
+        let nowDir = '/';
+        let mirrordom = $('#mirrordom');
+        initView(nowDir);
+
+        function initView(path) {
+            $('.wrapper-content').mLoading({
+                text: "加载中...",
+            });
+            $.ajax({
+                url: `/api/v1/mirror/index`,
+                type: 'post',
+                data: { q: path },
+                success(data) {
+                    $('.wrapper-content').mLoading('hide');
+                    let arr = data.data;
+                    fullView(arr.dirs, arr.files);
+                    nowDir = path;
+                    $('#nowdir .content').text(path);
+                },
+                error(err) {
+                    $('.wrapper-content').mLoading('hide');
+                    alert(err);
+                }
+            });
+        }
+
+        function fullView(dirs, files) {
+            let html = '';
+            mirrordom.html(html);
+            dirs.map(function (ele, index) {
+                html += `<div class="alert alert-primary dir" role="alert">${ele}</div>`
+            });
+
+            files.map(function (ele, index) {
+                html += `<div class="alert alert-light files" role="alert">${ele}
+                        <span class="badge badge-primary dow" data-file="${ele}">下载</span>
+                    </div>`;
+            });
+            mirrordom.html(html);
+        }
+
+        $('#mirrordom').click(function (e) {
+            var target = e.target;
+            if ($(target).hasClass('dir')) {
+                initView(nowDir + $(target).text() + '/');
+            } else if ($(target).hasClass('dow')) {
+                download($(target).data('file'));
+            }
+        })
+
+
+        $('#back').click(function () {
+            let t = nowDir.split('/');
+            let str = t.slice(0, t.length - 2).join('/') + '/';
+            initView(str);
+        });
+
+        function download(file) {
+            window.open(window.location.origin + '/public/mirror' + nowDir + file)
+        }
+
+    </script>
+</body>
+
+</html>

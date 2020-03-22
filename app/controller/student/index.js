@@ -118,6 +118,11 @@ class UserController extends UserInfoController {
       ctx.body = { code: 0, err: ErrMsg[4] };
     }
   }
+
+  async mirror() {
+    const { ctx } = this;
+    await ctx.render('user/mirror.ejs');
+  }
 }
 
 module.exports = UserController;

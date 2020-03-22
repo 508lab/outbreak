@@ -1,4 +1,6 @@
 const crypto = require('crypto');
+const fs = require('fs');
+const path = require('path');
 const SECRET = "123456";
 let mTool = null;
 
@@ -12,6 +14,19 @@ class _tool {
             .update(SECRET)
             .digest('hex');
     }
+
+    async  rmdirAsync(filePath) {
+        let stat = await fs.statSync(filePath)
+        if (stat.isFile()) {
+            await fs.unlinkSync(filePath)
+        } else {
+            let dirs = await fs.readdirSync(filePath)
+            dirs = dirs.map(dir => this.rmdirAsync(path.join(filePath, dir)))
+            await Promise.all(dirs)
+            await fs.rmdirSync(filePath)
+        }
+    }
+
 }
 
 function getInstance() {

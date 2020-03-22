@@ -30,6 +30,13 @@ $ 也可以直接查看 /app/public/test 下的文件
 $ 注：测试使用的技术为-> jmeter
 ```
 
+### 功能
+- 后台管理
+- 学生客户端
+- 教师客户端
+- 体温填报(统计)
+- 学习资源(在线云盘)
+
 ### npm scripts
 
 - Use `npm run lint` to check code style.

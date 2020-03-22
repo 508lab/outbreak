@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<!-- saved from url=(0091)#/eavyInfo/eavyinfoSummaryInfo/querySummaryInfo?projectInfoId=2 -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2020“泰山杯”</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<link rel="shortcut icon" href="#/eavyInfo/eavyinfoSummaryInfo/logo1.jpg">
+<link href="/Public/jn/ht/css/bootstrap.min.css" rel="stylesheet">
+<link href="/Public/jn/ht/css/font-awesome.css" rel="stylesheet">
+<link href="/Public/jn/ht/css/bootstrap-table.min.css" rel="stylesheet">
+<link href="/Public/jn/ht/css/style.min.css" rel="stylesheet">
+<link href="/Public/jn/ht/css/jquery.treegrid.css" rel="stylesheet">
+<!--summernote css -->
+<link href="/Public/jn/ht/css/summernote-0.8.8.css" rel="stylesheet">
+<link href="/Public/jn/ht/css/animate.css" rel="stylesheet">
+<link href="/Public/jn/ht/css/chosen.css" rel="stylesheet">
+<link href="/Public/jn/ht/css/style.css" rel="stylesheet">
+<link href="/Public/jn/ht/css/layui.css" rel="stylesheet">
+<link rel="stylesheet" href="http://v.bootstrapmb.com/2019/10/lfbpp6508/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="/Public/jn/ht/css/layer.css" id="layuicss-layer">
+
+<link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+<script src="/Public/jn/ht/js/jquery.min.js"></script>
+<style>
+    .reddel{
+        color: red;
+        font-size: 26px;
+        position: absolute;
+        right: 0px;
+        cursor: pointer;
+    }
+</style>
+<script>
+(function () {
+    $.ajax({
+    url: '/index.php/Home/index/islogin',
+    method: 'get',
+    success: function (data) {
+        if (data != '1') {
+            window.location.href = '/index.php';
+        }
+    },
+    }); 
+})()
+</script>
+</head>
+<body>
+		<div class="col-sm-12">
+			<h1 class="showMessage">项目信息</h1>
+			<div>
+
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="projectSignupForm" name="signupForm">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="red">*</span>
+                                <span>项目名称</span>
+                            </label>
+                            <div class="col-sm-8">
+                                <input name="projectName" value="" class="form-control" type="text">
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="red">*</span>
+                                <span>项目领域</span>
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="hidden" name="hidden_projectField" id="hidden_projectField" value="124">
+                                <select name="project" class="form-control chosen-select select" tabindex="-1" required="" >
+                                    <option value="">
+                                        --选择项目领域--
+                                    </option>
+									<option value="新一代信息技术">新一代信息技术</option>
+									<option value="高效生态农业">高效生态农业</option>
+									<option value="医养健康和旅游文创">医养健康和旅游文创</option>
+									<option value="高端装备和新材料">高端装备和新材料</option>
+								</select>
+								<div class="chosen-container chosen-container-single chosen-disabled" style="width: 1193px;" title="" id="projectField_chosen">
+									<!-- <a class="chosen-single" tabindex="-1"><span>HIGH-END EQUIPMENT AND INTELLIGENT MANUFACTURING(高端装备与智能制造)</span><div><b></b></div></a> -->
+									<div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off" disabled="" tabindex="2">
+									</div>
+								<ul class="chosen-results"></ul></div></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="red">*</span>
+                                <span>项目所在国</span>
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="hidden" name="hidden_projectHostCountry" id="hidden_projectHostCountry" value="176">
+                                <select data-placeholder="#{select.msg.start}#{eavyinfoProjectInfo.projectHostCountry}#{select.msg.end}" name="country" class="form-control chosen-select select" tabindex="-1" required="" >
+                                    <option value="">
+                                        --选择项目所在国--
+                                    </option>
+								<option value="133">AFGHANISTAN(阿富汗)</option><option value="134">ALBANIA(阿尔巴尼亚)</option><option value="135">ANTARCTICA(南极洲)</option><option value="136">ALGERIA(阿尔及利亚)</option><option value="137">AMERICAN SAMOA(美属萨摩亚)</option><option value="138">ANDORRA(安道尔)</option><option value="139">ANGOLA(安哥拉)</option><option value="140">ANTIGUA AND BARBUDA(安提瓜和巴布达)</option><option value="141">AZERBAIJAN(阿塞拜疆)</option><option value="142">ARGENTINA(阿根廷)</option><option value="143">AUSTRALIA(澳大利亚)</option><option value="144">AUSTRIA(奥地利)</option><option value="145">BAHAMAS(巴哈马)</option><option value="146">BAHRAIN(巴林)</option><option value="147">BANGLADESH(孟加拉国)</option><option value="148">ARMENIA(亚美尼亚)</option><option value="149">BARBADOS(巴巴多斯)</option><option value="150">BELGIUM(比利时)</option><option value="151">BERMUDA(百慕大群岛)</option><option value="152">BHUTAN(不丹)</option><option value="153">BOLIVIA, PLURINATIONAL STATE OF(玻利维亚)</option><option value="154">BOSNIA AND HERZEGOVINA(波斯尼亚和黑塞哥维那)</option><option value="155">BOTSWANA(博茨瓦纳)</option><option value="156">BOUVET ISLAND(布韦岛)</option><option value="157">BRAZIL(巴西)</option><option value="158">BELIZE(伯利兹)</option><option value="159">BRITISH INDIAN OCEAN TERRITORY(英属印度洋领地)</option><option value="160">SOLOMON ISLANDS(所罗门群岛)</option><option value="161">VIRGIN ISLANDS, BRITISH(维尔京群岛（英属）)</option><option value="162">BRUNEI DARUSSALAM(文莱)</option><option value="163">BULGARIA(保加利亚)</option><option value="164">MYANMAR(缅甸)</option><option value="165">BURUNDI(布隆迪)</option><option value="166">BELARUS(白俄罗斯)</option><option value="167">CAMBODIA(柬埔寨)</option><option value="168">CAMEROON(喀麦隆)</option><option value="169">CANADA(加拿大)</option><option value="170">CAPE VERDE(佛得角)</option><option value="171">CAYMAN ISLANDS(开曼群岛)</option><option value="172">CENTRAL AFRICAN REPUBLIC(中非共和国)</option><option value="173">SRI LANKA(斯里兰卡)</option><option value="174">CHAD(乍得)</option><option value="175">CHILE(智利)</option><option value="176">CHINA(中国)</option><option value="177">TAIWAN, PROVINCE OF CHINA(中国台湾)</option><option value="178">CHRISTMAS ISLAND(圣诞岛)</option><option value="179">COCOS (KEELING) ISLANDS(科科斯群岛（基灵群岛）)</option><option value="180">COLOMBIA(哥伦比亚)</option><option value="181">COMOROS(科摩罗)</option><option value="182">MAYOTTE(马约特岛)</option><option value="183">CONGO(刚果)</option><option value="184">CONGO, THE DEMOCRATIC REPUBLIC OF THE(刚果民主共和国)</option><option value="185">COOK ISLANDS(库克群岛)</option><option value="186">COSTA RICA(哥斯达黎加)</option><option value="187">CROATIA(克罗地亚)</option><option value="188">CUBA(古巴)</option><option value="189">CYPRUS(塞浦路斯)</option><option value="190">CZECH REPUBLIC(捷克共和国)</option><option value="191">BENIN(贝宁)</option><option value="192">DENMARK(丹麦)</option><option value="193">DOMINICA(多米尼加)</option><option value="194">DOMINICAN REPUBLIC(多米尼加共和国)</option><option value="195">ECUADOR(厄瓜多尔)</option><option value="196">EL SALVADOR(萨尔瓦多)</option><option value="197">EQUATORIAL GUINEA(赤道几内亚)</option><option value="198">ETHIOPIA(埃塞俄比亚)</option><option value="199">ERITREA(厄立特里亚)</option><option value="200">ESTONIA(爱沙尼亚)</option><option value="201">FAROE ISLANDS(法罗群岛)</option><option value="202">FALKLAND ISLANDS (MALVINAS)(福克兰群岛(马尔维纳斯群岛))</option><option value="203">SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS(南乔治亚和南桑德威奇群岛)</option><option value="204">FIJI(斐济群岛)</option><option value="205">FINLAND(芬兰)</option><option value="206">(ORLANDIC ISLANDS (FINLAND) (奥兰群岛(芬兰属))</option><option value="207">FRANCE(法国)</option><option value="208">FRENCH GUIANA(法属圭亚那)</option><option value="209">FRENCH POLYNESIA(法属波利尼西亚)</option><option value="210">FRENCH SOUTHERN TERRITORIES(法属南极地区)</option><option value="211">DJIBOUTI(吉布提)</option><option value="212">GABON(加蓬)</option><option value="213">GEORGIA(乔治亚)</option><option value="214">GAMBIA(冈比亚)</option><option value="215">PALESTINIAN TERRITORY, OCCUPIED(巴勒斯坦当局)</option><option value="216">GERMANY(德国)</option><option value="217">GHANA(加纳)</option><option value="218">GIBRALTAR(直布罗陀)</option><option value="219">KIRIBATI(基里巴斯)</option><option value="220">GREECE(希腊)</option><option value="221">GREENLAND(格陵兰)</option><option value="222">GRENADA(格林纳达)</option><option value="223">GUADELOUPE(瓜德罗普岛)</option><option value="224">GUAM(关岛)</option><option value="225">GUATEMALA(危地马拉)</option><option value="226">GUINEA(几内亚)</option><option value="227">GUYANA(圭亚那)</option><option value="228">HAITI(海地)</option><option value="229">HEARD ISLAND AND MCDONALD ISLANDS(赫德和麦克唐纳群岛)</option><option value="230">HOLY SEE (VATICAN CITY STATE)(梵蒂冈城)</option><option value="231">HONDURAS(洪都拉斯)</option><option value="232">HONG KONG(中国香港)</option><option value="233">HUNGARY(匈牙利)</option><option value="234">ICELAND(冰岛)</option><option value="235">INDIA(印度)</option><option value="236">INDONESIA(印度尼西亚)</option><option value="237">IRAN, ISLAMIC REPUBLIC OF(伊朗)</option><option value="238">IRAQ(伊拉克)</option><option value="239">IRELAND(爱尔兰)</option><option value="240">ISRAEL(以色列)</option><option value="241">ITALY(意大利)</option><option value="242">C訲E D'IVOIRE(科特迪瓦)</option><option value="243">JAMAICA(牙买加)</option><option value="244">JAPAN(日本)</option><option value="245">KAZAKHSTAN(哈萨克斯坦)</option><option value="246">JORDAN(约旦)</option><option value="247">KENYA(肯尼亚)</option><option value="248">KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF(朝鲜)</option><option value="249">KOREA, REPUBLIC OF(韩国)</option><option value="250">KUWAIT(科威特)</option><option value="251">KYRGYZSTAN(吉尔吉斯斯坦)</option><option value="252">LAO PEOPLE'S DEMOCRATIC REPUBLIC(老挝)</option><option value="253">LEBANON(黎巴嫩)</option><option value="254">LESOTHO(莱索托)</option><option value="255">LATVIA(拉脱维亚)</option><option value="256">LIBERIA(利比里亚)</option><option value="257">LIBYAN ARAB JAMAHIRIYA(利比亚)</option><option value="258">LIECHTENSTEIN(列支敦士登)</option><option value="259">LITHUANIA(立陶宛)</option><option value="260">LUXEMBOURG(卢森堡)</option><option value="261">MACAO(中国澳门)</option><option value="262">MADAGASCAR(马达加斯加)</option><option value="263">MALAWI(马拉维)</option><option value="264">MALAYSIA(马来西亚)</option><option value="265">MALDIVES(马尔代夫)</option><option value="266">MALI(马里)</option><option value="267">MALTA(马耳他)</option><option value="268">MARTINIQUE(马提尼克岛)</option><option value="269">MAURITANIA(毛里塔尼亚)</option><option value="270">MAURITIUS(毛里求斯)</option><option value="271">MEXICO(墨西哥)</option><option value="272">MONACO(摩纳哥)</option><option value="273">MONGOLIA(蒙古)</option><option value="274">MOLDOVA, REPUBLIC OF(摩尔多瓦)</option><option value="275">MONTENEGRO(门的内哥罗(黑山))</option><option value="276">MONTSERRAT(蒙特塞拉特)</option><option value="277">MOROCCO(摩洛哥)</option><option value="278">MOZAMBIQUE(莫桑比克)</option><option value="279">OMAN(阿曼)</option><option value="280">NAMIBIA(纳米比亚)</option><option value="281">NAURU(瑙鲁)</option><option value="282">NEPAL(尼泊尔)</option><option value="283">NETHERLANDS(荷兰)</option><option value="284">NETHERLANDS ANTILLES(荷属安的列斯群岛)</option><option value="285">ARUBA(阿鲁巴)</option><option value="286">NEW CALEDONIA(新喀里多尼亚)</option><option value="287">VANUATU(瓦努阿图)</option><option value="288">NEW ZEALAND(新西兰)</option><option value="289">NICARAGUA(尼加拉瓜)</option><option value="290">NIGER(尼日尔)</option><option value="291">NIGERIA(尼日利亚)</option><option value="292">NIUE(纽埃)</option><option value="293">NORFOLK ISLAND(诺福克岛)</option><option value="294">NORWAY(挪威)</option><option value="295">NORTHERN MARIANA ISLANDS(北马里亚纳群岛)</option><option value="296">UNITED STATES MINOR OUTLYING ISLANDS(美属小奥特兰群岛)</option><option value="297">MICRONESIA, FEDERATED STATES OF(密克罗尼西亚)</option><option value="298">MARSHALL ISLANDS(马绍尔群岛)</option><option value="299">PALAU(帕劳群岛)</option><option value="300">PAKISTAN(巴基斯坦)</option><option value="301">PANAMA(巴拿马)</option><option value="302">PAPUA NEW GUINEA(巴布亚新几内亚)</option><option value="303">PARAGUAY(巴拉圭)</option><option value="304">PERU(秘鲁)</option><option value="305">PHILIPPINES(菲律宾)</option><option value="306">PITCAIRN(皮特克恩群岛)</option><option value="307">POLAND(波兰)</option><option value="308">PORTUGAL(葡萄牙)</option><option value="309">GUINEA-BISSAU(几内亚比绍)</option><option value="310">TIMOR-LESTE(东帝汶)</option><option value="311">PUERTO RICO(波多黎各)</option><option value="312">QATAR(卡塔尔)</option><option value="313">REUNION(留尼汪岛)</option><option value="314">ROMANIA(罗马尼亚)</option><option value="315">RUSSIAN FEDERATION(俄罗斯)</option><option value="316">RWANDA(卢旺达)</option><option value="317">SAINT BARTH蒐EMY(圣巴泰勒米)</option><option value="318">SAINT HELENA(圣赫勒拿岛)</option><option value="319">SAINT KITTS AND NEVIS(圣基茨和尼维斯)</option><option value="320">ANGUILLA(安圭拉岛)</option><option value="321">SAINT LUCIA(圣卢西亚)</option><option value="322">SAINT MARTIN(圣马丁)</option><option value="323">SAINT PIERRE AND MIQUELON(圣皮埃尔岛和密克隆岛)</option><option value="324">SAINT VINCENT AND THE GRENADINES(圣文森特和格林纳丁斯)</option><option value="325">SAN MARINO(圣马力诺)</option><option value="326">SAO TOME AND PRINCIPE(圣多美和普林西比)</option><option value="327">SAUDI ARABIA(沙特阿拉伯)</option><option value="328">SENEGAL(塞内加尔)</option><option value="329">SERBIA(塞尔维亚)</option><option value="330">SEYCHELLES(塞舌尔)</option><option value="331">SIERRA LEONE(塞拉利昂)</option><option value="332">SINGAPORE(新加坡)</option><option value="333">SLOVAKIA(斯洛伐克)</option><option value="334">VIET NAM(越南)</option><option value="335">SLOVENIA(斯洛文尼亚)</option><option value="336">SOMALIA(索马里)</option><option value="337">SOUTH AFRICA(南非)</option><option value="338">ZIMBABWE(津巴布韦)</option><option value="339">SPAIN(西班牙)</option><option value="340">WESTERN SAHARA(西撒哈拉)</option><option value="341">SUDAN(苏丹)</option><option value="342">SURINAME(苏里南)</option><option value="343">SVALBARD AND JAN MAYEN(斯瓦尔巴群岛和扬马延)</option><option value="344">SWAZILAND(斯威士兰)</option><option value="345">SWEDEN(瑞典)</option><option value="346">SWITZERLAND(瑞士)</option><option value="347">SYRIAN ARAB REPUBLIC(叙利亚)</option><option value="348">TAJIKISTAN(塔吉克斯坦)</option>
+								<option value="349">THAILAND(泰国)</option><option value="350">TOGO(多哥)</option><option value="351">TOKELAU(托克劳)</option><option value="352">TONGA(汤加)</option><option value="353">TRINIDAD AND TOBAGO(特立尼达和多巴哥)</option><option value="354">UNITED ARAB EMIRATES(阿拉伯联合酋长国)</option><option value="355">TUNISIA(突尼斯)</option><option value="356">TURKEY(土耳其)</option><option value="357">TURKMENISTAN(土库曼斯坦)</option><option value="358">TURKS AND CAICOS ISLANDS(特克斯群岛和凯科斯群岛)</option><option value="359">TUVALU(图瓦卢)</option><option value="360">UGANDA(乌干达)</option><option value="361">UKRAINE(乌克兰)</option><option value="362">MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF(马其顿,前南斯拉夫共和国)</option><option value="363">EGYPT(埃及)</option><option value="364">UNITED KINGDOM(英国)</option><option value="365">GUERNSEY(格恩西)</option><option value="366">JERSEY(泽西)</option><option value="367">ISLE OF MAN(马恩岛)</option><option value="368">TANZANIA, UNITED REPUBLIC OF(坦桑尼亚)</option><option value="369">UNITED STATES(美国)</option><option value="370">VIRGIN ISLANDS, U.S.(维尔京群岛)</option><option value="371">BURKINA FASO(布基纳法索)</option><option value="372">URUGUAY(乌拉圭)</option><option value="373">UZBEKISTAN(乌兹别克斯坦)</option><option value="374">VENEZUELA, BOLIVARIAN REPUBLIC OF(委内瑞拉)</option><option value="375">WALLIS AND FUTUNA(瓦利斯群岛和富图纳群岛)</option><option value="376">SAMOA(萨摩亚)</option><option value="377">YEMEN(也门)</option><option value="378">ZAMBIA(赞比亚)</option></select><div class="chosen-container chosen-container-single chosen-disabled" style="width: 429px;" title="" id="projectHostCountry_chosen">
+									<!-- <a class="chosen-single" tabindex="-1"><span>CHINA(中国)</span><div><b></b></div></a> -->
+									<div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off" disabled="" tabindex="2"></div><ul class="chosen-results"></ul></div></div>
+                            </div>
+                            <label class="col-sm-2 control-label">
+                                <span class="red">*</span>
+                                <span>项目赛区</span>
+                            </label>
+                            <div class="col-sm-3">
+                                <!-- <input type="hidden" name="hidden_projectCompetitionArea" id="hidden_projectCompetitionArea" value="NC" readonly="readonly"> -->
+                                <select data-placeholder="#{select.msg.start}#{eavyinfoProjectInfo.projectCompetitionArea}#{select.msg.end}" name="projectCompetitionArea" class="form-control chosen-select select" tabindex="-1" required="" id="hidden_projectCompetitionArea">
+                                    <option value="">
+                                        --选择项目赛区--
+                                    </option>
+                                <option value="中国">中国</option>
+                                <option value="美国">美国</option>
+                                <option value="加拿大">加拿大</option>
+                                <option value="英国">英国</option>
+                                <option value="德国">德国</option>
+                                <option value="日本">日本</option>
+                                <option value="俄罗斯">俄罗斯</option>
+                                <option value="澳大利亚">澳大利亚</option>
+                            </select>
+                            <!-- <div class="chosen-container chosen-container-single chosen-disabled" style="width: 429px;" title="" id="projectCompetitionArea_chosen">
+                                <a class="chosen-single" tabindex="-1"><span>NC 北方</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off" disabled="" tabindex="2"></div>
+                            <ul class="chosen-results"></ul></div></div> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="red">*</span>
+                                <span>项目简介</span>
+                            </label>
+                            <div class="col-sm-8">
+									<textarea name="project_introduction" class="form-control" required="" ></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="red">*</span>
+                                <span>本项目所处阶段</span>
+                            </label>
+                            <div class="col-sm-8">
+                                <input name="project_stage" value="" class="form-control" type="text" >
+                            </div>
+               
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">本项目成果持有状况</label>
+                            <div class="col-sm-8">
+                                <input name="projectOutput" value="" class="form-control" type="text">
+                            </div>
+
+                           
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="red">*</span>
+                                <span>项目开展形式</span>
+                            </label>
+                            <div class="col-sm-8">
+                                <input name="projectDevelopmentForm" value="" class="form-control" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="red">*</span>
+                                <span>专利情况</span>
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="hidden" name="hidden_patentCondition" id="hidden_patentCondition" value="384" readonly="readonly">
+                                <select data-placeholder="#{select.msg.start}#{eavyinfoProjectInfo.patentCondition}#{select.msg.end}" name="patentinfo" class="form-control chosen-select select" tabindex="-1" required="">
+                                    <option value="">
+                                        --选择专利情况--
+                                    </option>
+								<option value="REGISTERED PATENTS(已注册专利)">REGISTERED PATENTS(已注册专利)</option>
+								<option value="PATENT PENDING(正申请专利)">PATENT PENDING(正申请专利)</option>
+								<option value="NO PATENT(没有专利)">NO PATENT(没有专利)</option></select>
+								<div class="chosen-container chosen-container-single chosen-disabled" style="width: 1193px;" title="" id="patentCondition_chosen">
+									<!-- <a class="chosen-single" tabindex="-1"><span>REGISTERED PATENTS(已注册专利)</span><div><b></b></div></a> -->
+									<div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off" disabled="" tabindex="2"></div><ul class="chosen-results"></ul></div></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="patentCondition_div1">
+                            <label class="col-sm-3 control-label">
+                                <span class="red">*</span>
+                                <span>注册国家</span>
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="hidden" name="hidden_registeredCountry" value="176">
+                                <select data-placeholder="#{select.msg.start}#{eavyinfoProjectInfo.registeredCountry}#{select.msg.end}" name="registeredCountry" id="registeredCountry" class="form-control chosen-select select" tabindex="-1" required="">
+                                    <option value="">
+                                        --选择注册国家--
+                                    </option>
+								<option value="133">AFGHANISTAN(阿富汗)</option><option value="134">ALBANIA(阿尔巴尼亚)</option><option value="135">ANTARCTICA(南极洲)</option><option value="136">ALGERIA(阿尔及利亚)</option><option value="137">AMERICAN SAMOA(美属萨摩亚)</option><option value="138">ANDORRA(安道尔)</option><option value="139">ANGOLA(安哥拉)</option><option value="140">ANTIGUA AND BARBUDA(安提瓜和巴布达)</option><option value="141">AZERBAIJAN(阿塞拜疆)</option><option value="142">ARGENTINA(阿根廷)</option><option value="143">AUSTRALIA(澳大利亚)</option><option value="144">AUSTRIA(奥地利)</option><option value="145">BAHAMAS(巴哈马)</option><option value="146">BAHRAIN(巴林)</option><option value="147">BANGLADESH(孟加拉国)</option><option value="148">ARMENIA(亚美尼亚)</option><option value="149">BARBADOS(巴巴多斯)</option><option value="150">BELGIUM(比利时)</option><option value="151">BERMUDA(百慕大群岛)</option><option value="152">BHUTAN(不丹)</option><option value="153">BOLIVIA, PLURINATIONAL STATE OF(玻利维亚)</option><option value="154">BOSNIA AND HERZEGOVINA(波斯尼亚和黑塞哥维那)</option><option value="155">BOTSWANA(博茨瓦纳)</option><option value="156">BOUVET ISLAND(布韦岛)</option><option value="157">BRAZIL(巴西)</option><option value="158">BELIZE(伯利兹)</option><option value="159">BRITISH INDIAN OCEAN TERRITORY(英属印度洋领地)</option><option value="160">SOLOMON ISLANDS(所罗门群岛)</option><option value="161">VIRGIN ISLANDS, BRITISH(维尔京群岛（英属）)</option><option value="162">BRUNEI DARUSSALAM(文莱)</option><option value="163">BULGARIA(保加利亚)</option><option value="164">MYANMAR(缅甸)</option><option value="165">BURUNDI(布隆迪)</option><option value="166">BELARUS(白俄罗斯)</option><option value="167">CAMBODIA(柬埔寨)</option><option value="168">CAMEROON(喀麦隆)</option><option value="169">CANADA(加拿大)</option><option value="170">CAPE VERDE(佛得角)</option><option value="171">CAYMAN ISLANDS(开曼群岛)</option><option value="172">CENTRAL AFRICAN REPUBLIC(中非共和国)</option><option value="173">SRI LANKA(斯里兰卡)</option><option value="174">CHAD(乍得)</option><option value="175">CHILE(智利)</option><option value="176">CHINA(中国)</option><option value="177">TAIWAN, PROVINCE OF CHINA(中国台湾)</option><option value="178">CHRISTMAS ISLAND(圣诞岛)</option><option value="179">COCOS (KEELING) ISLANDS(科科斯群岛（基灵群岛）)</option><option value="180">COLOMBIA(哥伦比亚)</option><option value="181">COMOROS(科摩罗)</option><option value="182">MAYOTTE(马约特岛)</option><option value="183">CONGO(刚果)</option><option value="184">CONGO, THE DEMOCRATIC REPUBLIC OF THE(刚果民主共和国)</option><option value="185">COOK ISLANDS(库克群岛)</option><option value="186">COSTA RICA(哥斯达黎加)</option><option value="187">CROATIA(克罗地亚)</option><option value="188">CUBA(古巴)</option><option value="189">CYPRUS(塞浦路斯)</option><option value="190">CZECH REPUBLIC(捷克共和国)</option><option value="191">BENIN(贝宁)</option><option value="192">DENMARK(丹麦)</option><option value="193">DOMINICA(多米尼加)</option><option value="194">DOMINICAN REPUBLIC(多米尼加共和国)</option><option value="195">ECUADOR(厄瓜多尔)</option><option value="196">EL SALVADOR(萨尔瓦多)</option><option value="197">EQUATORIAL GUINEA(赤道几内亚)</option><option value="198">ETHIOPIA(埃塞俄比亚)</option><option value="199">ERITREA(厄立特里亚)</option><option value="200">ESTONIA(爱沙尼亚)</option><option value="201">FAROE ISLANDS(法罗群岛)</option><option value="202">FALKLAND ISLANDS (MALVINAS)(福克兰群岛(马尔维纳斯群岛))</option><option value="203">SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS(南乔治亚和南桑德威奇群岛)</option><option value="204">FIJI(斐济群岛)</option><option value="205">FINLAND(芬兰)</option><option value="206">(ORLANDIC ISLANDS (FINLAND) (奥兰群岛(芬兰属))</option><option value="207">FRANCE(法国)</option><option value="208">FRENCH GUIANA(法属圭亚那)</option><option value="209">FRENCH POLYNESIA(法属波利尼西亚)</option><option value="210">FRENCH SOUTHERN TERRITORIES(法属南极地区)</option><option value="211">DJIBOUTI(吉布提)</option><option value="212">GABON(加蓬)</option><option value="213">GEORGIA(乔治亚)</option><option value="214">GAMBIA(冈比亚)</option><option value="215">PALESTINIAN TERRITORY, OCCUPIED(巴勒斯坦当局)</option><option value="216">GERMANY(德国)</option><option value="217">GHANA(加纳)</option><option value="218">GIBRALTAR(直布罗陀)</option><option value="219">KIRIBATI(基里巴斯)</option><option value="220">GREECE(希腊)</option><option value="221">GREENLAND(格陵兰)</option><option value="222">GRENADA(格林纳达)</option><option value="223">GUADELOUPE(瓜德罗普岛)</option><option value="224">GUAM(关岛)</option><option value="225">GUATEMALA(危地马拉)</option><option value="226">GUINEA(几内亚)</option><option value="227">GUYANA(圭亚那)</option><option value="228">HAITI(海地)</option><option value="229">HEARD ISLAND AND MCDONALD ISLANDS(赫德和麦克唐纳群岛)</option><option value="230">HOLY SEE (VATICAN CITY STATE)(梵蒂冈城)</option><option value="231">HONDURAS(洪都拉斯)</option><option value="232">HONG KONG(中国香港)</option><option value="233">HUNGARY(匈牙利)</option><option value="234">ICELAND(冰岛)</option><option value="235">INDIA(印度)</option><option value="236">INDONESIA(印度尼西亚)</option><option value="237">IRAN, ISLAMIC REPUBLIC OF(伊朗)</option><option value="238">IRAQ(伊拉克)</option><option value="239">IRELAND(爱尔兰)</option><option value="240">ISRAEL(以色列)</option><option value="241">ITALY(意大利)</option><option value="242">C訲E D'IVOIRE(科特迪瓦)</option><option value="243">JAMAICA(牙买加)</option><option value="244">JAPAN(日本)</option><option value="245">KAZAKHSTAN(哈萨克斯坦)</option><option value="246">JORDAN(约旦)</option><option value="247">KENYA(肯尼亚)</option><option value="248">KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF(朝鲜)</option><option value="249">KOREA, REPUBLIC OF(韩国)</option><option value="250">KUWAIT(科威特)</option><option value="251">KYRGYZSTAN(吉尔吉斯斯坦)</option><option value="252">LAO PEOPLE'S DEMOCRATIC REPUBLIC(老挝)</option><option value="253">LEBANON(黎巴嫩)</option><option value="254">LESOTHO(莱索托)</option><option value="255">LATVIA(拉脱维亚)</option><option value="256">LIBERIA(利比里亚)</option><option value="257">LIBYAN ARAB JAMAHIRIYA(利比亚)</option><option value="258">LIECHTENSTEIN(列支敦士登)</option><option value="259">LITHUANIA(立陶宛)</option><option value="260">LUXEMBOURG(卢森堡)</option><option value="261">MACAO(中国澳门)</option><option value="262">MADAGASCAR(马达加斯加)</option><option value="263">MALAWI(马拉维)</option><option value="264">MALAYSIA(马来西亚)</option><option value="265">MALDIVES(马尔代夫)</option><option value="266">MALI(马里)</option><option value="267">MALTA(马耳他)</option><option value="268">MARTINIQUE(马提尼克岛)</option><option value="269">MAURITANIA(毛里塔尼亚)</option><option value="270">MAURITIUS(毛里求斯)</option><option value="271">MEXICO(墨西哥)</option><option value="272">MONACO(摩纳哥)</option><option value="273">MONGOLIA(蒙古)</option><option value="274">MOLDOVA, REPUBLIC OF(摩尔多瓦)</option><option value="275">MONTENEGRO(门的内哥罗(黑山))</option><option value="276">MONTSERRAT(蒙特塞拉特)</option><option value="277">MOROCCO(摩洛哥)</option><option value="278">MOZAMBIQUE(莫桑比克)</option><option value="279">OMAN(阿曼)</option><option value="280">NAMIBIA(纳米比亚)</option><option value="281">NAURU(瑙鲁)</option><option value="282">NEPAL(尼泊尔)</option><option value="283">NETHERLANDS(荷兰)</option><option value="284">NETHERLANDS ANTILLES(荷属安的列斯群岛)</option><option value="285">ARUBA(阿鲁巴)</option><option value="286">NEW CALEDONIA(新喀里多尼亚)</option><option value="287">VANUATU(瓦努阿图)</option><option value="288">NEW ZEALAND(新西兰)</option><option value="289">NICARAGUA(尼加拉瓜)</option><option value="290">NIGER(尼日尔)</option><option value="291">NIGERIA(尼日利亚)</option><option value="292">NIUE(纽埃)</option><option value="293">NORFOLK ISLAND(诺福克岛)</option><option value="294">NORWAY(挪威)</option><option value="295">NORTHERN MARIANA ISLANDS(北马里亚纳群岛)</option><option value="296">UNITED STATES MINOR OUTLYING ISLANDS(美属小奥特兰群岛)</option><option value="297">MICRONESIA, FEDERATED STATES OF(密克罗尼西亚)</option><option value="298">MARSHALL ISLANDS(马绍尔群岛)</option><option value="299">PALAU(帕劳群岛)</option><option value="300">PAKISTAN(巴基斯坦)</option><option value="301">PANAMA(巴拿马)</option><option value="302">PAPUA NEW GUINEA(巴布亚新几内亚)</option><option value="303">PARAGUAY(巴拉圭)</option><option value="304">PERU(秘鲁)</option><option value="305">PHILIPPINES(菲律宾)</option><option value="306">PITCAIRN(皮特克恩群岛)</option><option value="307">POLAND(波兰)</option><option value="308">PORTUGAL(葡萄牙)</option><option value="309">GUINEA-BISSAU(几内亚比绍)</option><option value="310">TIMOR-LESTE(东帝汶)</option><option value="311">PUERTO RICO(波多黎各)</option><option value="312">QATAR(卡塔尔)</option><option value="313">REUNION(留尼汪岛)</option><option value="314">ROMANIA(罗马尼亚)</option><option value="315">RUSSIAN FEDERATION(俄罗斯)</option><option value="316">RWANDA(卢旺达)</option><option value="317">SAINT BARTH蒐EMY(圣巴泰勒米)</option><option value="318">SAINT HELENA(圣赫勒拿岛)</option><option value="319">SAINT KITTS AND NEVIS(圣基茨和尼维斯)</option><option value="320">ANGUILLA(安圭拉岛)</option><option value="321">SAINT LUCIA(圣卢西亚)</option><option value="322">SAINT MARTIN(圣马丁)</option><option value="323">SAINT PIERRE AND MIQUELON(圣皮埃尔岛和密克隆岛)</option><option value="324">SAINT VINCENT AND THE GRENADINES(圣文森特和格林纳丁斯)</option><option value="325">SAN MARINO(圣马力诺)</option><option value="326">SAO TOME AND PRINCIPE(圣多美和普林西比)</option><option value="327">SAUDI ARABIA(沙特阿拉伯)</option><option value="328">SENEGAL(塞内加尔)</option><option value="329">SERBIA(塞尔维亚)</option><option value="330">SEYCHELLES(塞舌尔)</option><option value="331">SIERRA LEONE(塞拉利昂)</option><option value="332">SINGAPORE(新加坡)</option><option value="333">SLOVAKIA(斯洛伐克)</option><option value="334">VIET NAM(越南)</option><option value="335">SLOVENIA(斯洛文尼亚)</option><option value="336">SOMALIA(索马里)</option><option value="337">SOUTH AFRICA(南非)</option><option value="338">ZIMBABWE(津巴布韦)</option><option value="339">SPAIN(西班牙)</option><option value="340">WESTERN SAHARA(西撒哈拉)</option><option value="341">SUDAN(苏丹)</option><option value="342">SURINAME(苏里南)</option><option value="343">SVALBARD AND JAN MAYEN(斯瓦尔巴群岛和扬马延)</option><option value="344">SWAZILAND(斯威士兰)</option><option value="345">SWEDEN(瑞典)</option><option value="346">SWITZERLAND(瑞士)</option><option value="347">SYRIAN ARAB REPUBLIC(叙利亚)</option><option value="348">TAJIKISTAN(塔吉克斯坦)</option>
+								<option value="349">THAILAND(泰国)</option><option value="350">TOGO(多哥)</option><option value="351">TOKELAU(托克劳)</option><option value="352">TONGA(汤加)</option><option value="353">TRINIDAD AND TOBAGO(特立尼达和多巴哥)</option><option value="354">UNITED ARAB EMIRATES(阿拉伯联合酋长国)</option><option value="355">TUNISIA(突尼斯)</option><option value="356">TURKEY(土耳其)</option><option value="357">TURKMENISTAN(土库曼斯坦)</option><option value="358">TURKS AND CAICOS ISLANDS(特克斯群岛和凯科斯群岛)</option><option value="359">TUVALU(图瓦卢)</option><option value="360">UGANDA(乌干达)</option><option value="361">UKRAINE(乌克兰)</option><option value="362">MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF(马其顿,前南斯拉夫共和国)</option><option value="363">EGYPT(埃及)</option><option value="364">UNITED KINGDOM(英国)</option><option value="365">GUERNSEY(格恩西)</option><option value="366">JERSEY(泽西)</option><option value="367">ISLE OF MAN(马恩岛)</option><option value="368">TANZANIA, UNITED REPUBLIC OF(坦桑尼亚)</option><option value="369">UNITED STATES(美国)</option><option value="370">VIRGIN ISLANDS, U.S.(维尔京群岛)</option><option value="371">BURKINA FASO(布基纳法索)</option><option value="372">URUGUAY(乌拉圭)</option><option value="373">UZBEKISTAN(乌兹别克斯坦)</option><option value="374">VENEZUELA, BOLIVARIAN REPUBLIC OF(委内瑞拉)</option><option value="375">WALLIS AND FUTUNA(瓦利斯群岛和富图纳群岛)</option><option value="376">SAMOA(萨摩亚)</option><option value="377">YEMEN(也门)</option><option value="378">ZAMBIA(赞比亚)</option></select><div class="chosen-container chosen-container-single chosen-disabled" style="width: 429px;" title="" id="registeredCountry_chosen">
+									<!-- <a class="chosen-single" tabindex="-1"><span>CHINA(中国)</span><div><b></b></div></a> -->
+									<div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off" disabled="" tabindex="2"></div><ul class="chosen-results"></ul></div></div>
+                            </div>
+                            <label class="col-sm-2 control-label">
+                                <span class="red">*</span>
+                                <span>专利号</span></label>
+                            <div class="col-sm-3">
+                                <input name="patentNumber" value="" class="form-control" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="patentCondition_div2" style="display: none;">
+                            <label class="col-sm-3 control-label">
+                                <span class="red">*</span>
+                                <span>申请国家</span>
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="hidden" name="hidden_applicantCounty" id="hidden_applicantCounty" value="" readonly="readonly">
+                                <select data-placeholder="#{select.msg.start}#{eavyinfoProjectInfo.applicantCounty}#{select.msg.end}" name="applicantCounty" id="applicantCounty" class="form-control chosen-select" tabindex="2" required="" disabled="disabled">
+                                    <option value="">
+                                        --选择申请国家--
+                                    </option>
+                                </select>
+
+                            </div>
+                            <label class="col-sm-2 control-label">
+                                <span class="red">*</span>
+                                <span>受理号</span>
+                            </label>
+                            <div class="col-sm-3">
+                                <input id="acceptanceNumber" name="acceptanceNumber" value="" class="form-control" type="text">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="red">*</span>
+                                <span>参赛推荐单位</span>
+                            </label>
+                            <div class="col-sm-7">
+                                <input name="recommendAgenciesOrCounties" value="" class="form-control" type="text">
+                            </div>
+                    
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="red">*</span>
+                                <span>是否已与泰安当地机构或县区达成初步合作意向</span>
+                            </label>
+                            <div class="col-sm-3">
+                                <div>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="whetherToCooperation" value="131">YES(有)
+                                    </label><label class="radio-inline">
+                                        <input type="radio" name="whetherToCooperation" value="132">NO(无)
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="cooperationAgenciesOrCounties_div" style="display: none;">
+                                <label class="col-sm-2 control-label">
+                                    <span class="red">*</span>
+                                    <span>机构或县区名称</span>
+                                </label>
+                                <div class="col-sm-3">
+                                    <input name="cooperationAgenciesOrCounties" value="" class="form-control" type="text" readonly="readonly">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="red">*</span>
+                                <span>是否参加预赛和决赛现场路演</span>
+                            </label>
+                            <div class="col-sm-8">
+                                <div>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="whetherToRoadShow" value="5" >YES(是)
+                                    </label><label class="radio-inline">
+                                        <input type="radio" name="whetherToRoadShow" value="6">NO(否)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="red">*</span>
+                                <span>参赛目的</span>
+                            </label>
+                            <div class="col-sm-8">
+                                <input id="entryPurpose" name="entryPurpose" value="" class="form-control" type="text">
+                            </div>
+                    
+                        </div>
+
+
+                        <div class="form-group" style="text-align: center;">
+                            <a href="/Public/taian/泰安创新创业大赛计划书模板.doc" style="color: red;font-size: 20px;text-decoration: underline;">商业计划书模板请按照模板撰写，请点此下载模版。</a>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="red">*</span>
+                                <span>申报书</span>
+                            </label>
+                            <div class="col-sm-7">
+                                <input id="businessPlanOfTheProjectName"  value="" style="cursor: pointer;" class="form-control" type="file">
+                                <input type="text" name="businessPlanOfTheProjectName" style="opacity: 0;">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button class="btn btn-success" type="submit" style="width: 200px;display: block;margin: 0 auto;margin-bottom: 0px;" id="save1">保存</button>
+<div>
+
+</div>
+
+</div>
+		</div>
+		<div class="col-sm-12">
+			<h1 class="showMessage">申报人信息</h1>
+			<div>
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm" name="signupForm" novalidate="novalidate">
+                        <div class="col-sm-10">
+                            <input id="id" name="id" value="" type="hidden" readonly="readonly">
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">
+                                    <span class="red">*</span>
+                                    <span>姓</span>
+                                </label>
+                                <div class="col-sm-4">
+                                    <input name="firstName" value="" class="form-control" type="text">
+                                </div>
+                                <label class="col-sm-2 control-label">
+                                    <span class="red">*</span>
+                                    <span>名</span>
+                                </label>
+                                <div class="col-sm-4">
+                                    <input name="lastName" value="" class="form-control" type="text" >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">
+                                    <span class="red">*</span>
+                                    <span>性别</span>
+                                </label>
+                                <div class="col-sm-4">
+                                    <div>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="sex" value="96" >MALE(男)
+                                        </label><label class="radio-inline">
+                                            <input type="radio" name="sex" value="97">FEMALE(女)
+                                        </label>
+                                    </div>
+                                </div>
+                            <!--</div>
+                            <div class="form-group">-->
+                                <label class="col-sm-2 control-label">
+                                    <span>出生日期</span>
+                                </label>
+                                <div class="col-sm-4" id='datetimepicker1'>
+                                    <input name="birhday"  class="form-control datepicker1" type="text"  lay-key="1" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">
+                                    <span class="red">*</span>
+                                    <span>国籍</span>
+                                </label>
+                                <div class="col-sm-4">
+                                    <!--<input id="nationality" name="nationality"
+                                           th:value="${eavyinfoApplicantInfo.nationality}" class="form-control" type="text">-->
+                                    <!-- <input name="guoji" id="hidden_nationality" value=""> -->
+                                    <select data-placeholder="#{message.nationality}" name="guoji" class="form-control chosen-select" tabindex="-1" required="" aria-required="true">
+                                        <option value="">--请选择国籍--</option>
+									<option value="133">AFGHANISTAN(阿富汗)</option><option value="134">ALBANIA(阿尔巴尼亚)</option><option value="135">ANTARCTICA(南极洲)</option><option value="136">ALGERIA(阿尔及利亚)</option><option value="137">AMERICAN SAMOA(美属萨摩亚)</option><option value="138">ANDORRA(安道尔)</option><option value="139">ANGOLA(安哥拉)</option><option value="140">ANTIGUA AND BARBUDA(安提瓜和巴布达)</option><option value="141">AZERBAIJAN(阿塞拜疆)</option><option value="142">ARGENTINA(阿根廷)</option><option value="143">AUSTRALIA(澳大利亚)</option><option value="144">AUSTRIA(奥地利)</option><option value="145">BAHAMAS(巴哈马)</option><option value="146">BAHRAIN(巴林)</option><option value="147">BANGLADESH(孟加拉国)</option><option value="148">ARMENIA(亚美尼亚)</option><option value="149">BARBADOS(巴巴多斯)</option><option value="150">BELGIUM(比利时)</option><option value="151">BERMUDA(百慕大群岛)</option><option value="152">BHUTAN(不丹)</option><option value="153">BOLIVIA, PLURINATIONAL STATE OF(玻利维亚)</option><option value="154">BOSNIA AND HERZEGOVINA(波斯尼亚和黑塞哥维那)</option><option value="155">BOTSWANA(博茨瓦纳)</option><option value="156">BOUVET ISLAND(布韦岛)</option><option value="157">BRAZIL(巴西)</option><option value="158">BELIZE(伯利兹)</option><option value="159">BRITISH INDIAN OCEAN TERRITORY(英属印度洋领地)</option><option value="160">SOLOMON ISLANDS(所罗门群岛)</option><option value="161">VIRGIN ISLANDS, BRITISH(维尔京群岛（英属）)</option><option value="162">BRUNEI DARUSSALAM(文莱)</option><option value="163">BULGARIA(保加利亚)</option><option value="164">MYANMAR(缅甸)</option><option value="165">BURUNDI(布隆迪)</option><option value="166">BELARUS(白俄罗斯)</option><option value="167">CAMBODIA(柬埔寨)</option><option value="168">CAMEROON(喀麦隆)</option><option value="169">CANADA(加拿大)</option><option value="170">CAPE VERDE(佛得角)</option><option value="171">CAYMAN ISLANDS(开曼群岛)</option><option value="172">CENTRAL AFRICAN REPUBLIC(中非共和国)</option><option value="173">SRI LANKA(斯里兰卡)</option><option value="174">CHAD(乍得)</option><option value="175">CHILE(智利)</option><option value="176">CHINA(中国)</option><option value="177">TAIWAN, PROVINCE OF CHINA(中国台湾)</option><option value="178">CHRISTMAS ISLAND(圣诞岛)</option><option value="179">COCOS (KEELING) ISLANDS(科科斯群岛（基灵群岛）)</option><option value="180">COLOMBIA(哥伦比亚)</option><option value="181">COMOROS(科摩罗)</option><option value="182">MAYOTTE(马约特岛)</option><option value="183">CONGO(刚果)</option><option value="184">CONGO, THE DEMOCRATIC REPUBLIC OF THE(刚果民主共和国)</option><option value="185">COOK ISLANDS(库克群岛)</option><option value="186">COSTA RICA(哥斯达黎加)</option><option value="187">CROATIA(克罗地亚)</option><option value="188">CUBA(古巴)</option><option value="189">CYPRUS(塞浦路斯)</option><option value="190">CZECH REPUBLIC(捷克共和国)</option><option value="191">BENIN(贝宁)</option><option value="192">DENMARK(丹麦)</option><option value="193">DOMINICA(多米尼加)</option><option value="194">DOMINICAN REPUBLIC(多米尼加共和国)</option><option value="195">ECUADOR(厄瓜多尔)</option><option value="196">EL SALVADOR(萨尔瓦多)</option><option value="197">EQUATORIAL GUINEA(赤道几内亚)</option><option value="198">ETHIOPIA(埃塞俄比亚)</option><option value="199">ERITREA(厄立特里亚)</option><option value="200">ESTONIA(爱沙尼亚)</option><option value="201">FAROE ISLANDS(法罗群岛)</option><option value="202">FALKLAND ISLANDS (MALVINAS)(福克兰群岛(马尔维纳斯群岛))</option><option value="203">SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS(南乔治亚和南桑德威奇群岛)</option><option value="204">FIJI(斐济群岛)</option><option value="205">FINLAND(芬兰)</option><option value="206">(ORLANDIC ISLANDS (FINLAND) (奥兰群岛(芬兰属))</option><option value="207">FRANCE(法国)</option><option value="208">FRENCH GUIANA(法属圭亚那)</option><option value="209">FRENCH POLYNESIA(法属波利尼西亚)</option><option value="210">FRENCH SOUTHERN TERRITORIES(法属南极地区)</option><option value="211">DJIBOUTI(吉布提)</option><option value="212">GABON(加蓬)</option><option value="213">GEORGIA(乔治亚)</option><option value="214">GAMBIA(冈比亚)</option><option value="215">PALESTINIAN TERRITORY, OCCUPIED(巴勒斯坦当局)</option><option value="216">GERMANY(德国)</option><option value="217">GHANA(加纳)</option><option value="218">GIBRALTAR(直布罗陀)</option><option value="219">KIRIBATI(基里巴斯)</option><option value="220">GREECE(希腊)</option><option value="221">GREENLAND(格陵兰)</option><option value="222">GRENADA(格林纳达)</option><option value="223">GUADELOUPE(瓜德罗普岛)</option><option value="224">GUAM(关岛)</option><option value="225">GUATEMALA(危地马拉)</option><option value="226">GUINEA(几内亚)</option><option value="227">GUYANA(圭亚那)</option><option value="228">HAITI(海地)</option><option value="229">HEARD ISLAND AND MCDONALD ISLANDS(赫德和麦克唐纳群岛)</option><option value="230">HOLY SEE (VATICAN CITY STATE)(梵蒂冈城)</option><option value="231">HONDURAS(洪都拉斯)</option><option value="232">HONG KONG(中国香港)</option><option value="233">HUNGARY(匈牙利)</option><option value="234">ICELAND(冰岛)</option><option value="235">INDIA(印度)</option><option value="236">INDONESIA(印度尼西亚)</option><option value="237">IRAN, ISLAMIC REPUBLIC OF(伊朗)</option><option value="238">IRAQ(伊拉克)</option><option value="239">IRELAND(爱尔兰)</option><option value="240">ISRAEL(以色列)</option><option value="241">ITALY(意大利)</option><option value="242">C訲E D'IVOIRE(科特迪瓦)</option><option value="243">JAMAICA(牙买加)</option><option value="244">JAPAN(日本)</option><option value="245">KAZAKHSTAN(哈萨克斯坦)</option><option value="246">JORDAN(约旦)</option><option value="247">KENYA(肯尼亚)</option><option value="248">KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF(朝鲜)</option><option value="249">KOREA, REPUBLIC OF(韩国)</option><option value="250">KUWAIT(科威特)</option><option value="251">KYRGYZSTAN(吉尔吉斯斯坦)</option><option value="252">LAO PEOPLE'S DEMOCRATIC REPUBLIC(老挝)</option><option value="253">LEBANON(黎巴嫩)</option><option value="254">LESOTHO(莱索托)</option><option value="255">LATVIA(拉脱维亚)</option><option value="256">LIBERIA(利比里亚)</option><option value="257">LIBYAN ARAB JAMAHIRIYA(利比亚)</option><option value="258">LIECHTENSTEIN(列支敦士登)</option><option value="259">LITHUANIA(立陶宛)</option><option value="260">LUXEMBOURG(卢森堡)</option><option value="261">MACAO(中国澳门)</option><option value="262">MADAGASCAR(马达加斯加)</option><option value="263">MALAWI(马拉维)</option><option value="264">MALAYSIA(马来西亚)</option><option value="265">MALDIVES(马尔代夫)</option><option value="266">MALI(马里)</option><option value="267">MALTA(马耳他)</option><option value="268">MARTINIQUE(马提尼克岛)</option><option value="269">MAURITANIA(毛里塔尼亚)</option><option value="270">MAURITIUS(毛里求斯)</option><option value="271">MEXICO(墨西哥)</option><option value="272">MONACO(摩纳哥)</option><option value="273">MONGOLIA(蒙古)</option><option value="274">MOLDOVA, REPUBLIC OF(摩尔多瓦)</option><option value="275">MONTENEGRO(门的内哥罗(黑山))</option><option value="276">MONTSERRAT(蒙特塞拉特)</option><option value="277">MOROCCO(摩洛哥)</option><option value="278">MOZAMBIQUE(莫桑比克)</option><option value="279">OMAN(阿曼)</option><option value="280">NAMIBIA(纳米比亚)</option><option value="281">NAURU(瑙鲁)</option><option value="282">NEPAL(尼泊尔)</option><option value="283">NETHERLANDS(荷兰)</option><option value="284">NETHERLANDS ANTILLES(荷属安的列斯群岛)</option><option value="285">ARUBA(阿鲁巴)</option><option value="286">NEW CALEDONIA(新喀里多尼亚)</option><option value="287">VANUATU(瓦努阿图)</option><option value="288">NEW ZEALAND(新西兰)</option><option value="289">NICARAGUA(尼加拉瓜)</option><option value="290">NIGER(尼日尔)</option><option value="291">NIGERIA(尼日利亚)</option><option value="292">NIUE(纽埃)</option><option value="293">NORFOLK ISLAND(诺福克岛)</option><option value="294">NORWAY(挪威)</option><option value="295">NORTHERN MARIANA ISLANDS(北马里亚纳群岛)</option><option value="296">UNITED STATES MINOR OUTLYING ISLANDS(美属小奥特兰群岛)</option><option value="297">MICRONESIA, FEDERATED STATES OF(密克罗尼西亚)</option><option value="298">MARSHALL ISLANDS(马绍尔群岛)</option><option value="299">PALAU(帕劳群岛)</option><option value="300">PAKISTAN(巴基斯坦)</option><option value="301">PANAMA(巴拿马)</option><option value="302">PAPUA NEW GUINEA(巴布亚新几内亚)</option><option value="303">PARAGUAY(巴拉圭)</option><option value="304">PERU(秘鲁)</option><option value="305">PHILIPPINES(菲律宾)</option><option value="306">PITCAIRN(皮特克恩群岛)</option><option value="307">POLAND(波兰)</option><option value="308">PORTUGAL(葡萄牙)</option><option value="309">GUINEA-BISSAU(几内亚比绍)</option><option value="310">TIMOR-LESTE(东帝汶)</option><option value="311">PUERTO RICO(波多黎各)</option><option value="312">QATAR(卡塔尔)</option><option value="313">REUNION(留尼汪岛)</option><option value="314">ROMANIA(罗马尼亚)</option><option value="315">RUSSIAN FEDERATION(俄罗斯)</option><option value="316">RWANDA(卢旺达)</option><option value="317">SAINT BARTH蒐EMY(圣巴泰勒米)</option><option value="318">SAINT HELENA(圣赫勒拿岛)</option><option value="319">SAINT KITTS AND NEVIS(圣基茨和尼维斯)</option><option value="320">ANGUILLA(安圭拉岛)</option><option value="321">SAINT LUCIA(圣卢西亚)</option><option value="322">SAINT MARTIN(圣马丁)</option><option value="323">SAINT PIERRE AND MIQUELON(圣皮埃尔岛和密克隆岛)</option><option value="324">SAINT VINCENT AND THE GRENADINES(圣文森特和格林纳丁斯)</option><option value="325">SAN MARINO(圣马力诺)</option><option value="326">SAO TOME AND PRINCIPE(圣多美和普林西比)</option><option value="327">SAUDI ARABIA(沙特阿拉伯)</option><option value="328">SENEGAL(塞内加尔)</option><option value="329">SERBIA(塞尔维亚)</option><option value="330">SEYCHELLES(塞舌尔)</option><option value="331">SIERRA LEONE(塞拉利昂)</option><option value="332">SINGAPORE(新加坡)</option><option value="333">SLOVAKIA(斯洛伐克)</option><option value="334">VIET NAM(越南)</option><option value="335">SLOVENIA(斯洛文尼亚)</option><option value="336">SOMALIA(索马里)</option><option value="337">SOUTH AFRICA(南非)</option><option value="338">ZIMBABWE(津巴布韦)</option><option value="339">SPAIN(西班牙)</option><option value="340">WESTERN SAHARA(西撒哈拉)</option><option value="341">SUDAN(苏丹)</option><option value="342">SURINAME(苏里南)</option><option value="343">SVALBARD AND JAN MAYEN(斯瓦尔巴群岛和扬马延)</option><option value="344">SWAZILAND(斯威士兰)</option><option value="345">SWEDEN(瑞典)</option><option value="346">SWITZERLAND(瑞士)</option><option value="347">SYRIAN ARAB REPUBLIC(叙利亚)</option><option value="348">TAJIKISTAN(塔吉克斯坦)</option>
+									<option value="349">THAILAND(泰国)</option><option value="350">TOGO(多哥)</option><option value="351">TOKELAU(托克劳)</option><option value="352">TONGA(汤加)</option><option value="353">TRINIDAD AND TOBAGO(特立尼达和多巴哥)</option><option value="354">UNITED ARAB EMIRATES(阿拉伯联合酋长国)</option><option value="355">TUNISIA(突尼斯)</option><option value="356">TURKEY(土耳其)</option><option value="357">TURKMENISTAN(土库曼斯坦)</option><option value="358">TURKS AND CAICOS ISLANDS(特克斯群岛和凯科斯群岛)</option><option value="359">TUVALU(图瓦卢)</option><option value="360">UGANDA(乌干达)</option><option value="361">UKRAINE(乌克兰)</option><option value="362">MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF(马其顿,前南斯拉夫共和国)</option><option value="363">EGYPT(埃及)</option><option value="364">UNITED KINGDOM(英国)</option><option value="365">GUERNSEY(格恩西)</option><option value="366">JERSEY(泽西)</option><option value="367">ISLE OF MAN(马恩岛)</option><option value="368">TANZANIA, UNITED REPUBLIC OF(坦桑尼亚)</option><option value="369">UNITED STATES(美国)</option><option value="370">VIRGIN ISLANDS, U.S.(维尔京群岛)</option><option value="371">BURKINA FASO(布基纳法索)</option><option value="372">URUGUAY(乌拉圭)</option><option value="373">UZBEKISTAN(乌兹别克斯坦)</option><option value="374">VENEZUELA, BOLIVARIAN REPUBLIC OF(委内瑞拉)</option><option value="375">WALLIS AND FUTUNA(瓦利斯群岛和富图纳群岛)</option><option value="376">SAMOA(萨摩亚)</option><option value="377">YEMEN(也门)</option><option value="378">ZAMBIA(赞比亚)</option></select><div class="chosen-container chosen-container-single chosen-disabled" style="width: 471px;" title="" id="nationality_chosen">
+										<!-- <a class="chosen-single" tabindex="-1"><span>--请选择国籍--</span><div><b></b></div></a> -->
+										<div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off" disabled="" tabindex="2"></div><ul class="chosen-results"></ul></div></div>
+                                </div>
+                            <!--</div>
+                            <div class="form-group">-->
+                                <label class="col-sm-2 control-label">
+                                    <span class="red">*</span>
+                                    <span>最高学位</span>
+                                </label>
+                                <div class="col-sm-4">
+                                    <!--<input id="education" name="education" th:value="${eavyinfoApplicantInfo.education}"
+                                           class="form-control" type="text">-->
+                                    <input type="hidden" name="hidden_education" id="hidden_education" value="">
+                                    <select id="max_edu" data-placeholder="#{message.education}" name="max_edu" class="form-control chosen-select" tabindex="-1" required="" aria-required="true">
+                                        <option value="">--请选择最高学位--</option>
+									<option value="380">BACHELOR(学士)</option><option value="381">MASTER(硕士)</option><option value="382">DOCTOR(博士)</option><option value="383">OTHER(其他)</option></select><div class="chosen-container chosen-container-single chosen-disabled" style="width: 471px;" title="" id="education_chosen">
+										<!-- <a class="chosen-single" tabindex="-1"><span>--请选择最高学位--</span><div><b></b></div></a> -->
+										<div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off" disabled="" tabindex="2"></div><ul class="chosen-results"></ul></div></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">
+                                    <span>现任职机构及职务</span>
+                                </label>
+                                <div class="col-sm-10">
+                                    <input name="position" value="" class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">国外电话</label>
+                                <div class="col-sm-4">
+                                    <input name="phone_gw" value="" class="form-control" type="text">
+                                </div>
+                            <!--</div>
+                            <div class="form-group" >-->
+                                <label class="col-sm-2 control-label">国内电话</label>
+                                <div class="col-sm-4">
+                                    <input name="contact_tel" value="" class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">
+                                    <span class="red">*</span>
+                                    <span>邮箱</span>
+                                </label>
+                                <div class="col-sm-10">
+                                    <input name="email" value="" class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">
+                                    <span>身份证明材料</span>
+                                </label>
+                                <div class="col-sm-8">
+                                    <input id="identificationPaperName"  value="" style="cursor: pointer;" class="form-control" type="file" >
+                                    <input type="text" name="identificationPaperName" style="opacity: 0;">
+                                </div>
+                                <div class="col-sm-2 file-manager">
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">
+                                    <span>学历证明材料</span>
+                                </label>
+                                <div class="col-sm-8">
+                                    <input id="educationCertificateName" value="" style="cursor: pointer;" class="form-control" type="file" onclick="openLayerById(&#39;educationCertificateUrl&#39;);">
+                                    <input type="text" name="educationCertificateName" style="opacity: 0;">
+                                </div>
+                                <div class="col-sm-2 file-manager">
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">现居住国家或地区</label>
+                                <div class="col-sm-10">
+                                    <input name="living" value="" class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group" style="display: none">
+                                <label class="col-sm-3 control-label">??eavyinfoApplicantInfo.createUser_zh_CN??</label>
+                                <div class="col-sm-8">
+                                    <input id="createUser" name="createUser" value="" class="form-control" type="text" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="form-group" style="display: none">
+                                <label class="col-sm-3 control-label">??eavyinfoApplicantInfo.gmtCreate_zh_CN??</label>
+                                <div class="col-sm-8">
+                                    <input id="gmtCreate" name="gmtCreate" value="" class="form-control" type="text" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="form-group" style="display: none">
+                                <label class="col-sm-3 control-label">??eavyinfoApplicantInfo.modifiedUser_zh_CN??</label>
+                                <div class="col-sm-8">
+                                    <input id="modifiedUser" name="modifiedUser" value="" class="form-control" type="text" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="form-group" style="display: none">
+                                <label class="col-sm-3 control-label">??eavyinfoApplicantInfo.gmtModified_zh_CN??</label>
+                                <div class="col-sm-8">
+                                    <input id="gmtModified" name="gmtModified" value="" class="form-control" type="text" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="form-group" style="display: none">
+                                <label class="col-sm-3 control-label">??eavyinfoApplicantInfo.delBy_zh_CN??</label>
+                                <div class="col-sm-8">
+                                    <input id="delBy" name="delBy" value="" class="form-control" type="text" readonly="readonly">
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="display: none">
+                                <label class="col-sm-3 control-label">??eavyinfoApplicantInfo.remark1_zh_CN??</label>
+                                <div class="col-sm-8">
+                                    <input id="remark1" name="remark1" value="" class="form-control" type="text" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="form-group" style="display: none">
+                                <label class="col-sm-3 control-label">??eavyinfoApplicantInfo.remark2_zh_CN??</label>
+                                <div class="col-sm-8">
+                                    <input id="remark2" name="remark2" value="" class="form-control" type="text" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="form-group" style="display: none">
+                                <label class="col-sm-3 control-label">??eavyinfoApplicantInfo.remark3_zh_CN??</label>
+                                <div class="col-sm-8">
+                                    <input id="remark3" name="remark3" value="" class="form-control" type="text" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="form-group" style="display: none">
+                                <label class="col-sm-3 control-label">??eavyinfoApplicantInfo.remark4_zh_CN??</label>
+                                <div class="col-sm-8">
+                                    <input id="remark4" name="remark4" value="" class="form-control" type="text" readonly="readonly">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-2">
+                            <input id="applicantPicture" name="applicantPicture" type="file" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" class="form-control">
+                            <a id="pictureUrl" type="hidden" style="pointer-events: none; height: 0px; opacity: 0.9; position: absolute; top: 0px; left: 0px; background-color: black; width: 100%; z-index: 5000; display: none;">
+                                <div class="image" style="height: 100%">
+                                    <img id="applicantPictureUrl" alt="照片" title="支持的格式：jpg、png、gif、bmp、jpeg" style="width: 100%; height: 150px;" class="img-thumbnail">
+                                </div>
+                            </a>
+                            <input class="layui-upload-file" type="text" id="img">
+                            <span style="color: red;">上传头像支持的格式：jpg、png、gif、bmp、jpeg。</span>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button class="btn btn-success" type="submit" style="width: 200px;display: block;margin: 0 auto;margin-bottom: 0px;" id="save2">保存</button>
+<div>
+
+</div>
+		</div>
+		<div class="col-sm-12">
+			<h1 class="showMessage showListMessage">工作经历</h1>
+			<div>
+<div class="wrapper wrapper-content ">
+	<div class="col-sm-12">
+		<div class="ibox">
+			<div class="ibox-body">
+				<div class="fixed-table-toolbar searchInfo" style="display: none;">
+					<div class="columns pull-left">
+					</div>
+					<div class="columns pull-right searchInfo" style="display: none;">
+						<button class="btn btn-success" onclick="conditionReLoad()">查询</button>
+					</div>
+					<div class="columns pull-right col-md-2 nopadding searchInfo" style="display: none;">
+						<input id="companyNameSearch" type="text" class="form-control" placeholder="单位名称">
+					</div>
+				</div>
+                <div class="bootstrap-table"><div class="fixed-table-toolbar"><div class="bars pull-left"></div></div><div class="fixed-table-container" style="padding-bottom: 0px;"><div class="fixed-table-header" style="display: none;"><table></table></div><div class="fixed-table-body"><div class="fixed-table-loading" style="top: 37px; display: none;">正在努力地加载数据中，请稍候……</div>
+                <table id="eavyinfoWorkingCondition" data-mobile-responsive="true" class="table table-hover table-striped">
+				<thead><tr><th style="" data-field="startTime" tabindex="0">
+					<div class="th-inner ">开始时间</div><div class="fht-cell"></div></th>
+					<th style="" data-field="endTime" tabindex="0">
+						<div class="th-inner ">结束时间</div><div class="fht-cell"></div></th><th style="" data-field="companyName" tabindex="0"><div class="th-inner ">单位名称</div><div class="fht-cell"></div></th><th style="" data-field="position" tabindex="0"><div class="th-inner ">职务</div>
+							<div class="fht-cell"></div></th></tr></thead>
+							<tbody>
+									<tr><th style="" data-field="startTime" tabindex="0"><div class="th-inner"><input class="form-control datepicker1" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="endTime" tabindex="0"><div class="th-inner "><input class="form-control datepicker1" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="companyName" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="position" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th></tr>
+									<tr><th style="" data-field="startTime" tabindex="0"><div class="th-inner "><input class="form-control datepicker1" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="endTime" tabindex="0"><div class="th-inner "><input class="form-control datepicker1" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="companyName" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="position" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th></tr>
+									<tr><th style="" data-field="startTime" tabindex="0"><div class="th-inner "><input class="form-control datepicker1" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="endTime" tabindex="0"><div class="th-inner "><input class="form-control datepicker1" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="companyName" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="position" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th></tr>
+                            </tbody></table>
+                <p style="width: 100%; text-align: center;height: 25px;line-height: 25px;font-size: 16px;cursor: pointer;" id="addeavyinfoWorkingCondition">添加</p>    
+                </div><div class="fixed-table-footer" style="display: none;"><table><tbody><tr></tr></tbody></table></div><div class="fixed-table-pagination" style="display: none;"><div class="pull-left pagination-detail"><span class="pagination-info">显示第 1 到第 0 条记录，总共 0 条记录</span><span class="page-list" style="display: none;">每页显示 <span class="btn-group dropup"><button type="button" class="btn btn-default  btn-outline dropdown-toggle" data-toggle="dropdown"><span class="page-size">10</span> <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li class="active"><a href="javascript:void(0)">10</a></li></ul></span> 条记录</span></div><div class="pull-right pagination" style="display: none;"><ul class="pagination pagination-outline"><li class="page-first disabled"><a href="javascript:void(0)">«</a></li><li class="page-pre disabled"><a href="javascript:void(0)">‹</a></li><li class="page-next disabled"><a href="javascript:void(0)">›</a></li><li class="page-last disabled"><a href="javascript:void(0)">»</a></li></ul></div></div></div></div><div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+<div>
+	<script type="text/javascript">
+		var s_edit_h = 'hidden';
+		var s_remove_h = 'hidden';
+		var s_resetPwd_h = 'hidden';
+	</script>
+</div>
+
+
+
+</div>
+<div>
+</div>
+		
+
+		<div class="col-sm-12">
+			<h1 class="showMessage showListMessage">主要教育经历情况<span style="font-size: 14px;">(从高中开始)</span></h1>
+			<div>
+<div class="wrapper wrapper-content ">
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-body">
+                <div class="fixed-table-toolbar searchInfo" style="display: none;">
+                    <div class="columns pull-left">
+                    </div>
+                    <div class="columns pull-right searchInfo" style="display: none;">
+                        <button class="btn btn-success" onclick="educationReLoad()">查询</button>
+                    </div>
+                    <div class="columns pull-right col-md-2 nopadding searchInfo" style="display: none;">
+                        <input id="schoolNameSearch" type="text" class="form-control" placeholder="学校名称">
+                    </div>
+                </div>
+                <div class="bootstrap-table"><div class="fixed-table-toolbar"><div class="bars pull-left"></div></div><div class="fixed-table-container" style="padding-bottom: 0px;"><div class="fixed-table-header" style="display: none;"><table></table></div><div class="fixed-table-body"><div class="fixed-table-loading" style="top: 37px; display: none;">正在努力地加载数据中，请稍候……</div><table id="eavyinfoEducationBackground" data-mobile-responsive="true" class="table table-hover table-striped">
+                <thead><tr><th style="" data-field="startTime" tabindex="0"><div class="th-inner ">开始时间</div><div class="fht-cell"></div></th><th style="" data-field="endTime" tabindex="0"><div class="th-inner ">结束时间</div><div class="fht-cell"></div></th><th style="" data-field="schoolName" tabindex="0"><div class="th-inner ">学校名称</div><div class="fht-cell"></div></th><th style="" data-field="major" tabindex="0"><div class="th-inner ">专业</div><div class="fht-cell"></div></th><th style="" data-field="degree" tabindex="0"><div class="th-inner ">学位</div><div class="fht-cell"></div></th></tr></thead><tbody>
+						
+					<tr><th style="" data-field="startTime" tabindex="0"><div class="th-inner "><input class="form-control datepicker1" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="endTime" tabindex="0"><div class="th-inner "><input class="form-control datepicker1" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="schoolName" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="major" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="degree" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th></tr>
+					<tr><th style="" data-field="startTime" tabindex="0"><div class="th-inner "><input class="form-control datepicker1" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="endTime" tabindex="0"><div class="th-inner "><input class="form-control datepicker1" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="schoolName" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="major" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="degree" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th></tr>
+					<tr><th style="" data-field="startTime" tabindex="0"><div class="th-inner "><input class="form-control datepicker1" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="endTime" tabindex="0"><div class="th-inner "><input class="form-control datepicker1" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="schoolName" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="major" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="degree" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th></tr>
+                </tbody></table>
+                <p style="width: 100%; text-align: center;height: 25px;line-height: 25px;font-size: 16px;cursor: pointer;" id="addeavyinfoEducationBackground">添加</p>    
+            </div><div class="fixed-table-footer" style="display: none;"><table><tbody><tr></tr></tbody></table></div><div class="fixed-table-pagination" style="display: none;"><div class="pull-left pagination-detail"><span class="pagination-info">显示第 1 到第 0 条记录，总共 0 条记录</span><span class="page-list" style="display: none;">每页显示 <span class="btn-group dropup"><button type="button" class="btn btn-default  btn-outline dropdown-toggle" data-toggle="dropdown"><span class="page-size">10</span> <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li class="active"><a href="javascript:void(0)">10</a></li></ul></span> 条记录</span></div><div class="pull-right pagination" style="display: none;"><ul class="pagination pagination-outline"><li class="page-first disabled"><a href="javascript:void(0)">«</a></li><li class="page-pre disabled"><a href="javascript:void(0)">‹</a></li><li class="page-next disabled"><a href="javascript:void(0)">›</a></li><li class="page-last disabled"><a href="javascript:void(0)">»</a></li></ul></div></div></div></div><div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+<div>
+    <script type="text/javascript">
+        var s_edit_h = 'hidden';
+        var s_remove_h = 'hidden';
+    </script>
+</div>
+
+
+</div>
+<div>
+
+</div>
+</div>
+		
+		<div class="col-sm-12">
+			<h1 class="showMessage showListMessage">团队人员信息</h1>
+			<div>
+<div class="wrapper wrapper-content ">
+    <div class="col-sm-12">
+		<span style="width: 18px; float: left; margin-top: 13px;">
+			<!-- <img src="/Public/jn/ht/css/tishi.png"> -->
+		</span>
+        <h2 style="font-size: 18px;color: #5ea5eb;line-height:40px;margin-top: 5px;text-indent: 10px;">
+            若有团队人员，请填写</h2>
+    </div>
+    <hr style="height: 5px;">
+
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-body">
+                <div class="fixed-table-toolbar searchInfo" style="display: none;">
+                    <div class="columns pull-left">
+                    </div>
+                    <div class="columns pull-right searchInfo" style="display: none;">
+                        <button class="btn btn-success" onclick="teammemberReLoad()">查询</button>
+                    </div>
+                    <div class="columns pull-right col-md-2 nopadding searchInfo" style="display: none;">
+                        <input id="searchName" type="text" class="form-control" placeholder="姓名">
+                    </div>
+                </div>
+                <div class="bootstrap-table"><div class="fixed-table-toolbar"><div class="bars pull-left"></div></div><div class="fixed-table-container" style="padding-bottom: 0px;"><div class="fixed-table-header" style="display: none;"><table></table></div><div class="fixed-table-body"><div class="fixed-table-loading" style="top: 37px; display: none;">正在努力地加载数据中，请稍候……</div><table id="eavyinfoTeammember" data-mobile-responsive="true" class="table table-hover table-striped">
+				<thead><tr><th style="" data-field="name" tabindex="0"><div class="th-inner ">姓名</div><div class="fht-cell"></div></th><th style="" data-field="sexName" tabindex="0"><div class="th-inner ">性别</div><div class="fht-cell"></div></th><th style="" data-field="birhday" tabindex="0"><div class="th-inner ">出生日期</div><div class="fht-cell"></div></th><th style="" data-field="nationalityName" tabindex="0"><div class="th-inner ">国籍</div><div class="fht-cell"></div></th><th style="" data-field="educationName" tabindex="0"><div class="th-inner ">学历</div><div class="fht-cell"></div></th><th style="" data-field="position" tabindex="0"><div class="th-inner ">单位及职务</div><div class="fht-cell"></div></th><th style="" data-field="mobile" tabindex="0"><div class="th-inner ">电话</div><div class="fht-cell"></div></th><th style="" data-field="email" tabindex="0"><div class="th-inner ">邮件</div><div class="fht-cell"></div></th><th style="text-align: center; " data-field="identificationPaper" tabindex="0"><div class="th-inner ">身份证号</div><div class="fht-cell"></div></th><th style="text-align: center; " data-field="educationCertificate" tabindex="0"><div class="th-inner ">毕业院校</div><div class="fht-cell"></div></th><th style="" data-field="positionInProject" tabindex="0"><div class="th-inner ">团队成员在项目中职务</div><div class="fht-cell"></div></th></tr></thead>
+				<tbody>
+						<tr><th style="" data-field="name" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="sexName" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="birhday" tabindex="0"><div class="th-inner "><input class="form-control datepicker1" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="nationalityName" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="educationName" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="position" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="mobile" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="email" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="text-align: center; " data-field="identificationPaper" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="text-align: center; " data-field="educationCertificate" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="positionInProject" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th></tr>
+						<tr><th style="" data-field="name" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="sexName" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="birhday" tabindex="0"><div class="th-inner "><input class="form-control datepicker1" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="nationalityName" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="educationName" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="position" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="mobile" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="email" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="text-align: center; " data-field="identificationPaper" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="text-align: center; " data-field="educationCertificate" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="positionInProject" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th></tr>
+						<tr><th style="" data-field="name" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="sexName" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="birhday" tabindex="0"><div class="th-inner "><input class="form-control datepicker1" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="nationalityName" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="educationName" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="position" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="mobile" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="email" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="text-align: center; " data-field="identificationPaper" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="text-align: center; " data-field="educationCertificate" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="positionInProject" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th></tr>
+                </tbody></table>
+                <p style="width: 100%; text-align: center;height: 25px;line-height: 25px;font-size: 16px;cursor: pointer;" id="addeavyinfoTeammember">添加</p>    
+            </div><div class="fixed-table-footer" style="display: none;"><table><tbody><tr></tr></tbody></table></div><div class="fixed-table-pagination" style="display: none;"><div class="pull-left pagination-detail"><span class="pagination-info">显示第 1 到第 0 条记录，总共 0 条记录</span><span class="page-list" style="display: none;">每页显示 <span class="btn-group dropup"><button type="button" class="btn btn-default  btn-outline dropdown-toggle" data-toggle="dropdown"><span class="page-size">10</span> <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li class="active"><a href="javascript:void(0)">10</a></li></ul></span> 条记录</span></div><div class="pull-right pagination" style="display: none;"><ul class="pagination pagination-outline"><li class="page-first disabled"><a href="javascript:void(0)">«</a></li><li class="page-pre disabled"><a href="javascript:void(0)">‹</a></li><li class="page-next disabled"><a href="javascript:void(0)">›</a></li><li class="page-last disabled"><a href="javascript:void(0)">»</a></li></ul></div></div></div></div><div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+<div>
+    <script type="text/javascript">
+        var s_edit_h = 'hidden';
+        var s_remove_h = 'hidden';
+    </script>
+</div>
+
+
+</div>
+<div>
+
+</div>
+
+
+</div>
+		
+		<div class="col-sm-12">
+			<h1 class="showMessage">项目需求</h1>
+			<div>
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm" name="signupForm">
+                        <input id="id" name="id" value="" type="hidden" readonly="readonly">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="red">*</span>
+                                <span>是否需要融资</span></label>
+                            <div class="col-sm-3">
+                                <div>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="whetherToFinancing" value="5"  >YES(是)
+                                    </label><label class="radio-inline">
+                                        <input type="radio" name="whetherToFinancing" value="6" >NO(否)
+                                    </label>
+                                </div>
+                            </div>
+                        <!-- </div> -->
+                        <div class="form-group" id="rouzimoney">
+                            <label class="col-sm-2 control-label">融资额</label>
+                            <div class="col-sm-3">
+                                <input id="financedAmount" name="financedAmount" value="" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="red">*</span>
+                                <span>合作条件</span></label>
+                            <div class="col-sm-8">
+									<textarea name="conditionOfCooperation" class="form-control" type="text"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="red">*</span>
+                                <span>有无其他要求或特别说明</span></label>
+                            <div class="col-sm-8">
+									<textarea name="specialVersion" class="form-control" type="text"></textarea>
+                            </div>
+                        </div>
+
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+
+</div>
+
+</div>
+		</div>
+		<div class="col-sm-12">
+			<h1 class="showMessage showListMessage">其他附件</h1>
+			<div>
+<div class="wrapper wrapper-content ">
+    <div class="col-sm-12">
+		<span style="width: 18px; float: left; margin-top: 13px;">
+			<!-- <img src="/Public/jn/ht/css/tishi.png"> -->
+		</span>
+        <h2 style="font-size: 18px;color: #5ea5eb;line-height:40px;margin-top: 5px;text-indent: 10px;">
+            其他附件为申请人可自由选择有助于申报相关的附件信息进行上传（非必填项）</h2>
+    </div>
+    <hr style="height: 5px;">
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-body">
+                <div class="fixed-table-toolbar searchInfo" style="display: none;">
+                    <div class="columns pull-left">
+                        
+                    </div>
+                </div>
+                <div class="bootstrap-table"><div class="fixed-table-toolbar"><div class="bars pull-left"></div></div><div class="fixed-table-container" style="padding-bottom: 0px;"><div class="fixed-table-header" style="display: none;"><table></table></div><div class="fixed-table-body"><div class="fixed-table-loading" style="top: 37px; display: none;">正在努力地加载数据中，请稍候……</div><table data-mobile-responsive="true" class="table table-hover table-striped">
+				<thead><tr><th style="" data-field="typeName" tabindex="0"><div class="th-inner ">附件类型</div><div class="fht-cell"></div></th><th style="text-align: center; " data-field="attachmentName" tabindex="0"><div class="th-inner ">附件</div><div class="fht-cell"></div></th></tr></thead>
+				<tbody>
+					<tr><th style="" data-field="typeName" tabindex="0"><div class="th-inner "><input class="form-control" type="file" id="eavyinfoOtherAttachments"> <input type="text" name="eavyinfoOtherAttachments" style="opacity: 0;"></div><div class="fht-cell"></div></th><th style="text-align: center; " data-field="attachmentName" tabindex="0"><div class="th-inner "><span class="form-control" type="text"></span></div><div class="fht-cell"></div></th></tr>
+				</tbody></table></div><div class="fixed-table-footer" style="display: none;"><table><tbody><tr></tr></tbody></table></div><div class="fixed-table-pagination" style="display: none;"><div class="pull-left pagination-detail"><span class="pagination-info">显示第 1 到第 0 条记录，总共 0 条记录</span><span class="page-list" style="display: none;">每页显示 <span class="btn-group dropup"><button type="button" class="btn btn-default  btn-outline dropdown-toggle" data-toggle="dropdown"><span class="page-size">10</span> <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li class="active"><a href="javascript:void(0)">10</a></li></ul></span> 条记录</span></div><div class="pull-right pagination" style="display: none;"><ul class="pagination pagination-outline"><li class="page-first disabled"><a href="javascript:void(0)">«</a></li><li class="page-pre disabled"><a href="javascript:void(0)">‹</a></li><li class="page-next disabled"><a href="javascript:void(0)">›</a></li><li class="page-last disabled"><a href="javascript:void(0)">»</a></li></ul></div></div></div></div><div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<button class="btn btn-success" type="submit" style="width: 200px;display: block;margin: 0 auto;margin-bottom: 100px;" id="upload">上传</button>
+<div>
+
+</div>
+
+</div>
+		<div>
+<div class="layui-layer-move"></div>
+
+
+
+<script src="/Public/info/js/bootstrap.min.js"></script>
+<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script>
+    function redel(e) {
+        $(e).next().remove();
+        $(e).remove();
+    }
+    function timeshow(e) {
+        $('#exampleModal').modal('show');
+    }
+</script>
+<script>
+var obj = {};
+var issave = false;
+(function () {
+    var datepickes = $('.datepicker1');
+    datepickes.map(function (i) {
+        $(datepickes[i]).datepicker();
+    })
+
+
+    function setdatepickes(dom) {
+        var arr = $(dom).find('.datepicker1');
+        arr.map(function (i) {
+            $(arr[i]).datepicker();
+        })
+    }
+
+    $('input[name="whetherToFinancing"]').click(function (e) {
+        var value = $(e.target).val();
+        if (value == 5) {
+            $('#rouzimoney div').css('opacity', 1);
+            $('#rouzimoney label').css('opacity', 1);
+        }else if (value == 6) {
+            $('#rouzimoney label').css('opacity', 0);
+            $('#rouzimoney div').css('opacity', 0);
+        }
+    });
+ 
+    $('#addeavyinfoWorkingCondition').click(function () {
+        var dom = document.createElement('tr');
+        $(dom).html(`<th style="" data-field="startTime" tabindex="0"><div class="th-inner "><input class="form-control datepicker1" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="endTime" tabindex="0"><div class="th-inner "><input class="form-control datepicker1" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="companyName" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="position" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th>`)
+        $('#eavyinfoWorkingCondition tbody').append('<span class="reddel" onclick="redel(this)">x</span>').append(dom);
+        setdatepickes(dom);
+    })
+
+    $('#addeavyinfoEducationBackground').click(function () {
+        var dom = document.createElement('tr');
+        $(dom).html(`<th style="" data-field="startTime" tabindex="0"><div class="th-inner "><input class="form-control datepicker1" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="endTime" tabindex="0"><div class="th-inner "><input class="form-control datepicker1" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="schoolName" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="major" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="degree" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th>`);
+        $('#eavyinfoEducationBackground tbody').append('<span class="reddel" onclick="redel(this)">x</span>').append(dom);
+        setdatepickes(dom);
+    })
+
+    $('#addeavyinfoTeammember').click(function () {
+        var dom = document.createElement('tr');
+        $(dom).html(`<th style="" data-field="name" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="sexName" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="birhday" tabindex="0"><div class="th-inner "><input class="form-control datepicker1" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="nationalityName" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="educationName" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="position" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="mobile" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="email" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="text-align: center; " data-field="identificationPaper" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="text-align: center; " data-field="educationCertificate" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th><th style="" data-field="positionInProject" tabindex="0"><div class="th-inner "><input class="form-control" type="text"></div><div class="fht-cell"></div></th>`);
+        $('#eavyinfoTeammember tbody').append('<span class="reddel" onclick="redel(this)">x</span>').append(dom);
+        setdatepickes(dom);
+    })
+
+
+
+    $('#save1').click(function () {
+        addProecjt(getObjInfo(obj), 0);
+        issave = true;
+    })
+
+    $('#save2').click(function () {
+        addProecjt(getObjInfo(obj), 0);
+        issave = true;
+    })
+
+	$('#upload').click(function () {
+        addProecjt(getObjInfo(obj), 1);
+	})
+
+
+    function getObjInfo(obj) {
+        obj['projectName'] = $('input[name="projectName"]').val();//项目名称
+		obj['project'] = $('select[name="project"] option:selected').val();
+		obj['projectCompetitionArea'] = $('#hidden_projectCompetitionArea option:selected').val();
+		obj['project_introduction'] = $('textarea[name="project_introduction"]').val();
+		obj['project_stage'] = $('input[name="project_stage"]').val();		
+		obj['projectOutput'] = $('input[name="projectOutput"]').val();	
+		obj['projectDevelopmentForm'] = $('input[name="projectDevelopmentForm"]').val();
+		obj['patentinfo'] = $('select[name="patentinfo"] option:selected').val();
+        obj['country'] = $('select[name="country"] option:selected').val();
+		obj['registeredCountry'] = $('select[name="registeredCountry"] option:selected').val();
+		obj['patentNumber'] = $('input[name="patentNumber"]').val();
+		obj['recommendAgenciesOrCounties'] = $('input[name="recommendAgenciesOrCounties"]').val();//参赛推荐单位
+		obj['whetherToCooperation'] = $('input[name="whetherToCooperation"]:checked').val();
+		obj['whetherToRoadShow'] = $('input[name="whetherToRoadShow"]:checked').val();
+		obj['entryPurpose'] = $('input[name="entryPurpose"]').val();  //参赛目的
+		
+		obj['firstName'] = $('input[name="firstName"]').val();
+		obj['lastName'] = $('input[name="lastName"]').val();
+		obj['sex'] = $('input[name="sex"]:checked').val();
+		obj['birhday'] = $('input[name="birhday"]').val();
+		obj['guoji'] = $('select[name="guoji"] option:selected').val();
+		obj['max_edu'] = $('select[name="max_edu"] option:selected').val();
+		obj['position'] = $('input[name="position"]').val();
+		obj['phone_gw'] = $('input[name="phone_gw"]').val();
+		obj['contact_tel'] = $('input[name="contact_tel"]').val();
+		obj['email'] = $('input[name="email"]').val();
+
+		obj['living'] = $('input[name="living"]').val();
+		obj['whetherToFinancing'] = $('input[name="whetherToFinancing"]:checked').val();
+		obj['financedAmount'] = $('input[name="financedAmount"]').val();
+		obj['conditionOfCooperation'] = $('textarea[name="conditionOfCooperation"]').val();
+		obj['specialVersion'] = $('textarea[name="specialVersion"]').val();
+
+		//工作经历
+		var eavyinfoWorkingCondition = getTableInput($('#eavyinfoWorkingCondition tbody input'));
+		obj['eavyinfoWorkingCondition'] = eavyinfoWorkingCondition;
+        //主要教育经历情况
+        var eavyinfoEducationBackground = getTableInput($('#eavyinfoEducationBackground tbody input'));
+        obj['eavyinfoEducationBackground'] = eavyinfoEducationBackground;
+
+        //团队人员信息
+        var eavyinfoTeammember = getTableInput($('#eavyinfoTeammember tbody input'));
+        obj['eavyinfoTeammember'] = eavyinfoTeammember;
+		
+        //文件处理
+        obj['businessPlanOfTheProjectName'] = $('input[name="businessPlanOfTheProjectName"]').val();
+		obj['identificationPaperName'] = $('input[name="identificationPaperName"]').val(); 
+		obj['educationCertificateName'] = $('input[name="educationCertificateName"]').val(); 
+        obj['eavyinfoOtherAttachments'] = $('input[name="eavyinfoOtherAttachments"]').val();
+        obj['img'] = $('#img').val();
+        return obj;
+    }
+
+    var globaluid = 0;
+
+    function addProecjt(obj, tag) {
+        console.log(issave, tag);
+        if (issave) {
+            obj['uid'] = globaluid;
+            $.ajax({
+                url: '/index.php/Home/index/edit',
+                data: obj,
+                method: 'post',
+                dataType: "json",
+                success: function (data) {
+                    if (data == '1') {
+                        if (tag) {
+                            alert('保存成功');
+                            setTimeout(function () {
+                                window.location.href = '/index.php/Home/index/projectlist';
+                            }, 500)   
+                        }else{
+                            alert('保存成功！');
+                        }
+                    } else {
+                        alert('保存失败');
+                    }
+                },
+            })
+        } else {
+            $.ajax({
+                url: '/index.php/Home/index/addproject',
+                data: obj,
+                method: 'post',
+                dataType: "json",
+                success: function (data) {
+                    if (data == '0') {
+                        alert('上传失败,请重新上传');
+                    } else {
+                        globaluid = data;
+                        if (tag) {
+                            alert('保存成功');
+                            setTimeout(function () {
+                                window.location.href = '/index.php/Home/index/projectlist';
+                            }, 500)   
+                        }else{
+                            alert('保存成功！');
+                        }
+                    }
+                },
+            })
+        }
+
+    }
+
+	function getTableInput(inputs) {
+		var arr = [];
+		for (let index = 0; index < inputs.length; index++) {
+			let element = inputs[index];
+			arr.push($(element).val());
+		}
+		return arr.toString();
+	}
+    //商业计划书
+    $('#businessPlanOfTheProjectName').change(function (e) {
+        var formData = new FormData();
+        formData.append('file', $('#businessPlanOfTheProjectName')[0].files[0]);
+        uploadFile(formData, function (path) {
+            $('input[name="businessPlanOfTheProjectName"]').val(path);
+        });
+    });
+
+    //身份证明材料
+    $('#identificationPaperName').change(function (e) {
+        var formData = new FormData();
+        formData.append('file', $('#identificationPaperName')[0].files[0]);
+        uploadFile(formData, function (path) {
+            $('input[name="identificationPaperName"]').val(path);
+        });
+    });
+    $('#educationCertificateName').change(function (e) {
+        var formData = new FormData();
+        formData.append('file', $('#educationCertificateName')[0].files[0]);
+        uploadFile(formData, function (path) {
+            $('input[name="educationCertificateName"]').val(path);
+        });
+    })
+
+    $('#eavyinfoOtherAttachments').change(function (e) {
+        var formData = new FormData();
+        formData.append('file', $('#eavyinfoOtherAttachments')[0].files[0]);
+        uploadFile(formData, function (path) {
+            $('input[name="eavyinfoOtherAttachments"]').val(path);
+        });
+    })
+
+    $('#applicantPicture').change(function (e) {
+        var formData = new FormData();
+        formData.append('file', $('#applicantPicture')[0].files[0]);
+        uploadFile(formData, function (path) {
+            $('#img').val(path);
+            $('#pictureUrl').css('display', 'block');
+            $('#applicantPictureUrl').attr('src', path);
+        });
+    })
+
+    function uploadFile(formData, callback) {
+        $.ajax({
+            url: '/index.php/Home/index/uploadf',
+            data: formData,
+            method: 'post',
+            dataType: "json",
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (data) {
+                if (data.code == '1') {
+                    callback(data.msg);
+                    alert('保存成功，请确认无误后提交您的项目。');
+                } else {
+                    alert('上传失败,请重新上传');
+                }
+            },
+        })
+    }
+
+    $('#max_edu').change(function () {
+        var msg = $('select[name="max_edu"] option:selected').val();
+        if (msg == 383) {
+            console.log('aa');
+        }
+    })
+})()
+</script>
+
+</body></html>

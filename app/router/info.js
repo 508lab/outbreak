@@ -21,4 +21,5 @@ module.exports = app => {
     router.get('/info/password', controller.student.index.password);
     router.post('/info/password', controller.student.index.cpass);
     router.put('/info/user/travel', controller.student.index.travel);
+    router.get('/info/mirror', controller.student.index.mirror);
 };

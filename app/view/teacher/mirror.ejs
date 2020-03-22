@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
+    <title>晋城职业技术学院-学习资料</title>
+    <link href="/public/info/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/info/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/public/info/css/animate.css" rel="stylesheet">
+    <link href="/public/info/css/style.css" rel="stylesheet">
+    <style>
+        #mirrordom .alert {
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+        }
+
+        #mirrordom .dir, #mirrordom .files{
+            position: relative;
+        }
+
+        #mirrordom .dir .dirname{
+            display: inline-block;
+            width: 85%;
+        }
+
+        #mirrordom .dir .action, #mirrordom .files .action{
+            position: absolute;
+            right: 0.4rem;
+            bottom: 0.45rem;
+        }
+
+        #nowdir {
+            position: relative;
+        }
+
+        #nowdir #back {
+            position: absolute;
+            right: 10px;
+            top: 0.4rem;
+        }
+    </style>
+    <script src="/public/info/js/jquery-3.1.1.min.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <% include /teacherpartial/nav.ejs %>
+        <script>
+            var activity = "mirror";
+            $('#side-menu .' + activity).addClass('active');
+            $($('#side-menu .' + activity).parent().parent()[0]).addClass('active');
+        </script>
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <% include /teacherpartial/header.ejs %>
+            </div>
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-success" role="alert" id="nowdir">
+                            <span class="content">/</span>
+                            <button type="button" class="btn btn-primary" id="back">返回</button>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-12" id="mirrordom">
+                    </div>
+                    <div class="col-lg-8">
+
+                    </div>
+
+                    <div class="col-lg-1" style="margin-top: 0.3rem;margin-bottom: 0.5rem;">
+                        <button type="button" class="btn btn-primary" id="mkdir">创建目录</button>
+                    </div>
+                    <div class="col-lg-3" style="margin-bottom: 0.5rem;">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="customFile">
+                            <label class="custom-file-label" for="customFile">上传文件</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% include /teacherpartial/footer.ejs %>
+        </div>
+    </div>
+
+    <script src="/public/info/js/popper.min.js"></script>
+    <script src="/public/info/js/bootstrap.min.js"></script>
+    <script src="/public/info/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/public/info/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/public/info/js/inspinia.js"></script>
+    <script src="/public/info/js/plugins/pace/pace.min.js"></script>
+    <script>
+        let nowDir = '/';
+        let mirrordom = $('#mirrordom');
+        let files = []; //当前所有的文件
+        let dirs = []; //当前所有的文件夹
+        initView(nowDir);
+        /**
+         * 文件夹组件
+         * */
+        function dirComponent(str) {
+            return `<div class="alert alert-primary dir" role="alert">
+                <span class="filename dirname" data-name="${str}">${str}</span>
+                <button type="button" class="btn btn-primary btn-sm dropdown-toggle action" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    操作
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item resetname" data-type="dir" data-name="${str}">重命名</a>
+                    <a class="dropdown-item del dirdel" data-name="${str}">删除</a>
+                </div>
+                </div>`;
+        }
+        /**
+         * 文件组件
+         * */
+        function fileComponent(str) {
+            return `<div class="alert alert-light files" role="alert">
+                <span class="filename">${str}</span>
+                <button type="button" class="btn btn-primary btn-sm dropdown-toggle action" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    操作
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item resetname" data-type="file"  data-name="${str}">重命名</a>
+                    <a class="dropdown-item dow" data-file="${str}">下载</a>
+                    <a class="dropdown-item del filesdel" data-name="${str}">删除</a>
+                </div>
+                    </div>`;
+        }
+        function initView(path) {
+            $('.wrapper-content').mLoading({
+                text: "加载中...",
+            });
+            $.ajax({
+                url: `/api/v1/mirror/index`,
+                type: 'post',
+                data: { q: path },
+                success(data) {
+                    $('.wrapper-content').mLoading('hide');
+                    let arr = data.data;
+                    fullView(arr.dirs, arr.files);
+                    files = arr.files;
+                    dirs = arr.dirs;
+                    nowDir = path;
+                    $('#nowdir .content').text(path);
+                },
+                error(err) {
+                    $('.wrapper-content').mLoading('hide');
+                    alert(err);
+                }
+            });
+        }
+
+        function fullView(dirs, files) {
+            let html = '';
+            mirrordom.html(html);
+            dirs.map(function (ele, index) {
+                html += dirComponent(ele);
+            });
+
+            files.map(function (ele, index) {
+                html += fileComponent(ele);
+            });
+            mirrordom.html(html);
+        }
+
+        /**
+         * 内部单击事件的处理
+         * */
+        $('#mirrordom').click(function (e) {
+            var target = e.target;
+            if ($(target).hasClass('dirname')) {
+                initView(nowDir + $(target).data('name') + '/');
+            } else if ($(target).hasClass('dow')) {
+                download($(target).data('file'));
+            } else if ($(target).hasClass('del')) {
+                delcom(target);
+            } else if ($(target).hasClass('resetname')) {
+                restname(target);
+            }
+        })
+
+
+        /**
+         * 判断文件或者文件夹是否存在
+         * */
+        function isExistsSync(name, type) {
+            let tag = true;
+
+            if (type === 'file') {
+                files.map(function (ele) {
+                    if (ele === name) {
+                        tag = false;
+                        return;
+                    }
+                });
+            } else if (type === 'dir') {
+                dirs.map(function (ele) {
+                    if (ele === name) {
+                        tag = false;
+                        return;
+                    }
+                });
+            }
+            return tag;
+        }
+
+        function restname(e) {
+            let type = $(e).data('type');
+            let oldName = $(e).data('name');
+            let name = prompt('请输入新的名称：', oldName);
+            if (name === '') {
+                alert('输入不能为空!');
+                return
+            }
+            if (name === oldName) {
+                alert('新名称与旧名称相同');
+                return;
+            }
+       
+            if (!isExistsSync(name, type)) {
+                alert('该名称已存在!');
+                return;
+            }
+
+            $('.wrapper-content').mLoading({
+                text: "加载中...",
+            });
+
+            $.ajax({
+                url: `/api/v1/mirror/update`,
+                type: 'put',
+                data: {
+                    name: name,
+                    oldname: oldName,
+                    dir: nowDir
+                },
+                dataType: 'JSON',
+                success(data) {
+                    $('.wrapper-content').mLoading('hide');
+                    if (data.code === 1) {
+                        $(e).parent().parent().find('.filename').text(name);
+                    }else{
+                        alert(data.err);
+                    }
+                },
+                error(err) {
+                    $('.wrapper-content').mLoading('hide');
+                    alert(err);
+                }
+            });
+        }
+
+        /**
+         * 删除组件
+         * */
+        function delcom(e) {
+            let name = $(e).data('name');
+            let type = '';
+            if ($(e).hasClass('filesdel')) {
+                type = 'file';
+            } else if ($(e).hasClass('dirdel')) {
+                type = 'dir';
+            }
+            let tag = prompt('是否确认删除：' + name, '是');
+            if (tag !== '是') {
+                return;
+            }
+            $('.wrapper-content').mLoading({
+                text: "加载中...",
+            });
+            $.ajax({
+                url: `/api/v1/mirror/delete`,
+                type: 'delete',
+                data: {
+                    name: name,
+                    type: type,
+                    dir: nowDir
+                },
+                dataType: 'JSON',
+                success(data) {
+                    $('.wrapper-content').mLoading('hide');
+                    $(e).parent().parent().remove();
+                },
+                error(err) {
+                    $('.wrapper-content').mLoading('hide');
+                    alert(err);
+                }
+            });
+        }
+
+        $('#back').click(function () {
+            let t = nowDir.split('/');
+            let str = t.slice(0, t.length - 2).join('/') + '/';
+            initView(str);
+        });
+
+        function download(file) {
+            window.open(window.location.origin + '/public/mirror' + nowDir + file)
+        }
+
+        $('#mkdir').click(function () {
+            let name = prompt("请输入文件夹名称", "");
+            if (name === '') {
+                alert('文件夹名称不能为空!');
+                return;
+            }
+            if (!isExistsSync(name, 'dir')) {
+                alert('该文件夹已存在!');
+                return;
+            }
+            $('.wrapper-content').mLoading({
+                text: "加载中...",
+            });
+            $.ajax({
+                url: `/api/v1/mirror/mkdir`,
+                type: 'post',
+                data: {
+                    name: name,
+                    dir: nowDir
+                },
+                dataType: 'JSON',
+                success(data) {
+                    $('.wrapper-content').mLoading('hide');
+                    if (data.code == 1) {
+                        mirrordom.prepend(dirComponent(name));
+                    } else {
+                        alert(data.err);
+                    }
+                },
+                error(err) {
+                    $('.wrapper-content').mLoading('hide');
+                    alert(err);
+                }
+            });
+        })
+
+        $('#customFile').change(function () {
+            let form = new FormData();
+            form.append('dir', nowDir);
+            form.append('file', this.files[0]);
+            let name = this.files[0].name.toLowerCase();
+
+            if (!isExistsSync(name, 'file')) {
+                alert('该文件已存在!');
+                return;
+            }
+            $('.wrapper-content').mLoading({
+                text: "加载中...",
+            });
+            $.ajax({
+                url: `/api/v1/mirror/upload`,
+                type: 'post',
+                data: form,
+                dataType: 'JSON',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success(data) {
+                    $('.wrapper-content').mLoading('hide');
+                    if (data.code == 1) {
+                        data.data.map(function (ele) {
+                            mirrordom.append(fileComponent(ele));
+                        })
+                    } else {
+                        alert('上传失败!');
+                    }
+                },
+                error(err) {
+                    $('.wrapper-content').mLoading('hide');
+                    alert(err);
+                }
+            });
+        })
+
+    </script>
+</body>
+
+</html>

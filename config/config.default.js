@@ -24,6 +24,38 @@ module.exports = appInfo => {
     },
   };
 
+  config.multipart = {
+    whitelist: [
+      '.jpg', 
+      '.jpeg',
+      '.png',
+      '.gif',
+      '.bmp',
+      '.wbmp',
+      '.webp',
+      '.tif',
+      '.psd',
+      // text
+      '.svg',
+      '.js', '.jsx',
+      '.json',
+      '.css', '.less',
+      '.html', '.htm',
+      '.xml',
+      // tar
+      '.zip',
+      '.gz', '.tgz', '.gzip',
+      // video
+      '.mp3',
+      '.mp4',
+      '.avi',
+      //doc
+      '.pdf',
+      '.doc',
+      '.xlsx'
+    ],
+  };
+  
   config.mysql = {
     // 单数据库信息配置
     client: {

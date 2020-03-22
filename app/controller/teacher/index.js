@@ -110,9 +110,11 @@ class TeacherController extends TeacherBaseController {
         });
     }
 
+    /**
+     * 对密码的操作
+     */
     async password() {
         const { ctx } = this;
-
         if (ctx.request.method == 'GET') {
             await ctx.render('teacher/password.ejs');
         } else if (ctx.request.method == 'PUT') {
@@ -176,9 +178,11 @@ class TeacherController extends TeacherBaseController {
         }
     }
 
+    /**
+     * 学生信息
+     */
     async students() {
         const { ctx } = this;
-
         const id = ctx.session.teacherid;
         const user = await ctx.service.teacher.findById(id);
         let classs = ClasDepartment[user.department];
@@ -210,6 +214,12 @@ class TeacherController extends TeacherBaseController {
         } else {
             ctx.body = { code: 0, err: ErrMsg[4] };
         }
+    }
+
+
+    async mirror() {
+        const { ctx } = this;
+        await ctx.render('teacher/mirror.ejs');
     }
 }
 

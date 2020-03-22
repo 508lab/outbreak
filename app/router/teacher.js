@@ -16,4 +16,5 @@ module.exports = app => {
     router.put('/teacher/password', controller.teacher.index.password);
     router.get('/teacher/students', controller.teacher.index.students);
     router.put('/teacher/students/password', controller.teacher.index.cpass);
+    router.get('/teacher/mirror', controller.teacher.index.mirror);
 };

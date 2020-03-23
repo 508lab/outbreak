@@ -28,13 +28,14 @@ $ npm stop
 ### Test
 ```
 $ ./bin/jmeter -n -t 文件路径1/疫情填报系统测试.jmx -l 文件路径2/html.csv -e -o 文件路径
-$ 也可以直接查看 /app/public/test 下的文件
 $ 注：测试使用的技术为-> jmeter
 ```
 
 使用到的技术
+```
 $ "node": ">=10.0.0"
 $ "MariaDB": ">=10.0.38"
+```
 
 ### 功能
 - 后台管理

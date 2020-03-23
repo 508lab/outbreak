@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `teacher` (
   `department` varchar(300) NOT NULL DEFAULT '信息工程系' COMMENT '所在系',
   `studentid` int(10) NOT NULL COMMENT '工号',
   `city` varchar(250) NOT NULL DEFAULT '晋城' COMMENT '目前所在城市',
-  `password` varchar(300) NOT NULL DEFAULT '709fd61da959694852b3d28ae67931a22d4189d192b85d2c6685aa5e948c5787' COMMENT '密码',
+  `password` varchar(300) NOT NULL DEFAULT 'b8ad08a3a547e35829b821b75370301dd8c4b06bdd7771f9b541a75914068718' COMMENT '密码',
   `travel` text NOT NULL COMMENT '出行信息',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `teacher` (
 --
 
 INSERT INTO `teacher` (`id`, `name`, `wuhan`, `sex`, `department`, `studentid`, `city`, `password`, `travel`) VALUES
-(24, '老师', 1, 1, '信息工程系', 123456, '北京', '709fd61da959694852b3d28ae67931a22d4189d192b85d2c6685aa5e948c5787', '[{"purpose":"北京","way":"大巴","trains1":"无","start_time":"2020-01-03","en_time":"2020-03-05","trains2":"无","note":"无异常"}]');
+(24, '老师', 1, 1, '信息工程系', 123456, '北京', 'b8ad08a3a547e35829b821b75370301dd8c4b06bdd7771f9b541a75914068718', '[{"purpose":"北京","way":"大巴","trains1":"无","start_time":"2020-01-03","en_time":"2020-03-05","trains2":"无","note":"无异常"}]');
 
 -- --------------------------------------------------------
 
@@ -175,8 +175,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `wuhan`, `sex`, `department`, `clas`, `studentid`, `city`, `password`, `travel`) VALUES
-(21, '大哥', 0, 0, '矿业系', '17矿井通风与安全班', 1601373310, '北京', '5590c48589361a82ee8476a3286e40e13f347949fb1703beb307ea9a0808a40e', ''),
-(25, '武杰', 1, 0, '信息工程系', '17物流信息技术班', 1501373434, '北京', '709fd61da959694852b3d28ae67931a22d4189d192b85d2c6685aa5e948c5787', '[{"purpose":"北京","way":"大巴","trains1":"无","start_time":"2020-01-03","en_time":"2020-01-05","trains2":"无","note":"无异常"},{"purpose":"北京","way":"大巴","trains1":"无","start_time":"2020-01-08","en_time":"2020-01-10","trains2":"无","note":""}]');
+(21, '大哥', 0, 0, '矿业系', '17矿井通风与安全班', 1601373310, '北京', 'b8ad08a3a547e35829b821b75370301dd8c4b06bdd7771f9b541a75914068718', ''),
+(25, '武杰', 1, 0, '信息工程系', '17物流信息技术班', 1501373434, '北京', 'b8ad08a3a547e35829b821b75370301dd8c4b06bdd7771f9b541a75914068718', '[{"purpose":"北京","way":"大巴","trains1":"无","start_time":"2020-01-03","en_time":"2020-01-05","trains2":"无","note":"无异常"},{"purpose":"北京","way":"大巴","trains1":"无","start_time":"2020-01-08","en_time":"2020-01-10","trains2":"无","note":""}]');
 
 --
 -- 限制导出的表

@@ -11,6 +11,8 @@ see [egg docs][egg] for more detail.
 ### Development
 
 ```bash
+$ 导入数据库 mtest.sql
+$ 修改/config/config.default.js 中关于数据库的配置（config.mysql）
 $ npm i
 $ npm run dev
 $ open http://localhost:7001/
@@ -30,12 +32,21 @@ $ 也可以直接查看 /app/public/test 下的文件
 $ 注：测试使用的技术为-> jmeter
 ```
 
+使用到的技术
+$ "node": ">=10.0.0"
+$ "MariaDB": ">=10.0.38"
+
 ### 功能
 - 后台管理
 - 学生客户端
 - 教师客户端
 - 体温填报(统计)
 - 学习资源(在线云盘)
+
+测试帐号
+学生->   学号： 1501373434  密码： 123456
+教师->   工号： 123456      密码： 123456
+后台->   帐号： admin       密码： 123456  
 
 ### npm scripts
 

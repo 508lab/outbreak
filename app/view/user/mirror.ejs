@@ -29,6 +29,19 @@
             right: 10px;
             top: 0.4rem;
         }
+
+        #search-list {
+            position: absolute;
+            top: 2.16rem;
+            z-index: 100;
+            background-color: white;
+            width: 100%;
+            display: none;
+        }
+
+        #search-list ul li{
+            cursor: pointer;
+        }
     </style>
     <script src="/public/js/jquery-3.1.1.min.js"></script>
 </head>
@@ -52,13 +65,27 @@
                                 data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> <span
                                 id="tip"><a href="https://www.bilibili.com/video/av91364742/" target="_blank">
                                     此为实验性功能，如果觉得有任何问题可到哔哩哔哩中留言
-                                </a> 
+                                </a>
                             </span></div>
                     </div>
                     <div class="col-lg-12">
                         <div class="alert alert-success" role="alert" id="nowdir">
                             <span class="content">/</span>
                             <button type="button" class="btn btn-primary" id="back">返回</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="请输入需要查询的内容(注意大小写)" aria-label="请输入需要查询的内容"
+                                aria-describedby="button-addon2" id="search">
+                            <span class="ds-dropdown-menu ds-with-1" id="search-list">
+                                <ul class="list-group">
+
+                                </ul>
+                            </span>
                         </div>
                     </div>
                     <div class="col-lg-12" id="mirrordom">
@@ -106,12 +133,12 @@
             let html = '';
             mirrordom.html(html);
             dirs.map(function (ele, index) {
-                html += `<div class="alert alert-primary dir" role="alert">${ele}</div>`
+                html += `<div class="alert alert-primary dir" role="alert">${ele.name}</div>`
             });
 
             files.map(function (ele, index) {
-                html += `<div class="alert alert-light files" role="alert">${ele}
-                        <span class="badge badge-primary dow" data-file="${ele}">下载</span>
+                html += `<div class="alert alert-light files" role="alert">${ele.name}
+                        <span class="badge badge-primary dow" data-file="${ele.name}">下载</span>
                     </div>`;
             });
             mirrordom.html(html);
@@ -137,6 +164,75 @@
             window.open(window.location.origin + '/public/mirror' + nowDir + file)
         }
 
+        let search_tag = true;
+
+        $('#search').bind('input propertychange', function () {
+            if (search_tag) {
+                var q = $('#search').val();
+                if (q == '' || q.length < 2) {
+                    $("#search-list").hide();
+                    return;
+                }
+                searchlist(q);
+            }
+        });
+
+        function searchlist(q) {
+            search_tag = false;
+            $.ajax({
+                url: `/api/v1/mirror/search`,
+                type: 'post',
+                data: { q: q, dir: nowDir },
+                success(data) {
+                    fullSearchListView(data.data);
+                },
+                error(err) {
+                    console.error(err);
+                }
+            });
+        }
+
+        function fullSearchListView(data) {
+            let html = ``;
+            data.dirs.map(function (ele) {
+                html += `<li class="list-group-item dir" data-path="/${ele.name}/">${getLastByFilePath(ele.name, '/')}</li>`;
+            });
+
+            data.files.map(function (ele) {
+                html += `<li class="list-group-item files" data-link="/public/mirror/${nowDir}${ele.name}">${getLastByFilePath(ele.name, '/')}</li>`;
+            });
+            $('#search-list ul').html(html);
+            $("#search-list").show();
+        }
+
+        $('#search-list').click(function (e) {
+            if ($(e.target).hasClass('dir')) {
+                initView($(e.target).data('path'));
+                $("#search-list").hide();
+            }else if ($(e.target).hasClass('files')) {
+                window.open($(e.target).data('link'))
+            }
+        })
+
+        /**
+         * 获取路径最后一位
+         * **/
+        function getLastByFilePath(path, str) {
+            let arr = path.split(str);
+            return arr[arr.length - 1];
+        }
+
+        setInterval(() => {
+            if (search_tag) {
+                search_tag = false;
+            } else {
+                search_tag = true;
+            }
+        }, 1000);
+
+        $('body').click(function () {
+            $("#search-list").hide();
+        });
     </script>
 </body>
 

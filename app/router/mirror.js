@@ -8,4 +8,5 @@ module.exports = app => {
     router.post('/api/v1/mirror/mkdir', controller.mirror.index.mkdir);
     router.delete('/api/v1/mirror/delete', controller.mirror.index.delete);
     router.put('/api/v1/mirror/update', controller.mirror.index.update);
+    router.post('/api/v1/mirror/search', controller.mirror.index.search);
 };

@@ -11,7 +11,8 @@
     "egg-mysql": "^3.0.0",
     "egg-scripts": "^2.12.0",
     "egg-validate": "^2.0.2",
-    "egg-view-ejs": "^2.0.1"
+    "egg-view-ejs": "^2.0.1",
+    "filehound": "^1.17.4"
   },
   "devDependencies": {
     "autod": "^3.0.1",

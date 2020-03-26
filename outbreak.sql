@@ -17,10 +17,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- 数据库: `mtest`
+-- 数据库: `outbreak`
 --
-CREATE DATABASE IF NOT EXISTS `mtest` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `mtest`;
+CREATE DATABASE IF NOT EXISTS `outbreak` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `outbreak`;
 
 -- --------------------------------------------------------
 

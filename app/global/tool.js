@@ -15,6 +15,10 @@ class _tool {
             .digest('hex');
     }
 
+    /**
+     * 删除文件夹
+     * @param {*} filePath 
+     */
     async  rmdirAsync(filePath) {
         let stat = await fs.statSync(filePath)
         if (stat.isFile()) {
@@ -26,7 +30,6 @@ class _tool {
             await fs.rmdirSync(filePath)
         }
     }
-
 }
 
 function getInstance() {

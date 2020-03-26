@@ -6,6 +6,9 @@ const sendToWormhole = require('stream-wormhole');
 const pump = require('mz-modules/pump');
 const path = require('path');
 const Tool = require('../../global/tool');
+const ErrMsg = require('../../global/errmsg');
+const FileHound = require('filehound');
+
 /**
  * 学习资料
  */
@@ -17,24 +20,12 @@ class MirrorController extends Controller {
         const { ctx } = this;
         let q = ctx.request.body.q || '/';
         let basePath = this.config.baseDir + '/app/public/mirror' + q;
-        const arr = await fs.readdirSync(basePath);
+        const arr = await fs.readdirSync(basePath, { withFileTypes: true });
         let list = {
-            files: [],
-            dirs: []
+            files: arr.filter((ele) => { return !ele.isDirectory() }),
+            dirs: arr.filter((ele) => { return ele.isDirectory() })
         };
-        const prom = await arr.map(async function (ele) {
-            if (await fs.statSync(basePath + ele).isDirectory()) {
-                list.dirs.push(ele);
-            } else {
-                list.files.push(ele);
-            }
-        });
-        Promise.all(prom).then(() => {
-            ctx.body = { code: 1, data: list };
-        }).catch((err) => {
-            ctx.logger.error(err);
-            ctx.body = { code: 0 }
-        })
+        ctx.body = { code: 1, data: list };
     }
 
     async upload() {
@@ -50,7 +41,11 @@ class MirrorController extends Controller {
                 if (!part.filename) {
                     break;
                 }
-                files.push(await this.uploadFile(part, parts.field.dir));
+                if (await fs.existsSync(this.config.baseDir + '/app/public/mirror' + parts.field.dir + part.filename)) {
+                    ctx.body = { code: 0, err: ErrMsg[22] };
+                } else {
+                    files.push(await this.uploadFile(part, parts.field.dir));
+                }
             }
         }
         ctx.body = { code: 1, data: files };
@@ -65,7 +60,7 @@ class MirrorController extends Controller {
         let { dir, name } = ctx.request.body;
         let basePath = this.config.baseDir + '/app/public/mirror' + dir + name;
         if (await fs.existsSync(basePath)) {
-            ctx.body = { code: 0, err: '文件夹已存在' };
+            ctx.body = { code: 0, err: ErrMsg[23] };
         } else {
             await fs.mkdirSync(basePath);
             ctx.body = { code: 1 };
@@ -89,7 +84,7 @@ class MirrorController extends Controller {
             }
             ctx.body = { code: 1 };
         } else {
-            ctx.body = { code: 0, err: '需要删除的内容不存在!' };
+            ctx.body = { code: 0, err: ErrMsg[24] };
         }
     }
 
@@ -106,8 +101,28 @@ class MirrorController extends Controller {
             await fs.renameSync(basePath, newPath);
             ctx.body = { code: 1 };
         } else {
-            ctx.body = { code: 0, err: '需要删除的内容不存在!' };
+            ctx.body = { code: 0, err: ErrMsg[25] };
         }
+    }
+
+    async search() {
+        const { ctx } = this;
+        let { dir, q } = ctx.request.body;
+        let basePath = this.config.baseDir + '/app/public/mirror' + dir
+        let files = await FileHound.create()
+            .paths(basePath)
+            .match(`*${q}*`)
+            .findSync();
+        let dirs = await FileHound.create()
+            .paths(basePath)
+            .directory()
+            .match(`*${q}*`)
+            .findSync();
+        let list = {
+            files: files.map((e) => { return { name: e.slice(basePath.length, e.length) } }),
+            dirs: dirs.map((e) => { return { name: e.slice(basePath.length, e.length) } })
+        };
+        ctx.body = { code: 1, data: list };
     }
 
     /**

@@ -4,6 +4,7 @@ const Controller = require('egg').Controller;
 const { entryvalidate, logindata } = require('../validate/home');
 const ErrMsg = require('../global/errmsg');
 const moment = require('moment');
+const fs = require('fs');
 const ClasDeartment = require('../global/clasdepartment');
 
 class HomeController extends Controller {
@@ -169,6 +170,14 @@ class HomeController extends Controller {
  */
   async clasdepartment() {
     this.ctx.body = { code: 1, data: ClasDeartment };
+  }
+
+  async test(){
+    let arr = await fs.readdirSync(this.config.baseDir + '/app/public/', { withFileTypes: true });
+    arr.map(function (ele) {
+      console.log(ele); //此处获取到的本应是对象,实际返回的是字符串
+    })
+    this.ctx.body = { code: 1};
   }
 }
 

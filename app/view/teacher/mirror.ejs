@@ -16,16 +16,18 @@
             cursor: pointer;
         }
 
-        #mirrordom .dir, #mirrordom .files{
+        #mirrordom .dir,
+        #mirrordom .files {
             position: relative;
         }
 
-        #mirrordom .dir .dirname{
+        #mirrordom .dir .dirname {
             display: inline-block;
             width: 85%;
         }
 
-        #mirrordom .dir .action, #mirrordom .files .action{
+        #mirrordom .dir .action,
+        #mirrordom .files .action {
             position: absolute;
             right: 0.4rem;
             bottom: 0.45rem;
@@ -39,6 +41,19 @@
             position: absolute;
             right: 10px;
             top: 0.4rem;
+        }
+
+        #search-list {
+            position: absolute;
+            top: 2.16rem;
+            z-index: 100;
+            background-color: white;
+            width: 100%;
+            display: none;
+        }
+
+        #search-list ul li {
+            cursor: pointer;
         }
     </style>
     <script src="/public/js/jquery-3.1.1.min.js"></script>
@@ -59,20 +74,40 @@
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row">
                     <div class="col-lg-12">
+                        <div class="alert alert-info alert-dismissible" role="alert"><button type="button" class="close"
+                                data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> <span
+                                id="tip">请勿上传大于2M的文件,目前支持上传的文件格式：[
+                                '.jpg',
+                                '.jpeg',
+                                '.png',
+                                '.gif',
+                                '.bmp',
+                                '.wbmp',
+                                '.webp',
+                                '.tif',
+                                '.psd',
+                                '.svg',
+                                '.json',
+                                '.html', '.htm',
+                                '.xml',
+                                '.zip',
+                                '.gz', '.tgz', '.gzip',
+                                '.mp3',
+                                '.mp4',
+                                '.avi',
+                                '.pdf',
+                                '.doc',
+                                '.xlsx'
+                                ]
+                            </span></div>
+                    </div>
+                    <div class="col-lg-12">
                         <div class="alert alert-success" role="alert" id="nowdir">
                             <span class="content">/</span>
                             <button type="button" class="btn btn-primary" id="back">返回</button>
                         </div>
                     </div>
-
-
-                    <div class="col-lg-12" id="mirrordom">
-                    </div>
-                    <div class="col-lg-8">
-
-                    </div>
-
-                    <div class="col-lg-1" style="margin-top: 0.3rem;margin-bottom: 0.5rem;">
+                    <div class="col-lg-1" style="margin-top: 0.2rem;margin-bottom: 0.5rem;">
                         <button type="button" class="btn btn-primary" id="mkdir">创建目录</button>
                     </div>
                     <div class="col-lg-3" style="margin-bottom: 0.5rem;">
@@ -81,6 +116,28 @@
                             <label class="custom-file-label" for="customFile">上传文件</label>
                         </div>
                     </div>
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="请输入需要查询的内容(注意大小写)"
+                                aria-label="请输入需要查询的内容" aria-describedby="button-addon2" id="search">
+                            <span class="ds-dropdown-menu ds-with-1" id="search-list">
+                                <ul class="list-group">
+
+                                </ul>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12" id="mirrordom">
+                    </div>
+                    <div class="col-lg-8">
+
+                    </div>
+
+
+
                 </div>
             </div>
             <% include /teacherpartial/footer.ejs %>
@@ -102,7 +159,8 @@
         /**
          * 文件夹组件
          * */
-        function dirComponent(str) {
+        function dirComponent(ele) {
+            let str = ele.name;
             return `<div class="alert alert-primary dir" role="alert">
                 <span class="filename dirname" data-name="${str}">${str}</span>
                 <button type="button" class="btn btn-primary btn-sm dropdown-toggle action" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -117,7 +175,8 @@
         /**
          * 文件组件
          * */
-        function fileComponent(str) {
+        function fileComponent(ele) {
+            let str = ele.name;
             return `<div class="alert alert-light files" role="alert">
                 <span class="filename">${str}</span>
                 <button type="button" class="btn btn-primary btn-sm dropdown-toggle action" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -189,7 +248,6 @@
          * */
         function isExistsSync(name, type) {
             let tag = true;
-
             if (type === 'file') {
                 files.map(function (ele) {
                     if (ele === name) {
@@ -212,6 +270,9 @@
             let type = $(e).data('type');
             let oldName = $(e).data('name');
             let name = prompt('请输入新的名称：', oldName);
+            if (name == null) {
+                return;
+            }
             if (name === '') {
                 alert('输入不能为空!');
                 return
@@ -220,7 +281,7 @@
                 alert('新名称与旧名称相同');
                 return;
             }
-       
+
             if (!isExistsSync(name, type)) {
                 alert('该名称已存在!');
                 return;
@@ -243,7 +304,7 @@
                     $('.wrapper-content').mLoading('hide');
                     if (data.code === 1) {
                         $(e).parent().parent().find('.filename').text(name);
-                    }else{
+                    } else {
                         alert(data.err);
                     }
                 },
@@ -266,6 +327,9 @@
                 type = 'dir';
             }
             let tag = prompt('是否确认删除：' + name, '是');
+            if (tag == null) {
+                return;
+            }
             if (tag !== '是') {
                 return;
             }
@@ -284,12 +348,28 @@
                 success(data) {
                     $('.wrapper-content').mLoading('hide');
                     $(e).parent().parent().remove();
+                    if (type === 'file') {
+                        delFromArr(files, name);
+                    } else {
+                        delFromArr(dirs, name);
+                    }
+
                 },
                 error(err) {
                     $('.wrapper-content').mLoading('hide');
                     alert(err);
                 }
             });
+        }
+
+        /**
+         * 删除数组中的对应元素
+         * */
+        function delFromArr(arr, str) {
+            let index = arr.findIndex(function (ele) {
+                return ele.name === str;
+            });
+            arr.splice(index, 1);
         }
 
         $('#back').click(function () {
@@ -304,6 +384,9 @@
 
         $('#mkdir').click(function () {
             let name = prompt("请输入文件夹名称", "");
+            if (name == null) {
+                return;
+            }
             if (name === '') {
                 alert('文件夹名称不能为空!');
                 return;
@@ -326,7 +409,7 @@
                 success(data) {
                     $('.wrapper-content').mLoading('hide');
                     if (data.code == 1) {
-                        mirrordom.prepend(dirComponent(name));
+                        mirrordom.prepend(dirComponent({ name: name }));
                     } else {
                         alert(data.err);
                     }
@@ -363,7 +446,7 @@
                     $('.wrapper-content').mLoading('hide');
                     if (data.code == 1) {
                         data.data.map(function (ele) {
-                            mirrordom.append(fileComponent(ele));
+                            mirrordom.append(fileComponent({ name: ele }));
                         })
                     } else {
                         alert('上传失败!');
@@ -374,8 +457,78 @@
                     alert(err);
                 }
             });
+        });
+
+
+        let search_tag = true;
+
+        $('#search').bind('input propertychange', function () {
+            if (search_tag) {
+                var q = $('#search').val();
+                if (q == '' || q.length < 2) {
+                    $("#search-list").hide();
+                    return;
+                }
+                searchlist(q);
+            }
+        });
+
+        function searchlist(q) {
+            search_tag = false;
+            $.ajax({
+                url: `/api/v1/mirror/search`,
+                type: 'post',
+                data: { q: q, dir: nowDir },
+                success(data) {
+                    fullSearchListView(data.data);
+                },
+                error(err) {
+                    console.error(err);
+                }
+            });
+        }
+
+        function fullSearchListView(data) {
+            let html = ``;
+            data.dirs.map(function (ele) {
+                html += `<li class="list-group-item dir" data-path="/${ele.name}/">${getLastByFilePath(ele.name, '/')}</li>`;
+            });
+
+            data.files.map(function (ele) {
+                html += `<li class="list-group-item files" data-link="/public/mirror/${nowDir}${ele.name}">${getLastByFilePath(ele.name, '/')}</li>`;
+            });
+            $('#search-list ul').html(html);
+            $("#search-list").show();
+        }
+
+        $('#search-list').click(function (e) {
+            if ($(e.target).hasClass('dir')) {
+                initView($(e.target).data('path'));
+                $("#search-list").hide();
+            } else if ($(e.target).hasClass('files')) {
+                window.open($(e.target).data('link'))
+            }
         })
 
+        /**
+         * 获取路径最后一位
+         * **/
+        function getLastByFilePath(path, str) {
+            let arr = path.split(str);
+            return arr[arr.length - 1];
+        }
+
+        setInterval(() => {
+            if (search_tag) {
+                search_tag = false;
+            } else {
+                search_tag = true;
+            }
+        }, 1000);
+
+        $('body').click(function () {
+            $("#search-list").hide();
+        });
     </script>
 </body>
 

@@ -13,4 +13,5 @@ module.exports = app => {
 
   router.get('/classaerch', controller.home.classaerch);
   router.get('/clasdepartment', controller.home.clasdepartment);
+  router.get('/test', controller.home.test);
 };

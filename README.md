@@ -1,13 +1,5 @@
 # school
 
-
-
-## QuickStart
-
-<!-- add docs here for user -->
-
-see [egg docs][egg] for more detail.
-
 ### Development
 
 ```bash
@@ -33,7 +25,7 @@ $ 注：测试使用的技术为-> jmeter
 
 使用到的技术
 ```
-$ "node": ">=10.0.0"
+$ "node": ">=10.10.0"
 $ "MariaDB": ">=10.0.38"
 ```
 
@@ -43,11 +35,25 @@ $ "MariaDB": ">=10.0.38"
 - 教师客户端
 - 体温填报(统计)
 - 学习资源(在线云盘)
+- 待续(欢迎PR)
 
 ### 测试帐号
-- 学生->   学号： 1501373434  密码： 123456   链接：/login
-- 教师->   工号： 123456      密码： 123456   链接：/teacher/login
-- 后台->   帐号： admin       密码： 123456   链接：/admin/login
+- 学生
+    - 学号： 1501373434  
+    - 密码： 123456   
+    - [链接](http://uname.dongkji.com/login)
+- 教师   
+    - 工号： 123456      
+    - 密码： 123456   
+    - [链接](http://uname.dongkji.com/teacher/login)
+- 后台
+    - 帐号： admin       
+    - 密码： 123456   
+    - [链接](http://uname.dongkji.com/admin/login)
+
+### 问题
+- 学生数据很多时候都需要一次性导入(直接使用代码或者工具导入即可)
+- 如果遇到问题或者需求请联系我qq：2833324528@qq.com
 
 ### npm scripts
 

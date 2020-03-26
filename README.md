@@ -3,7 +3,7 @@
 ### Development
 
 ```bash
-$ 导入数据库 mtest.sql
+$ 导入数据库 outbreak.sql
 $ 修改/config/config.default.js 中关于数据库的配置（config.mysql）
 $ npm i
 $ npm run dev

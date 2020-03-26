@@ -460,32 +460,34 @@
         });
 
 
-        let search_tag = true;
+        let oldtime = new Date().getTime();
 
         $('#search').bind('input propertychange', function () {
-            if (search_tag) {
-                var q = $('#search').val();
-                if (q == '' || q.length < 2) {
-                    $("#search-list").hide();
-                    return;
-                }
-                searchlist(q);
+            var q = $('#search').val();
+            if (q == '' || q.length < 2) {
+                $("#search-list").hide();
+                return;
             }
+            this.tag = true;
+            searchlist(q, this);
         });
 
-        function searchlist(q) {
-            search_tag = false;
-            $.ajax({
-                url: `/api/v1/mirror/search`,
-                type: 'post',
-                data: { q: q, dir: nowDir },
-                success(data) {
-                    fullSearchListView(data.data);
-                },
-                error(err) {
-                    console.error(err);
-                }
-            });
+        function searchlist(q, that) {
+            if (that.tag && (new Date().getTime() - oldtime) > 2500) {
+                $.ajax({
+                    url: `/api/v1/mirror/search`,
+                    type: 'post',
+                    data: { q: q, dir: nowDir },
+                    success(data) {
+                        fullSearchListView(data.data);
+                        oldtime = new Date().getTime();
+                    },
+                    error(err) {
+                        oldtime = new Date().getTime();
+                        console.error(err);
+                    }
+                });
+            }
         }
 
         function fullSearchListView(data) {
@@ -517,14 +519,6 @@
             let arr = path.split(str);
             return arr[arr.length - 1];
         }
-
-        setInterval(() => {
-            if (search_tag) {
-                search_tag = false;
-            } else {
-                search_tag = true;
-            }
-        }, 1000);
 
         $('body').click(function () {
             $("#search-list").hide();

@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="/public/css/plugins/dataTables/datatables.min.css">
     <link rel="stylesheet" href="/public/css/plugins/dataTables/buttons.dataTables.min.css">
     <script src="/public/js/jquery-3.1.1.min.js"></script>
+    <style>
+        #studnetinfo .form-group label {
+            text-align: right;
+        }
+    </style>
 </head>
 
 <body>
@@ -41,19 +46,24 @@
                 </div>
                 <div class="row" style="margin-top: 10px;">
                     <div class="col-lg-12">
-                            <table id="example" class="display" style="width:100%">
+                        <table id="example" class="display" style="width:100%">
                             <thead>
-                                        <tr>
-                                            <th>姓名</th>
-                                            <th>学号</th>
-                                            <th>重置密码</th>
-                                        </tr>
-                                    </thead>
+                                <tr>
+                                    <th>姓名</th>
+                                    <th>学号</th>
+                                    <th>操作</th>
+                                    <th>重置密码</th>
+                                </tr>
+                            </thead>
                             <tbody>
                             <%for(var i=0;i < data.length; i++){%>
                             <tr>
                                 <td><%= data[i].name %></td>
                                 <td><%= data[i].studentid %></td>
+                                <td><button data-student="<%= JSON.stringify(data[i]) %>" type="button"
+                                        class="btn btn-primary editinfo">编辑</button>
+                                    <button data-sid="<%= data[i].id %>" type="button"
+                                        class="btn btn-danger delinfo">删除</button></td>
                                 <td><button data-studentid="<%= data[i].studentid %>" type="button"
                                         class="btn btn-primary npass">重置</button></td>
                             </tr>
@@ -63,7 +73,64 @@
                     </div>
                 </div>
             </div>
-            
+            <div class="modal" tabindex="-1" role="dialog" id="studnetinfo">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">学生信息</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                       <div class="form-group row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">姓名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="name">
+                            </div>
+                        </div>
+                       <div class="form-group row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">性别</label>
+                            <div class="col-sm-10">
+                                <select class="custom-select mr-sm-2" id="sex">
+                                    <option value="1">女</option>
+                                    <option value="0">男</option>
+                                </select>
+                            </div>
+                        </div>
+                       <div class="form-group row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">系别</label>
+                            <div class="col-sm-10">
+                                <select class="custom-select mr-sm-2" id="department">
+                   
+                                </select>
+                            </div>
+                        </div>
+                       <div class="form-group row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">班级</label>
+                            <div class="col-sm-10">
+                                <select class="custom-select mr-sm-2" id="clas">
+                                    <%for(var i=0;i < clas.length; i++){%>
+                            <option value="<%= clas[i] %>"><%= clas[i] %></option>
+                            <%}%>
+                                </select>
+                            </div>
+                        </div>
+                       <div class="form-group row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">学号</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="studentid">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                      <button type="button" class="btn btn-primary" id="edit_ok">确认修改</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             <% include /teacherpartial/footer.ejs %>
                     </div>
                 </div>
@@ -81,6 +148,91 @@
                         window.location.href = '/teacher/students?clas=' + clas;
                     })
 
+                    initView();
+                    let arrDepClas = {}; //目前所有系与班级
+                    function initView() {
+                        //渲染系别select
+                        departmentFullView(function (data) {
+                            $('#studnetinfo #department').html(data);
+                        });
+
+                        //系别变化时 班级的变化
+                        $('#studnetinfo #department').change(function () {
+                            let department = $('#studnetinfo #department').find("option:selected").val();
+                            let html = '';
+                            arrDepClas[department].map(function (ele) {
+                                html += `<option value="${ele}">${ele}</option>`;
+                            });
+                            $('#studnetinfo #clas').html(html);
+                        });
+
+                        //修改学生信息
+                        $('#edit_ok').click(function () {
+                            let name = $('#studnetinfo #name').val();
+                            let sex = $('#studnetinfo #sex').val();
+                            let studentid = $('#studnetinfo #studentid').val();
+                            let department = $('#studnetinfo #department').find("option:selected").val();
+                            let clas = $('#studnetinfo #clas').find("option:selected").val();
+                            let id = $('#studnetinfo').attr('uid');
+                            if (name === '') {
+                                alert('姓名不能为空!');
+                                return;
+                            }
+                            if (studentid == '') {
+                                alert('学号不能为空');
+                                return;
+                            }
+                            $.ajax({
+                                url: "/teacher/student",
+                                type: "PUT",
+                                data: {
+                                    user: {
+                                        name: name,
+                                        sex: sex,
+                                        studentid: studentid,
+                                        department: department,
+                                        clas: clas
+                                    },
+                                    id: id
+                                },
+                                dataType: 'JSON',
+                                success: function (data) {
+                                    if (data.code === 1) {
+                                        alert('修改成功');
+                                        window.location.reload();
+                                    } else {
+                                        alert(data.err);
+                                    }
+                                },
+
+                                error: function (err) {
+                                    alert(err);
+                                }
+                            });
+
+                        })
+                    }
+
+                    function departmentFullView(callbcak) {
+                        let html = '';
+                        $.ajax({
+                            url: "/clasdepartment",
+                            type: "GET",
+                            success: function (data) {
+                                arrDepClas = data.data;
+                                Object.keys(data.data).map(function (ele) {
+                                    html += `<option value="${ele}">${ele}</option>`
+                                    callbcak(html);
+                                })
+                            },
+
+                            error: function (err) {
+                                console.error(err);
+                            }
+                        });
+                    }
+
+
                     $(document).ready(function () {
                         //配置DataTables默认参数
                         $.extend(true, $.fn.dataTable.defaults, {
@@ -92,6 +244,46 @@
 
                         $('#example').DataTable({
                         });
+                        //编辑学生信息
+                        $('.editinfo').click(function (e) {
+                            let student = $(e.target).data('student');
+                            $('#studnetinfo').modal('show');
+                            $('#studnetinfo').attr('uid', student.id);
+                            $('#studnetinfo #name').val(student.name);
+                            $('#studnetinfo #sex').val(student.sex);
+                            $('#studnetinfo #studentid').val(student.studentid);
+                            $('#studnetinfo #clas').val(student.clas);
+                            $('#studnetinfo #department').val(student.department);
+                        });
+                        //删除该学生
+                        $('.delinfo').click(function (e) {
+                            let sid = $(e.target).data('sid');
+                            let is_del = prompt('是否确认删除该学生：', '是');
+                            if (is_del !== '是' || is_del == undefined) {
+                                return;
+                            }
+                            $.ajax({
+                                url: "/teacher/students/index",
+                                type: "DELETE",
+                                data: {
+                                    sid: sid
+                                },
+                                success: function (data) {
+                                    if (data.code === 1) {
+                                        alert('删除成功');
+                                        $(e.target).parent().parent().remove();
+                                    } else {
+                                        alert(data.err);
+                                    }
+                                },
+
+                                error: function (err) {
+                                    console.error(err);
+                                }
+                            });
+                        })
+
+
 
                         /**
                          * 重置密码
@@ -117,8 +309,8 @@
                                     }
                                 },
 
-                                error: function (data) {
-                                    err(data);
+                                error: function (err) {
+                                    alert(err);
                                     $('.ibox-content').mLoading('hide');
                                 }
                             });

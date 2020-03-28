@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
+    <title>晋城职业技术学院</title>
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/public/css/animate.css" rel="stylesheet">
+    <link href="/public/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/kalendae.css">
+    <link rel="stylesheet" href="/public/css/plugins/dataTables/datatables.min.css">
+    <link rel="stylesheet" href="/public/css/plugins/dataTables/buttons.dataTables.min.css">
+    <script src="/public/js/jquery-3.1.1.min.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <% include /adminpartial/nav.ejs %>
+        <script>
+            var activity = "list-teacher";
+            $('#side-menu .' + activity).addClass('active');
+            $($('#side-menu .' + activity).parent().parent()[0]).addClass('active');
+        </script>
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <% include /adminpartial/header.ejs %>
+            </div>
+            <style>
+                .btn-primary2 {
+                    background-color: #177ce4;
+                    height: 30px;
+                    width: 100px;
+                    color: #fff;
+                    border: none;
+                    cursor: pointer;
+                    text-align: center;
+                    display: block;
+                    font-size: 15px;
+                }
+            </style>
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table id="example" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>姓名</th>
+                                    <th>性别</th>
+                                    <th>所在系</th>
+                                    <th>工号</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%for(var i=0;i < data.length; i++){%>
+                                <tr>
+                                    <td><%= data[i].name %></td>
+                                    <% if (data[i].sex == 0) { %>
+                                    <td>男</td>
+                                    <% } else { %>
+                                    <td>女</td>
+                                    <% } %>
+                                    <td><%= data[i].department %></td>
+                                    <td><%= data[i].studentid %></td>
+                                    <th>
+                                        <button data-studentid="<%= data[i].studentid %>" type="button"
+                                            class="btn btn-primary npass">重置密码</button>
+                                        <button data-teacher="<%= JSON.stringify(data[i]) %>" type="button"
+                                            class="btn btn-primary editinfo">编辑</button>
+                                        <button data-sid="<%= data[i].id %>" type="button"
+                                            class="btn btn-danger delinfo">删除</button>
+                                    </th>
+                                </tr>
+                                <%}%>
+                            </tbody>
+      
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal" tabindex="-1" role="dialog" id="teacherinfo">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">教师信息</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                           <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">姓名</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="name">
+                                </div>
+                            </div>
+                           <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">性别</label>
+                                <div class="col-sm-10">
+                                    <select class="custom-select mr-sm-2" id="sex">
+                                        <option value="1">女</option>
+                                        <option value="0">男</option>
+                                    </select>
+                                </div>
+                            </div>
+                           <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">系别</label>
+                                <div class="col-sm-10">
+                                    <select class="custom-select mr-sm-2" id="department">
+                                        <%for(var i=0;i < departments.length; i++){%>
+                                <option value="<%= departments[i] %>"><%= departments[i] %></option>
+                                <%}%>
+                                    </select>
+                                </div>
+                            </div>
+                           <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">工号</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="studentid">
+                                </div>
+                            </div>
+    
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                          <button type="button" class="btn btn-primary" id="edit_ok">确认修改</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            <% include /adminpartial/footer.ejs %>
+                    </div>
+
+                </div>
+
+
+                <script src="/public/js/popper.min.js"></script>
+                <script src="/public/js/bootstrap.min.js"></script>
+                <script src="/public/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+                <script src="/public/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+                <script src="/public/js/inspinia.js"></script>
+                <script src="/public/js/plugins/pace/pace.min.js"></script>
+                <script src="/public/js/moment.min.js"></script>
+                <script src="/public/js/kalendae.min.js"></script>
+                <script src="/public/js/plugins/dataTables/datatables.min.js"></script>
+                <script src="/public/js/plugins/dataTables/dataTables.buttons.min.js"></script>
+                <script src="/public/js/plugins/dataTables/buttons.flash.min.js"></script>
+                <script src="/public/js/plugins/dataTables/jszip.min.js"></script>
+                <script src="/public/js/plugins/dataTables/pdfmake.min.js"></script>
+                <script src="/public/js/plugins/dataTables/vfs_fonts.js"></script>
+                <script src="/public/js/plugins/dataTables/buttons.html5.min.js"></script>
+                <script>
+                    $(document).ready(function () {
+
+                        $('.editinfo').click(function (e) {
+                            let teacher = $(e.target).data('teacher');
+                            $('#teacherinfo').modal('show');
+                            $('#teacherinfo').attr('uid', teacher.id);
+                            $('#teacherinfo #name').val(teacher.name);
+                            $('#teacherinfo #sex').val(teacher.sex);
+                            $('#teacherinfo #studentid').val(teacher.studentid);
+                            $('#teacherinfo #department').val(teacher.department);
+                        });
+
+                        $('.delinfo').click(function (e) {
+                            let sid = $(e.target).data('sid');
+                            let is_del = prompt('是否确认删除该教师：', '是');
+                            if (is_del !== '是' || is_del == undefined) {
+                                return;
+                            }
+                            $.ajax({
+                                url: "/admin/user/teacher/index",
+                                type: "DELETE",
+                                data: {
+                                    sid: sid
+                                },
+                                success: function (data) {
+                                    if (data.code === 1) {
+                                        alert('删除成功');
+                                        $(e.target).parent().parent().remove();
+                                    } else {
+                                        alert(data.err);
+                                    }
+                                },
+
+                                error: function (err) {
+                                    console.error(err);
+                                }
+                            });
+                        })
+                        //修改教师信息
+                        $('#edit_ok').click(function () {
+                            let name = $('#teacherinfo #name').val();
+                            let sex = $('#teacherinfo #sex').val();
+                            let studentid = $('#teacherinfo #studentid').val();
+                            let department = $('#teacherinfo #department').find("option:selected").val();
+                            let id = $('#teacherinfo').attr('uid');
+                            if (name === '') {
+                                alert('姓名不能为空!');
+                                return;
+                            }
+                            if (studentid == '') {
+                                alert('学号不能为空');
+                                return;
+                            }
+                            $.ajax({
+                                url: "/admin/user/teacher/index",
+                                type: "PUT",
+                                data: {
+                                    teacher: {
+                                        name: name,
+                                        sex: sex,
+                                        studentid: studentid,
+                                        department: department,
+                                    },
+                                    id: id
+                                },
+                                dataType: 'JSON',
+                                success: function (data) {
+                                    if (data.code === 1) {
+                                        alert('修改成功');
+                                        window.location.reload();
+                                    } else {
+                                        alert(data.err);
+                                    }
+                                },
+
+                                error: function (err) {
+                                    alert(err);
+                                }
+                            });
+                        });
+
+                        /**
+                         * 重置密码
+                         * */
+                        $('.npass').click(function (e) {
+                            let studentid = $(e.target).data('studentid');
+                            $('.ibox-content').mLoading({
+                                text: "修改密码中...",
+                            });
+                            $.ajax({
+                                url: "/admin/user/teacher/cpass",
+                                type: "PUT",
+                                dataType: 'json',
+                                data: {
+                                    studentid: studentid
+                                },
+                                success: function (data) {
+                                    $('.ibox-content').mLoading('hide');
+                                    if (data.code === 1) {
+                                        alert('修改成功,密码为：123456');
+                                    } else {
+                                        alert(data.err);
+                                    }
+                                },
+
+                                error: function (data) {
+                                    err(data);
+                                    $('.ibox-content').mLoading('hide');
+
+                                }
+                            });
+                        })
+                        //配置DataTables默认参数
+                        $.extend(true, $.fn.dataTable.defaults, {
+                            "language": {
+                                "url": "/public/language/Chinese.txt"
+                            },
+                            "dom": "l<'#toolbar'>frtip"
+                        });
+
+                        $('#example').DataTable({
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'excel', 'pdf',
+                            ]
+                        });
+                    });
+                </script>
+</body>
+
+</html>

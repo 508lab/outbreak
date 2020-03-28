@@ -6,7 +6,7 @@ const { entryvalitemp, entryvalipass } = require('../../validate/user');
 const ErrMsg = require('../../global/errmsg');
 
 /**
- * 用户个人中心
+ * 学生
  */
 class UserController extends UserInfoController {
 
@@ -20,7 +20,7 @@ class UserController extends UserInfoController {
 
   async user() {
     const { ctx } = this;
-    const user = await ctx.service.user.findById(ctx.session.userid);
+    const user = await ctx.service.students.findById(ctx.session.userid);
     await ctx.render('user/user.ejs', {
       user: user
     });
@@ -48,7 +48,7 @@ class UserController extends UserInfoController {
     ctx.validate(entryvalipass, info);
     const id = ctx.session.userid;
     //旧密码是否正确
-    const user = await ctx.service.user.findById(id);
+    const user = await ctx.service.students.findById(id);
     if (user.password !== Tool.encryption(info.oldpassword)) {
       ctx.body = { code: 0, err: ErrMsg[16] };
       return;
@@ -57,7 +57,7 @@ class UserController extends UserInfoController {
       ctx.body = { code: 0, err: ErrMsg[17] };
       return;
     }
-    const res = await ctx.service.user.changePass(id, info.password, info.oldpassword);
+    const res = await ctx.service.students.changePass(id, info.password, info.oldpassword);
     if (res) {
       ctx.body = { code: 1 };
     } else {

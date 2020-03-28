@@ -7,6 +7,16 @@ const TABLE = "teacher";
  */
 class TeacherService extends Service {
 
+    /**
+     * 注册
+     * @param {*} user 
+     */
+    async insert(user) {
+        user.password = Tool.encryption(user.password);
+        const result = await this.app.mysql.insert(TABLE, user);
+        return result;
+    }
+
     async find(info) {
         info.password = Tool.encryption(info.password);
         const user = await this.app.mysql.get(TABLE, info, {
@@ -65,6 +75,42 @@ class TeacherService extends Service {
         const result = await this.app.mysql.update(TABLE, { password: password }, options);
         return result.affectedRows === 1;
     }
+
+    /**
+     * 获取所有教师的信息
+     */
+    async list(){
+        return await this.app.mysql.select(TABLE, {
+            columns: ['name', 'sex', 'department', 'studentid', 'id'],
+        });
+    }
+
+    /**
+     * 修改教师信息
+     * @param {*} id 
+     * @param {*} info 
+     */
+    async edit(id, user){
+        const options = {
+            where: {
+                id: id,
+            },
+        };
+        const result = await this.app.mysql.update(TABLE, user, options);
+        return result.affectedRows === 1;
+    }
+
+    /**
+     * 根据id删除该教师
+     * @param {*} id 
+     */
+    async delete(id) {
+        const result = await this.app.mysql.delete(TABLE, {
+            id: id,
+        });
+        return result.protocol41;
+    }
+
 }
 
 module.exports = TeacherService;

@@ -126,7 +126,6 @@ class TeacherController extends TeacherBaseController {
      */
     async temp() {
         const { ctx } = this;
-
         let info = ctx.request.body;
         ctx.validate(entryvalitemp, info);
         let record = parseFloat(info.record);
@@ -153,40 +152,6 @@ class TeacherController extends TeacherBaseController {
             ctx.body = { code: 0, err: ErrMsg[6] };
         }
     }
-
-    /**
-     * 学生信息
-     */
-    async students() {
-        const { ctx } = this;
-        const id = ctx.session.teacherid;
-        const user = await ctx.service.teacher.findById(id);
-        let classs = ClasDepartment[user.department];
-        let clas = classs[0];
-        if (ctx.query.clas) {
-            clas = ctx.query.clas;
-        }
-        const data = await ctx.service.user.findClasData(user.department, clas);
-        await ctx.render('teacher/students.ejs', {
-            clas: classs,
-            data: data
-        });
-    }
-
-    /**
-     * 修改学生密码
-     */
-    async cpass() {
-        const { ctx } = this;
-
-        let res = await ctx.service.user.updatePassword(ctx.request.body.studentid, '123456');
-        if (res) {
-            ctx.body = { code: 1 };
-        } else {
-            ctx.body = { code: 0, err: ErrMsg[4] };
-        }
-    }
-
 
     async mirror() {
         const { ctx } = this;

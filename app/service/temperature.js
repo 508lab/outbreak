@@ -15,6 +15,17 @@ class TemperatureService extends Service {
     }
 
     /**
+     * 根据学生id删除体温信息
+     * @param {*} studentid 
+     */
+    async deleteByStudentId(id) {
+        const result = await this.app.mysql.delete(TABLE, {
+            sid: id,
+        });
+        return result.protocol41;
+    }
+
+    /**
      * 根据id获取全部时间
      * @param {*} id 
      */
@@ -37,7 +48,7 @@ class TemperatureService extends Service {
         } else if (time == 'week') {
             t = `YEARWEEK(date_format(t.time,'%Y-%m-%d')) = YEARWEEK(now())`;
         }
-        const sql = `select * from ${TABLE} t join user u on t.sid = u.id AND t.record >= ${record} AND ${t};`;
+        const sql = `select * from ${TABLE} t join students u on t.sid = u.id AND t.record >= ${record} AND ${t};`;
         return await this.app.mysql.query(sql);
     }
 
@@ -88,7 +99,7 @@ class TemperatureService extends Service {
      * 根据条件获取id
      */
     async sid(where) {
-        const ids = await this.app.mysql.select('user', {
+        const ids = await this.app.mysql.select('students', {
             where: where,
             columns: ["id"]
         });

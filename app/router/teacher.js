@@ -14,7 +14,14 @@ module.exports = app => {
     router.post('/teacher/temperature', controller.teacher.index.temp);
     router.get('/teacher/password', controller.teacher.index.password);
     router.put('/teacher/password', controller.teacher.index.password);
-    router.get('/teacher/students', controller.teacher.index.students);
-    router.put('/teacher/students/password', controller.teacher.index.cpass);
     router.get('/teacher/mirror', controller.teacher.index.mirror);
+
+    //关于学生部分
+
+    router.get('/teacher/students', controller.teacher.students.students);
+    router.put('/teacher/student', controller.teacher.students.edit);
+    router.put('/teacher/students/password', controller.teacher.students.cpass);
+    router.get('/teacher/students/index', controller.teacher.students.student);
+    router.post('/teacher/students/index', controller.teacher.students.student);
+    router.delete('/teacher/students/index', controller.teacher.students.student);
 };

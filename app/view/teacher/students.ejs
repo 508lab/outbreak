@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
-    <title>晋城职业技术学院-个人中心</title>
+    <title>晋城职业技术学院-教师个人中心</title>
     <link href="/public/css/bootstrap.min.css" rel="stylesheet">
     <link href="/public/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="/public/css/animate.css" rel="stylesheet">
@@ -45,31 +45,17 @@
                             <thead>
                                         <tr>
                                             <th>姓名</th>
-                                            <th>是否去过武汉</th>
                                             <th>学号</th>
-                                            <th>所在城市</th>
                                             <th>重置密码</th>
-                                            <th>出行记录</th>
                                         </tr>
                                     </thead>
                             <tbody>
                             <%for(var i=0;i < data.length; i++){%>
                             <tr>
                                 <td><%= data[i].name %></td>
-
-                                <% if (data[i].wuhan == 0) { %>
-                                <td>是</td>
-                                <% } else { %>
-                                <td>否</td>
-                                <% } %>
                                 <td><%= data[i].studentid %></td>
-                                <td><%= data[i].city %></td>
                                 <td><button data-studentid="<%= data[i].studentid %>" type="button"
                                         class="btn btn-primary npass">重置</button></td>
-                                <td>
-                                    <button data-username="<%= data[i].name %>" data-travel="<%= data[i].travel %>"
-                                        type="button" class="btn btn-primary travel">显示</button>
-                                </td>
                             </tr>
                             <%}%>
                             </tbody>
@@ -79,25 +65,6 @@
             </div>
             
             <% include /teacherpartial/footer.ejs %>
-                    </div>
-                </div>
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalCenterTitle">出行记录</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body" id="travel-body">
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <script src="/public/js/popper.min.js"></script>
@@ -125,55 +92,6 @@
 
                         $('#example').DataTable({
                         });
-
-
-                        $('.travel').click(function (e) {
-                            $('#exampleModalCenter').modal('show');
-                            let arr = $(e.target).data('travel');
-                            let html = ``;
-                            arr.map(function (ele) {
-                                html += `<div class="content">
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>主要目的地 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="" class="form-control purpose" value="${ele.purpose}" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>出行方式 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="" class="form-control way" value="${ele.way}" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>车次 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="没有请填写无" class="form-control trains1" value="${ele.trains1}" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>出行时间 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="" class="form-control start_time" value="${ele.start_time}" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>返回时间 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="" class="form-control en_time" value="${ele.en_time}" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>车次 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="没有请填写无" class="form-control trains2" value="${ele.trains2}" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px"></span>备注<span
-                                class="en"></span>：</label>
-                        <textarea class="note" style="width: 100%;" disabled>${ele.note} </textarea>
-                    </div>
-                    <p style="width: 100%;height: 1px;background-color: #b3aba0;"></p>
-                </div>`;
-                            })
-                            $('#travel-body').html(html);
-                            $('#exampleModalCenterTitle').text($(e.target).data('username'));
-                        })
 
                         /**
                          * 重置密码

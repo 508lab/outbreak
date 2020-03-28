@@ -10,7 +10,7 @@ class TeacherService extends Service {
     async find(info) {
         info.password = Tool.encryption(info.password);
         const user = await this.app.mysql.get(TABLE, info, {
-            columns: ["id", "travel"]
+            columns: ["id"]
         });
         return user;
     }
@@ -40,14 +40,12 @@ class TeacherService extends Service {
         return result.affectedRows === 1;
     }
 
-
-
     /**
      * 更新用户的信息
      * @param {*} id 
      * @param {*} data
      */
-    async updateTravel(id, data) {
+    async updateInfo(id, data) {
         const options = {
             where: {
                 id: id,

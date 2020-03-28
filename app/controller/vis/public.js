@@ -35,23 +35,6 @@ class VisApiController extends Controller {
             ctx.body = { code: 1, data: result };
         }
     }
-
-    /*
-    * 根据班级或者系去过武汉数据统计
-    **/
-    async wuhandata() {
-        const { ctx } = this;
-        let info = ctx.query;
-        if (info.type == 1) {
-            ctx.validate(bardatavali, info);
-            const result = await ctx.service.user.findWuHan(`department='${info.department}'`);
-            ctx.body = { code: 1, data: result };
-        } else if (info.type == 2) {
-            ctx.validate(bardataClasVali, info);
-            const result = await ctx.service.user.findWuHan(`department='${info.department}' AND clas='${info.clas}'`);
-            ctx.body = { code: 1, data: result };
-        }
-    }
 }
 
 module.exports = VisApiController;

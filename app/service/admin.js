@@ -1,5 +1,5 @@
 const Service = require('egg').Service;
-const TABLE = "config";
+const TABLE = "admin";
 
 /**
  * admin用户

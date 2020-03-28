@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
-const SECRET = "123456";
+const SECRET = "1234567891234567", IV = '1234567891234567';
 let mTool = null;
 
 class _tool {
@@ -10,9 +10,19 @@ class _tool {
      * @param {*} str 
      */
     encryption(str) {
-        return crypto.createHmac('sha256', str)
-            .update(SECRET)
-            .digest('hex');
+        let sign = '';
+        const cipher = crypto.createCipheriv('aes-128-cbc', Buffer.from(SECRET), Buffer.from(IV));
+        sign += cipher.update(str, 'utf8', 'hex');
+        sign += cipher.final('hex');
+        return sign;
+    }
+
+    decryption(str) {
+        let src = '';
+        const cipher = crypto.createDecipheriv('aes-128-cbc', Buffer.from(SECRET), Buffer.from(IV));
+        src += cipher.update(str, 'hex', 'utf8');
+        src += cipher.final('utf8');
+        return src;
     }
 
     /**

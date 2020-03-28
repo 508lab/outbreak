@@ -1,10 +1,11 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
-    <title>晋城职业技术学院-个人中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
+    <title>晋城职业技术学院-教师个人中心</title>
     <link href="/public/css/bootstrap.min.css" rel="stylesheet">
     <link href="/public/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="/public/css/animate.css" rel="stylesheet">
@@ -263,239 +264,108 @@
         }
     </style>
 </head>
-<body >
-<div id="wrapper">
-    <% include /teacherpartial/nav.ejs %>
-<script>
-    var activity = "userinfo";
-    $('#side-menu .' + activity).addClass('active');
-    $($('#side-menu .' + activity).parent().parent()[0]).addClass('active');
-</script>
-    <div id="page-wrapper" class="gray-bg">
-        <div class="row border-bottom">
-        <% include /teacherpartial/header.ejs %>   
-</div>
-    <style>
 
-.btn-primary2{
-    background-color: #177ce4;
-    height: 30px;
-    width: 100px;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    text-align: center;
-    display: block;
-    font-size: 15px;
-}
-</style>
-        <div class="wrapper wrapper-content animated fadeInRight">
-            <div class="row">
-                <div class="ibox-content">
-                    <div class="center-content" style="margin:0 auto;background-color:#fff">
-                        <div class="total-top">
-                            <div class="form-group" style="float:left;width:100%" id="type">
-                                <label class="title"><span style="color:red;padding-right:5px">*</span>是否去过武汉<span
-                                        class="en"></span>：</label>
-                            <select class="select-country" name="account" style="height:39px" id="wuhan">
-                                <% if (user.wuhan == 0) { %>
-                                    <option value="1">否</option>
-                                    <option value="0" selected>是</option>
-                                <% } %>
-                                <% if (user.wuhan == 1) { %>
-                                    <option value="1" selected>否</option>
-                                    <option value="0">是</option>
-                                <% } %>
-                            </select>
+<body>
+    <div id="wrapper">
+        <% include /teacherpartial/nav.ejs %>
+        <script>
+            var activity = "userinfo";
+            $('#side-menu .' + activity).addClass('active');
+            $($('#side-menu .' + activity).parent().parent()[0]).addClass('active');
+        </script>
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <% include /teacherpartial/header.ejs %>
+            </div>
+            <style>
+                .btn-primary2 {
+                    background-color: #177ce4;
+                    height: 30px;
+                    width: 100px;
+                    color: #fff;
+                    border: none;
+                    cursor: pointer;
+                    text-align: center;
+                    display: block;
+                    font-size: 15px;
+                }
+            </style>
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="ibox-content">
+                        <div class="center-content" style="margin:0 auto;background-color:#fff">
+                            <div class="form-group">
+                                <label class="title"><span style="color:red;padding-right:5px">*</span>姓名 <span
+                                        class="en">Name</span>：</label>
+                                <input type="text" placeholder="" class="form-control" value="<%= user.name %>"
+                                    id="name">
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="title"><span style="color:red;padding-right:5px">*</span>姓名 <span
-                                    class="en">Name</span>：</label>
-                            <input type="text" placeholder="" class="form-control"  value="<%= user.name %>" id="name">
-                        </div>
-                        <div class="form-group" id="sex">
-                            <label class="title"><span style="color:red;padding-right:5px">*</span>性别 <span
-                                    class="en">Sex</span>：</label>
-                            <select class="select-country" name="account" style="height:39px" id="sex">
-                                <% if (user.sex == 0) { %>
+                            <div class="form-group" id="sex">
+                                <label class="title"><span style="color:red;padding-right:5px">*</span>性别 <span
+                                        class="en">Sex</span>：</label>
+                                <select class="select-country" name="account" style="height:39px" id="sex">
+                                    <% if (user.sex == 0) { %>
                                     <option value="0" selected>男</option>
                                     <option value="1">女</option>
-                                <% } %>
-                                <% if (user.sex == 1) { %>
+                                    <% } %>
+                                    <% if (user.sex == 1) { %>
                                     <option value="0">男</option>
                                     <option value="1" selected>女</option>
-                                <% } %>
-                            </select>                
-                        </div>
-                        <div class="form-group">
-                            <label class="title"><span style="color:red;padding-right:5px">*</span>所在系<span
-                                    class="en"></span>：</label>
-                            <select class="select-country" name="account" style="height:39px" id="department">
-                                <%for(var i = 0 ;i < deps.length; i++){%>
+                                    <% } %>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="title"><span style="color:red;padding-right:5px">*</span>所在系<span
+                                        class="en"></span>：</label>
+                                <select class="select-country" name="account" style="height:39px" id="department">
+                                    <%for(var i = 0 ;i < deps.length; i++){%>
                                     <option value="<%= deps[i] %>"><%= deps[i] %></option>
-                                <%}%>
+                                    <%}%>
                             </select>  
                         </div>
                         <div class="form-group">
                             <label class="title"><span style="color:red;padding-right:5px"></span>工号 <span
                                     class="en"></span>：</label>
-                            <input type="text" placeholder="" class="form-control" id="studentid"  value="<%= user.studentid %>" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label class="title"><span style="color:red;padding-right:5px">*</span>目前所在城市<span
-                                    class="en"></span>：</label>
-                            <input type="text" placeholder="" class="form-control"  value="<%= user.city %>" id="city" >
-                        </div>
-                        <p style="padding-left:1.2rem;padding-top:15px"><strong style="font-size: 20px">出行信息 <span
-                            class="en">(2020年1月-1日后)</span></strong>
-                        </p>
-                        <div id="travel">
-                                <%for(var i=0;i < travel.length; i++){%>
-                                <div class="content">
-                                    <div class="form-group">
-                                        <label class="title"><span style="color:red;padding-right:5px">*</span>主要目的地 <span
-                                                class="en"></span>：</label>
-                                        <input type="text" placeholder="" class="form-control purpose" value="<%= travel[i].purpose %>" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="title"><span style="color:red;padding-right:5px">*</span>出行方式 <span
-                                                class="en"></span>：</label>
-                                        <input type="text" placeholder="" class="form-control way" value="<%= travel[i].way %>" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="title"><span style="color:red;padding-right:5px">*</span>车次 <span
-                                                class="en"></span>：</label>
-                                        <input type="text" placeholder="没有请填写无" class="form-control trains1" value="<%= travel[i].trains1 %>" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="title"><span style="color:red;padding-right:5px">*</span>出行时间 <span
-                                                class="en"></span>：</label>
-                                        <input type="text" placeholder="" class="form-control start_time" value="<%= travel[i].start_time %>" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="title"><span style="color:red;padding-right:5px">*</span>返回时间 <span
-                                                class="en"></span>：</label>
-                                        <input type="text" placeholder="" class="form-control en_time" value="<%= travel[i].en_time %>" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="title"><span style="color:red;padding-right:5px">*</span>车次 <span
-                                                class="en"></span>：</label>
-                                        <input type="text" placeholder="没有请填写无" class="form-control trains2" value="<%= travel[i].trains2 %>" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="title"><span style="color:red;padding-right:5px">*</span>备注<span
-                                                class="en"></span>：</label>
-                                        <textarea class="note" style="width: 100%;"><%= travel[i].note %></textarea>
-                                    </div>
-                                    <p style="width: 100%;height: 1px;background-color: #b3aba0;"></p>
-                                </div>
-                                <%}%>
+                            <input type="text" placeholder="" class="form-control" id="studentid"  value="<%= user.studentid %>"
+                                    disabled>
                             </div>
-                        <p style="padding: 0 1.5rem;text-align: right;color: blue;cursor: pointer;">
-                            <span id="addtravel">添加出行记录</span>
-                        </p>
-                        <div style="height: 52px;">
-                            <button type="button" class="btn btn-primary2" id="submit" >保存<span class="en" style="color: white;"></span></button>
-                         </div>
+
+                            <div style="height: 52px;">
+                                <button type="button" class="btn btn-primary2" id="submit">保存<span class="en"
+                                        style="color: white;"></span></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <% include /teacherpartial/footer.ejs %>
         </div>
-        <% include /teacherpartial/footer.ejs %>
     </div>
-</div>
 
-<script src="/public/js/popper.min.js"></script>
-<script src="/public/js/bootstrap.min.js"></script>
-<script src="/public/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="/public/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="/public/js/inspinia.js"></script>
-<script src="/public/js/plugins/pace/pace.min.js"></script>
-<script>
-    initView()
-    function initView() {
-        let department = "<%= user.department %>";
-        $('#department').val(department);
-        let t = "<%= type %>";
-        if (t) {
-            alert(t);
-        }
-    }
-        let c_cdom = `<div class="content">
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>主要目的地 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="" class="form-control purpose">
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>出行方式 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="" class="form-control way">
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>车次 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="没有请填写无" class="form-control trains1">
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>出行时间 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="" class="form-control start_time">
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>返回时间 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="" class="form-control en_time">
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>车次 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="没有请填写无" class="form-control trains2">
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px"></span>备注<span
-                                class="en"></span>：</label>
-                        <textarea class="note" style="width: 100%;"></textarea>
-                    </div>
-                    <p style="width: 100%;height: 1px;background-color: #b3aba0;"></p>
-                </div>`;
-
-        $('#addtravel').click(function () {
-            let num = $('#travel div.content').length;
-            if (num > 2) {
-                alert('出行记录最多添加3次');
-            } else {
-                $('#travel').append(c_cdom + `<p style="padding: 0 1.5rem;margin-bottom: 5px;text-align: left;"><span style="color: red;" onclick="deldom(this)">删除</span></p>`);
+    <script src="/public/js/popper.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="/public/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/public/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/public/js/inspinia.js"></script>
+    <script src="/public/js/plugins/pace/pace.min.js"></script>
+    <script>
+        initView()
+        function initView() {
+            let department = "<%= user.department %>";
+            $('#department').val(department);
+            let t = "<%= type %>";
+            if (t) {
+                alert(t);
             }
-        });
-        /**
-         * del dom
-         * */
-         function deldom(e) {
-            $(e).parent().prev().remove();
-            $(e).parent().remove();
         }
 
         $('#submit').click(function () {
-            let travel = getTravel();
-            if (!travel) {
-                alert('请最少填写一条出行记录');
-                return;
-            }
-            var wuhan = $('#wuhan').find("option:selected").val();
             var name = $('#name').val();
             var sex = $('#sex').find("option:selected").val();
             var department = $('#department').find("option:selected").val();
-            var city = $('#city').val();
 
             if (name == '') {
                 alert('姓名不能为空');
-                return;
-            }
-
-            if (city == '') {
-                alert('请输入您目前所在城市');
                 return;
             }
 
@@ -507,20 +377,14 @@
                 type: "PUT",
                 dataType: 'json',
                 data: {
-                    wuhan: wuhan,
                     name: name,
                     sex: sex,
                     department: department,
-                    city: city,
-                    travel: JSON.stringify(travel)
                 },
                 success: function (data) {
                     $('.ibox-content').mLoading('hide');
                     if (data.code === 1) {
                         alert('修改成功');
-                        setTimeout(function () {
-                            window.location.href = '/teacher/index';
-                        }, 1000);
                     } else {
                         alert(data.err);
                     }
@@ -533,59 +397,7 @@
                 }
             });
         })
-        /**
-         * 获取出行记录
-         * */
-        function getTravel() {
-            let doms = $('#travel div.content');
-            let arr = [];
-            let tag = true;
-            doms.map(function (e) {
-                let ele = doms[e];
-                let obj = {
-                    purpose: $(ele).find('.purpose').val(),
-                    way: $(ele).find('.way').val(),
-                    trains1: $(ele).find('.trains1').val(),
-                    start_time: $(ele).find('.start_time').val(),
-                    en_time: $(ele).find('.en_time').val(),
-                    trains2: $(ele).find('.trains2').val(),
-                    note: $(ele).find('.note').val(),
-                };
-                if (valedDom(obj)) {
-                    arr.push(obj);
-                } else {
-                    tag = false;
-                }
-            });
-            if (tag) {
-                return arr;
-            } else {
-                return false;
-            }
-        }
-
-        /**
-         * 校验填写的出行信息
-         * */
-        function valedDom(object) {
-            let tag = true;
-            for (const key in object) {
-                if (object.hasOwnProperty(key)) {
-                    const element = object[key];
-                    if (key != 'note') {
-                        if (element == '') {
-                            tag = false;
-                            alert('请查看您的出行信息中是否有未填项');
-                            return;
-                        }else if (element.length > 30) {
-                            alert('避免您的出行信息过长');
-                            return;
-                        }
-                    }
-                }
-            }
-            return tag;
-        }
-</script>
+    </script>
 </body>
+
 </html>

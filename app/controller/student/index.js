@@ -2,7 +2,7 @@
 
 const UserInfoController = require('../base/userinfo');
 const Tool = require('../../global/tool');
-const { entryvalitemp, entryvalipass, entryvaltravel } = require('../../validate/user');
+const { entryvalitemp, entryvalipass } = require('../../validate/user');
 const ErrMsg = require('../../global/errmsg');
 
 /**
@@ -21,12 +21,8 @@ class UserController extends UserInfoController {
   async user() {
     const { ctx } = this;
     const user = await ctx.service.user.findById(ctx.session.userid);
-    if (!user.travel) {
-      user.travel = "[]";
-    }
     await ctx.render('user/user.ejs', {
-      user: user,
-      travel: JSON.parse(user.travel)
+      user: user
     });
   }
 
@@ -82,10 +78,6 @@ class UserController extends UserInfoController {
       ctx.body = { code: 0, err: ErrMsg[20] };
       return;
     }
-    ctx.coreLogger.info('---studnet-temp---' + JSON.stringify({
-      id: ctx.session.userid,
-      record: record
-    }));
     //如果已经上传直接拒绝
     const data = await ctx.service.temperature.findNow(ctx.session.userid);
     if (data == 'undefined') {
@@ -104,20 +96,6 @@ class UserController extends UserInfoController {
     }
   }
 
-  /**
-   * 修改出行记录
-   */
-  async travel() {
-    const { ctx } = this;
-    const info = ctx.request.body;
-    ctx.validate(entryvaltravel, info);
-    const result = await ctx.service.user.updateTravel(ctx.session.userid, info);
-    if (result) {
-      ctx.body = { code: 1 };
-    } else {
-      ctx.body = { code: 0, err: ErrMsg[4] };
-    }
-  }
 
   async mirror() {
     const { ctx } = this;

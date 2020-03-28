@@ -7,9 +7,6 @@
     <meta name="viewport"
         content="wclassth=device-wclassth, initial-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
     <title>请填写个人信息-晋城职业技术学院</title>
-</head>
-
-<body>
     <style>
         body {
             padding: 0px;
@@ -264,6 +261,9 @@
         }
     </style>
     <link rel="stylesheet" href="/public/css/jquery.mloading.css">
+</head>
+
+<body>
     <div class="ibox-content">
         <div style="text-align:center">
             <a href="http://www.sxjczy.cn:88/gb2015/"><img src="http://www.sxjczy.cn:88/gb2015/images/20.png"
@@ -279,17 +279,6 @@
             <p style="padding-left:1.2rem;padding-top:15px"><strong style="font-size: 20px">请填写您的信息 <span
                         class="en"></span></strong>
             </p>
-            <div class="total-top">
-                <div class="form-group" style="float:left;width:40%" id="type">
-                    <label class="title"><span style="color:red;padding-right:5px">*</span>是否去过武汉<span
-                            class="en"></span>：</label>
-                    <div class="i-checks"><label> <input type="radio" value="1" name="type" checked="">
-                            <i></i>否 <span class="en"></span></label></div>
-                    <div class="i-checks"><label> <input type="radio" value="0" name="type">
-                            <i></i>是 <span class="en"></span></label></div>
-
-                </div>
-            </div>
             <div class="form-group">
                 <label class="title"><span style="color:red;padding-right:5px">*</span>姓名 <span
                         class="en">Name</span>：</label>
@@ -321,11 +310,6 @@
                 <input type="email" placeholder="" class="form-control" id="idcard" value="<%= data.id %>" disabled>
             </div>
             <div class="form-group">
-                <label class="title"><span style="color:red;padding-right:5px">*</span>目前所在城市<span
-                        class="en"></span>：</label>
-                <input type="text" placeholder="" class="form-control" id="city">
-            </div>
-            <div class="form-group">
                 <label class="title"><span style="color:red;padding-right:5px">*</span>填写您的密码 <span
                         class="en"></span>：</label>
                 <input type="password" placeholder="请务必记住您的密码" class="form-control" id="password">
@@ -335,55 +319,6 @@
                         class="en"></span>：</label>
                 <input type="password" placeholder="" class="form-control" id="npass">
             </div>
-            <p style="padding-left:1.2rem;padding-top:15px"><strong style="font-size: 20px">请填写您的出行信息 <span
-                        class="en">(2020年1月-1日后)</span></strong>
-            </p>
-
-            <div id="travel">
-
-                <div class="content">
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>主要目的地 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="" class="form-control purpose" value="无">
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>出行方式 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="" class="form-control way" value="无">
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>车次 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="没有请填写无" class="form-control trains1" value="无">
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>出行时间 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="" class="form-control start_time" value="无">
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>返回时间 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="" class="form-control en_time" value="无">
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>车次 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="没有请填写无" class="form-control trains2" value="无">
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px"></span>备注<span
-                                class="en"></span>：</label>
-                        <textarea class="note" style="width: 100%;"></textarea>
-                    </div>
-                    <p style="width: 100%;height: 1px;background-color: #b3aba0;"></p>
-                </div>
-            </div>
-            <p style="padding: 0 1.5rem;text-align: right;color: blue;cursor: pointer;">
-                <span id="addtravel">添加出行记录</span>
-            </p>
-
             <div style="height: 52px;">
                 <button type="button" class="btn btn-primary2" id="submit" style="margin-top: 10px;">确认<span class="en"
                         style="color: white;"></span></button>
@@ -394,43 +329,17 @@
     <script src="/public/js/jquery-3.1.1.min.js"></script>
     <script src="/public/js/jquery.mloading.js"></script>
     <script>
-        /**
-         * del dom
-         * */
-        function deldom(e) {
-            $(e).parent().prev().remove();
-            $(e).parent().remove();
-        }
-
-        let c_cdom = $('#travel').html();
-        $('#addtravel').click(function () {
-            let num = $('#travel div.content').length;
-            if (num > 2) {
-                alert('出行记录最多添加3次');
-            } else {
-                $('#travel').append(c_cdom + `<p style="padding: 0 1.5rem;margin-bottom: 5px;text-align: left;"><span style="color: red;" onclick="deldom(this)">删除</span></p>`);
-            }
-        })
-
-
         $('#submit').click(function () {
             var sex = $($('#sex input:radio:checked')[0]).val();
-            var wuhan = $($('#type input:radio:checked')[0]).val();
             var name = $('#name').val();
             var dep = $('#nationality').val();
             var clas = $('#clas').val();
             var sid = $('#idcard').val();
-            var city = $('#city').val();
             var password = $('#password').val();
             var n_pass = $('#npass').val();
 
             if (name == '') {
                 alert('姓名不能为空');
-                return;
-            }
-
-            if (city == '') {
-                alert('请输入您目前所在城市');
                 return;
             }
 
@@ -444,11 +353,6 @@
                 return;
             }
 
-            let travel = getTravel();
-            if (!travel) {
-                return;
-            }
-
             $('.ibox-content').mLoading({
                 text: "上传中...",
             });
@@ -459,14 +363,11 @@
                 dataType: 'json',
                 data: {
                     name: name,
-                    wuhan: wuhan,
                     sex: sex,
                     clas: clas,
                     studentid: sid,
-                    city: city,
                     password: password,
                     department: dep,
-                    travel: JSON.stringify(travel)
                 },
                 success: function (data) {
                     $('.ibox-content').mLoading('hide');
@@ -480,64 +381,9 @@
                 error: function (data) {
                     err(data);
                     $('.ibox-content').mLoading('hide');
-
                 }
             });
-        })
-
-        /**
-         * 获取出行记录
-         * */
-        function getTravel() {
-            let doms = $('#travel div.content');
-            let arr = [];
-            let tag = true;
-            doms.map(function (e) {
-                let ele = doms[e];
-                let obj = {
-                    purpose: $(ele).find('.purpose').val(),
-                    way: $(ele).find('.way').val(),
-                    trains1: $(ele).find('.trains1').val(),
-                    start_time: $(ele).find('.start_time').val(),
-                    en_time: $(ele).find('.en_time').val(),
-                    trains2: $(ele).find('.trains2').val(),
-                    note: $(ele).find('.note').val(),
-                };
-                if (valedDom(obj)) {
-                    arr.push(obj);
-                } else {
-                    tag = false;
-                }
-            });
-            if (tag) {
-                return arr;
-            } else {
-                return false;
-            }
-        }
-
-        /**
-         * 校验填写的出行信息
-         * */
-        function valedDom(object) {
-            let tag = true;
-            for (const key in object) {
-                if (object.hasOwnProperty(key)) {
-                    const element = object[key];
-                    if (key != 'note') {
-                        if (element == '') {
-                            tag = false;
-                            alert('请查看您的出行信息中是否有未填项');
-                            return;
-                        } else if (element.length > 20) {
-                            alert('避免您的出行信息过长');
-                            return;
-                        }
-                    }
-                }
-            }
-            return tag;
-        }
+        });
 
         function err(data) {
             if (data.responseJSON.code === 'ER_DUP_ENTRY') {

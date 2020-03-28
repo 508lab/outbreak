@@ -8,8 +8,5 @@ const entryvalipass = {
     conpassword: 'string',
 }
 
-const entryvaltravel = {
-    travel: 'string',
-}
 
-module.exports = { entryvalitemp, entryvalipass, entryvaltravel };
+module.exports = { entryvalitemp, entryvalipass };

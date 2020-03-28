@@ -1,6 +1,5 @@
 const Service = require('egg').Service;
 const Tool = require('../global/tool');
-const ClasDeartment = require('../global/clasdepartment');
 const TABLE = "user";
 
 class UserService extends Service {
@@ -56,23 +55,6 @@ class UserService extends Service {
     }
 
     /**
-     * 获取所有班级的信息
-     */
-    async clas() {
-        let arr = [];
-        for (const key in ClasDeartment) {
-            if (ClasDeartment.hasOwnProperty(key)) {
-                const element = ClasDeartment[key];
-                arr = arr.concat({
-                    clas: element,
-                    dep: key,
-                });
-            }
-        }
-        return arr;
-    }
-
-    /**
      * 获取该班级学生信息并获取当天的体温记录
      */
     async findByClas(name, department, time) {
@@ -89,35 +71,6 @@ class UserService extends Service {
     }
 
     /**
-     * 统计去过武汉的数据
-     * @param {*} type 1: 有  0: 没有 
-     * @param {*} where
-     */
-    async findWuHan(where) {
-        const sql = `SELECT ELT( INTERVAL( wuhan, 0, 1 ) ,  'y',  'n' ) AS  'data', COUNT( * ) AS  'num'
-            FROM user
-            WHERE ${where}
-            GROUP BY ELT( INTERVAL( wuhan, 0, 1 ) ,  '1',  'n' ) `;
-        return await this.app.mysql.query(sql);
-    }
-
-    /**
-     * 更新用户的出行记录
-     * @param {*} id 
-     * @param {*} data
-     */
-    async updateTravel(id, data) {
-        const options = {
-            where: {
-                id: id,
-            }
-        };
-        const result = await this.app.mysql.update(TABLE, data, options);
-        return result.affectedRows === 1;
-    }
-
-
-    /**
      * 根据时间与班级并获取当天的体温记录
     */
     async findByClasAndTime(name, department, time) {
@@ -128,7 +81,7 @@ class UserService extends Service {
     async findClasData(department, clas) {
         return await this.app.mysql.select(TABLE, {
             where: { department: department, clas: clas },
-            columns: ['name', 'id', 'studentid', 'wuhan', 'sex', 'department', 'clas', 'city' ,'travel'],
+            columns: ['name', 'id', 'studentid', 'sex', 'department', 'clas'],
         });
     }
 }

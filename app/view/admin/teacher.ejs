@@ -47,7 +47,7 @@
                         <div class="form-group">
                             <select class="custom-select" id="departmentsSelect" style="width: 100%;">
                                 <%for(var i=0;i < departments.length; i++){%>
-                                    <option value="<%= departments[i] %>"><%= departments[i] %></option>
+                                <option value="<%= departments[i] %>"><%= departments[i] %></option>
                                 <%}%>
                             </select>
                         </div>
@@ -61,23 +61,17 @@
                         <button type="button" class="btn btn-primary2" id="submit" style="height: 70%;">提交</button>
                     </div>
                 </div>
-
-
-
                 <div class="row">
                     <div class="col-lg-12">
                         <table id="example" class="display" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>姓名</th>
-                                    <th>是否去过武汉</th>
                                     <th>性别</th>
                                     <th>所在系</th>
                                     <th>工号</th>
-                                    <th>目前所在城市</th>
                                     <th>目前温度</th>
                                     <td>重置密码</td>
-                                    <th>出行记录</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
@@ -85,13 +79,6 @@
                                 <%for(var i=0;i < data.length; i++){%>
                                 <tr>
                                     <td><%= data[i].name %></td>
-
-                                    <% if (data[i].wuhan == 0) { %>
-                                    <td>是</td>
-                                    <% } else { %>
-                                    <td>否</td>
-                                    <% } %>
-
                                     <% if (data[i].sex == 0) { %>
                                     <td>男</td>
                                     <% } else { %>
@@ -99,179 +86,108 @@
                                     <% } %>
                                     <td><%= data[i].department %></td>
                                     <td><%= data[i].studentid %></td>
-                                    <td><%= data[i].city %></td>
-                                    
                                     <td><%= data[i].record %></td>
                                     <td><button data-studentid="<%= data[i].studentid %>" type="button"
-                                        class="btn btn-primary npass">重置</button></td>
-                                    <td>
-                                        <button data-username="<%= data[i].name %>" data-travel="<%= data[i].travel %>"
-                                            type="button" class="btn btn-primary travel">显示</button>
-                                    </td>
+                                            class="btn btn-primary npass">重置</button></td>
                                     <th><a href="/admin/user/teacher/info?sid=<%= data[i].id %>&n=<%= data[i].name %>"
                                             target="_blank">体温记录</a>
-                                        </th>
+                                    </th>
                                 </tr>
                                 <%}%>
                             </tbody>
       
                         </table>
-                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalCenterTitle">出行记录</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body" id="travel-body">
-                 
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                </div>
-              </div>
-            </div>
-          </div>
+    
         <% include /adminpartial/footer.ejs %>
-                    </div>
-                </div>
+                        </div>
 
-                <script src="/public/js/popper.min.js"></script>
-                <script src="/public/js/bootstrap.min.js"></script>
-                <script src="/public/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-                <script src="/public/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-                <script src="/public/js/inspinia.js"></script>
-                <script src="/public/js/plugins/pace/pace.min.js"></script>
-                <script src="/public/js/moment.min.js"></script>
-                <script src="/public/js/kalendae.min.js"></script>
-                <script src="/public/js/plugins/dataTables/datatables.min.js"></script>
-                <script src="/public/js/plugins/dataTables/dataTables.buttons.min.js"></script>
-                <script src="/public/js/plugins/dataTables/buttons.flash.min.js"></script>
-                <script src="/public/js/plugins/dataTables/jszip.min.js"></script>
-                <script src="/public/js/plugins/dataTables/pdfmake.min.js"></script>
-                <script src="/public/js/plugins/dataTables/vfs_fonts.js"></script>
-                <script src="/public/js/plugins/dataTables/buttons.html5.min.js"></script>
-                <script>
-                    $(document).ready(function () {
-                        var k4 = new Kalendae.Input('input1', {
-                            months: 2,
-                            mode: 'range',
-                            selected: ['<%= starttime %>', '<%= endtime %>'],
-                            closeOnSelection: true,
-                        });
-                        $('#departmentsSelect').val('<%= department %>');
+                        <script src="/public/js/popper.min.js"></script>
+                        <script src="/public/js/bootstrap.min.js"></script>
+                        <script src="/public/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+                        <script src="/public/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+                        <script src="/public/js/inspinia.js"></script>
+                        <script src="/public/js/plugins/pace/pace.min.js"></script>
+                        <script src="/public/js/moment.min.js"></script>
+                        <script src="/public/js/kalendae.min.js"></script>
+                        <script src="/public/js/plugins/dataTables/datatables.min.js"></script>
+                        <script src="/public/js/plugins/dataTables/dataTables.buttons.min.js"></script>
+                        <script src="/public/js/plugins/dataTables/buttons.flash.min.js"></script>
+                        <script src="/public/js/plugins/dataTables/jszip.min.js"></script>
+                        <script src="/public/js/plugins/dataTables/pdfmake.min.js"></script>
+                        <script src="/public/js/plugins/dataTables/vfs_fonts.js"></script>
+                        <script src="/public/js/plugins/dataTables/buttons.html5.min.js"></script>
+                        <script>
+                            $(document).ready(function () {
+                                var k4 = new Kalendae.Input('input1', {
+                                    months: 2,
+                                    mode: 'range',
+                                    selected: ['<%= starttime %>', '<%= endtime %>'],
+                                    closeOnSelection: true,
+                                });
+                                $('#departmentsSelect').val('<%= department %>');
 
-                        $('<div class="btnbox"><a class="k-submit">确定</a></div>').appendTo(".kalendae");
-                        $(".k-submit").click(function () {
-                            k4.hide();
-                        });
+                                $('<div class="btnbox"><a class="k-submit">确定</a></div>').appendTo(".kalendae");
+                                $(".k-submit").click(function () {
+                                    k4.hide();
+                                });
 
-                        /**
-                         * 重置密码
-                         * */
-                         $('.npass').click(function (e) {
-                            let studentid = $(e.target).data('studentid');
-                            $('.ibox-content').mLoading({
-                                text: "修改密码中...",
+                                /**
+                                 * 重置密码
+                                 * */
+                                $('.npass').click(function (e) {
+                                    let studentid = $(e.target).data('studentid');
+                                    $('.ibox-content').mLoading({
+                                        text: "修改密码中...",
+                                    });
+                                    $.ajax({
+                                        url: "/admin/user/teacher/cpass",
+                                        type: "PUT",
+                                        dataType: 'json',
+                                        data: {
+                                            studentid: studentid
+                                        },
+                                        success: function (data) {
+                                            $('.ibox-content').mLoading('hide');
+                                            if (data.code === 1) {
+                                                alert('修改成功,密码为：123456');
+                                            } else {
+                                                alert(data.err);
+                                            }
+                                        },
+
+                                        error: function (data) {
+                                            err(data);
+                                            $('.ibox-content').mLoading('hide');
+
+                                        }
+                                    });
+                                })
+                                //配置DataTables默认参数
+                                $.extend(true, $.fn.dataTable.defaults, {
+                                    "language": {
+                                        "url": "/public/language/Chinese.txt"
+                                    },
+                                    "dom": "l<'#toolbar'>frtip"
+                                });
+
+                                $('#example').DataTable({
+                                    dom: 'Bfrtip',
+                                    buttons: [
+                                        'excel', 'pdf',
+                                    ]
+                                });
+
+                                $('#submit').click(function () {
+                                    var times = $("#input1").val().split(" 至 ");
+                                    var department = $('#departmentsSelect').find("option:selected").val();
+                                    window.location.href = '/admin/user/teacher?department=' + department + '&starttime=' + times[0] + '&endtime=' + times[1]
+                                });
                             });
-                            $.ajax({
-                                url: "/admin/user/teacher/cpass",
-                                type: "PUT",
-                                dataType: 'json',
-                                data: {
-                                    studentid: studentid
-                                },
-                                success: function (data) {
-                                    $('.ibox-content').mLoading('hide');
-                                    if (data.code === 1) {
-                                        alert('修改成功,密码为：123456');
-                                    } else {
-                                        alert(data.err);
-                                    }
-                                },
-
-                                error: function (data) {
-                                    err(data);
-                                    $('.ibox-content').mLoading('hide');
-
-                                }
-                            });
-                        })
-                        //配置DataTables默认参数
-                        $.extend(true, $.fn.dataTable.defaults, {
-                            "language": {
-                                "url": "/public/language/Chinese.txt"
-                            },
-                            "dom": "l<'#toolbar'>frtip"
-                        });
-
-                        $('#example').DataTable({
-                            dom: 'Bfrtip',
-                            buttons: [
-                                'excel', 'pdf',
-                            ]
-                        });
-
-                        $('#submit').click(function () {
-                            var times = $("#input1").val().split(" 至 ");
-                            var department = $('#departmentsSelect').find("option:selected").val();
-                            window.location.href = '/admin/user/teacher?department=' + department + '&starttime=' + times[0] + '&endtime=' + times[1]
-                        });
-                        $('.travel').click(function (e) {
-                            $('#exampleModalCenter').modal('show');
-                            let arr = $(e.target).data('travel');
-                            let html = ``;
-                            arr.map(function (ele) {
-                                html += `<div class="content">
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>主要目的地 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="" class="form-control purpose" value="${ele.purpose}" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>出行方式 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="" class="form-control way" value="${ele.way}" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>车次 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="没有请填写无" class="form-control trains1" value="${ele.trains1}" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>出行时间 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="" class="form-control start_time" value="${ele.start_time}" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>返回时间 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="" class="form-control en_time" value="${ele.en_time}" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px">*</span>车次 <span
-                                class="en"></span>：</label>
-                        <input type="text" placeholder="没有请填写无" class="form-control trains2" value="${ele.trains2}" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label class="title"><span style="color:red;padding-right:5px"></span>备注<span
-                                class="en"></span>：</label>
-                        <textarea class="note" style="width: 100%;" disabled>${ele.note} </textarea>
-                    </div>
-                    <p style="width: 100%;height: 1px;background-color: #b3aba0;"></p>
-                </div>`;
-                            })
-                            $('#travel-body').html(html);
-                            $('#exampleModalCenterTitle').text($(e.target).data('username'));
-                        })
-
-                    });
-                </script>
+                        </script>
 </body>
 
 </html>

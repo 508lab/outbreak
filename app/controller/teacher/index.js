@@ -2,7 +2,7 @@
 
 const TeacherBaseController = require('../base/teacher');
 const { logindata } = require('../../validate/home');
-const { entryvalitemp, entryvalipass, entryvaltravel } = require('../../validate/user');
+const { entryvalitemp, entryvalipass } = require('../../validate/user');
 const ErrMsg = require('../../global/errmsg');
 const ClasDepartment = require('../../global/clasdepartment');
 const Tool = require('../../global/tool');
@@ -24,16 +24,10 @@ class TeacherController extends TeacherBaseController {
         } else {
             let info = ctx.request.body;
             ctx.validate(logindata, info);
-            ctx.coreLogger.info('---teacher-login---' + JSON.stringify(info));
             const user = await ctx.service.teacher.find(info);
             if (user && user.id) {
                 ctx.session.teacherid = user.id;
-                if (user.travel) {  //判断是否未提交出行信息
-                    ctx.body = { code: 1, data: 1 }
-                } else {
-                    ctx.body = { code: 1, data: 0 }
-                }
-
+                ctx.body = { code: 1, data: 1 }
             } else {
                 ctx.body = { code: 0, err: ErrMsg[9] };
             }
@@ -51,7 +45,6 @@ class TeacherController extends TeacherBaseController {
      */
     async index() {
         const { ctx } = this;
-
         const data = await ctx.service.teachertemp.findNow(ctx.session.teacherid);
         await ctx.render('/teacher/index.ejs', {
             data: data
@@ -63,27 +56,16 @@ class TeacherController extends TeacherBaseController {
      */
     async user() {
         const { ctx } = this;
-
         const user = await ctx.service.teacher.findById(ctx.session.teacherid);
         let type = '';
         if (ctx.query.type) {
-            type = ErrMsg[21]
+            type = ErrMsg[21];
         };
-        if (user.travel) {
-            await ctx.render('teacher/user.ejs', {
-                user: user,
-                travel: JSON.parse(user.travel),
-                deps: Object.keys(ClasDepartment),
-                type: type
-            });
-        } else {
-            await ctx.render('teacher/user.ejs', {
-                user: user,
-                travel: [],
-                deps: Object.keys(ClasDepartment),
-                type: type
-            });
-        }
+        await ctx.render('teacher/user.ejs', {
+            user: user,
+            deps: Object.keys(ClasDepartment),
+            type: type
+        });
     }
 
     /**
@@ -91,9 +73,8 @@ class TeacherController extends TeacherBaseController {
      */
     async updateuser() {
         const { ctx } = this;
-
         const info = ctx.request.body;
-        const result = await ctx.service.teacher.updateTravel(ctx.session.teacherid, info);
+        const result = await ctx.service.teacher.updateInfo(ctx.session.teacherid, info);
         if (result) {
             ctx.body = { code: 1 };
         } else {
@@ -103,7 +84,6 @@ class TeacherController extends TeacherBaseController {
 
     async temperature() {
         const { ctx } = this;
-
         const data = await ctx.service.teachertemp.data(ctx.session.teacherid);
         await ctx.render('teacher/temperature.ejs', {
             data: data
@@ -155,10 +135,6 @@ class TeacherController extends TeacherBaseController {
             ctx.body = { code: 0, err: ErrMsg[20] };
             return;
         }
-        ctx.coreLogger.info('---teacher-login---' + JSON.stringify({
-            id: ctx.session.teacherid,
-            record: record
-        }));
         //如果已经上传直接拒绝
         const data = await ctx.service.teachertemp.findNow(ctx.session.teacherid);
         if (data == 'undefined') {
@@ -205,11 +181,6 @@ class TeacherController extends TeacherBaseController {
 
         let res = await ctx.service.user.updatePassword(ctx.request.body.studentid, '123456');
         if (res) {
-            //记录修改密码的教师与学生
-            ctx.coreLogger.info('---teacher-cpass-studnet---' + JSON.stringify({
-                teacherid: ctx.session.teacherid,
-                studentid: ctx.request.body.studentid
-            }));
             ctx.body = { code: 1 };
         } else {
             ctx.body = { code: 0, err: ErrMsg[4] };

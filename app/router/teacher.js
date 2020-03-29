@@ -17,11 +17,17 @@ module.exports = app => {
     router.get('/teacher/mirror', controller.teacher.index.mirror);
 
     //关于学生部分
-
     router.get('/teacher/students', controller.teacher.students.students);
     router.put('/teacher/student', controller.teacher.students.edit);
     router.put('/teacher/students/password', controller.teacher.students.cpass);
     router.get('/teacher/students/index', controller.teacher.students.student);
     router.post('/teacher/students/index', controller.teacher.students.student);
     router.delete('/teacher/students/index', controller.teacher.students.student);
+
+
+    //关于文章部分
+    router.get('/teacher/students/article/list', controller.teacher.students.list);
+    router.get('/teacher/students/article', controller.teacher.students.article);
+    router.put('/teacher/students/article', controller.teacher.students.article);
+    router.delete('/teacher/students/article', controller.teacher.students.article);
 };

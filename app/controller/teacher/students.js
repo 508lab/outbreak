@@ -85,6 +85,35 @@ class StudentController extends TeacherBaseController {
             }
         }
     }
+
+    /**
+     * 教师管理学生文章
+     */
+    async article() {
+        const { ctx } = this;
+        const METHOD = ctx.request.method;
+        if (METHOD == 'GET') {
+            let d = ctx.request.query;
+            await ctx.render('/teacher/article.ejs');
+        } else if (METHOD == 'PUT') {
+
+        } else if (METHOD == 'DELETE') {
+
+        }
+    }
+    /**
+     * 文章列表
+     */
+    async list() {
+        const { ctx } = this;
+        let req = ctx.request.query;
+        const data = await ctx.service.article.alllist({}, parseInt(req.length), parseInt(req.start));
+        const len = await ctx.service.article.count();
+        ctx.body = {
+            draw: req.draw, start: req.start, length: req.length, recordsTotal: data.length, 
+            recordsFiltered: len[0]['count(*)'], data: data
+        };
+    }
 }
 
 module.exports = StudentController;

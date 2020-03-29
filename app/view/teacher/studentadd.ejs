@@ -162,6 +162,9 @@
                 alert('学号不能为空');
                 return;
             }
+            $('.wrapper-content').mLoading({
+                text: "加载中...",
+            });
             $.ajax({
                 url: "/teacher/students/index",
                 type: "POST",
@@ -174,6 +177,7 @@
                 },
                 dataType: 'JSON',
                 success: function (data) {
+                    $('.wrapper-content').mLoading('hide');
                     if (data.code === 1) {
                         alert('添加成功');
                         window.location.reload();
@@ -183,6 +187,7 @@
                 },
 
                 error: function (err) {
+                    $('.wrapper-content').mLoading('hide');
                     alert(err);
                 }
             });

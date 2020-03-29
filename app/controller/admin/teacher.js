@@ -55,7 +55,6 @@ class AdminTeacherController extends AdminBaseontroller {
         const { ctx } = this;
         const METHOD = ctx.request.method;
         if (METHOD == 'GET') {
-            console.log('aa')
             await ctx.render('/admin/teacheradd.ejs');
         } else if (METHOD == 'POST') { //添加教师
             const user = ctx.request.body;

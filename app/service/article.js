@@ -72,6 +72,23 @@ class ArticleService extends Service {
     }
 
     /**
+     * 管理员去修改文章信息
+     * @param {*} sid 
+     * @param {*} id 
+     * @param {*} info 
+     */
+    async editByTeacher(sid, id, info){
+        const options = {
+            where: {
+                id: id,
+                sid: sid
+            },
+        };
+        const result = await this.app.mysql.update(TABLE, info, options);
+        return result.affectedRows === 1;
+    }
+
+    /**
      * 根据id获取文章信息
      * @param {*} id 
      */

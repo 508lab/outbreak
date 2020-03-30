@@ -93,12 +93,21 @@ class StudentController extends TeacherBaseController {
         const { ctx } = this;
         const METHOD = ctx.request.method;
         if (METHOD == 'GET') {
-            let d = ctx.request.query;
             await ctx.render('/teacher/article.ejs');
         } else if (METHOD == 'PUT') {
-
+            let { id, audit, sid } = ctx.request.body;
+            if (await ctx.service.article.editByTeacher(sid, id, { audit: audit })) {
+                ctx.body = { code: 1 };
+            } else {
+                ctx.body = { code: 0, err: ErrMsg[4] };
+            }
         } else if (METHOD == 'DELETE') {
-
+            let { id, sid } = ctx.request.body;
+            if (await ctx.service.article.delete(id, sid)) {
+                ctx.body = { code: 1 };
+            } else {
+                ctx.body = { code: 0, err: ErrMsg[5] };
+            }
         }
     }
     /**
@@ -110,7 +119,7 @@ class StudentController extends TeacherBaseController {
         const data = await ctx.service.article.alllist({}, parseInt(req.length), parseInt(req.start));
         const len = await ctx.service.article.count();
         ctx.body = {
-            draw: req.draw, start: req.start, length: req.length, recordsTotal: data.length, 
+            draw: req.draw, start: req.start, length: req.length, recordsTotal: data.length,
             recordsFiltered: len[0]['count(*)'], data: data
         };
     }

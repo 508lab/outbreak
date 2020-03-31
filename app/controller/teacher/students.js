@@ -56,7 +56,7 @@ class StudentController extends TeacherBaseController {
     }
 
     /**
-     * 添加学生
+     * 对学生的操作
      */
     async student() {
         const { ctx } = this;
@@ -77,8 +77,7 @@ class StudentController extends TeacherBaseController {
             }
         } else if (METHOD == 'DELETE') {
             const sid = ctx.request.body.sid;
-            if (await ctx.service.temperature.deleteByStudentId(sid)) {
-                await ctx.service.students.delete(sid)
+            if (await ctx.service.students.delete(sid)) {
                 ctx.body = { code: 1 };
             } else {
                 ctx.body = { code: 0, err: ErrMsg[5] };

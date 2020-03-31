@@ -70,8 +70,7 @@ class AdminTeacherController extends AdminBaseontroller {
             }
         } else if (METHOD == 'DELETE') { //删除教师
             const sid = ctx.request.body.sid;
-            if (await ctx.service.teachertemp.deleteByStudentId(sid)) {
-                await ctx.service.teacher.delete(sid)
+            if (await ctx.service.teacher.delete(sid)) {
                 ctx.body = { code: 1 };
             } else {
                 ctx.body = { code: 0, err: ErrMsg[5] };

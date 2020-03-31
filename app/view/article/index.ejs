@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>文章</title>
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/jquery.mloading.css">
+    <style>
+        .wrap .item a {
+            width: 100%;
+            display: block;
+            margin: 0 auto;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                所以信息必须经过审核
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        <div class="row" style="width: 90%;margin: 0 auto;" id="content">
+        </div>
+        <div style="width: 90%;margin: 0 auto;text-align: center;margin-top: 1rem;">
+            <button type="button" class="btn btn-primary btn-sm" id="loading">加载更多</button>
+        </div>
+    </div>
+    <script src="/public/js/jquery-3.1.1.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="/public/js/moment.min.js"></script>
+    <script src="/public/js/jquery.mloading.js"></script>
+    <script>
+        let num = 0;
+        initView();
+
+        function initView() {
+            getData();
+        }
+
+        $('#loading').click(function () {
+            getData();
+        });
+
+        function getData() {
+            $('.wrap').mLoading({
+                text: "加载中...",
+            });
+            $.ajax({
+                url: `/article/list/data?limit=5&offset=${num}`,
+                type: 'get',
+                success(data) {
+                    $('.wrap').mLoading('hide');
+                    if (data.data.length === 0) {
+                        $('#loading').text('无更多内容');
+                        setTimeout(function () {
+                            $('#loading').hide();
+                        }, 1500)
+                        return;
+                    }
+                    fullView(data.data);
+                    num = num + 5;
+                },
+                error(err) {
+                    $('.wrap').mLoading('hide');
+                    alert(err);
+                }
+            });
+        }
+
+        function fullView(arr) {
+            let html = ``;
+            arr.map(function (ele) {
+                let time = moment(ele.time).format('YYYY-MM-DD');
+                html += ` <div class="col-lg-12 item">
+                <a class="btn btn-primary" data-toggle="collapse" href="#${ele.id}" role="button"
+                    aria-expanded="false" aria-controls="${ele.id}">${ele.title}</a>
+                <div class="collapse multi-collapse" id="${ele.id}">
+                    <div class="card card-body">
+                            ${ele.content}
+                        <footer class="blockquote-footer" style="text-align: right;">
+                            ${time}
+                            </footer>
+                    </div>
+                </div>
+            </div>`
+            })
+
+            $('#content').append(html);
+        }
+    </script>
+</body>
+
+</html>

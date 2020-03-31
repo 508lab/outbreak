@@ -31,10 +31,13 @@ class StudentsService extends Service {
      * @param {*} id 
      */
     async delete(id) {
-        const result = await this.app.mysql.delete(TABLE, {
-            id: id,
-        });
-        return result.protocol41;
+        const result = await this.app.mysql.beginTransactionScope(async conn => {
+            await this.app.mysql.delete('temperature', { sid: id });
+            await this.app.mysql.delete('article', { sid: id });
+            await conn.delete(TABLE, { id: id });
+            return { success: true };
+        }, this.ctx);
+        return result.success;
     }
 
     /**

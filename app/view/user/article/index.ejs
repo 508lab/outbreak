@@ -66,6 +66,9 @@
                                     <% if (data[i].audit == 1) { %>
                                     <td>通过</td>
                                     <% } %>
+                                    <% if (data[i].audit == 2) { %>
+                                    <td>拒绝</td>
+                                    <% } %>
                                     <td>
                                         <button type="button" class="btn btn-primary">
                                             <a href="/info/article/edit?id=<%= data[i].id %>" target="_blank">编辑</a>

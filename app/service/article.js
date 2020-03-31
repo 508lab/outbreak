@@ -43,7 +43,7 @@ class ArticleService extends Service {
      * @param {*} limit 
      * @param {*} offset 
      */
-    async alllist(where = {}, limit = 10, offset = 0){
+    async alllist(where, limit = 10, offset = 0){
         return await this.app.mysql.select(TABLE, {
             where: where,
             orders: [['audit','asc'], ['time','desc']],

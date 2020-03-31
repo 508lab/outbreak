@@ -79,7 +79,7 @@ class TeacherService extends Service {
     /**
      * 获取所有教师的信息
      */
-    async list(){
+    async list() {
         return await this.app.mysql.select(TABLE, {
             columns: ['name', 'sex', 'department', 'studentid', 'id'],
         });
@@ -90,7 +90,7 @@ class TeacherService extends Service {
      * @param {*} id 
      * @param {*} info 
      */
-    async edit(id, user){
+    async edit(id, user) {
         const options = {
             where: {
                 id: id,
@@ -105,10 +105,12 @@ class TeacherService extends Service {
      * @param {*} id 
      */
     async delete(id) {
-        const result = await this.app.mysql.delete(TABLE, {
-            id: id,
-        });
-        return result.protocol41;
+        const result = await this.app.mysql.beginTransactionScope(async conn => {
+            await await this.app.mysql.delete('teachertemp', { sid: id });
+            await conn.delete(TABLE, { id: id });
+            return { success: true };
+        }, this.ctx);
+        return result.success;
     }
 
 }

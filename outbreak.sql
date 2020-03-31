@@ -50,6 +50,37 @@ INSERT INTO `admin` VALUES (1,'admin','123456',0);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `article`
+--
+
+DROP TABLE IF EXISTS `article`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `article` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` char(250) NOT NULL,
+  `content` text NOT NULL,
+  `time` date NOT NULL,
+  `tag` char(100) DEFAULT NULL,
+  `sid` int(11) NOT NULL,
+  `audit` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `sid` (`sid`),
+  CONSTRAINT `article_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `students` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='utf8_general_ci';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `article`
+--
+
+LOCK TABLES `article` WRITE;
+/*!40000 ALTER TABLE `article` DISABLE KEYS */;
+INSERT INTO `article` VALUES (4,'测试文章','<p>这是测试文章</p><figure class=\"image\"><img src=\"/public/article/22/1585481921701user.png\"></figure>','2020-03-30','[\"0\",\"1\",\"3\"]',22,1),(5,'test','<p>123123123</p>','2020-03-29','[\"0\"]',22,1),(6,'2','<p>123123</p>','2020-03-29','[\"0\"]',22,2),(9,'5','<p>12312</p>','2020-03-29','[\"0\"]',22,0),(10,'5151241','<p>123123</p>','2020-03-29','[\"0\"]',22,0),(11,'123123','<p>124124124</p>','2020-03-29','[\"0\"]',22,0),(12,'12312','<p>312312</p>','2020-03-29','[\"0\"]',22,0),(13,'412412','<p>312312312</p>','2020-03-29','[\"0\"]',22,0),(14,'12312','<p>3123123</p>','2020-03-29','[\"0\"]',22,0),(15,'12312','<p>3123123</p>','2020-03-29','[\"0\"]',22,0),(16,'1231','<p>23123</p>','2020-03-29','[\"0\"]',22,0);
+/*!40000 ALTER TABLE `article` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `students`
 --
 
@@ -97,7 +128,7 @@ CREATE TABLE `teacher` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
   UNIQUE KEY `studentid` (`studentid`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='utf8_general_ci';
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COMMENT='utf8_general_ci';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,7 +137,7 @@ CREATE TABLE `teacher` (
 
 LOCK TABLES `teacher` WRITE;
 /*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
-INSERT INTO `teacher` VALUES (25,'老师',1,'信息工程系',123456,'c602e848d382024feb75f90b10425a86');
+INSERT INTO `teacher` VALUES (28,'123456',1,'信息工程系',123456,'c602e848d382024feb75f90b10425a86');
 /*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -126,7 +157,7 @@ CREATE TABLE `teachertemp` (
   UNIQUE KEY `id` (`id`),
   KEY `studentid` (`sid`),
   CONSTRAINT `teachertemp_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `teacher` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +166,7 @@ CREATE TABLE `teachertemp` (
 
 LOCK TABLES `teachertemp` WRITE;
 /*!40000 ALTER TABLE `teachertemp` DISABLE KEYS */;
-INSERT INTO `teachertemp` VALUES (17,25,36,'2020-03-28');
+INSERT INTO `teachertemp` VALUES (19,28,37,'2020-03-31');
 /*!40000 ALTER TABLE `teachertemp` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,7 +186,7 @@ CREATE TABLE `temperature` (
   UNIQUE KEY `id` (`id`),
   KEY `studentid` (`sid`),
   CONSTRAINT `temperature_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `students` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -176,4 +207,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-28 22:12:11
+-- Dump completed on 2020-03-31 22:21:41

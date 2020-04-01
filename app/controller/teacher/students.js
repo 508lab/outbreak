@@ -56,7 +56,7 @@ class StudentController extends TeacherBaseController {
     }
 
     /**
-     * 添加学生
+     * 对学生的操作
      */
     async student() {
         const { ctx } = this;
@@ -77,13 +77,50 @@ class StudentController extends TeacherBaseController {
             }
         } else if (METHOD == 'DELETE') {
             const sid = ctx.request.body.sid;
-            if (await ctx.service.temperature.deleteByStudentId(sid)) {
-                await ctx.service.students.delete(sid)
+            if (await ctx.service.students.delete(sid)) {
                 ctx.body = { code: 1 };
             } else {
                 ctx.body = { code: 0, err: ErrMsg[5] };
             }
         }
+    }
+
+    /**
+     * 教师管理学生文章
+     */
+    async article() {
+        const { ctx } = this;
+        const METHOD = ctx.request.method;
+        if (METHOD == 'GET') {
+            await ctx.render('/teacher/article.ejs');
+        } else if (METHOD == 'PUT') {
+            let { id, audit, sid } = ctx.request.body;
+            if (await ctx.service.article.editByTeacher(sid, id, { audit: audit })) {
+                ctx.body = { code: 1 };
+            } else {
+                ctx.body = { code: 0, err: ErrMsg[4] };
+            }
+        } else if (METHOD == 'DELETE') {
+            let { id, sid } = ctx.request.body;
+            if (await ctx.service.article.delete(id, sid)) {
+                ctx.body = { code: 1 };
+            } else {
+                ctx.body = { code: 0, err: ErrMsg[5] };
+            }
+        }
+    }
+    /**
+     * 文章列表
+     */
+    async list() {
+        const { ctx } = this;
+        let req = ctx.request.query;
+        const data = await ctx.service.article.alllist({}, parseInt(req.length), parseInt(req.start));
+        const len = await ctx.service.article.count();
+        ctx.body = {
+            draw: req.draw, start: req.start, length: req.length, recordsTotal: data.length,
+            recordsFiltered: len[0]['count(*)'], data: data
+        };
     }
 }
 

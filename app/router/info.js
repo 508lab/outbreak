@@ -17,5 +17,18 @@ module.exports = app => {
     router.post('/info/temperature', controller.student.index.temp);
     router.get('/info/password', controller.student.index.password);
     router.post('/info/password', controller.student.index.cpass);
+
+    //学习资源
     router.get('/info/mirror', controller.student.index.mirror);
+
+    //文章中心
+
+    router.get('/info/article', controller.student.article.index);
+    router.get('/info/article/edit', controller.student.article.info);
+    
+    router.post('/info/article/upload', controller.student.article.upload);
+    router.get('/info/article/index', controller.student.article.article);
+    router.post('/info/article/index', controller.student.article.article);
+    router.put('/info/article/index', controller.student.article.article);
+    router.delete('/info/article/index', controller.student.article.article);
 };

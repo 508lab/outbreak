@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
+    <title>晋城职业技术学院-添加文章</title>
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/public/css/animate.css" rel="stylesheet">
+    <link href="/public/css/style.css" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+    <script src="/public/js/jquery-3.1.1.min.js"></script>
+    <style>
+        .ck-content {
+            min-height: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <% include /userpartial/nav.ejs %>
+        <script>
+            var activity = "article-add";
+            $('#side-menu .' + activity).addClass('active');
+            $($('#side-menu .' + activity).parent().parent()[0]).addClass('active');
+        </script>
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <% include /userpartial/header.ejs %>
+            </div>
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-info alert-dismissible" role="alert"><button type="button" class="close"
+                                data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> <span
+                                id="tip">添加之后后台将会审核，审核成功之后才会在页面中显示</span></div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="title" style="margin-top: 10px;"><span
+                                    style="color:red;padding-right:5px">*</span>标题 <span class="en"></span>：</label>
+                            <input type="text" placeholder="" class="form-control" id="title">
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="title" style="margin-top: 10px;"><span
+                                    style="color:red;padding-right:5px">*</span>标签 <span class="en"></span>：</label>
+                            <select id="tags" class="form-control" multiple>
+                                <option value="0" selected>学习</option>
+                                <option value="1">生活</option>
+                                <option value="2">交易</option>
+                                <option value="3">其他</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div id="editor"></div>
+                    </div>
+                    <div class="col-lg-12" style="margin-top: 10px;">
+                        <button type="button" class="btn btn-primary" id="add">提交</button>
+                    </div>
+                </div>
+            </div>
+            <% include /userpartial/footer.ejs %>
+        </div>
+    </div>
+
+    <script src="/public/js/popper.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="/public/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/public/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/public/js/inspinia.js"></script>
+    <script src="/public/js/plugins/pace/pace.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script>
+    <script>
+        $('#tags').selectpicker();
+        let meditor = null;
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                removePlugins: ["MediaEmbed"],
+                language: "zh-cn", // 中文
+                ckfinder: {
+                    uploadUrl: "/info/article/upload"
+                }
+            }).then(editor => {
+                meditor = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        $('#add').click(function () {
+            let title = $('#title').val();
+            let tags = $('#tags').selectpicker('val');
+            let content = meditor.getData();
+            if (title === '') {
+                alert('标题不能为空！');
+                return;
+            }
+            if (title.length > 20) {
+                alert('标题不能多于20个字！');
+            }
+            if (content === '') {
+                alert('内容不能为空！');
+                return;
+            }
+            $('#page-wrapper').mLoading({
+                text: "上传中...",
+            });
+            $.ajax({
+                url: "/info/article/index",
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    title: title,
+                    tag: JSON.stringify(tags),
+                    content: content
+                },
+                success: function (data) {
+                    $('#page-wrapper').mLoading('hide');
+                    if (data.code === 1) {
+                        alert('添加成功');
+                        setTimeout(function (params) {
+                            window.location.reload();
+                        }, 100);
+                    } else {
+                        alert(data.err);
+                    }
+                },
+
+                error: function (data) {
+                    $('#page-wrapper').mLoading('hide');
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>

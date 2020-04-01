@@ -172,6 +172,9 @@
                             if (is_del !== '是' || is_del == undefined) {
                                 return;
                             }
+                            $('.wrapper-content').mLoading({
+                                text: "删除中...",
+                            });
                             $.ajax({
                                 url: "/admin/user/teacher/index",
                                 type: "DELETE",
@@ -179,6 +182,7 @@
                                     sid: sid
                                 },
                                 success: function (data) {
+                                    $('.wrapper-content').mLoading('hide');
                                     if (data.code === 1) {
                                         alert('删除成功');
                                         $(e.target).parent().parent().remove();
@@ -188,6 +192,7 @@
                                 },
 
                                 error: function (err) {
+                                    $('.wrapper-content').mLoading('hide');
                                     console.error(err);
                                 }
                             });
@@ -207,6 +212,9 @@
                                 alert('学号不能为空');
                                 return;
                             }
+                            $('.wrapper-content').mLoading({
+                                text: "修改中...",
+                            });
                             $.ajax({
                                 url: "/admin/user/teacher/index",
                                 type: "PUT",
@@ -221,6 +229,7 @@
                                 },
                                 dataType: 'JSON',
                                 success: function (data) {
+                                    $('.wrapper-content').mLoading('hide');
                                     if (data.code === 1) {
                                         alert('修改成功');
                                         window.location.reload();
@@ -230,6 +239,7 @@
                                 },
 
                                 error: function (err) {
+                                    $('.wrapper-content').mLoading('hide');
                                     alert(err);
                                 }
                             });

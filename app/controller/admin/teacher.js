@@ -55,7 +55,6 @@ class AdminTeacherController extends AdminBaseontroller {
         const { ctx } = this;
         const METHOD = ctx.request.method;
         if (METHOD == 'GET') {
-            console.log('aa')
             await ctx.render('/admin/teacheradd.ejs');
         } else if (METHOD == 'POST') { //添加教师
             const user = ctx.request.body;
@@ -71,8 +70,7 @@ class AdminTeacherController extends AdminBaseontroller {
             }
         } else if (METHOD == 'DELETE') { //删除教师
             const sid = ctx.request.body.sid;
-            if (await ctx.service.teachertemp.deleteByStudentId(sid)) {
-                await ctx.service.teacher.delete(sid)
+            if (await ctx.service.teacher.delete(sid)) {
                 ctx.body = { code: 1 };
             } else {
                 ctx.body = { code: 0, err: ErrMsg[5] };

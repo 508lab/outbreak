@@ -37,7 +37,7 @@ $ "MariaDB": ">=10.0.38"
     + 体温填报
     + 学生管理
     + 学习资源管理
-    + 文章管理
+    + 文章管理(审核)
 - 学生客户端
     + 体温填报
     + 学习资源的下载
@@ -68,5 +68,7 @@ $ "MariaDB": ">=10.0.38"
 - Use `npm test` to run unit test.
 - Use `npm run autod` to auto detect dependencies upgrade, see [autod](https://www.npmjs.com/package/autod) for more detail.
 
+### License
+采用 [MIT](./LICENSE) 开源许可证，你可以在商业项目中免费使用或者二次开发而不必支付费用。
 
 [egg]: https://eggjs.org

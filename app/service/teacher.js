@@ -106,7 +106,7 @@ class TeacherService extends Service {
      */
     async delete(id) {
         const result = await this.app.mysql.beginTransactionScope(async conn => {
-            await await this.app.mysql.delete('teachertemp', { sid: id });
+            await conn.delete('teachertemp', { sid: id });
             await conn.delete(TABLE, { id: id });
             return { success: true };
         }, this.ctx);

@@ -17,6 +17,10 @@ class _tool {
         return sign;
     }
 
+    /**
+     * 解密
+     * @param {*} str 
+     */
     decryption(str) {
         let src = '';
         const cipher = crypto.createDecipheriv('aes-128-cbc', Buffer.from(SECRET), Buffer.from(IV));
@@ -30,7 +34,10 @@ class _tool {
      * @param {*} filePath 
      */
     async  rmdirAsync(filePath) {
-        let stat = await fs.statSync(filePath)
+        if (!await fs.existsSync(filePath)) {
+            return;
+        }
+        let stat = await fs.statSync(filePath);
         if (stat.isFile()) {
             await fs.unlinkSync(filePath)
         } else {
@@ -40,6 +47,29 @@ class _tool {
             await fs.rmdirSync(filePath)
         }
     }
+
+    /**
+     * 获取img中的src
+     * @param {*} path 
+     * @param {*} str 
+     */
+    getImgSrc(path, str) {
+        let arr = str.match(/src=[\'\"]?([^\'\"]*)[\'\"]?/ig);
+        return arr.map(function (ele) {
+            return path + ele.slice(5, ele.length - 1);
+        });
+    }
+
+    /**
+     * delete 文件
+     * @param {*} files 
+     */
+    async delFile(files) {
+        for (let index = 0; index < files.length; index++) {
+            await fs.unlinkSync(files[index]);
+        }
+    }
+
 }
 
 function getInstance() {

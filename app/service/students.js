@@ -1,5 +1,6 @@
 const Service = require('egg').Service;
 const Tool = require('../global/tool');
+const fs = require('fs');
 const TABLE = "students";
 
 class StudentsService extends Service {
@@ -31,12 +32,16 @@ class StudentsService extends Service {
      * @param {*} id 
      */
     async delete(id) {
+        const articles = await this.app.mysql.select('article', { where: { sid: id } });
         const result = await this.app.mysql.beginTransactionScope(async conn => {
-            await this.app.mysql.delete('temperature', { sid: id });
-            await this.app.mysql.delete('article', { sid: id });
+            await conn.delete('temperature', { sid: id });
+            await conn.delete('article', { sid: id });
             await conn.delete(TABLE, { id: id });
             return { success: true };
         }, this.ctx);
+        if (result.success) {
+            await Tool.rmdirAsync(`${this.app.baseDir}/app/public/article/${id}/`);
+        }
         return result.success;
     }
 

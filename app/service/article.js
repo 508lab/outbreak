@@ -1,4 +1,5 @@
 const Service = require('egg').Service;
+const Tool = require('../global/tool');
 const TABLE = "article";
 
 /**
@@ -33,7 +34,7 @@ class ArticleService extends Service {
     /**
      * 获取总量
      */
-    async count(){
+    async count() {
         return await this.app.mysql.query(`select count(*) from ${TABLE}`);
     }
 
@@ -43,11 +44,11 @@ class ArticleService extends Service {
      * @param {*} limit 
      * @param {*} offset 
      */
-    async alllist(where, limit = 10, offset = 0){
+    async alllist(where, limit = 10, offset = 0) {
         return await this.app.mysql.select(TABLE, {
             where: where,
-            orders: [['audit','asc'], ['time','desc']],
-            limit: limit, 
+            orders: [['audit', 'asc'], ['time', 'desc']],
+            limit: limit,
             offset: offset,
         });
     }
@@ -77,7 +78,7 @@ class ArticleService extends Service {
      * @param {*} id 
      * @param {*} info 
      */
-    async editByTeacher(sid, id, info){
+    async editByTeacher(sid, id, info) {
         const options = {
             where: {
                 id: id,
@@ -103,10 +104,14 @@ class ArticleService extends Service {
      */
     async delete(id, sid) {
         //此处需要删除对应文章的图片
+        const article = await this.app.mysql.get(TABLE, { id: id });
         const result = await this.app.mysql.delete(TABLE, {
             id: id,
             sid: sid
         });
+        if (result.protocol41) {
+            Tool.delFile(Tool.getImgSrc(this.app.baseDir + '/app', article.content));
+        }
         return result.protocol41;
     }
 }

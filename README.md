@@ -56,6 +56,7 @@ $ "MariaDB": ">=10.0.38"
     - [链接](http://uname.dongkji.com/admin/login)
 
 ### 问题
+- 修改当前的系和班级名称：/app/global/clasdepartment.js
 - 学生数据很多时候都需要一次性导入(直接使用代码或者工具导入即可)
 - 如果遇到问题或者需求请联系我qq：2833324528@qq.com
 

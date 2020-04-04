@@ -21,6 +21,7 @@ $ npm stop
 ```
 $ ./bin/jmeter -n -t 文件路径1/疫情填报系统测试.jmx -l 文件路径2/html.csv -e -o 文件路径
 $ 注：测试使用的技术为-> jmeter
+$ 本人精力有限,测试更新会慢很多
 ```
 
 使用到的技术
@@ -36,9 +37,11 @@ $ "MariaDB": ">=10.0.38"
     + 体温填报
     + 学生管理
     + 学习资源管理
+    + 文章管理(审核)
 - 学生客户端
     + 体温填报
     + 学习资源的下载
+    + 发布文章
 - 待续(欢迎PR)
 
 ### 测试帐号
@@ -66,5 +69,7 @@ $ "MariaDB": ">=10.0.38"
 - Use `npm test` to run unit test.
 - Use `npm run autod` to auto detect dependencies upgrade, see [autod](https://www.npmjs.com/package/autod) for more detail.
 
+### License
+采用 [MIT](./LICENSE) 开源许可证，你可以在商业项目中免费使用或者二次开发而不必支付费用。
 
 [egg]: https://eggjs.org

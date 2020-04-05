@@ -20,7 +20,7 @@
     <div id="wrapper">
         <% include /adminpartial/nav.ejs %>
         <script>
-            var activity = "home";
+            var activity = "clasdep";
             $('#side-menu .' + activity).addClass('active');
             $($('#side-menu .' + activity).parent().parent()[0]).addClass('active');
         </script>
@@ -30,8 +30,7 @@
             </div>
 
             <div class="wrapper wrapper-content animated fadeInRight">
-                <div class="row">
-                    <h1>管理中心</h1>
+                <div class="row" id="content">
                 </div>
             </div>
             <% include /adminpartial/footer.ejs %>
@@ -45,6 +44,44 @@
     <script src="/public/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <script src="/public/js/inspinia.js"></script>
     <script src="/public/js/plugins/pace/pace.min.js"></script>
+    <script>
+        let allData = {};
+        $.ajax({
+            url: "/clasdepartment",
+            type: "GET",
+            success: function (data) {
+                allData = data.data;
+                fullView(data.data);
+            },
+
+            error: function (err) {
+                console.error(err);
+            }
+        });
+
+        function fullView(data) {
+            let html = ''
+            Object.keys(data).map(function (e1, i1) {
+                let html_2 = '';
+                data[e1].map(function (e2, i2) {
+                    html_2 += `
+                        <input type="text" class="form-control" value="${e2}">
+                       `
+                });
+                console.log(html_2)
+                html += `<div class="col-lg-8"><p>
+                            <a class="btn btn-primary" data-toggle="collapse" href="#${i1}" role="button"
+                                aria-expanded="false" aria-controls="${i1}">${e1}</a></p>
+                                <div class="collapse" id="${i1}">
+                                        <div class="card card-body">
+                        ${html_2}
+                    </div>
+                    </div>
+                    </div>`
+            });
+            $('#content').html(html);
+        }
+    </script>
 </body>
 
 </html>

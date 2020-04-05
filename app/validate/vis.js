@@ -1,13 +1,11 @@
-const ClasDeartment = require('../global/clasdepartment');
-
 const bardatavali = {
     type: ['1'],
-    department: Object.keys(ClasDeartment)
+    department: 'string'
 }
 
 const bardataClasVali = {
     type: ['2'],
-    department: Object.keys(ClasDeartment),
+    department:'string',
     clas: 'string'
 }
 

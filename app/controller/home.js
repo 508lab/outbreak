@@ -4,7 +4,7 @@ const Controller = require('egg').Controller;
 const { logindata } = require('../validate/home');
 const ErrMsg = require('../global/errmsg');
 const moment = require('moment');
-const ClasDeartment = require('../global/clasdepartment');
+const Tool = require('../global/tool');
 
 class HomeController extends Controller {
 
@@ -105,7 +105,8 @@ class HomeController extends Controller {
  * 获取所有系与班级的信息
  */
   async clasdepartment() {
-    this.ctx.body = { code: 1, data: ClasDeartment };
+    const data = await Tool.getClassDepData();
+    this.ctx.body = { code: 1, data: data };
   }
 }
 

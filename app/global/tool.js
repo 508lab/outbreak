@@ -70,6 +70,13 @@ class _tool {
         }
     }
 
+    /**
+     * 获取系与班级的对于关系
+     */
+    async getClassDepData() {
+        return JSON.parse(await fs.readFileSync(path.resolve(__dirname, '../../db/clasdepartment.json')));
+    }
+
 }
 
 function getInstance() {
@@ -77,6 +84,5 @@ function getInstance() {
         mTool = new _tool();
     }
     return mTool;
-
 }
 module.exports = getInstance();

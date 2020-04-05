@@ -2,7 +2,7 @@
 
 const TeacherBaseController = require('../base/teacher');
 const ErrMsg = require('../../global/errmsg');
-const ClasDepartment = require('../../global/clasdepartment');
+const Tool = require('../../global/tool');
 
 /**
  * 教师系统中关于学生的操作
@@ -16,7 +16,8 @@ class StudentController extends TeacherBaseController {
         const { ctx } = this;
         const id = ctx.session.teacherid;
         const user = await ctx.service.teacher.findById(id);
-        let classs = ClasDepartment[user.department];
+        const clasDep = await Tool.getClassDepData();
+        let classs = clasDep[user.department];
         let clas = classs[0];
         if (ctx.query.clas) {
             clas = ctx.query.clas;

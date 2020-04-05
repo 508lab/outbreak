@@ -8,6 +8,7 @@ module.exports = app => {
     router.get('/admin/login', controller.admin.index.login);
     router.post('/admin/login', controller.admin.index.loginin);
     router.get('/admin/loginout', controller.admin.index.loginout);
+    router.get('/admin/clasdep', controller.admin.index.clasdep);
     router.get('/admin/user/index', controller.admin.users.index);
 
     //关于教师的router

@@ -1,7 +1,7 @@
 'use strict';
 
 const AdminBaseontroller = require('../base/admin');
-const ClasDeartment = require('../../global/clasdepartment');
+const Tool = require('../../global/tool');
 const moment = require('moment');
 const ErrMsg = require('../../global/errmsg');
 /**
@@ -10,7 +10,7 @@ const ErrMsg = require('../../global/errmsg');
 class AdminTeacherController extends AdminBaseontroller {
     async index() {
         const { ctx } = this;
-        const departments = Object.keys(ClasDeartment);
+        const departments = Object.keys(await Tool.getClassDepData());
         const now = moment().format("YYYY-MM-DD");
         const info = ctx.query;
         let time = [now, now], department = departments[0];
@@ -44,7 +44,7 @@ class AdminTeacherController extends AdminBaseontroller {
     async list() {
         const { ctx } = this;
         const list = await ctx.service.teacher.list();
-        const departments = Object.keys(ClasDeartment);
+        const departments = Object.keys(await Tool.getClassDepData());
         await ctx.render('/admin/teacherlist.ejs', {
             data: list,
             departments: departments,

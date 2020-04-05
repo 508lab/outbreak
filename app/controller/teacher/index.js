@@ -4,7 +4,6 @@ const TeacherBaseController = require('../base/teacher');
 const { logindata } = require('../../validate/home');
 const { entryvalitemp, entryvalipass } = require('../../validate/user');
 const ErrMsg = require('../../global/errmsg');
-const ClasDepartment = require('../../global/clasdepartment');
 const Tool = require('../../global/tool');
 
 class TeacherController extends TeacherBaseController {
@@ -63,7 +62,7 @@ class TeacherController extends TeacherBaseController {
         };
         await ctx.render('teacher/user.ejs', {
             user: user,
-            deps: Object.keys(ClasDepartment),
+            deps: Object.keys(await Tool.getClassDepData()),
             type: type
         });
     }

@@ -1,7 +1,6 @@
 'use strict';
 
 const Controller = require('egg').Controller;
-const ClasDeartment = require('../../global/clasdepartment');
 const moment = require('moment');
 const { bardatavali, bardataClasVali } = require('../../validate/vis');
 
@@ -14,7 +13,8 @@ class VisApiController extends Controller {
         const { ctx } = this;
         const data = await ctx.service.temperature.outstandard(37.0);
         const teacher = await ctx.service.teachertemp.outstandard(37.0);
-        ctx.body = { code: 1, clasdep: ClasDeartment, students: data, teachers: teacher }
+        const clasdep = await Tool.getClassDepData();
+        ctx.body = { code: 1, clasdep: clasdep, students: data, teachers: teacher }
     }
 
     /**

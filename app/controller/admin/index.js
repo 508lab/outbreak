@@ -2,6 +2,7 @@
 
 const AdminBaseontroller = require('../base/admin');
 const { loginin } = require('../../validate/admin');
+const Tool = require('../../global/tool');
 const ErrMsg = require('../../global/errmsg');
 
 
@@ -40,6 +41,14 @@ class AdminController extends AdminBaseontroller {
     const { ctx } = this;
     ctx.session.user = null;
     ctx.redirect('/admin/login');
+  }
+
+  /**
+   * 系别管理
+   */
+  async clasdep(){
+    const { ctx } = this;
+    await ctx.render('/admin/clasdep.ejs');
   }
 }
 

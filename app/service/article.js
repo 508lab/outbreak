@@ -98,6 +98,14 @@ class ArticleService extends Service {
     }
 
     /**
+     * 根据id获取审核通过的文章信息
+     * @param {*} id 
+     */
+    async findByAudit(id, audit) {
+        return await this.app.mysql.get(TABLE, { id: id, audit: audit });
+    }
+
+    /**
      * 根据id删除该文章
      * @param {*} id 
      * @param {*} sid 
@@ -113,6 +121,13 @@ class ArticleService extends Service {
             Tool.delFile(Tool.getImgSrc(this.app.baseDir + '/app', article.content));
         }
         return result.protocol41;
+    }
+
+    async likeQuery(q, limit){
+        q = this.app.mysql.escape(`%${q}%`);
+        limit = parseInt(limit);
+        let data = await this.app.mysql.query(`SELECT * from ${TABLE} WHERE audit = 1 AND(title LIKE ${q} OR content LIKE ${q}) LIMIT ${limit}`);
+        return data;
     }
 }
 

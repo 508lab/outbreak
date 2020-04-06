@@ -11,9 +11,22 @@ class ArticleController extends Controller {
 
     async data() {
         const { ctx } = this;
-        let { limit, offset } = ctx.request.query;
-        const list = await ctx.service.article.alllist({ audit: 1 }, parseInt(limit), parseInt(offset));
+        let { limit, offset, search } = ctx.request.query;
+        let where = { audit: 1  };
+        let list = [];
+        if (search) {
+            list = await ctx.service.article.likeQuery(search, 9);
+        }else{
+            list = await ctx.service.article.alllist({ audit: 1 }, parseInt(limit), parseInt(offset));
+        }
+        
         ctx.body = { code: 1, data: list };
+    }
+
+    async find() {
+        const { ctx } = this;
+        const data = await ctx.service.article.findByAudit(ctx.request.query.id, 1);
+        await ctx.render('/article/article.ejs', {data: data, moment: moment});
     }
 }
 

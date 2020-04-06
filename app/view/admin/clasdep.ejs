@@ -14,6 +14,22 @@
     <link rel="stylesheet" href="/public/css/plugins/dataTables/datatables.min.css">
     <link rel="stylesheet" href="/public/css/plugins/dataTables/buttons.dataTables.min.css">
     <script src="/public/js/jquery-3.1.1.min.js"></script>
+    <style>
+        #content .card-body input{
+            margin-bottom: 1rem;
+        }   
+        #content .card-body{
+            margin-bottom: 1rem;
+        }   
+        #content .card-body .col-lg-12{
+            text-align: right;
+        }  
+        #content .card-body .col-lg-12 .del{
+            color: red;
+            cursor: pointer;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -30,8 +46,34 @@
             </div>
 
             <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="alert alert-primary" role="alert">
+                    这里最好只添加当前在学校的班级和系别（旧的学生信息不推荐删除,如果需要临时修改，可以在此处添加对应的系别和班级。使用完之后删除)
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                   </button>
+                 </div>
+                <div class="alert alert-danger" role="alert">
+                   删除系别与班级并不会删除对应学生！（如果此处需要变动，最好先添加对应的系或者班级，然后让学生和者老师变更对应的信息！之后变动信息）
+                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
                 <div class="row" id="content">
                 </div>
+
+                <div class="row" style="margin-bottom: 1rem;">
+                    <div class="col-lg-1">
+                        <button type="button" class="btn btn-success" id="adddep">添加系别</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button type="button" class="btn btn-danger" id="deldep">删除系别</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button type="button" class="btn btn-success" id="update">上传</button>
+                    </div>
+                </div>
+
+                
             </div>
             <% include /adminpartial/footer.ejs %>
         </div>
@@ -64,23 +106,140 @@
             Object.keys(data).map(function (e1, i1) {
                 let html_2 = '';
                 data[e1].map(function (e2, i2) {
-                    html_2 += `
-                        <input type="text" class="form-control" value="${e2}">
-                       `
+                    html_2 += insertClasView(e2, e1);
                 });
-                console.log(html_2)
-                html += `<div class="col-lg-8"><p>
-                            <a class="btn btn-primary" data-toggle="collapse" href="#${i1}" role="button"
-                                aria-expanded="false" aria-controls="${i1}">${e1}</a></p>
-                                <div class="collapse" id="${i1}">
-                                        <div class="card card-body">
-                        ${html_2}
-                    </div>
-                    </div>
-                    </div>`
+                html += insertDepView(i1, e1, html_2);
             });
             $('#content').html(html);
         }
+
+        /**
+         * 添加班级
+         * */
+        function insertClasView(e2, dep) {
+            return `<div class='row'>
+                            <div class='col-lg-12'>
+                                <svg class="bi bi-x-circle del" data-dep="${dep}" data-clas="${e2}" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
+                                    <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+                                    <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
+                                </svg>   
+                                <input type="text" class="form-control" value="${e2}">
+                            </div>
+                        </div>
+             `;
+        }
+
+        function insertDepView(index, dep, clasView) {
+            return `<div class="col-lg-8"><p>
+                            <a class="btn btn-primary" data-toggle="collapse" href="#${index}" role="button"
+                                aria-expanded="false" aria-controls="${index}">${dep}</a>
+                            </p>
+                                <div class="collapse" id="${index}">
+                                        <div class="card card-body">
+                                            ${clasView}
+                                            <button type="button" class="btn btn-outline-primary add" data-dep='${dep}'>添加</button>
+                                </div>
+                    </div>
+                </div>`;
+        }
+
+        handleClick();
+
+        function handleClick() {
+            $('#content').click(function (e) {
+                if ($(e.target).hasClass('del')) {
+                    let dep = $(e.target).data('dep');
+                    let clas = $(e.target).data('clas');
+                    $(e.target).parent().remove();
+                    let index = allData[dep].indexOf(clas);
+                    allData[dep].splice(index, 1);
+                }else if ($(e.target).hasClass('add')) {
+                    addhandelClick(e);
+                }
+            })
+        }
+
+        /**
+         * 添加班级
+         * */
+        function addhandelClick(e) {
+                let clas = prompt('请输入需要添加的班级名称', '');
+                let dep = $(e.target).data('dep');
+                if (clas =='' || clas == undefined) {
+                    return;
+                }
+                let obj = allData[dep].find(function (ele) {
+                    return ele == clas;
+                });
+                if (!obj) {
+                    allData[dep].push(clas);
+                    $(e.target).before(insertClasView(clas, dep));
+                }else{
+                    alert('该班级已添加!');
+                }
+        }
+
+        $('#adddep').click(function () {
+            let dep = prompt('请输入需要添加的系别名称', '');
+            if (dep =='' || dep == undefined) {
+                return;
+            }
+            let obj = Object.keys(allData).find(function (ele) {
+                return ele == dep;
+            });
+            if (!obj) {
+                let html = insertDepView(Object.keys(allData).length, dep, '');
+                $('#content').append(html);
+                allData[dep] = [];
+            }else{
+                alert('该系别已添加!');
+            }
+        });
+
+        $('#deldep').click(function () {
+            let dep = prompt('请输入需要删除的系别名称', '');
+            if (dep =='' || dep == undefined) {
+                return;
+            }
+            let obj = Object.keys(allData).find(function (ele) {
+                return ele == dep;
+            });
+            if (obj) {
+                let index = Object.keys(allData).indexOf(dep);
+                $('#content .col-lg-8')[index].remove();
+                delete allData[dep];
+            }else{
+                alert('该系别未添加!');
+            }
+        })
+
+        $('#update').click(function () {
+            $('#page-wrapper').mLoading({
+             text: "修改中...",
+            });
+            $.ajax({
+                url: "/admin/clasdep",
+                type: "PUT",
+                dataType: 'json',
+                data: {
+                    data: JSON.stringify(allData)
+                },
+                success: function (data) {
+                    $('#page-wrapper').mLoading('hide');
+                    if (data.code == '1') {
+                        alert('修改成功');
+                    } else {
+                        alert(data.err);
+                    }
+                },
+
+                error: function (err) {
+                    $('#page-wrapper').mLoading('hide');
+                    console.error(err);
+                }
+            });
+        })
     </script>
 </body>
 

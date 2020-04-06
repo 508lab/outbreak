@@ -9,16 +9,17 @@
     <link href="/public/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/public/css/jquery.mloading.css">
     <style>
-        .wrap .item a {
+        #content .list-group{
             width: 100%;
-            display: block;
-            margin: 0 auto;
-            margin-top: 0.5rem;
+        }
+        #content .list-group li .time{
+            float: right;
         }
     </style>
 </head>
 
 <body>
+    <% include /homepartial/nav.ejs %>
     <div class="wrap">
         <div>
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -29,6 +30,9 @@
             </div>
         </div>
         <div class="row" style="width: 90%;margin: 0 auto;" id="content">
+            <ul class="list-group list-group-flush">
+                
+            </ul>
         </div>
         <div style="width: 90%;margin: 0 auto;text-align: center;margin-top: 1rem;">
             <button type="button" class="btn btn-primary btn-sm" id="loading">加载更多</button>
@@ -39,7 +43,16 @@
     <script src="/public/js/moment.min.js"></script>
     <script src="/public/js/jquery.mloading.js"></script>
     <script>
+        $('#navbarColor .article').addClass('active');
         let num = 0;
+        function getQueryString(name) {
+            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+            return unescape(r[2]);
+            }
+            return null;
+        }
         initView();
 
         function initView() {
@@ -54,8 +67,14 @@
             $('.wrap').mLoading({
                 text: "加载中...",
             });
+            let search = getQueryString('search');
+            if (search) {
+                search = '&search=' + search;
+            }else{
+                search = '';
+            }
             $.ajax({
-                url: `/article/list/data?limit=5&offset=${num}`,
+                url: `/article/list/data?limit=5&offset=${num}${search}`,
                 type: 'get',
                 success(data) {
                     $('.wrap').mLoading('hide');
@@ -80,21 +99,14 @@
             let html = ``;
             arr.map(function (ele) {
                 let time = moment(ele.time).format('YYYY-MM-DD');
-                html += ` <div class="col-lg-12 item">
-                <a class="btn btn-primary" data-toggle="collapse" href="#${ele.id}" role="button"
-                    aria-expanded="false" aria-controls="${ele.id}">${ele.title}</a>
-                <div class="collapse multi-collapse" id="${ele.id}">
-                    <div class="card card-body">
-                            ${ele.content}
-                        <footer class="blockquote-footer" style="text-align: right;">
-                            ${time}
-                            </footer>
-                    </div>
-                </div>
-            </div>`
+                html += `<li class="list-group-item">
+                    <a href="/article/info?id=${ele.id}" title="${ele.title}">${ele.title}</a>
+                    <p></p>
+                    <span class="badge badge-primary badge-pill time">${time}</span>
+                </li>`
             })
 
-            $('#content').append(html);
+            $('#content .list-group').append(html);
         }
     </script>
 </body>

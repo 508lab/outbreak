@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= data.title %></title>
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/jquery.mloading.css">
+    <style>
+        .wrap{
+            width: 95%;
+            margin: 0 auto;
+        }
+        .title{
+            text-align: center;
+        }
+        .time{
+            text-align: right;
+        }
+        .tags{
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <% include /homepartial/nav.ejs %>
+    <div class="wrap">
+        <h3 class="title"><%= data.title %></h3>
+        <p class="time"><%= moment(data.time).format('YYYY-MM-DD') %></p>
+        <div class="content">
+            <%- data.content %>
+        </div>
+        <div class="tags">
+            <%for(var i = 0 ;i < JSON.parse(data.tag).length; i++){%>
+                <% if (JSON.parse(data.tag)[i] == 0) { %>
+                    <span class="badge badge-primary">学习</span>
+                <% } %>
+                <% if (JSON.parse(data.tag)[i] == 1) { %>
+                    <span class="badge badge-primary">生活</span>
+                <% } %>
+                <% if (JSON.parse(data.tag)[i] == 2) { %>
+                    <span class="badge badge-primary">交易</span>
+                <% } %>
+                <% if (JSON.parse(data.tag)[i] == 3) { %>
+                    <span class="badge badge-primary">其他</span>
+                <% } %>
+            <%}%>
+        </div>
+    </div>
+    <script src="/public/js/jquery-3.1.1.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="/public/js/moment.min.js"></script>
+    <script src="/public/js/jquery.mloading.js"></script>
+</body>
+
+</html>

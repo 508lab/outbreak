@@ -8,7 +8,6 @@ module.exports = app => {
     router.get('/admin/login', controller.admin.index.login);
     router.post('/admin/login', controller.admin.index.loginin);
     router.get('/admin/loginout', controller.admin.index.loginout);
-    router.get('/admin/clasdep', controller.admin.index.clasdep);
     router.get('/admin/user/index', controller.admin.users.index);
 
     //关于教师的router
@@ -20,6 +19,9 @@ module.exports = app => {
     router.post('/admin/user/teacher/index', controller.admin.teacher.teacher);
     router.get('/admin/user/teacher/index', controller.admin.teacher.teacher);
     router.delete('/admin/user/teacher/index', controller.admin.teacher.teacher);
-    
+
+    //系别管理
+    router.get('/admin/clasdep', controller.admin.index.clasdep);
+    router.put('/admin/clasdep', controller.admin.index.clasdep);
 };
 

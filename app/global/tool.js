@@ -77,6 +77,10 @@ class _tool {
         return JSON.parse(await fs.readFileSync(path.resolve(__dirname, '../../db/clasdepartment.json')));
     }
 
+    async setClassDepData(data) {
+        return await fs.writeFileSync(path.resolve(__dirname, '../../db/clasdepartment.json'), data);
+    }
+
 }
 
 function getInstance() {

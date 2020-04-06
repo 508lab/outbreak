@@ -48,7 +48,12 @@ class AdminController extends AdminBaseontroller {
    */
   async clasdep(){
     const { ctx } = this;
-    await ctx.render('/admin/clasdep.ejs');
+    if (ctx.request.method == 'GET') {
+      await ctx.render('/admin/clasdep.ejs');
+    }else if (ctx.request.method == 'PUT') {
+      await Tool.setClassDepData(ctx.request.body.data);
+      ctx.body = { code: 1};
+    }
   }
 }
 

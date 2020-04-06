@@ -116,6 +116,7 @@ class TemperatureService extends Service {
      * @param {*} record 
      */
     async outstandard(record) {
+        record = parseFloat(record);
         //当天统计
         const now_sql = `SELECT count(DISTINCT sid) FROM temperature WHERE date(time) = curdate() AND record >= ${record};`;
         //全部统计

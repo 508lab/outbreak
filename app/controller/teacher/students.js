@@ -120,7 +120,7 @@ class StudentController extends TeacherBaseController {
         const len = await ctx.service.article.count();
         ctx.body = {
             draw: req.draw, start: req.start, length: req.length, recordsTotal: data.length,
-            recordsFiltered: len[0]['count(*)'], data: data
+            recordsFiltered: len, data: data
         };
     }
 }

@@ -35,7 +35,7 @@ class ArticleService extends Service {
      * 获取总量
      */
     async count() {
-        return await this.app.mysql.query(`select count(*) from ${TABLE}`);
+        return await this.app.mysql.count(TABLE);
     }
 
     /**

@@ -104,6 +104,8 @@ class StudentsService extends Service {
      * 获取该班级学生信息并获取当天的体温记录
      */
     async findByClas(name, department, time) {
+        name = this.app.mysql.escape(name);
+        department = this.app.mysql.escape(department);
         let t = 'date(t.time) = curdate()';
         if (time == 'month') {  //本月
             t = `DATE_FORMAT( t.time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )`;
@@ -112,7 +114,7 @@ class StudentsService extends Service {
         } else if (time == 'week') {
             t = `YEARWEEK(date_format(t.time,'%Y-%m-%d')) = YEARWEEK(now())`;
         }
-        const sql = `select * from students u join temperature t on t.sid = u.id AND department = '${department}' AND clas = '${name}' AND ${t};`;
+        const sql = `select * from students u join temperature t on t.sid = u.id AND department = ${department} AND clas = ${name} AND ${t};`;
         return await this.app.mysql.query(sql);
     }
 
@@ -120,7 +122,10 @@ class StudentsService extends Service {
      * 根据时间与班级并获取当天的体温记录
     */
     async findByClasAndTime(name, department, time) {
-        const sql = `select * from students u join temperature t on t.sid = u.id AND t.time = '${time}' AND department = '${department}' AND clas = '${name}';`;
+        name = this.app.mysql.escape(name);
+        department = this.app.mysql.escape(department);
+        time = this.app.mysql.escape(time);
+        const sql = `select * from students u join temperature t on t.sid = u.id AND t.time = ${time} AND department = ${department} AND clas = ${name};`;
         return await this.app.mysql.query(sql);
     }
 

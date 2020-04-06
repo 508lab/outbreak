@@ -23,7 +23,7 @@
     <div class="wrap">
         <div>
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                所以信息必须经过审核
+                信息必须经过审核
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -74,19 +74,20 @@
                 search = '';
             }
             $.ajax({
-                url: `/article/list/data?limit=5&offset=${num}${search}`,
+                url: `/article/list/data?limit=10&offset=${num}${search}`,
                 type: 'get',
                 success(data) {
                     $('.wrap').mLoading('hide');
-                    if (data.data.length === 0) {
+                    fullView(data.data);
+                    num = num + 10;
+                    if (data.data.length === 0 || data.data.length < 10) {
                         $('#loading').text('无更多内容');
                         setTimeout(function () {
                             $('#loading').hide();
                         }, 1500)
                         return;
                     }
-                    fullView(data.data);
-                    num = num + 5;
+
                 },
                 error(err) {
                     $('.wrap').mLoading('hide');

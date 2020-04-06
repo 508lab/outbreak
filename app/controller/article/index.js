@@ -12,7 +12,6 @@ class ArticleController extends Controller {
     async data() {
         const { ctx } = this;
         let { limit, offset, search } = ctx.request.query;
-        let where = { audit: 1  };
         let list = [];
         if (search) {
             list = await ctx.service.article.likeQuery(search, 9);

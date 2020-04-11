@@ -21,7 +21,10 @@ module.exports = app => {
     router.delete('/admin/user/teacher/index', controller.admin.teacher.teacher);
 
     //系别管理
-    router.get('/admin/clasdep', controller.admin.index.clasdep);
-    router.put('/admin/clasdep', controller.admin.index.clasdep);
+    router.get('/admin/seeting/clasdep', controller.admin.index.clasdep);
+    router.put('/admin/seeting/clasdep', controller.admin.index.clasdep);
+    //文章标签管理
+    router.get('/admin/seeting/articletags', controller.admin.index.articletags);
+    router.put('/admin/seeting/articletags', controller.admin.index.articletags);
 };
 

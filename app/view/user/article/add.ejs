@@ -51,10 +51,9 @@
                             <label class="title" style="margin-top: 10px;"><span
                                     style="color:red;padding-right:5px">*</span>标签 <span class="en"></span>：</label>
                             <select id="tags" class="form-control" multiple>
-                                <option value="0" selected>学习</option>
-                                <option value="1">生活</option>
-                                <option value="2">交易</option>
-                                <option value="3">其他</option>
+                                <% for (const key in tags) { %>
+                                    <option value="<%= key %>"><%= tags[key] %></option>
+                                <% } %>
                             </select>
                         </div>
                     </div>
@@ -81,7 +80,7 @@
     <script src="/public/js/plugins/ckeditor/zh-cn.js"></script>
     
     <script>
-        $('#tags').selectpicker();
+        $('#tags').selectpicker('val', 0);
         let meditor = null;
         ClassicEditor
             .create(document.querySelector('#editor'), {
@@ -109,6 +108,10 @@
             }
             if (content === '') {
                 alert('内容不能为空！');
+                return;
+            }
+            if (tags.length == 0) {
+                alert('请选择对应的标签！');
                 return;
             }
             $('#page-wrapper').mLoading({

@@ -20,6 +20,9 @@
         #infomodal .modal-dialog {
             max-width: 88%;
         }
+        #infomodal img{
+            max-width: 100%;
+        }
     </style>
     <script src="/public/js/jquery-3.1.1.min.js"></script>
 </head>
@@ -70,10 +73,9 @@
                                 <label for="inputPassword" class="col-sm-2 col-form-label">标签</label>
                                 <div class="col-sm-10">
                                     <select id="tags" class="form-control" multiple disabled>
-                                        <option value="0" selected>学习</option>
-                                        <option value="1">生活</option>
-                                        <option value="2">交易</option>
-                                        <option value="3">其他</option>
+                                        <% for (const key in tags) { %>
+                                            <option value="<%= key %>"><%= tags[key] %></option>
+                                        <% } %>
                                     </select>
                                 </div>
                             </div>
@@ -134,6 +136,7 @@
             });
             let now_data = [];  //单个文章信息
             $('#example').DataTable({
+                ordering: false,
                 lengthChange: false,
                 searching: false, //禁用原生搜索
                 processing: true, //显示加载提示,自行处理

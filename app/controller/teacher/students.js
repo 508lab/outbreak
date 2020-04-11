@@ -93,7 +93,9 @@ class StudentController extends TeacherBaseController {
         const { ctx } = this;
         const METHOD = ctx.request.method;
         if (METHOD == 'GET') {
-            await ctx.render('/teacher/article.ejs');
+            await ctx.render('/teacher/article.ejs', {
+                tags: await Tool.getArticleTags()
+            });
         } else if (METHOD == 'PUT') {
             let { id, audit, sid } = ctx.request.body;
             if (await ctx.service.article.editByTeacher(sid, id, { audit: audit })) {
@@ -120,7 +122,7 @@ class StudentController extends TeacherBaseController {
         const len = await ctx.service.article.count();
         ctx.body = {
             draw: req.draw, start: req.start, length: req.length, recordsTotal: data.length,
-            recordsFiltered: len, data: data
+            recordsFiltered: len, data: data,
         };
     }
 }

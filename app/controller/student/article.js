@@ -7,6 +7,7 @@ const pump = require('mz-modules/pump');
 const path = require('path');
 const moment = require('moment');
 const ErrMsg = require('../../global/errmsg');
+const Tool = require('../../global/tool');
 
 /**
  * 文章
@@ -27,7 +28,8 @@ class ArticleController extends UserInfoController {
         const id = ctx.request.query.id;
         const data = await ctx.service.article.find(id);
         await ctx.render('/user/article/edit.ejs', {
-            data: data
+            data: data,
+            tags: await Tool.getArticleTags()
         });
     }
 
@@ -36,7 +38,9 @@ class ArticleController extends UserInfoController {
         const { ctx } = this;
         const METHOD = ctx.request.method;
         if (METHOD == 'GET') {
-            await ctx.render('/user/article/add.ejs')
+            await ctx.render('/user/article/add.ejs', {
+                tags: await Tool.getArticleTags()
+            })
         } else if (METHOD == 'POST') {
             let info = ctx.request.body;
             info.sid = ctx.session.userid;

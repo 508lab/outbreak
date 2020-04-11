@@ -105,9 +105,9 @@ class HomeController extends Controller {
  * 获取所有系与班级的信息
  */
   async clasdepartment() {
-    const data = await Tool.getClassDepData();
-    this.ctx.body = { code: 1, data: data };
+    this.ctx.body = { code: 1, data: await Tool.getClassDepData() };
   }
+
 }
 
 module.exports = HomeController;

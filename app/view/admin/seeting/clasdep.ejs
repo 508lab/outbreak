@@ -47,7 +47,7 @@
 
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="alert alert-primary" role="alert">
-                    这里最好只添加当前在学校的班级和系别（旧的学生信息不推荐删除,如果需要临时修改，可以在此处添加对应的系别和班级。使用完之后删除)
+                    这里最好只添加当前在学校的班级和系别（旧的学生信息不推荐删除,如果需要临时修改已毕业的信息，可以在此处添加对应的系别和班级。使用完之后删除)
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                    </button>
@@ -219,7 +219,7 @@
              text: "修改中...",
             });
             $.ajax({
-                url: "/admin/clasdep",
+                url: "/admin/seeting/clasdep",
                 type: "PUT",
                 dataType: 'json',
                 data: {

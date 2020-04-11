@@ -71,15 +71,34 @@ class _tool {
     }
 
     /**
-     * 获取系与班级的对于关系
+     * 获取系与班级的对应关系
      */
     async getClassDepData() {
         return JSON.parse(await fs.readFileSync(path.resolve(__dirname, '../../db/clasdepartment.json')));
     }
 
+    /**
+     * 设置系与班级的对应关系
+     * @param {*} data 
+     */
     async setClassDepData(data) {
         return await fs.writeFileSync(path.resolve(__dirname, '../../db/clasdepartment.json'), data);
     }
+    
+    /**
+     * 获取文章的所有标签
+     */
+    async getArticleTags(){
+        return JSON.parse(await fs.readFileSync(path.resolve(__dirname, '../../db/articletags.json')));
+    } 
+    
+    /**
+     * 设置文章的所有标签
+     *  @param {*} data 
+     */
+    async setArticleTags(data){
+        return await fs.writeFileSync(path.resolve(__dirname, '../../db/articletags.json'), data);
+    }   
 
 }
 

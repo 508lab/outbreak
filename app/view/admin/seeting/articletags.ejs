@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
+    <title>晋城职业技术学院-管理中心</title>
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/public/css/animate.css" rel="stylesheet">
+    <link href="/public/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/kalendae.css">
+    <link rel="stylesheet" href="/public/css/plugins/dataTables/datatables.min.css">
+    <link rel="stylesheet" href="/public/css/plugins/dataTables/buttons.dataTables.min.css">
+    <script src="/public/js/jquery-3.1.1.min.js"></script>
+    <style>
+        #content .row {
+            margin-bottom: 1rem;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <% include /adminpartial/nav.ejs %>
+        <script>
+            var activity = "clasdep";
+            $('#side-menu .' + activity).addClass('active');
+            $($('#side-menu .' + activity).parent().parent()[0]).addClass('active');
+        </script>
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <% include /adminpartial/header.ejs %>
+            </div>
+
+            <div class="wrapper wrapper-content animated fadeInRight">
+
+                <div id="content" class="row">
+    
+                </div>
+
+                <div class="row" style="margin-bottom: 1rem;">
+                    <div class="col-lg-1">
+                        <button type="button" class="btn btn-success" id="adddep">添加标签</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button type="button" class="btn btn-danger" id="deldep">删除标签</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button type="button" class="btn btn-success" id="update">上传</button>
+                    </div>
+                </div>
+            </div>
+            <% include /adminpartial/footer.ejs %>
+        </div>
+    </div>
+
+
+    <script src="/public/js/popper.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="/public/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/public/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/public/js/inspinia.js"></script>
+    <script src="/public/js/plugins/pace/pace.min.js"></script>
+    <script>
+        let allData = {};
+        $.ajax({
+            url: "/article/articletags",
+            type: "GET",
+            success: function (data) {
+                allData = data.data;
+                fullView(data.data);
+            },
+
+            error: function (err) {
+                console.error(err);
+            }
+        });
+
+        function fullView(object) {
+            let html = ``
+            for (const key in object) {
+                if (object.hasOwnProperty(key)) {
+                    const element = object[key];
+                    html += insertTagView(key, element);
+                }
+            }
+            $('#content').html(html);
+        }
+
+        function insertTagView(key, element) {
+            return `<div class="input-group mb-3" id="tag${key}">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">${key}</span>
+                        </div>
+                        <input type="text" class="form-control" value="${element}">
+                    </div>`;
+        }
+
+
+        $('#adddep').click(function () {
+            let dep = prompt('请输入需要添加的标签名称', '');
+            if (dep == '' || dep == undefined) {
+                return;
+            }
+
+            if (tagIsExit(dep) === -1) {
+                let key = new Date().getTime();
+                let html = insertTagView(key ,dep);
+                $('#content').append(html);
+                allData[key] = dep;
+            } else {
+                alert('该标签已添加!');
+            }
+        });
+
+        $('#deldep').click(function () {
+            let dep = prompt('请输入需要删除的标签名称', '');
+            if (dep == '' || dep == undefined) {
+                return;
+            }
+            let key = tagIsExit(dep) ;
+            if (tagIsExit(dep) !== -1) {
+                $(`#content #tag${key}`).remove();
+                delete allData[key];
+            } else {
+                alert('该标签未添加!');
+            }
+        })
+
+        $('#update').click(function () {
+            $('#page-wrapper').mLoading({
+                text: "修改中...",
+            });
+            $.ajax({
+                url: "/admin/seeting/articletags",
+                type: "PUT",
+                dataType: 'json',
+                data: {
+                    data: JSON.stringify(allData)
+                },
+                success: function (data) {
+                    $('#page-wrapper').mLoading('hide');
+                    if (data.code == '1') {
+                        alert('修改成功');
+                    } else {
+                        alert(data.err);
+                    }
+                },
+
+                error: function (err) {
+                    $('#page-wrapper').mLoading('hide');
+                    console.error(err);
+                }
+            });
+        })
+
+        /**
+         * 查看标签是存在
+         * */
+        function tagIsExit(tag) {
+            for (const key in allData) {
+                if (allData.hasOwnProperty(key)) {
+                    const element = allData[key];
+                    if(element == tag) return key;
+                }
+            }
+            return -1;
+        }
+    </script>
+</body>
+
+</html>

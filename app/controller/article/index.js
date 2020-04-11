@@ -2,6 +2,7 @@
 
 const Controller = require('egg').Controller;
 const moment = require('moment');
+const Tool = require('../../global/tool');
 
 class ArticleController extends Controller {
 
@@ -26,6 +27,13 @@ class ArticleController extends Controller {
         const { ctx } = this;
         const data = await ctx.service.article.findByAudit(ctx.request.query.id, 1);
         await ctx.render('/article/article.ejs', {data: data, moment: moment});
+    }
+    
+    /**
+     * 获取文章标签
+     */
+    async articletags() {
+        this.ctx.body = { code: 1, data: await Tool.getArticleTags() };
     }
 }
 

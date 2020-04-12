@@ -125,6 +125,7 @@
     <script src="/public/js/plugins/pace/pace.min.js"></script>
     <script src="/public/js/plugins/dataTables/datatables.min.js"></script>
     <script src="/public/js/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="/public/js/moment.min.js"></script>
     <script>
         $(document).ready(function () {
             //配置DataTables默认参数
@@ -174,7 +175,7 @@
                     {
                         data: 'time',
                         render: function (data, type, full) {
-                            return `<i>${data}</i>`;
+                            return `<i>${moment(data).format('YYYY-MM-DD')}</i>`;
                         }
                     },
                     {
@@ -246,6 +247,7 @@
                     },
                     dataType: 'json',
                     success: function (data) {
+                        $('#auditmodal').modal('hide');
                         $('body').mLoading('hide');
                         if (data.code === 1) {
                             $(`#${id}`).parent().parent().find('.status').text(audit_text);
@@ -253,10 +255,12 @@
                         } else {
                             alert(data.err);
                         }
+                        $('#auditmodal').modal('hide');
                     },
 
                     error: function (err) {
                         $('body').mLoading('hide');
+                        $('#auditmodal').modal('hide');
                         console.error(err);
                     }
                 });
@@ -271,7 +275,7 @@
                     return;
                 }
                 $('.wrapper-content').mLoading({
-                    text: "审核中...",
+                    text: "删除中...",
                 });
                 $.ajax({
                     url: "/teacher/students/article",

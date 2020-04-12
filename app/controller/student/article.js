@@ -62,7 +62,7 @@ class ArticleController extends UserInfoController {
             let id = ctx.request.body.id;
             if (await ctx.service.article.delete(id, ctx.session.userid)) {
                 ctx.body = { code: 1 };
-            }else{
+            } else {
                 ctx.body = { code: 0, err: ErrMsg[5] };
             }
         }
@@ -76,7 +76,7 @@ class ArticleController extends UserInfoController {
         const parts = ctx.multipart({ autoFields: true });
         let part;
         let files = [];
-        let userid = ctx.session.userid;
+        let userid = Tool.encryptionImg(ctx.session.userid.toString());
         while ((part = await parts()) != null) {
             if (part.length) {
             } else {
@@ -109,6 +109,30 @@ class ArticleController extends UserInfoController {
             await sendToWormhole(part);
             throw err;
         }
+    }
+
+    /**
+     * 评论列表
+     */
+    async comments() {
+        const { ctx } = this;
+        const id = ctx.session.userid;
+        const METHOD = ctx.request.method;
+        if (METHOD == 'GET') {
+            const data = await ctx.service.comments.getComments({ sid: id }, ['content', 'time', 'aid', 'id']);
+            await ctx.render('/user/article/comments.ejs', {
+                data: data,
+                moment: moment
+            });
+        } else if (METHOD == 'DELETE') {
+            let uid = ctx.request.body.id;
+            if (await ctx.service.comments.delete({ sid: id, id: uid })) {
+                ctx.body = { code: 1 };
+            } else {
+                ctx.body = { code: 0, err: ErrMsg[5] };
+            }
+        }
+
     }
 }
 

@@ -29,11 +29,17 @@
                 </h1>
             </div>
             <div class="m-t" id="pwd_login" style="display: block;">
+                <div class="alert alert-primary" role="alert">
+                    您的密码被重置为：123456
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                   </button>
+                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control" placeholder="请输入您的学号" required="" id="sid" value="1501373434">
+                    <input type="number" class="form-control" placeholder="请输入您的学号" required="" id="sid" >
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="请输入您的密码" required="" id="password" value="123456">
+                    <input type="password" class="form-control" placeholder="请输入您的密码" required="" id="password">
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b" id="login2">登陆</button>
                 <a href="/article/list" style="float: right;">文章</a>

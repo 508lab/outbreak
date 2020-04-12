@@ -111,16 +111,17 @@ class ArticleService extends Service {
      * @param {*} sid 
      */
     async delete(id, sid) {
-        //此处需要删除对应文章的图片
         const article = await this.app.mysql.get(TABLE, { id: id });
-        const result = await this.app.mysql.delete(TABLE, {
-            id: id,
-            sid: sid
-        });
-        if (result.protocol41) {
+        const result = await this.app.mysql.beginTransactionScope(async conn => {
+            await conn.delete('comments', { aid: id });
+            await conn.delete(TABLE, { id: id, sid: sid });
+            return { success: true };
+        }, this.ctx);
+
+        if (result.success) {
             Tool.delFile(Tool.getImgSrc(this.app.baseDir + '/app', article.content));
         }
-        return result.protocol41;
+        return result.success;
     }
 
     async likeQuery(q, limit){

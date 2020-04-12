@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+const FastScanner = require('fastscan');
 const SECRET = "1234567891234567", IV = '1234567891234567';
 let mTool = null;
 
@@ -29,6 +30,12 @@ class _tool {
         return src;
     }
 
+    encryptionImg(str) {
+        return crypto.createHmac('sha256', str)
+            .update(SECRET)
+            .digest('hex');
+    }
+
     /**
      * 删除文件夹
      * @param {*} filePath 
@@ -55,6 +62,9 @@ class _tool {
      */
     getImgSrc(path, str) {
         let arr = str.match(/src=[\'\"]?([^\'\"]*)[\'\"]?/ig);
+        if (!Array.isArray(arr)) {
+            return [];
+        }
         return arr.map(function (ele) {
             return path + ele.slice(5, ele.length - 1);
         });
@@ -100,6 +110,16 @@ class _tool {
         return await fs.writeFileSync(path.resolve(__dirname, '../../db/articletags.json'), data);
     }   
 
+
+    /**
+     * 判断内容中是否包含敏感词
+     * @param {*} msg 
+     */
+    async  isSensitiveWord(msg) {
+        const data = await fs.readFileSync(path.resolve(__dirname, '../../db/sensitive.json'));
+        var scanner = new FastScanner(JSON.parse(data));
+        return scanner.hits(msg);
+    }
 }
 
 function getInstance() {

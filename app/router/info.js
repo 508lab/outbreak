@@ -31,4 +31,7 @@ module.exports = app => {
     router.post('/info/article/index', controller.student.article.article);
     router.put('/info/article/index', controller.student.article.article);
     router.delete('/info/article/index', controller.student.article.article);
+
+    router.get('/info/article/comments', controller.student.article.comments);
+    router.delete('/info/article/comments', controller.student.article.comments);
 };

@@ -155,6 +155,17 @@ class MirrorController extends Controller {
             }
         }
     }
+
+    /**
+     * 文件分片上传
+     */
+    async continuingly() {
+        const { ctx } = this;
+        this.userv();
+        let info = ctx.request.body;
+        await fs.appendFileSync(path.join(this.config.baseDir, `app/public/mirror${info.dir}`, info.name), info.data, { encoding: "binary" });
+        ctx.body = { code: 1, data: { index: info.index } };
+    }
 }
 
 module.exports = MirrorController;

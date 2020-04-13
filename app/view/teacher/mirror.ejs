@@ -150,6 +150,7 @@
     <script src="/public/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <script src="/public/js/inspinia.js"></script>
     <script src="/public/js/plugins/pace/pace.min.js"></script>
+    <script src="/public/js/upload.js"></script>
     <script>
         let nowDir = '/';
         let mirrordom = $('#mirrordom');
@@ -250,7 +251,7 @@
             let tag = true;
             if (type === 'file') {
                 files.map(function (ele) {
-                    if (ele === name) {
+                    if (ele.name === name) {
                         tag = false;
                         return;
                     }
@@ -422,41 +423,24 @@
         })
 
         $('#customFile').change(function () {
-            let form = new FormData();
-            form.append('dir', nowDir);
-            form.append('file', this.files[0]);
-            let name = this.files[0].name.toLowerCase();
-
+            let name = this.files[0].name;
             if (!isExistsSync(name, 'file')) {
                 alert('该文件已存在!');
                 return;
             }
+     
             $('.wrapper-content').mLoading({
-                text: "加载中...",
+                text: "上传中...",
             });
-            $.ajax({
-                url: `/api/v1/mirror/upload`,
-                type: 'post',
-                data: form,
-                dataType: 'JSON',
-                cache: false,
-                contentType: false,
-                processData: false,
-                success(data) {
+            uploadFile(this.files[0], '/api/v1/mirror/upload/continuingly', { dir: nowDir }, function (data, len) {
+                if (len == data.data.index) {
                     $('.wrapper-content').mLoading('hide');
-                    if (data.code == 1) {
-                        data.data.map(function (ele) {
-                            mirrordom.append(fileComponent({ name: ele }));
-                        })
-                    } else {
-                        alert('上传失败!');
-                    }
-                },
-                error(err) {
-                    $('.wrapper-content').mLoading('hide');
-                    alert(err);
+                    mirrordom.append(fileComponent({ name: name }));
+                    files.push(name);
+                }else{
+                    $('.mloading .mloading-body .mloading-text').text(`上传中... ( ${data.data.index} / ${len}) `);
                 }
-            });
+            })
         });
 
 

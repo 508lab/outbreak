@@ -324,6 +324,11 @@
                             </select>  
                         </div>
                         <div class="form-group">
+                            <label class="title"><span style="color:red;padding-right:5px"></span>邮箱 <span
+                                    class="en"></span>：</label>
+                            <input type="text" placeholder="" class="form-control" id="email"  value="<%= user.email %>">
+                        </div>
+                        <div class="form-group">
                             <label class="title"><span style="color:red;padding-right:5px"></span>工号 <span
                                     class="en"></span>：</label>
                             <input type="text" placeholder="" class="form-control" id="studentid"  value="<%= user.studentid %>"
@@ -363,12 +368,21 @@
             var name = $('#name').val();
             var sex = $('#sex').find("option:selected").val();
             var department = $('#department').find("option:selected").val();
-
+            let email = $('#email').val();
             if (name == '') {
                 alert('姓名不能为空');
                 return;
             }
-
+            if (email == '') {
+                alert('邮箱不能为空');
+                return;
+            }
+            var mailReg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+            if (!mailReg.test(email)) { //正则验证不通过，格式不对
+                alert("请输入正确的邮箱地址!"); 
+                return;                       
+            }
+            
             $('.ibox-content').mLoading({
                 text: "上传中...",
             });
@@ -380,6 +394,7 @@
                     name: name,
                     sex: sex,
                     department: department,
+                    email: email
                 },
                 success: function (data) {
                     $('.ibox-content').mLoading('hide');

@@ -14,7 +14,8 @@
     "egg-view-ejs": "^2.0.1",
     "fastscan": "^1.0.6",
     "filehound": "^1.17.4",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "nodemailer": "^6.4.6"
   },
   "devDependencies": {
     "autod": "^3.0.1",

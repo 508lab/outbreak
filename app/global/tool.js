@@ -96,19 +96,34 @@ class _tool {
     }
     
     /**
-     * 获取文章的所有标签
-     */
-    async getArticleTags(){
-        return JSON.parse(await fs.readFileSync(path.resolve(__dirname, '../../db/articletags.json')));
-    } 
-    
-    /**
      * 设置文章的所有标签
      *  @param {*} data 
      */
     async setArticleTags(data){
         return await fs.writeFileSync(path.resolve(__dirname, '../../db/articletags.json'), data);
     }   
+
+    /**
+     * 获取文章的所有标签
+     */
+    async getArticleTags(){
+        return JSON.parse(await fs.readFileSync(path.resolve(__dirname, '../../db/articletags.json')));
+    } 
+
+    /**
+     * 获取邮箱的配置
+     */
+    async getEmailConf(){
+        return JSON.parse(await fs.readFileSync(path.resolve(__dirname, '../../db/email.json')));
+    } 
+    
+    /**
+     * 设置邮箱的配置
+     */
+    async setEmailConf(data){
+        return await fs.writeFileSync(path.resolve(__dirname, '../../db/email.json'), data);
+    } 
+    
 
 
     /**

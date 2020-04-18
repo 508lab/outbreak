@@ -46,23 +46,39 @@ class AdminController extends AdminBaseontroller {
   /**
    * 系别管理
    */
-  async clasdep(){
+  async clasdep() {
     const { ctx } = this;
     if (ctx.request.method == 'GET') {
       await ctx.render('/admin/seeting/clasdep.ejs');
-    }else if (ctx.request.method == 'PUT') {
+    } else if (ctx.request.method == 'PUT') {
       await Tool.setClassDepData(ctx.request.body.data);
-      ctx.body = { code: 1};
+      ctx.body = { code: 1 };
     }
   }
 
-  async articletags(){
+  /**
+   * 文章标签管理
+   */
+  async articletags() {
     const { ctx } = this;
     if (ctx.request.method == 'GET') {
       await ctx.render('/admin/seeting/articletags.ejs');
-    }else if (ctx.request.method == 'PUT') {
+    } else if (ctx.request.method == 'PUT') {
       await Tool.setArticleTags(ctx.request.body.data);
-      ctx.body = { code: 1};
+      ctx.body = { code: 1 };
+    }
+  }
+
+  /**
+   * 邮箱管理
+   */
+  async email() {
+    const { ctx } = this;
+    if (ctx.request.method == 'GET') {
+      await ctx.render('/admin/seeting/email.ejs', { data: await Tool.getEmailConf() });
+    } else if (ctx.request.method == 'PUT') {
+      await Tool.setEmailConf(ctx.request.body.data);
+      ctx.body = { code: 1 };
     }
   }
 }

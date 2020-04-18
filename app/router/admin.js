@@ -23,6 +23,9 @@ module.exports = app => {
     //系别管理
     router.get('/admin/seeting/clasdep', controller.admin.index.clasdep);
     router.put('/admin/seeting/clasdep', controller.admin.index.clasdep);
+    //邮箱管理
+    router.get('/admin/seeting/email', controller.admin.index.email);
+    router.put('/admin/seeting/email', controller.admin.index.email);
     //文章标签管理
     router.get('/admin/seeting/articletags', controller.admin.index.articletags);
     router.put('/admin/seeting/articletags', controller.admin.index.articletags);

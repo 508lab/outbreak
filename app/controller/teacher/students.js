@@ -94,7 +94,7 @@ class StudentController extends TeacherBaseController {
         const { ctx } = this;
         const METHOD = ctx.request.method;
         if (METHOD == 'GET') {
-            await ctx.render('/teacher/article.ejs', {
+            await ctx.render('/teacher/articles/article.ejs', {
                 tags: await Tool.getArticleTags()
             });
         } else if (METHOD == 'PUT') {
@@ -111,7 +111,7 @@ class StudentController extends TeacherBaseController {
                     }
                 } catch (error) {
                     ctx.logger.error(error);
-                } finally{
+                } finally {
                     ctx.body = { code: 1 };
                 }
             } else {
@@ -127,7 +127,7 @@ class StudentController extends TeacherBaseController {
                     }
                 } catch (error) {
                     ctx.logger.error(error);
-                } finally{
+                } finally {
                     ctx.body = { code: 1 };
                 }
             } else {
@@ -135,6 +135,7 @@ class StudentController extends TeacherBaseController {
             }
         }
     }
+
     /**
      * 文章列表
      */
@@ -148,6 +149,48 @@ class StudentController extends TeacherBaseController {
             recordsFiltered: len, data: data,
         };
     }
+
+    /**
+     * 评论管理
+     */
+    async comments() {
+        const { ctx } = this;
+        const METHOD = ctx.request.method;
+        if (METHOD == 'GET') {
+            await ctx.render('/teacher/articles/comments.ejs');
+        } else if (METHOD == 'DELETE') {
+            let { id, sid } = ctx.request.body;
+            if (await ctx.service.comments.delete({ id: id })) {
+                try {
+                    let ele = await ctx.service.students.findColoumById(sid, ['email']);
+                    if (ele.email) {
+                        await SendEmail(ele.email, '文章删除通知', '文章删除', `您有文章被管理员删除。`);
+                    }
+                } catch (error) {
+                    ctx.logger.error(error);
+                } finally {
+                    ctx.body = { code: 1 };
+                }
+            } else {
+                ctx.body = { code: 0, err: ErrMsg[5] };
+            }
+        }
+    }
+
+    /**
+     * 评论列表
+     */
+    async commentslist() {
+        const { ctx } = this;
+        let req = ctx.request.query;
+        const data = await ctx.service.comments.alllist({}, parseInt(req.length), parseInt(req.start));
+        const len = await ctx.service.comments.count();
+        ctx.body = {
+            draw: req.draw, start: req.start, length: req.length, recordsTotal: data.length,
+            recordsFiltered: len, data: data,
+        };
+    }
+
 }
 
 module.exports = StudentController;

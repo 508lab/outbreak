@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
+    <title>晋城职业技术学院-文章管理中心</title>
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/public/css/animate.css" rel="stylesheet">
+    <link href="/public/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/kalendae.css">
+    <link rel="stylesheet" href="/public/css/plugins/dataTables/datatables.min.css">
+    <link rel="stylesheet" href="/public/css/plugins/dataTables/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="/public/css/plugins/dataTables/buttons.dataTables.min.css">
+    <link rel="stylesheet"
+        href="/public/css/plugins/bootstrap-select/bootstrap-select.min.css">
+    <script src="/public/js/jquery-3.1.1.min.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <% include /teacherpartial/nav.ejs %>
+        <script>
+            var activity = "home";
+            $('#side-menu .' + activity).addClass('active');
+            $($('#side-menu .' + activity).parent().parent()[0]).addClass('active');
+        </script>
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <% include /teacherpartial/header.ejs %>
+            </div>
+
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table id="example" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>内容</th>
+                                    <th>时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <% include /teacherpartial/footer.ejs %>
+        </div>
+    </div>
+
+    <script src="/public/js/popper.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="/public/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/public/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/public/js/inspinia.js"></script>
+    <script src="/public/js/plugins/pace/pace.min.js"></script>
+    <script src="/public/js/plugins/dataTables/datatables.min.js"></script>
+    <script src="/public/js/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="/public/js/moment.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            
+            //配置DataTables默认参数
+            $.extend(true, $.fn.dataTable.defaults, {
+                "language": {
+                    "url": "/public/language/Chinese.txt"
+                },
+                "dom": "l<'#toolbar'>frtip"
+            });
+
+            let now_data = [];  //单个文章信息
+            $('#example').DataTable({
+                ordering: false,
+                lengthChange: false,
+                searching: false, //禁用原生搜索
+                processing: true, //显示加载提示,自行处理
+                serverSide: true, //开启服务器端分页
+                paging: true,	//开启分页
+                pageLength: 10, 
+                ajax: function (data, callback, seetting) {
+                    var flag = data.draw;//标记字段
+                    var pagesize = data.length;//当前页大小
+                    var currentPage = (data.start) / data.length + 1;//当前页码
+                    $.ajax({
+                        type: "GET",
+                        url: "/teacher/students/comments/list",
+                        cache: false, //禁用缓存
+                        data: {
+                            draw: data.draw,
+                            length: data.length,
+                            start: data.start
+                        }, //传入组装的参数
+                        dataType: "json",
+                        success: function (result) {
+                            now_data = result.data;
+                            let returnData = {};
+                            returnData.recordsTotal = result.recordsTotal;//返回数据全部记录
+                            returnData.recordsFiltered = result.recordsFiltered;//后台不实现过滤功能，每次查询均视作全部结果
+                            returnData.data = result.data;//返回的数据列表
+                            callback(returnData);
+                        }
+                    });
+                },
+                cache: false,
+                async: true,
+                columns: [	// 指定数据源,与服务器端响应的数据一一对应,使用对象数组
+                    { data: 'content', defaultContent: "<i></i>" },
+                    {
+                        data: 'time',
+                        render: function (data, type, full) {
+                            return `<i>${moment(data).format('YYYY-MM-DD')}</i>`;
+                        }
+                    },
+                    {
+                        data: 'id',
+                        render: function (data, type, full) {
+                            return `
+                            <button type="button" class="btn btn-danger delete" uid="${data}">删除</button>`;
+                        }
+                    },
+                ],
+            });
+
+            $('#example tbody').click(function (e) {
+                let target = $(e.target);
+                let uid = $(target).attr('uid');
+                if (target.hasClass('delete')) {
+                    delArticle(uid, e)
+                }
+            })
+
+         
+            function delArticle(id, e) {
+                let obj = now_data.find(function (ele) {
+                    return ele.id == id;
+                });
+                let is_del = prompt(`是否确认删除${obj.title}：`, '是');
+                if (is_del !== '是' || is_del == undefined) {
+                    return;
+                }
+                $('.wrapper-content').mLoading({
+                    text: "删除中...",
+                });
+                $.ajax({
+                    url: "/teacher/students/comments",
+                    type: "DELETE",
+                    data: {
+                        id: id,
+                        sid: obj.sid,
+                    },
+                    success: function (data) {
+                        $('.wrapper-content').mLoading('hide');
+                        if (data.code === 1) {
+                            alert('删除成功');
+                            $(e.target).parent().parent().remove();
+                        } else {
+                            alert(data.err);
+                        }
+                    },
+
+                    error: function (err) {
+                        $('.wrapper-content').mLoading('hide');
+                        console.error(err);
+                    }
+                });
+            }
+        });
+
+    </script>
+</body>
+
+</html>

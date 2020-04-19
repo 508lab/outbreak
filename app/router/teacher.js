@@ -30,4 +30,8 @@ module.exports = app => {
     router.get('/teacher/students/article', controller.teacher.students.article);
     router.put('/teacher/students/article', controller.teacher.students.article);
     router.delete('/teacher/students/article', controller.teacher.students.article);
+    //文章评论
+    router.get('/teacher/students/comments', controller.teacher.students.comments);
+    router.get('/teacher/students/comments/list', controller.teacher.students.commentslist);
+    router.delete('/teacher/students/comments', controller.teacher.students.comments);
 };

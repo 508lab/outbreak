@@ -37,6 +37,28 @@ class CommentsService extends Service {
         return result.protocol41;
     }
 
+    /**
+     * 获取数据
+     * @param {*} where 
+     * @param {*} limit 
+     * @param {*} offset 
+     */
+    async alllist(where, limit = 10, offset = 0) {
+        return await this.app.mysql.select(TABLE, {
+            where: where,
+            orders: [['time', 'desc']],
+            limit: limit,
+            offset: offset,
+        });
+    }
+
+    /**
+     * 获取总量
+     */
+    async count() {
+        return await this.app.mysql.count(TABLE);
+    }
+
 }
 
 module.exports = CommentsService;

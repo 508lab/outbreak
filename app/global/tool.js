@@ -94,43 +94,41 @@ class _tool {
     async setClassDepData(data) {
         return await fs.writeFileSync(path.resolve(__dirname, '../../db/clasdepartment.json'), data);
     }
-    
+
     /**
      * 设置文章的所有标签
      *  @param {*} data 
      */
-    async setArticleTags(data){
+    async setArticleTags(data) {
         return await fs.writeFileSync(path.resolve(__dirname, '../../db/articletags.json'), data);
-    }   
+    }
 
     /**
      * 获取文章的所有标签
      */
-    async getArticleTags(){
+    async getArticleTags() {
         return JSON.parse(await fs.readFileSync(path.resolve(__dirname, '../../db/articletags.json')));
-    } 
+    }
 
     /**
      * 获取邮箱的配置
      */
-    async getEmailConf(){
+    async getEmailConf() {
         return JSON.parse(await fs.readFileSync(path.resolve(__dirname, '../../db/email.json')));
-    } 
-    
+    }
+
     /**
      * 设置邮箱的配置
      */
-    async setEmailConf(data){
+    async setEmailConf(data) {
         return await fs.writeFileSync(path.resolve(__dirname, '../../db/email.json'), data);
-    } 
-    
-
+    }
 
     /**
      * 判断内容中是否包含敏感词
      * @param {*} msg 
      */
-    async  isSensitiveWord(msg) {
+    async isSensitiveWord(msg) {
         const data = await fs.readFileSync(path.resolve(__dirname, '../../db/sensitive.json'));
         var scanner = new FastScanner(JSON.parse(data));
         return scanner.hits(msg);

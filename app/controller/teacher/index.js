@@ -44,7 +44,6 @@ class TeacherController extends TeacherBaseController {
      */
     async index() {
         const { ctx } = this;
-        console.log(await ctx.service.teacher.randomGetEmail());
         const data = await ctx.service.teachertemp.findNow(ctx.session.teacherid);
         await ctx.render('/teacher/index.ejs', {
             data: data

@@ -64,7 +64,7 @@ module.exports = appInfo => {
       // 端口号
       port: '3306',
       // 用户名
-      user: 'root',
+      user: 'outbreak',
       // 密码
       password: '123456',
       // 数据库名
@@ -78,7 +78,7 @@ module.exports = appInfo => {
   
   config.session = {
     key: '123456',
-    maxAge: 72 * 3600 * 1000, // 3 天
+    maxAge: 24 * 3600 * 1000, // 1 天
     httpOnly: true,
     encrypt: true,
   };

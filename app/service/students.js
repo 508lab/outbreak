@@ -39,7 +39,7 @@ class StudentsService extends Service {
             return { success: true };
         }, this.ctx);
         if (result.success) {
-            await Tool.rmdirAsync(`${this.app.baseDir}/app/public/article/${Tool.encryptionImg(id)}/`,);
+            await Tool.rmdirAsync(`${this.app.baseDir}/app/public/article/${Tool.encryptionImg(id)}/`);
         }
         return result.success;
     }
@@ -68,6 +68,18 @@ class StudentsService extends Service {
         const user = await this.app.mysql.get(TABLE, { id: id });
         return user;
     }
+
+    /**
+     * 根据id获取学生信息对应的字段
+     * @param {*} id 
+     */
+    async findColoumById(id, columns) {
+        const user = await this.app.mysql.get(TABLE, { id: id }, {
+            columns: columns
+        });
+        return user;
+    }
+
 
     /**
      * 根据学号获取学生信息

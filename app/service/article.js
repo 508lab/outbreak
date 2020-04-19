@@ -115,6 +115,17 @@ class ArticleService extends Service {
     }
 
     /**
+     * 根据条件获取对应的字段
+     * @param {*} where 
+     */
+    async findColoumByWhere(where, columns) {
+        const article = await this.app.mysql.get(TABLE, where, {
+            columns: columns
+        });
+        return article;
+    }
+
+    /**
      * 根据id获取审核通过的文章信息
      * @param {*} id 
      */

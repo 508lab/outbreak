@@ -9,4 +9,8 @@ const entryvalipass = {
 }
 
 
-module.exports = { entryvalitemp, entryvalipass };
+const entryvaliemail = {
+    email: 'email',
+}
+
+module.exports = { entryvalitemp, entryvalipass, entryvaliemail };

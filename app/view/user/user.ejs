@@ -1,9 +1,10 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
     <title>晋城职业技术学院-个人中心</title>
     <link href="/public/css/bootstrap.min.css" rel="stylesheet">
     <link href="/public/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -139,6 +140,7 @@
             .center-content {
                 width: 800px
             }
+
             .ibox-content {
                 width: 100%;
                 height: auto;
@@ -262,79 +264,139 @@
         }
     </style>
 </head>
-<body >
-<div id="wrapper">
-    <% include /userpartial/nav.ejs %>
-<script>
-    var activity = "userinfo";
-    $('#side-menu .' + activity).addClass('active');
-    $($('#side-menu .' + activity).parent().parent()[0]).addClass('active');
-</script>
-    <div id="page-wrapper" class="gray-bg">
-        <div class="row border-bottom">
-        <% include /userpartial/header.ejs %>   
-</div>
-    <style>
 
-.btn-primary2{
-    background-color: #177ce4;
-    height: 30px;
-    width: 100px;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    text-align: center;
-    display: block;
-    font-size: 15px;
-}
-</style>
-        <div class="wrapper wrapper-content animated fadeInRight">
-            <div class="row">
-                <div class="ibox-content">
-                    <div class="center-content" style="margin:0 auto;background-color:#fff">
-                        <div class="form-group">
-                            <label class="title"><span style="color:red;padding-right:5px"></span>姓名 <span
-                                    class="en">Name</span>：</label>
-                            <input type="text" placeholder="" class="form-control" disabled value="<%= user.name %>">
-                        </div>
-                        <div class="form-group" id="sex">
-                            <label class="title"><span style="color:red;padding-right:5px"></span>性别 <span
-                                    class="en">Sex</span>：</label>
-                            <% if (user.sex == 0) { %>
-                                <input type="text" placeholder="" class="form-control" disabled value="男">
-                            <% } %>
-                            <% if (user.sex == 1) { %>
-                                <input type="sextext" placeholder="" class="form-control" disabled value="女">
-                            <% } %>                
-                        </div>
-                        <div class="form-group">
-                            <label class="title"><span style="color:red;padding-right:5px"></span>所在系<span
-                                    class="en"></span>：</label>
-                            <input type="text" placeholder="" class="form-control" disabled value="<%= user.department %>">
-                        </div>
-                        <div class="form-group">
-                            <label class="title"><span style="color:red;padding-right:5px"></span>所在班级<span
-                                    class="en"></span>：</label>
-                            <input type="text" placeholder="" class="form-control" disabled value="<%= user.clas %>">
-                        </div>
-                        <div class="form-group">
-                            <label class="title"><span style="color:red;padding-right:5px"></span>学号 <span
-                                    class="en"></span>：</label>
-                            <input type="text" placeholder="" class="form-control" disabled value="<%= user.studentid %>">
+<body>
+    <div id="wrapper">
+        <% include /userpartial/nav.ejs %>
+        <script>
+            var activity = "userinfo";
+            $('#side-menu .' + activity).addClass('active');
+            $($('#side-menu .' + activity).parent().parent()[0]).addClass('active');
+        </script>
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <% include /userpartial/header.ejs %>
+            </div>
+            <style>
+                .btn-primary2 {
+                    background-color: #177ce4;
+                    height: 30px;
+                    width: 100px;
+                    color: #fff;
+                    border: none;
+                    cursor: pointer;
+                    text-align: center;
+                    display: block;
+                    font-size: 15px;
+                }
+            </style>
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-lg-2" style="margin-bottom: 1rem;">
+                        <button type="button" class="btn btn-primary" id="c_email">修改邮箱</button>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="ibox-content">
+                            <div class="center-content" style="margin:0 auto;background-color:#fff">
+                                <div class="form-group">
+                                    <label class="title"><span style="color:red;padding-right:5px"></span>姓名 <span
+                                            class="en">Name</span>：</label>
+                                    <input type="text" placeholder="" class="form-control" disabled
+                                        value="<%= user.name %>">
+                                </div>
+                                <div class="form-group" id="sex">
+                                    <label class="title"><span style="color:red;padding-right:5px"></span>性别 <span
+                                            class="en">Sex</span>：</label>
+                                    <% if (user.sex == 0) { %>
+                                    <input type="text" placeholder="" class="form-control" disabled value="男">
+                                    <% } %>
+                                    <% if (user.sex == 1) { %>
+                                    <input type="sextext" placeholder="" class="form-control" disabled value="女">
+                                    <% } %>
+                                </div>
+                                <div class="form-group">
+                                    <label class="title"><span style="color:red;padding-right:5px"></span>所在系<span
+                                            class="en"></span>：</label>
+                                    <input type="text" placeholder="" class="form-control" disabled
+                                        value="<%= user.department %>">
+                                </div>
+                                <div class="form-group">
+                                    <label class="title"><span style="color:red;padding-right:5px"></span>所在班级<span
+                                            class="en"></span>：</label>
+                                    <input type="text" placeholder="" class="form-control" disabled
+                                        value="<%= user.clas %>">
+                                </div>
+                                <div class="form-group">
+                                    <label class="title"><span style="color:red;padding-right:5px"></span>邮箱<span
+                                            class="en"></span>：</label>
+                                    <input type="email" placeholder="" class="form-control" disabled
+                                        value="<%= user.email %>" id="email">
+                                </div>
+                                <div class="form-group">
+                                    <label class="title"><span style="color:red;padding-right:5px"></span>学号 <span
+                                            class="en"></span>：</label>
+                                    <input type="text" placeholder="" class="form-control" disabled
+                                        value="<%= user.studentid %>">
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
+            <% include /userpartial/footer.ejs %>
         </div>
-        <% include /userpartial/footer.ejs %>
     </div>
-</div>
 
-<script src="/public/js/popper.min.js"></script>
-<script src="/public/js/bootstrap.min.js"></script>
-<script src="/public/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="/public/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="/public/js/inspinia.js"></script>
-<script src="/public/js/plugins/pace/pace.min.js"></script>
+    <script src="/public/js/popper.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="/public/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/public/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/public/js/inspinia.js"></script>
+    <script src="/public/js/plugins/pace/pace.min.js"></script>
+
+    <script>
+        $('#c_email').click(function () {
+            let email = prompt('请输入您的邮箱', '');
+            if (email == '' || email == undefined) {
+                return;
+            }
+            var mailReg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+            if (!mailReg.test(email)) { //正则验证不通过，格式不对
+                alert("请输入正确的邮箱地址!");
+                return;
+            }
+            updateEmail(email);
+        });
+
+        function updateEmail(email) {
+            $('.ibox-content').mLoading({
+                text: "上传中...",
+            });
+            $.ajax({
+                url: "/info/user/email",
+                type: "PUT",
+                dataType: 'json',
+                data: {
+                    email: email
+                },
+                success: function (data) {
+                    $('.ibox-content').mLoading('hide');
+                    if (data.code === 1) {
+                        alert('修改成功');
+                        $('#page-wrapper #email').val(email);
+                    } else {
+                        alert(data.err);
+                    }
+                },
+
+                error: function (data) {
+                    alert('服务器异常!');
+                    $('.ibox-content').mLoading('hide');
+                }
+            });
+        }
+    </script>
 </body>
+
 </html>

@@ -3,6 +3,7 @@
 const TeacherBaseController = require('../base/teacher');
 const ErrMsg = require('../../global/errmsg');
 const Tool = require('../../global/tool');
+const SendEmail = require('../../global/email');
 
 /**
  * 教师系统中关于学生的操作
@@ -99,14 +100,36 @@ class StudentController extends TeacherBaseController {
         } else if (METHOD == 'PUT') {
             let { id, audit, sid } = ctx.request.body;
             if (await ctx.service.article.editByTeacher(sid, id, { audit: audit })) {
-                ctx.body = { code: 1 };
+                let str_email = '未通过';
+                if (audit == 1) {
+                    str_email = '通过';
+                }
+                try {
+                    let ele = await ctx.service.students.findColoumById(sid, ['email']);
+                    if (ele.email) {
+                        await SendEmail(ele.email, '文章申核通知', '文章申核', `您有文章申核${str_email}`);
+                    }
+                } catch (error) {
+                    ctx.logger.error(error);
+                } finally{
+                    ctx.body = { code: 1 };
+                }
             } else {
                 ctx.body = { code: 0, err: ErrMsg[4] };
             }
         } else if (METHOD == 'DELETE') {
             let { id, sid } = ctx.request.body;
             if (await ctx.service.article.delete(id, sid)) {
-                ctx.body = { code: 1 };
+                try {
+                    let ele = await ctx.service.students.findColoumById(sid, ['email']);
+                    if (ele.email) {
+                        await SendEmail(ele.email, '文章删除通知', '文章删除', `您有文章被管理员删除。`);
+                    }
+                } catch (error) {
+                    ctx.logger.error(error);
+                } finally{
+                    ctx.body = { code: 1 };
+                }
             } else {
                 ctx.body = { code: 0, err: ErrMsg[5] };
             }

@@ -2,7 +2,7 @@
 
 const UserInfoController = require('../base/userinfo');
 const Tool = require('../../global/tool');
-const { entryvalitemp, entryvalipass } = require('../../validate/user');
+const { entryvalitemp, entryvalipass, entryvaliemail } = require('../../validate/user');
 const ErrMsg = require('../../global/errmsg');
 
 /**
@@ -20,10 +20,22 @@ class UserController extends UserInfoController {
 
   async user() {
     const { ctx } = this;
-    const user = await ctx.service.students.findById(ctx.session.userid);
-    await ctx.render('user/user.ejs', {
-      user: user
-    });
+    const METHOD = ctx.request.method;
+    if (METHOD == 'GET') {
+      const user = await ctx.service.students.findById(ctx.session.userid);
+      await ctx.render('user/user.ejs', {
+        user: user
+      });
+    } else if (METHOD == 'PUT') {
+      let info = ctx.request.body;
+      ctx.validate(entryvaliemail, info);
+      if (await ctx.service.students.edit(ctx.session.userid, info)) {
+        ctx.body = { code: 1 };
+      } else {
+        ctx.body = { code: 0, err: ErrMsg[4] };
+      }
+    }
+
   }
 
   async temperature() {
@@ -57,8 +69,7 @@ class UserController extends UserInfoController {
       ctx.body = { code: 0, err: ErrMsg[17] };
       return;
     }
-    const res = await ctx.service.students.changePass(id, info.password, info.oldpassword);
-    if (res) {
+    if (await ctx.service.students.changePass(id, info.password, info.oldpassword)) {
       ctx.body = { code: 1 };
     } else {
       ctx.body = { code: 0, err: ErrMsg[4] };

@@ -13,10 +13,12 @@ module.exports = app => {
     */
     router.get('/info/index', controller.student.index.index);
     router.get('/info/user', controller.student.index.user);
+    router.put('/info/user/email', controller.student.index.user);
     router.get('/info/temperature', controller.student.index.temperature);
     router.post('/info/temperature', controller.student.index.temp);
     router.get('/info/password', controller.student.index.password);
     router.post('/info/password', controller.student.index.cpass);
+
 
     //学习资源
     router.get('/info/mirror', controller.student.index.mirror);

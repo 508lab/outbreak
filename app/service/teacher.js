@@ -117,7 +117,7 @@ class TeacherService extends Service {
      * 获取邮箱（申核文章时使用）
      */
     async randomGetEmail() {
-        let sql = `SELECT (email) FROM ${TABLE} WHERE email IS NOT NULL LIMIT 1;`;
+        let sql = `SELECT email FROM ${TABLE} WHERE email IS NOT NULL ORDER BY RAND() LIMIT 1;`;
         return await this.app.mysql.query(sql);
     }
 

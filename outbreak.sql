@@ -108,6 +108,7 @@ CREATE TABLE IF NOT EXISTS `teacher` (
   `department` varchar(300) NOT NULL DEFAULT '信息工程系' COMMENT '所在系',
   `studentid` varchar(12) NOT NULL COMMENT '工号',
   `password` varchar(300) NOT NULL DEFAULT 'c602e848d382024feb75f90b10425a86'
+  `email` char(100) DEFAULT NULL COMMENT '邮箱'
 ) ENGINE=InnoDB AUTO_INCREMENT=1522 DEFAULT CHARSET=utf8 COMMENT='utf8_general_ci';
 
 --
@@ -185,7 +186,8 @@ ALTER TABLE `students`
 ALTER TABLE `teacher`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`),
-  ADD UNIQUE KEY `studentid` (`studentid`);
+  ADD UNIQUE KEY `studentid` (`studentid`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `teachertemp`

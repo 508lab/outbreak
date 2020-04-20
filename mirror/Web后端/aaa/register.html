@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/Public/favicon.ico" type="image/x-icon" />
+    <title>2020“泰山杯”</title>
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/public/css/animate.css" rel="stylesheet">
+    <link href="/public/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/jquery.mloading.css">
+    <script src="/public/js/jquery-3.1.1.min.js"></script>
+    <style>
+        .middle-box {
+            padding-top: 0px;
+        }
+    </style>
+    <script>
+        $.ajax({
+            url: '/index.php/Home/index/islogin',
+            method: 'get',
+            success: function (data) {
+                if (data == '1') {
+                    window.location.href = '/index.php/Home/index/info';
+                }
+            },
+        })
+        if (window.top !== window.self) {
+            window.top.location = window.location;
+        }
+    </script>
+</head>
+
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div>
+            <div>
+                <h1 class="logo-name" style="margin-top: 0px;">
+                    <img src="http://www.globaltalent.net/img/carouselImg/glogo.png" style="width: 300px;height: 84px;">
+                </h1>
+            </div>
+            <div class="m-t" id="pwd_login" style="display: block;">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="请输入您的用户名" required="" id="username">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="请输入您的密码" required="" id="password">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="请再次输入您的密码" required=""
+                        id="confirmPassword">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="请输入您的邮箱" required="" id="email">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="请输入您的手机号" required="" id="mobile">
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b" id="register">注册</button>
+                <p style="width: 100%;">
+                    <a href="/index.php/Home/index/login" style="float: right;">登录</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/public/js/popper.min.js"></script>
+    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="/public/jquery.mloading.js"></script>
+    <script>
+        (function () {
+            $('#register').click(function () {
+                var username = $('#username').val();
+                var password = $('#password').val();
+                var confirmPassword = $('#confirmPassword').val();
+                var email = $('#email').val();
+                var mobile = $('#mobile').val();
+                if (username == '' || password == '' || confirmPassword == '' || email == '' || mobile == '') {
+                    alert('请检查输入内容是否为空');
+                    return;
+                }
+                if (username.length < 2) {
+                    alert('请确保您的用户名大于2位');
+                    return;
+                }
+                if (password.length < 6) {
+                    alert('请确保您的密码长度大于6位');
+                    return;                    
+                }
+                if (password !== confirmPassword) {
+                    alert('请检查两次密码是否一致');
+                    return;
+                }
+                $.ajax({
+                    url: '/index.php/Home/index/isreg?phone=' + mobile + '&email=' + email + '&name=' + username,
+                    method: 'GET',
+                    success: function (data) {
+                        if (data == '1') {
+                            alert('该手机号已注册！');
+                        }else if (data == '2') {
+                            alert('该邮箱已注册！');
+                        } else if (data == '3') {
+                            alert('该用户名已注册！');
+                        } else {
+                            reg(username, password, email, mobile);
+                        }
+                    },
+                    error: function (data) {
+                        alert('服务器异常!');
+                    }
+                })
+
+                
+            })
+            function reg(username, password, email, mobile) {
+                $('body').mLoading({
+                    text: "注册中...",
+                });
+                $.ajax({
+                    url: '/index.php/Home/index/reg',
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        username: username,
+                        password: password,
+                        email: email,
+                        phone: mobile
+                    },
+                    success: function (data) {
+                        $('body').mLoading('hide');
+                        if (data == '1') {
+                            alert('注册成功');
+                            setTimeout(function () {
+                                window.location.href = '/index.php/Home/index/login'
+                            }, 1500);
+                        } else {
+                            alert('注册失败');
+                        }
+                    },
+                    error: function (data) {
+                        $('body').mLoading('hide');
+                    }
+                })
+            }
+        })()
+    </script>
+</body>
+
+</html>

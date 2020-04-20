@@ -19,7 +19,7 @@ class MirrorController extends Controller {
     async index() {
         const { ctx } = this;
         let q = ctx.request.body.q || '/';
-        let basePath = this.config.baseDir + '/app/public/mirror' + q;
+        let basePath = this.config.baseDir + '/mirror' + q;
         const arr = await fs.readdirSync(basePath, { withFileTypes: true });
         let list = {
             files: arr.filter((ele) => { return !ele.isDirectory() }),
@@ -28,6 +28,22 @@ class MirrorController extends Controller {
         ctx.body = { code: 1, data: list };
     }
 
+    async download() {
+        const { ctx } = this;
+        const info = ctx.request.query;
+        if (ctx.session.teacherid || ctx.session.userid) {
+            const filePath = path.resolve(this.config.baseDir + '/mirror' + info.path, info.name);
+            ctx.attachment(info.name);
+            ctx.set('Content-Type', 'application/octet-stream');
+            ctx.body = fs.createReadStream(filePath);
+        } else {
+            ctx.body = { code: 0, err: ErrMsg[0] };
+        }
+    }
+
+    /**
+     * 使用multipart上传
+     */
     async upload() {
         const { ctx } = this;
         this.userv();
@@ -41,7 +57,7 @@ class MirrorController extends Controller {
                 if (!part.filename) {
                     break;
                 }
-                if (await fs.existsSync(this.config.baseDir + '/app/public/mirror' + parts.field.dir + part.filename)) {
+                if (await fs.existsSync(this.config.baseDir + '/mirror' + parts.field.dir + part.filename)) {
                     ctx.body = { code: 0, err: ErrMsg[22] };
                 } else {
                     files.push(await this.uploadFile(part, parts.field.dir));
@@ -58,7 +74,7 @@ class MirrorController extends Controller {
         const { ctx } = this;
         this.userv();
         let { dir, name } = ctx.request.body;
-        let basePath = this.config.baseDir + '/app/public/mirror' + dir + name;
+        let basePath = this.config.baseDir + '/mirror' + dir + name;
         if (await fs.existsSync(basePath)) {
             ctx.body = { code: 0, err: ErrMsg[23] };
         } else {
@@ -73,9 +89,8 @@ class MirrorController extends Controller {
      */
     async delete() {
         const { ctx } = this;
-        this.userv();
         let { dir, name, type } = ctx.request.body;
-        let basePath = this.config.baseDir + '/app/public/mirror' + dir + name;
+        let basePath = this.config.baseDir + '/mirror' + dir + name;
         if (await fs.existsSync(basePath)) {
             if (type == 'file') {
                 await fs.unlinkSync(basePath);
@@ -95,8 +110,8 @@ class MirrorController extends Controller {
         const { ctx } = this;
         this.userv();
         let { dir, name, oldname } = ctx.request.body;
-        let basePath = this.config.baseDir + '/app/public/mirror' + dir + oldname;
-        let newPath = this.config.baseDir + '/app/public/mirror' + dir + name;
+        let basePath = this.config.baseDir + '/mirror' + dir + oldname;
+        let newPath = this.config.baseDir + '/mirror' + dir + name;
         if (await fs.existsSync(basePath)) {
             await fs.renameSync(basePath, newPath);
             ctx.body = { code: 1 };
@@ -108,7 +123,7 @@ class MirrorController extends Controller {
     async search() {
         const { ctx } = this;
         let { dir, q } = ctx.request.body;
-        let basePath = this.config.baseDir + '/app/public/mirror' + dir
+        let basePath = this.config.baseDir + '/mirror' + dir
         let files = await FileHound.create()
             .paths(basePath)
             .match(`*${q}*`)
@@ -133,7 +148,7 @@ class MirrorController extends Controller {
     async uploadFile(part, nowdir) {
         try {
             const filename = part.filename.toLowerCase();
-            const dir = this.config.baseDir + `/app/public/mirror${nowdir}`;
+            const dir = this.config.baseDir + `/mirror${nowdir}`;
             if (!fs.existsSync(dir)) {
                 fs.mkdirSync(dir);
             }
@@ -163,7 +178,7 @@ class MirrorController extends Controller {
         const { ctx } = this;
         this.userv();
         let info = ctx.request.body;
-        await fs.appendFileSync(path.join(this.config.baseDir, `app/public/mirror${info.dir}`, info.name), info.data, { encoding: "binary" });
+        await fs.appendFileSync(path.join(this.config.baseDir, `/mirror${info.dir}`, info.name), info.data, { encoding: "binary" });
         ctx.body = { code: 1, data: { index: info.index } };
     }
 }

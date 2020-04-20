@@ -358,7 +358,7 @@
         });
 
         function download(file) {
-            window.open(window.location.origin + '/public/mirror' + nowDir + file)
+            window.location.href = window.location.origin + `/api/v1/mirror/download?name=${file}&path=${encodeURIComponent(nowDir)}`;
         }
 
         $('#mkdir').click(function () {

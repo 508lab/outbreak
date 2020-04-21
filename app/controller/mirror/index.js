@@ -18,6 +18,10 @@ class MirrorController extends Controller {
      */
     async index() {
         const { ctx } = this;
+        if (!this.userv(0, 0)) {
+            ctx.body = { code: 0, err: ErrMsg[10] };
+            return;
+        }
         let q = ctx.request.body.q || '/';
         let basePath = this.config.baseDir + '/mirror' + q;
         const arr = await fs.readdirSync(basePath, { withFileTypes: true });
@@ -30,6 +34,10 @@ class MirrorController extends Controller {
 
     async download() {
         const { ctx } = this;
+        if (!this.userv(0, 0)) {
+            ctx.body = { code: 0, err: ErrMsg[10] };
+            return;
+        }
         const info = ctx.request.query;
         if (ctx.session.teacherid || ctx.session.userid) {
             const filePath = path.resolve(this.config.baseDir + '/mirror' + info.path, info.name);
@@ -46,7 +54,10 @@ class MirrorController extends Controller {
      */
     async upload() {
         const { ctx } = this;
-        this.userv();
+        if (!this.userv(0, 1)) {
+            ctx.body = { code: 0, err: ErrMsg[10] };
+            return;
+        }
         const parts = ctx.multipart({ autoFields: true });
         let part;
         let files = [];
@@ -72,7 +83,10 @@ class MirrorController extends Controller {
      */
     async mkdir() {
         const { ctx } = this;
-        this.userv();
+        if (!this.userv(0, 1)) {
+            ctx.body = { code: 0, err: ErrMsg[10] };
+            return;
+        }
         let { dir, name } = ctx.request.body;
         let basePath = this.config.baseDir + '/mirror' + dir + name;
         if (await fs.existsSync(basePath)) {
@@ -89,6 +103,10 @@ class MirrorController extends Controller {
      */
     async delete() {
         const { ctx } = this;
+        if (!this.userv(0, 1)) {
+            ctx.body = { code: 0, err: ErrMsg[10] };
+            return;
+        }
         let { dir, name, type } = ctx.request.body;
         let basePath = this.config.baseDir + '/mirror' + dir + name;
         if (await fs.existsSync(basePath)) {
@@ -108,7 +126,10 @@ class MirrorController extends Controller {
      */
     async update() {
         const { ctx } = this;
-        this.userv();
+        if (!this.userv(0, 1)) {
+            ctx.body = { code: 0, err: ErrMsg[10] };
+            return;
+        }
         let { dir, name, oldname } = ctx.request.body;
         let basePath = this.config.baseDir + '/mirror' + dir + oldname;
         let newPath = this.config.baseDir + '/mirror' + dir + name;
@@ -122,6 +143,10 @@ class MirrorController extends Controller {
 
     async search() {
         const { ctx } = this;
+        if (!this.userv(0, 0)) {
+            ctx.body = { code: 0, err: ErrMsg[10] };
+            return;
+        }
         let { dir, q } = ctx.request.body;
         let basePath = this.config.baseDir + '/mirror' + dir
         let files = await FileHound.create()
@@ -162,13 +187,28 @@ class MirrorController extends Controller {
         }
     }
 
-    userv() {
+    userv(studnet = 0, teacher = 0) {
+        let tag = true;
         const sid = this.ctx.session.teacherid;
-        if (sid == null || sid == 'undefined' || sid == undefined) {
-            if (this.ctx.request.url !== '/teacher/login') {
-                this.ctx.redirect('/teacher/login');
+        const uid = this.ctx.session.userid;
+        if (studnet) {
+            if (uid == null || uid == 'undefined') {
+                tag = false;
             }
         }
+
+        if (teacher) {
+            if (sid == null || sid == 'undefined') {
+                tag = false;
+            }
+        }
+
+        if (studnet === 0 && teacher === 0) {
+            if ((uid == null || uid == 'undefined') && (sid == null || sid == 'undefined')) {
+                tag = false;
+            }
+        }
+        return tag;
     }
 
     /**
@@ -176,7 +216,10 @@ class MirrorController extends Controller {
      */
     async continuingly() {
         const { ctx } = this;
-        this.userv();
+        if (!this.userv(0, 1)) {
+            ctx.body = { code: 0, err: ErrMsg[10] };
+            return;
+        }
         let info = ctx.request.body;
         await fs.appendFileSync(path.join(this.config.baseDir, `/mirror${info.dir}`, info.name), info.data, { encoding: "binary" });
         ctx.body = { code: 1, data: { index: info.index } };

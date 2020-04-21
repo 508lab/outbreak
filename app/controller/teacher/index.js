@@ -7,6 +7,7 @@ const ErrMsg = require('../../global/errmsg');
 const Tool = require('../../global/tool');
 
 class TeacherController extends TeacherBaseController {
+
     /**
      * 登陆页面
      */

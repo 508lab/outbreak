@@ -11,7 +11,7 @@ class CommentsService extends Service {
     async insert(info) {
         const result = await this.app.mysql.insert(TABLE, info);
         try {
-            if (result) {
+            if (result && await this.ctx.helper.emailStatus()) {
                 let ele = await this.ctx.service.students.findColoumById(info.sid, ['email']);
                 if (ele.email) {
                     let article = await this.ctx.service.article.findColoumByWhere({ id: info.aid }, ['title']);

@@ -5,9 +5,6 @@ const Tool = require('./tool');
  */
 module.exports = async function (email, subject, text, html) {
     let conf = await Tool.getEmailConf();
-    if (conf.status == 0) {
-        return false;
-    }
     let send_tag = true;
     let transporter = nodemailer.createTransport({
         service:  conf.service,

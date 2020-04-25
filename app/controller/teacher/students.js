@@ -97,9 +97,9 @@ class StudentController extends TeacherBaseController {
             await ctx.render('/teacher/articles/article.ejs', {
                 tags: await Tool.getArticleTags()
             });
-        } else if (METHOD == 'PUT') {
+        } else if (METHOD == 'PUT') { //审核文章
             let { id, audit, sid } = ctx.request.body;
-            if (await ctx.service.article.editByTeacher(sid, id, { audit: audit })) {
+            if (await ctx.service.article.editByTeacher(sid, id, { audit: audit }) && await this.ctx.helper.emailStatus()) {
                 let str_email = '未通过';
                 if (audit == 1) {
                     str_email = '通过';
@@ -117,9 +117,9 @@ class StudentController extends TeacherBaseController {
             } else {
                 ctx.body = { code: 0, err: ErrMsg[4] };
             }
-        } else if (METHOD == 'DELETE') {
+        } else if (METHOD == 'DELETE') {  //删除文章
             let { id, sid } = ctx.request.body;
-            if (await ctx.service.article.delete(id, sid)) {
+            if (await ctx.service.article.delete(id, sid) && await this.ctx.helper.emailStatus()) {
                 try {
                     let ele = await ctx.service.students.findColoumById(sid, ['email']);
                     if (ele.email) {
@@ -160,7 +160,7 @@ class StudentController extends TeacherBaseController {
             await ctx.render('/teacher/articles/comments.ejs');
         } else if (METHOD == 'DELETE') {
             let { id, sid } = ctx.request.body;
-            if (await ctx.service.comments.delete({ id: id })) {
+            if (await ctx.service.comments.delete({ id: id }) && await this.ctx.helper.emailStatus()) {
                 try {
                     let ele = await ctx.service.students.findColoumById(sid, ['email']);
                     if (ele.email) {

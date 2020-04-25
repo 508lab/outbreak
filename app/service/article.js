@@ -16,7 +16,7 @@ class ArticleService extends Service {
         info.time = new Date();
         const result = await this.app.mysql.insert(TABLE, info);
         try {
-            if (result) { 
+            if (result && await this.ctx.helper.emailStatus()) { 
                 let ele = await this.ctx.service.teacher.randomGetEmail();
                 await SendEmail(ele[0].email, '新的文章需要申核', '新的文章', `<h2>文章名称：${info.title}<h2>`); 
             }
@@ -79,7 +79,7 @@ class ArticleService extends Service {
         info.audit = 0; //修改文章之后需要重新审核!
         const result = await this.app.mysql.update(TABLE, info, options);
         try {
-            if (result.affectedRows === 1) { 
+            if (result.affectedRows === 1 && await this.ctx.helper.emailStatus()) { 
                 let ele = await this.ctx.service.teacher.randomGetEmail();
                 await SendEmail(ele[0].email, '该文章被修改需要申核', '文章申核', `<h2>文章名称：${info.title}<h2>`);
             }

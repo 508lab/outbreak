@@ -2,22 +2,22 @@
 
 ### Development
 
-```bash
-$ 导入数据库 outbreak.sql
+```开发
+$ 导入数据库 outbreak.sql (文件在mariadb目录下)
 $ 修改/config/config.default.js 中关于数据库的配置（config.mysql）
 $ npm i
 $ npm run dev
 $ open http://localhost:7001/
 ```
 
-### Deploy
+### 部署
 
 ```bash
 $ npm start
 $ npm stop
 ```
 
-### Test
+### 测试
 ```
 $ ./bin/jmeter -n -t 文件路径1/疫情填报系统测试.jmx -l 文件路径2/html.csv -e -o 文件路径
 $ 注：测试使用的技术为-> jmeter
@@ -65,8 +65,16 @@ $ "MariaDB": ">=10.0.38"
     - 密码： 123456   
     - [链接](http://uname.dongkji.com/admin/login)
 
+### Docker启动
+```bash
+$ 先将package.json中scripts下start中的 --daemon 去掉
+$ docker-compose up -d
+$ open http://localhost:7001/
+```
+
+
 ### 问题
-- 学生数据很多时候都需要一次性导入(推荐直接使用代码导入数据库即可) [参考](https://github.com/508lab/outbreak-dump)
+- 学生数据很多时候都需要一次性导入(推荐直接使用代码导入数据库即可) [参考](https://github.com/508lab/AutoScript/tree/master/outbreak-dump)
 - 如果遇到问题或者需求请联系我qq：2833324528@qq.com
 
 ### npm scripts

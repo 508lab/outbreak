@@ -1,0 +1,15 @@
+version: '3'
+services:
+  mysql:
+    image: "mariadb:latest"
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+    volumes:
+      - "./db:/var/lib/mysql"
+      - "./mariadb:/docker-entrypoint-initdb.d/"
+    ports:
+     - "3306:3306"
+  web:
+    build: .
+    ports:
+     - "7001:7001"

@@ -406,17 +406,22 @@
                 alert('该文件已存在!');
                 return;
             }
-     
+
             $('.wrapper-content').mLoading({
                 text: "上传中...",
             });
-            uploadFile(this.files[0], '/api/v1/mirror/upload/continuingly', { dir: nowDir }, function (data, len) {
+            uploadFile(this.files[0], '/api/v1/mirror/upload/continuingly', { dir: nowDir }, function (err, data, len) {
+                if (err) {
+                    $('.wrapper-content').mLoading('hide');
+                    alert('文件传输失败,请删除失败的文件后重新上传');
+                    return;
+                }
                 if (len == data.data.index) {
                     $('.wrapper-content').mLoading('hide');
                     mirrordom.append(fileComponent({ name: name }));
                     files.push(name);
-                }else{
-                    $('.mloading .mloading-body .mloading-text').text(`上传中... ( ${data.data.index} / ${len}) `);
+                } else {
+                    $('.mloading .mloading-body .mloading-text').text(`上传中... ( ${parseInt((data.data.index / len) * 100) + '%'}) `);
                 }
             })
         });

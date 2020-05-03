@@ -15,6 +15,7 @@ function uploadFile(file, url, form, callbak) {
     let chunk = 100 * 1024;
     let now_index = 0;
     let start = 0;
+    let err_tag = false;
     fileObj.name = file.name;
     //文件分片
     for (let i = 0; i < Math.ceil(file.size / chunk); i++) {
@@ -24,6 +25,9 @@ function uploadFile(file, url, form, callbak) {
     }
 
     let upload = function () {
+        if (err_tag) {
+            return;
+        }
         if (fileObj.chunks.length !== now_index) {
             getFileBinary(fileObj.chunks[now_index], function (binary) {
                 $.ajax({
@@ -34,11 +38,13 @@ function uploadFile(file, url, form, callbak) {
                         if (data.code == 1) {
                             now_index += 1;
                             upload(now_index);
-                            callbak(data, fileObj.chunks.length - 1);
+                            callbak(null, data, fileObj.chunks.length - 1);
                         }
                     },
                     error(err) {
-                        console.error(err.responseJSON.message);
+                        err_tag = true;
+                        callbak(err);
+                        console.error(err);
                     }
                 });
             })

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2020-04-12 15:08:19
+-- Generation Time: 2020-05-03 20:06:07
 -- 服务器版本： 5.5.62-log
 -- PHP Version: 5.6.40
 
@@ -56,7 +56,15 @@ CREATE TABLE IF NOT EXISTS `article` (
   `tag` char(100) DEFAULT NULL COMMENT '标签',
   `sid` int(11) NOT NULL,
   `audit` int(1) NOT NULL DEFAULT '0' COMMENT '审核'
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='utf8_general_ci';
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='utf8_general_ci';
+
+--
+-- 转存表中的数据 `article`
+--
+
+INSERT INTO `article` (`id`, `title`, `content`, `time`, `tag`, `sid`, `audit`) VALUES
+(19, 'aaasdas', '<p>adaaaaaada</p>', '2020-04-19', '["0"]', 362, 1),
+(21, 'adas', '<p>dasda</p>', '2020-04-25', '["0"]', 362, 0);
 
 -- --------------------------------------------------------
 
@@ -70,7 +78,14 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `sid` int(11) NOT NULL COMMENT '学生id',
   `content` varchar(350) NOT NULL COMMENT '评论内容',
   `aid` int(11) NOT NULL COMMENT '文章id'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `comments`
+--
+
+INSERT INTO `comments` (`id`, `time`, `sid`, `content`, `aid`) VALUES
+(1, '2020-04-19 08:58:40', 362, '1', 19);
 
 -- --------------------------------------------------------
 
@@ -93,8 +108,8 @@ CREATE TABLE IF NOT EXISTS `students` (
 -- 转存表中的数据 `students`
 --
 
-INSERT INTO `students` (`id`, `name`, `sex`, `department`, `clas`, `studentid`, `password`) VALUES
-(362, 'test', 1, '信息工程系', '19物流信息技术班', '1501373434', 'c602e848d382024feb75f90b10425a86');
+INSERT INTO `students` (`id`, `name`, `sex`, `department`, `clas`, `studentid`, `password`, `email`) VALUES
+(362, 'test', 1, '信息工程系', '19物流信息技术班', '1501373434', 'c602e848d382024feb75f90b10425a86', NULL);
 
 -- --------------------------------------------------------
 
@@ -108,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `teacher` (
   `sex` int(1) NOT NULL DEFAULT '1' COMMENT '0:男 1:女',
   `department` varchar(300) NOT NULL DEFAULT '信息工程系' COMMENT '所在系',
   `studentid` varchar(12) NOT NULL COMMENT '工号',
-  `password` varchar(300) NOT NULL DEFAULT 'c602e848d382024feb75f90b10425a86'
+  `password` varchar(300) NOT NULL DEFAULT 'c602e848d382024feb75f90b10425a86',
   `email` char(100) DEFAULT NULL COMMENT '邮箱'
 ) ENGINE=InnoDB AUTO_INCREMENT=1522 DEFAULT CHARSET=utf8 COMMENT='utf8_general_ci';
 
@@ -116,8 +131,8 @@ CREATE TABLE IF NOT EXISTS `teacher` (
 -- 转存表中的数据 `teacher`
 --
 
-INSERT INTO `teacher` (`id`, `name`, `sex`, `department`, `studentid`, `password`) VALUES
-(1521, 'test', 1, '信息工程系', '123456', 'c602e848d382024feb75f90b10425a86');
+INSERT INTO `teacher` (`id`, `name`, `sex`, `department`, `studentid`, `password`, `email`) VALUES
+(1521, 'test', 1, '信息工程系', '123456', 'c602e848d382024feb75f90b10425a86', '2833324528@qq.com');
 
 -- --------------------------------------------------------
 
@@ -220,12 +235,12 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE `article`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `students`
 --

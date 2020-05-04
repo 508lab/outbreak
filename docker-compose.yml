@@ -5,10 +5,9 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "123456"
     volumes:
-      - "./dba:/var/lib/mysql"
       - "./mariadb:/docker-entrypoint-initdb.d/"
-    ports:
-      - "3305:3306"
+    #ports:
+      #- "3305:3306"
   web:
     build: .
     depends_on:

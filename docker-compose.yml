@@ -6,6 +6,8 @@ services:
       MYSQL_ROOT_PASSWORD: "123456"
     volumes:
       - "./mariadb:/docker-entrypoint-initdb.d/"
+    expose:
+      - "3306"
     #ports:
       #- "3305:3306"
   web:
@@ -16,3 +18,4 @@ services:
       - mysql
     ports:
      - "7001:7001"
+    command: sh -c './wait-for-it.sh -t 0 mysql:3306 -- npm start'

@@ -50,35 +50,6 @@ class MirrorController extends Controller {
     }
 
     /**
-     * 使用multipart上传
-     */
-    async upload() {
-        const { ctx } = this;
-        if (!this.userv(0, 1)) {
-            ctx.body = { code: 0, err: ErrMsg[10] };
-            return;
-        }
-        const parts = ctx.multipart({ autoFields: true });
-        let part;
-        let files = [];
-
-        while ((part = await parts()) != null) {
-            if (part.length) {
-            } else {
-                if (!part.filename) {
-                    break;
-                }
-                if (await fs.existsSync(this.config.baseDir + '/mirror' + parts.field.dir + part.filename)) {
-                    ctx.body = { code: 0, err: ErrMsg[22] };
-                } else {
-                    files.push(await this.uploadFile(part, parts.field.dir));
-                }
-            }
-        }
-        ctx.body = { code: 1, data: files };
-    }
-
-    /**
      * 创建文件夹
      */
     async mkdir() {
@@ -165,28 +136,46 @@ class MirrorController extends Controller {
         ctx.body = { code: 1, data: list };
     }
 
+
     /**
-     * 具体保存文件
-     * @param {*} part 
-     * @param {*} nowdir 
+     * 文件分片上传
      */
-    async uploadFile(part, nowdir) {
-        try {
-            const filename = part.filename.toLowerCase();
-            const dir = this.config.baseDir + `/mirror${nowdir}`;
-            if (!fs.existsSync(dir)) {
-                fs.mkdirSync(dir);
-            }
-            const target = path.join(dir, filename);
-            const writeStream = fs.createWriteStream(target);
-            await pump(part, writeStream);
-            return filename;
-        } catch (err) {
-            await sendToWormhole(part);
-            throw err;
+    async continuingly() {
+        const { ctx } = this;
+        if (!this.userv(0, 1)) {
+            ctx.body = { code: 0, err: ErrMsg[10] };
+            return;
         }
+        let userid = ctx.session.teacherid;
+
+        let info = ctx.request.body;
+        let baseDir = `${this.config.baseDir}/tmp/${userid}`;
+        if (info.index == 0) {
+            if (await fs.existsSync(baseDir)) {  //如果存在就先删除
+                await Tool.rmdirAsync(baseDir);
+            }
+            await fs.mkdirSync(baseDir);
+        }
+        await fs.appendFileSync(path.join(baseDir,
+            info.index + '.' + info.name.split('.')[1]), info.data, { encoding: "binary" });
+        if (info.index == info.len) {
+            let index = 0;
+            while (info.len > -1) {
+                let text = await fs.readFileSync(`${baseDir}/${index}.${info.name.split('.')[1]}`, { encoding: "binary" });
+                await fs.appendFileSync(path.join(this.config.baseDir, `/mirror${info.dir}`, info.name), text, { encoding: "binary" });
+                index++;
+                info.len--;
+            }
+            await Tool.rmdirAsync(baseDir);
+        }
+        ctx.body = { code: 1, data: { index: info.index } };
     }
 
+    /**
+     * 控制学生与教师的权限
+     * @param {*} studnet 
+     * @param {*} teacher 
+     */
     userv(studnet = 0, teacher = 0) {
         let tag = true;
         const sid = this.ctx.session.teacherid;
@@ -209,20 +198,6 @@ class MirrorController extends Controller {
             }
         }
         return tag;
-    }
-
-    /**
-     * 文件分片上传
-     */
-    async continuingly() {
-        const { ctx } = this;
-        if (!this.userv(0, 1)) {
-            ctx.body = { code: 0, err: ErrMsg[10] };
-            return;
-        }
-        let info = ctx.request.body;
-        await fs.appendFileSync(path.join(this.config.baseDir, `/mirror${info.dir}`, info.name), info.data, { encoding: "binary" });
-        ctx.body = { code: 1, data: { index: info.index } };
     }
 }
 

@@ -33,7 +33,7 @@ function uploadFile(file, url, form, callbak) {
                 $.ajax({
                     url: url,
                     type: 'post',
-                    data: Object.assign({ name: fileObj.name, data: binary, index: now_index }, form),
+                    data: Object.assign({ name: fileObj.name, data: binary, index: now_index, len: fileObj.chunks.length - 1 }, form),
                     success(data) {
                         if (data.code == 1) {
                             now_index += 1;

@@ -11,6 +11,12 @@
     <link href="/public/css/animate.css" rel="stylesheet">
     <link href="/public/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="/public/css/jquery.mloading.css">
+    <script src="/public/js/quicklink.umd.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            quicklink.listen();
+        });
+    </script>
     <script src="/public/js/jquery-3.1.1.min.js"></script>
     <style>
         .middle-box {
@@ -33,10 +39,10 @@
                     您的密码被重置为：123456
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                   </button>
-                 </div>
+                    </button>
+                </div>
                 <div class="form-group">
-                    <input type="number" class="form-control" placeholder="请输入您的学号" required="" id="sid" >
+                    <input type="number" class="form-control" placeholder="请输入您的学号" required="" id="sid">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="请输入您的密码" required="" id="password">
@@ -44,7 +50,7 @@
                 <button type="submit" class="btn btn-primary block full-width m-b" id="login2">登陆</button>
                 <a href="/article/list" style="float: right;">文章</a>
             </div>
-        
+
         </div>
         <p style="width: 100%; text-align: center;">
             <a href="http://www.beian.gov.cn">晋ICP备19005965 号</a>

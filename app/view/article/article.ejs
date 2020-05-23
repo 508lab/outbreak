@@ -101,7 +101,7 @@
                     <%for(var i = 0 ;i < comments.length; i++){%>
                         <li class="list-group-item">
                             <p><%= comments[i].content %></p>
-                            <span class="badge badge-light badge-pill"><%= moment(comments.time).format('YYYY-MM-DD, h:mm:ss') %></span></li>
+                            <span class="badge badge-light badge-pill"><%= moment(comments[i].time).format('YYYY-MM-DD, h:mm:ss') %></span></li>
                     <%}%>
                   </ul>
             </div>

@@ -24,9 +24,13 @@ module.exports = appInfo => {
     },
   };
 
+  config.notfound = {
+    pageUrl: '/404',
+  }
+
   config.multipart = {
     whitelist: [
-      '.jpg', 
+      '.jpg',
       '.jpeg',
       '.png',
       '.gif',
@@ -55,7 +59,7 @@ module.exports = appInfo => {
       '.xlsx'
     ],
   };
-  
+
   config.mysql = {
     // 单数据库信息配置
     client: {
@@ -75,7 +79,7 @@ module.exports = appInfo => {
     // 是否加载到 agent 上，默认关闭
     agent: false,
   };
-  
+
   config.session = {
     key: '123456',
     maxAge: 24 * 3600 * 1000, // 1 天

@@ -14,4 +14,5 @@ module.exports = app => {
 
   router.get('/classaerch', controller.home.classaerch);
   router.get('/clasdepartment', controller.home.clasdepartment);
+  router.get('/404', controller.home.notfound);
 };

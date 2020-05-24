@@ -1,5 +1,4 @@
 'use strict';
-const ErrMsg = require('../global/errmsg');
 /**
  * sql异常处理
  */

@@ -108,6 +108,10 @@ class HomeController extends Controller {
     this.ctx.body = { code: 1, data: await Tool.getClassDepData() };
   }
 
+
+  async notfound() {
+    await this.ctx.render('404.ejs');
+  }
 }
 
 module.exports = HomeController;

@@ -8,6 +8,9 @@ const ErrMsg = require('../../global/errmsg');
  * 管理员帐号中心（老师）
  */
 class AdminTeacherController extends AdminBaseontroller {
+    /**
+     * 教师温度记录列表
+     */
     async index() {
         const { ctx } = this;
         const departments = Object.keys(await Tool.getClassDepData());
@@ -18,14 +21,14 @@ class AdminTeacherController extends AdminBaseontroller {
             time = [info.starttime, info.endtime]
             department = info.department;
         }
-
         const result = await ctx.service.teachertemp.historyByDepTime(time, department);
         await ctx.render('/admin/teacher.ejs', {
             data: result,
             departments: departments,
             department: department,
             starttime: time[0],
-            endtime: time[1]
+            endtime: time[1],
+            moment: moment
         });
     }
 

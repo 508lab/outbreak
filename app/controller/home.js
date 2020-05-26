@@ -62,8 +62,6 @@ class HomeController extends Controller {
     if (info && info != undefined && info.clas) {
       time = info.time;
       let result = await ctx.service.students.findByClasAndTime(info.clas, info.department, time);
-      const studens = await ctx.service.students.findUsersByClasDep(info.department, info.clas);
-      result = this.getNoWriteNow(studens, result);
       await ctx.render('classaerch.ejs', {
         clas: info.clas,
         department: info.department,
@@ -77,28 +75,6 @@ class HomeController extends Controller {
         time: time
       });
     }
-  }
-
-  getNoWriteNow(studens, data) {
-    let yids = data.map(function (e) {
-      return e.studentid;
-    });
-    let result = [];
-    studens.map(function (ele) {
-      if (!yids.includes(ele.id) && ele.name != '' && ele.name != undefined) {
-        result.push({
-          name: ele.name,
-          record: 0
-        })
-      }
-    });
-    data.map(function (ele) {
-      result.push({
-        name: ele.name,
-        record: ele.record
-      })
-    })
-    return result;
   }
 
   /**

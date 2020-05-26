@@ -11,6 +11,9 @@ class ArticleController extends Controller {
         await this.ctx.render('/article/index.ejs');
     }
 
+    /**
+     * 获取文章数据列表
+     */
     async data() {
         const { ctx } = this;
         let { limit, offset, search } = ctx.request.query;
@@ -18,9 +21,8 @@ class ArticleController extends Controller {
         if (search) {
             list = await ctx.service.article.likeQuery(search, 9);
         } else {
-            list = await ctx.service.article.alllist({ audit: 1 }, parseInt(limit), parseInt(offset));
+            list = await ctx.service.article.alllist({ audit: 1 }, parseInt(limit), parseInt(offset), ['id', 'title', 'time']);
         }
-
         ctx.body = { code: 1, data: list };
     }
 

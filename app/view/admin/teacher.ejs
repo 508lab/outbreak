@@ -71,6 +71,7 @@
                                     <th>所在系</th>
                                     <th>工号</th>
                                     <th>目前温度</th>
+                                    <th>记录时间</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
@@ -86,6 +87,7 @@
                                     <td><%= data[i].department %></td>
                                     <td><%= data[i].studentid %></td>
                                     <td><%= data[i].record %></td>
+                                    <td><%= moment(data[i].time).format('YYYY-MM-DD') %></td>
                                     <th><a href="/admin/user/teacher/info?sid=<%= data[i].id %>&n=<%= data[i].name %>"
                                             target="_blank">体温记录</a>
                                     </th>

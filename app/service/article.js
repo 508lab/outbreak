@@ -16,9 +16,9 @@ class ArticleService extends Service {
         info.time = new Date();
         const result = await this.app.mysql.insert(TABLE, info);
         try {
-            if (result && await this.ctx.helper.emailStatus()) { 
+            if (result && await this.ctx.helper.emailStatus()) {
                 let ele = await this.ctx.service.teacher.randomGetEmail();
-                await SendEmail(ele[0].email, '新的文章需要申核', '新的文章', `<h2>文章名称：${info.title}<h2>`); 
+                await SendEmail(ele[0].email, '新的文章需要申核', '新的文章', `<h2>文章名称：${info.title}<h2>`);
             }
         } catch (error) {
             this.ctx.logger.error(error);
@@ -53,9 +53,10 @@ class ArticleService extends Service {
      * @param {*} limit 
      * @param {*} offset 
      */
-    async alllist(where, limit = 10, offset = 0) {
+    async alllist(where, limit = 10, offset = 0, columns = ['id', 'title', 'time']) {
         return await this.app.mysql.select(TABLE, {
             where: where,
+            columns: columns,
             orders: [['audit', 'asc'], ['time', 'desc']],
             limit: limit,
             offset: offset,
@@ -79,7 +80,7 @@ class ArticleService extends Service {
         info.audit = 0; //修改文章之后需要重新审核!
         const result = await this.app.mysql.update(TABLE, info, options);
         try {
-            if (result.affectedRows === 1 && await this.ctx.helper.emailStatus()) { 
+            if (result.affectedRows === 1 && await this.ctx.helper.emailStatus()) {
                 let ele = await this.ctx.service.teacher.randomGetEmail();
                 await SendEmail(ele[0].email, '该文章被修改需要申核', '文章申核', `<h2>文章名称：${info.title}<h2>`);
             }
@@ -155,7 +156,7 @@ class ArticleService extends Service {
     async likeQuery(q, limit) {
         q = this.app.mysql.escape(`%${q}%`);
         limit = parseInt(limit);
-        let data = await this.app.mysql.query(`SELECT * from ${TABLE} WHERE audit = 1 AND(title LIKE ${q} OR content LIKE ${q}) LIMIT ${limit}`);
+        let data = await this.app.mysql.query(`SELECT id,title,time from ${TABLE} WHERE audit = 1 AND(title LIKE ${q} OR content LIKE ${q}) LIMIT ${limit}`);
         return data;
     }
 }

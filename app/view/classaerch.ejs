@@ -316,7 +316,7 @@
                 <%for(var i=0;i < data.length; i++){%>
                 <tr>
                     <td><%= data[i].name %></td>
-                    <td><%= data[i].record %></td>
+                    <td><%= data[i].record || 0 %></td>
                 </tr>
                 <%}%>
                                 </tbody>

@@ -10,7 +10,7 @@ class TemperatureService extends Service {
 
     async findNow(id) {
         id = parseInt(id);
-        const sql = `SELECT * FROM ${TABLE} WHERE date(time) = curdate() and sid = ${id};`;
+        const sql = `SELECT record FROM ${TABLE} WHERE date(time) = curdate() and sid = ${id};`;
         const result = await this.app.mysql.query(sql);
         return result[0];
     }
@@ -64,7 +64,7 @@ class TemperatureService extends Service {
      */
     async historyByDepTime(time, dep) {
         dep = this.app.mysql.escape(dep);
-        const sql = `select * from teachertemp t join teacher u on t.sid = u.id AND t.time >= "${time[0]}" AND t.time <= "${time[1]}" AND u.department = ${dep};`
+        const sql = `select u.name,u.sex,u.department,u.studentid,u.id,t.record,t.time from teachertemp t right join teacher u on t.sid = u.id AND t.time >= "${time[0]}" AND t.time <= "${time[1]}" AND u.department = ${dep};`
         return await this.app.mysql.query(sql);
     }
 

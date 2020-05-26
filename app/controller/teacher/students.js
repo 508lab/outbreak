@@ -142,7 +142,7 @@ class StudentController extends TeacherBaseController {
     async list() {
         const { ctx } = this;
         let req = ctx.request.query;
-        const data = await ctx.service.article.alllist({}, parseInt(req.length), parseInt(req.start));
+        const data = await ctx.service.article.alllist({}, parseInt(req.length), parseInt(req.start), ['id', 'title', 'time', 'audit', 'tag', 'content']);
         const len = await ctx.service.article.count();
         ctx.body = {
             draw: req.draw, start: req.start, length: req.length, recordsTotal: data.length,

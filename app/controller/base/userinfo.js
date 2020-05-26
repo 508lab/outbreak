@@ -1,7 +1,9 @@
 const { Controller } = require('egg');
 
+/**
+ * 对学生控制层统一验证
+ */
 class UserInfoBaseController extends Controller {
-
   constructor(app) {
     super(app);
     this.userv();

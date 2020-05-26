@@ -140,7 +140,7 @@
                 let obj = now_data.find(function (ele) {
                     return ele.id == id;
                 });
-                let is_del = prompt(`是否确认删除${obj.title}：`, '是');
+                let is_del = prompt(`是否确认删除该评论：`, '是');
                 if (is_del !== '是' || is_del == undefined) {
                     return;
                 }

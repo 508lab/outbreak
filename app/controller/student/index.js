@@ -18,6 +18,9 @@ class UserController extends UserInfoController {
     });
   }
 
+  /**
+   * 学生基本信息
+   */
   async user() {
     const { ctx } = this;
     const METHOD = ctx.request.method;
@@ -38,6 +41,9 @@ class UserController extends UserInfoController {
 
   }
 
+  /**
+   * 体温
+   */
   async temperature() {
     const { ctx } = this;
     const data = await ctx.service.temperature.data(ctx.session.userid);
@@ -46,6 +52,9 @@ class UserController extends UserInfoController {
     });
   }
 
+  /**
+   * 学生密码
+   */
   async password() {
     const { ctx } = this;
     await ctx.render('user/password.ejs');

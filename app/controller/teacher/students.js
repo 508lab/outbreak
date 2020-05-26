@@ -160,17 +160,22 @@ class StudentController extends TeacherBaseController {
             await ctx.render('/teacher/articles/comments.ejs');
         } else if (METHOD == 'DELETE') {
             let { id, sid } = ctx.request.body;
-            if (await ctx.service.comments.delete({ id: id }) && await this.ctx.helper.emailStatus()) {
-                try {
-                    let ele = await ctx.service.students.findColoumById(sid, ['email']);
-                    if (ele.email) {
-                        await SendEmail(ele.email, '文章删除通知', '文章删除', `您有文章被管理员删除。`);
+            if (await ctx.service.comments.delete({ id: id })) {
+                if (this.ctx.helper.emailStatus()) {
+                    try {
+                        let ele = await ctx.service.students.findColoumById(sid, ['email']);
+                        if (ele.email) {
+                            await SendEmail(ele.email, '文章删除通知', '文章删除', `您有文章被管理员删除。`);
+                        }
+                    } catch (error) {
+                        ctx.logger.error(error);
+                    } finally {
+                        ctx.body = { code: 1 };
                     }
-                } catch (error) {
-                    ctx.logger.error(error);
-                } finally {
+                } else {
                     ctx.body = { code: 1 };
                 }
+
             } else {
                 ctx.body = { code: 0, err: ErrMsg[5] };
             }

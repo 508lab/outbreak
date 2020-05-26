@@ -43,9 +43,10 @@ class CommentsService extends Service {
      * @param {*} limit 
      * @param {*} offset 
      */
-    async alllist(where, limit = 10, offset = 0) {
+    async alllist(where, limit = 10, offset = 0, columns = ['id', 'time', 'content']) {
         return await this.app.mysql.select(TABLE, {
             where: where,
+            columns: columns,
             orders: [['time', 'desc']],
             limit: limit,
             offset: offset,

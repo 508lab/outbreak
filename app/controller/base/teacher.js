@@ -1,5 +1,8 @@
 const { Controller } = require('egg');
 
+/**
+ * 对教师控制层统一验证
+ */
 class TeacherBaseController extends Controller {
     constructor(app) {
         super(app);

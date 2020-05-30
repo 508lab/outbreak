@@ -17,6 +17,7 @@ module.exports = app => {
     router.get('/teacher/mirror', controller.teacher.index.mirror);
 
     //关于学生部分
+    router.get('/teacher/students/userinfo', controller.teacher.students.userinfo);
     router.get('/teacher/students', controller.teacher.students.students);
     router.put('/teacher/student', controller.teacher.students.edit);
     router.put('/teacher/students/password', controller.teacher.students.cpass);

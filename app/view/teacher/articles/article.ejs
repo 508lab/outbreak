@@ -14,13 +14,13 @@
     <link rel="stylesheet" href="/public/css/plugins/dataTables/datatables.min.css">
     <link rel="stylesheet" href="/public/css/plugins/dataTables/buttons.dataTables.min.css">
     <link rel="stylesheet" href="/public/css/plugins/dataTables/buttons.dataTables.min.css">
-    <link rel="stylesheet"
-        href="/public/css/plugins/bootstrap-select/bootstrap-select.min.css">
+    <link rel="stylesheet" href="/public/css/plugins/bootstrap-select/bootstrap-select.min.css">
     <style>
         #infomodal .modal-dialog {
             max-width: 88%;
         }
-        #infomodal img{
+
+        #infomodal img {
             max-width: 100%;
         }
     </style>
@@ -49,6 +49,7 @@
                                     <th>名称</th>
                                     <th>时间</th>
                                     <th>状态</th>
+                                    <th>发布者</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
@@ -74,7 +75,7 @@
                                 <div class="col-sm-10">
                                     <select id="tags" class="form-control" multiple disabled>
                                         <% for (const key in tags) { %>
-                                            <option value="<%= key %>"><%= tags[key] %></option>
+                                        <option value="<%= key %>"><%= tags[key] %></option>
                                         <% } %>
                                     </select>
                                 </div>
@@ -113,10 +114,14 @@
                     </div>
                 </div>
             </div>
-            <% include /teacherpartial/footer.ejs %>
         </div>
     </div>
 
+    <% include /teacherpartial/footer.ejs %>
+
+
+    <% include /components/userdialog/index.ejs %>
+    <user-dialog></user-dialog>
     <script src="/public/js/popper.min.js"></script>
     <script src="/public/js/bootstrap.min.js"></script>
     <script src="/public/js/plugins/metisMenu/jquery.metisMenu.js"></script>
@@ -127,6 +132,24 @@
     <script src="/public/js/plugins/bootstrap-select/bootstrap-select.min.js"></script>
     <script src="/public/js/moment.min.js"></script>
     <script>
+
+        /**
+         * 查看用户基本信息
+         * */
+        function showUserInfo(sid) {
+            let userDialog = document.querySelector('user-dialog');
+            userDialog.setAttribute('status', "show");
+            $('#page-wrapper').mLoading({
+                text: "加载中...",
+            });
+            $.get(`/teacher/students/userinfo?id=${sid}`, function (data, status, xhr) {
+                $('#page-wrapper').mLoading('hide');
+                if (status === 'success' && data.data != 'null') {
+                    userDialog.setAttribute('user', JSON.stringify(data.data));
+                }
+            })
+        }
+
         $(document).ready(function () {
             //配置DataTables默认参数
             $.extend(true, $.fn.dataTable.defaults, {
@@ -190,6 +213,12 @@
                                 str = '拒绝';
                             }
                             return `<i class="status">${str}</i>`;
+                        }
+                    },
+                    {
+                        data: 'sid',
+                        render: function (sid) {
+                            return `<button type="button" class="btn btn-primary" onclick="showUserInfo(${sid})">查看</button>`;
                         }
                     },
                     {
@@ -313,6 +342,7 @@
                 $('#infomodal #tags').selectpicker('val', JSON.parse(obj.tag));
                 $('#infomodal #content').html(obj.content);
             }
+
         });
 
     </script>

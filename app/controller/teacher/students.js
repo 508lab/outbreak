@@ -99,31 +99,36 @@ class StudentController extends TeacherBaseController {
             });
         } else if (METHOD == 'PUT') { //审核文章
             let { id, audit, sid } = ctx.request.body;
-            if (await ctx.service.article.editByTeacher(sid, id, { audit: audit }) && await this.ctx.helper.emailStatus()) {
-                let str_email = '未通过';
-                if (audit == 1) {
-                    str_email = '通过';
-                }
-                try {
-                    let ele = await ctx.service.students.findColoumById(sid, ['email']);
-                    if (ele.email) {
-                        await SendEmail(ele.email, '文章申核通知', '文章申核', `您有文章申核${str_email}`);
+            if (await ctx.service.article.editByTeacher(sid, id, { audit: audit })) {
+                if (await this.ctx.helper.emailStatus()) {
+                    let str_email = '未通过';
+                    if (audit == 1) {
+                        str_email = '通过';
                     }
-                } catch (error) {
-                    ctx.logger.error(error);
-                } finally {
-                    ctx.body = { code: 1 };
+                    try {
+                        let ele = await ctx.service.students.findColoumById(sid, ['email']);
+                        if (ele.email) {
+                            await SendEmail(ele.email, '文章申核通知', '文章申核', `您有文章申核${str_email}`);
+                        }
+                    } catch (error) {
+                        ctx.logger.error(error);
+                    } finally {
+                        ctx.body = { code: 1 };
+                    }
                 }
+                ctx.body = { code: 1 };
             } else {
                 ctx.body = { code: 0, err: ErrMsg[4] };
             }
         } else if (METHOD == 'DELETE') {  //删除文章
             let { id, sid } = ctx.request.body;
-            if (await ctx.service.article.delete(id, sid) && await this.ctx.helper.emailStatus()) {
+            if (await ctx.service.article.delete(id, sid)) {
                 try {
-                    let ele = await ctx.service.students.findColoumById(sid, ['email']);
-                    if (ele.email) {
-                        await SendEmail(ele.email, '文章删除通知', '文章删除', `您有文章被管理员删除。`);
+                    if (await this.ctx.helper.emailStatus()) {
+                        let ele = await ctx.service.students.findColoumById(sid, ['email']);
+                        if (ele.email) {
+                            await SendEmail(ele.email, '文章删除通知', '文章删除', `您有文章被管理员删除。`);
+                        }
                     }
                 } catch (error) {
                     ctx.logger.error(error);
@@ -142,7 +147,7 @@ class StudentController extends TeacherBaseController {
     async list() {
         const { ctx } = this;
         let req = ctx.request.query;
-        const data = await ctx.service.article.alllist({}, parseInt(req.length), parseInt(req.start), ['id', 'title', 'time', 'audit', 'tag', 'content']);
+        const data = await ctx.service.article.alllist({}, parseInt(req.length), parseInt(req.start), ['id', 'title', 'time', 'audit', 'tag', 'content', 'sid']);
         const len = await ctx.service.article.count();
         ctx.body = {
             draw: req.draw, start: req.start, length: req.length, recordsTotal: data.length,
@@ -172,10 +177,8 @@ class StudentController extends TeacherBaseController {
                     } finally {
                         ctx.body = { code: 1 };
                     }
-                } else {
-                    ctx.body = { code: 1 };
                 }
-
+                ctx.body = { code: 1 };
             } else {
                 ctx.body = { code: 0, err: ErrMsg[5] };
             }
@@ -188,12 +191,22 @@ class StudentController extends TeacherBaseController {
     async commentslist() {
         const { ctx } = this;
         let req = ctx.request.query;
-        const data = await ctx.service.comments.alllist({}, parseInt(req.length), parseInt(req.start));
+        const data = await ctx.service.comments.alllist({}, parseInt(req.length), parseInt(req.start), ['id', 'time', 'content', 'sid']);
         const len = await ctx.service.comments.count();
         ctx.body = {
             draw: req.draw, start: req.start, length: req.length, recordsTotal: data.length,
             recordsFiltered: len, data: data,
         };
+    }
+
+    /**
+     * 获取单个学生的信息
+     */
+    async userinfo() {
+        const { ctx } = this;
+        let id = ctx.request.query.id;
+        const data = await ctx.service.students.findColoumById(id, ['name', 'sex', 'department', 'clas', 'studentid']);
+        ctx.body = { code: 1, data: data };
     }
 
 }

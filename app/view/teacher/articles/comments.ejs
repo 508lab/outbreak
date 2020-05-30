@@ -14,8 +14,7 @@
     <link rel="stylesheet" href="/public/css/plugins/dataTables/datatables.min.css">
     <link rel="stylesheet" href="/public/css/plugins/dataTables/buttons.dataTables.min.css">
     <link rel="stylesheet" href="/public/css/plugins/dataTables/buttons.dataTables.min.css">
-    <link rel="stylesheet"
-        href="/public/css/plugins/bootstrap-select/bootstrap-select.min.css">
+    <link rel="stylesheet" href="/public/css/plugins/bootstrap-select/bootstrap-select.min.css">
     <script src="/public/js/jquery-3.1.1.min.js"></script>
 </head>
 
@@ -23,7 +22,7 @@
     <div id="wrapper">
         <% include /teacherpartial/nav.ejs %>
         <script>
-            var activity = "home";
+            var activity = "comments";
             $('#side-menu .' + activity).addClass('active');
             $($('#side-menu .' + activity).parent().parent()[0]).addClass('active');
         </script>
@@ -40,6 +39,7 @@
                                 <tr>
                                     <th>内容</th>
                                     <th>时间</th>
+                                    <th>发布者</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
@@ -54,6 +54,8 @@
         </div>
     </div>
 
+    <% include /components/userdialog/index.ejs %>
+    <user-dialog></user-dialog>
     <script src="/public/js/popper.min.js"></script>
     <script src="/public/js/bootstrap.min.js"></script>
     <script src="/public/js/plugins/metisMenu/jquery.metisMenu.js"></script>
@@ -64,8 +66,25 @@
     <script src="/public/js/plugins/bootstrap-select/bootstrap-select.min.js"></script>
     <script src="/public/js/moment.min.js"></script>
     <script>
+
+        /**
+         * 查看用户基本信息
+         * */
+        function showUserInfo(sid) {
+            let userDialog = document.querySelector('user-dialog');
+            userDialog.setAttribute('status', "show");
+            $('#page-wrapper').mLoading({
+                text: "加载中...",
+            });
+            $.get(`/teacher/students/userinfo?id=${sid}`, function (data, status, xhr) {
+                $('#page-wrapper').mLoading('hide');
+                if (status === 'success' && data.data != 'null') {
+                    userDialog.setAttribute('user', JSON.stringify(data.data));
+                }
+            })
+        }
         $(document).ready(function () {
-            
+
             //配置DataTables默认参数
             $.extend(true, $.fn.dataTable.defaults, {
                 "language": {
@@ -82,7 +101,7 @@
                 processing: true, //显示加载提示,自行处理
                 serverSide: true, //开启服务器端分页
                 paging: true,	//开启分页
-                pageLength: 10, 
+                pageLength: 10,
                 ajax: function (data, callback, seetting) {
                     var flag = data.draw;//标记字段
                     var pagesize = data.length;//当前页大小
@@ -118,6 +137,12 @@
                         }
                     },
                     {
+                        data: 'sid',
+                        render: function (sid) {
+                            return `<button type="button" class="btn btn-primary" onclick="showUserInfo(${sid})">查看</button>`;
+                        }
+                    },
+                    {
                         data: 'id',
                         render: function (data, type, full) {
                             return `
@@ -131,11 +156,11 @@
                 let target = $(e.target);
                 let uid = $(target).attr('uid');
                 if (target.hasClass('delete')) {
-                    delArticle(uid, e)
+                    delArticle(uid, e);
                 }
             })
 
-         
+
             function delArticle(id, e) {
                 let obj = now_data.find(function (ele) {
                     return ele.id == id;

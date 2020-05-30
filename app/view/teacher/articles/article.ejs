@@ -121,7 +121,6 @@
 
 
     <% include /components/userdialog/index.ejs %>
-    <user-dialog></user-dialog>
     <script src="/public/js/popper.min.js"></script>
     <script src="/public/js/bootstrap.min.js"></script>
     <script src="/public/js/plugins/metisMenu/jquery.metisMenu.js"></script>
@@ -132,20 +131,25 @@
     <script src="/public/js/plugins/bootstrap-select/bootstrap-select.min.js"></script>
     <script src="/public/js/moment.min.js"></script>
     <script>
-
+        let templateElem = document.getElementById('user-dialog');
+        let modal = $(templateElem.content).find('.modal')[0];
         /**
          * 查看用户基本信息
          * */
         function showUserInfo(sid) {
-            let userDialog = document.querySelector('user-dialog');
-            userDialog.setAttribute('status', "show");
             $('#page-wrapper').mLoading({
                 text: "加载中...",
             });
-            $.get(`/teacher/students/userinfo?id=${sid}`, function (data, status, xhr) {
+            $.get(`/teacher/students/userinfo?id=${sid}`, function (res, status, xhr) {
                 $('#page-wrapper').mLoading('hide');
-                if (status === 'success' && data.data != 'null') {
-                    userDialog.setAttribute('user', JSON.stringify(data.data));
+                if (status === 'success' && res.data != 'null') {
+                    let data = res.data;
+                    $(modal).modal('show');
+                    $(modal).find('.department').val(data.department);
+                    $(modal).find('.clas').val(data.clas);
+                    $(modal).find('.name').val(data.name);
+                    $(modal).find('.sex').val(data.sex);
+                    $(modal).find('.studentid').val(data.studentid);
                 }
             })
         }

@@ -1,5 +1,7 @@
 # school
 
+[English](./README-EN.md)
+
 ### Development
 
 ```开发
